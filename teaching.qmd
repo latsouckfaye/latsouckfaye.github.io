@@ -9,7 +9,9 @@ format:
 
 ::: {style="text-align: center;"}
 <h6 class="outlinebis">
+
 ✏️ Teaching
+
 </h6>
 :::
 
@@ -51,7 +53,7 @@ Courses, tutorials and practical sessions with R
 
 *Topics to cover:* Simple and Multiple Linear Regression: Introduction (Framework and exploration), Models (Equation, Fitting, Analysis of variance, Goodness of fit), Inference (Assumptions, Estimators and properties, Tests, Confidence and prediction intervals, Diagnostics, Validation, Model selection).
 
-### 💻 Stochastic modeling
+### 💻 Stochastic Modeling
 
 🎓 **Bachelor 3rd Year --- Mathematics**
 
@@ -61,7 +63,9 @@ Practical sessions with R
 
 ::: {style="text-align: center;"}
 <h6 class="outlinebis">
+
 📋 Monitoring
+
 </h6>
 :::
 
