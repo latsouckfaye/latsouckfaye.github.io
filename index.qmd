@@ -16,7 +16,7 @@ format:
 **Data Scientist**
 </h1>
 
-I'm a data scientist and web development enthusiast with a passion for teaching and making knowledge accessible to everyone. Guided by curiosity, creativity and a drive to empower others through learning, I'm always building, exploring, and sharing.
+I'm a data scientist and web development enthusiast with a passion for teaching and making knowledge accessible to everyone. Guided by curiosity, creativity and a drive to empower others through learning, I'm always building, exploring and sharing.
 :::
 
 <h1 style="text-align:center;">
