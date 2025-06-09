@@ -1,7 +1,6 @@
 project:
   type: website
-#  resources:
-#    - Projects
+  output-dir: docs
   
 freeze: false
 
