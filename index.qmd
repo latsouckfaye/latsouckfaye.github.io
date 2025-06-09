@@ -1,0 +1,49 @@
+---
+freeze: false
+toc: false
+
+format:
+  html:
+    css: styles.css
+---
+
+::: {style="text-align:center; solid #ccc; padding:10px;"}
+<h1 style="text-align:center; font-size: 40px;">
+<img src="./images/photoprof.jpg" alt="Description" style="border-radius:220px; max-width:35%;"/>
+</h1>
+
+<h1 style="text-align:center; font-size: 40px;">
+**Data Scientist**
+</h1>
+
+I'm a data scientist and web development enthusiast with a passion for teaching and making knowledge accessible to everyone. Guided by curiosity, creativity and a drive to empower others through learning, I'm always building, exploring, and sharing.
+:::
+
+<h1 style="text-align:center;">
+🌟 Professional Interests
+</h1>
+
+::: {style="text-align: center; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+Since November 2023, I have held the position of **Temporary Teaching and Research Associate** (*Attaché Temporaire d'Enseignement et de Recherche*) at the University of Lille. I actively contribute to multiple academic programs, notably the *BUT in Data Science* and various *Professional Bachelor's* degrees, delivering courses across diverse topics.
+
+My teaching portfolio covers a wide spectrum of statistical methodologies, from **Descriptive analysis** to **advanced statistical modeling**. I design and lead lectures, tutorials, and hands-on sessions employing industry-standard tools such as **R**, **Python**, **Excel** and **SAS** to equip students with practical data analysis and programming skills.
+
+Beyond classroom teaching, I have successfully supervised numerous student projects, guiding them through the application of statistical techniques and data science principles to real-world datasets. This mentorship fosters critical thinking and practical problem-solving, ensuring student success in their academic and professional pursuits.
+
+My research is centered on the **analysis of large-scale and complex spatial data**, where I develop and implement innovative statistical models tailored to address challenging problems in **biostatistics** and related fields. I have authored peer-reviewed publications that propose novel methodologies for spatial data analysis, reflecting my commitment to advancing the scientific community's understanding of complex data structures.
+
+<h1 style="text-align:center;">
+![](./images/dataSkills.png){width="350"}![](./images/spdaSkills.png){width="370"}
+</h1>
+
+</h6>
+:::
+
+<h1 style="text-align:center;">
+🎨 Outside the terminal
+</h1>
+::: {style="text-align: center; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+::: {style="text-align: center; solid #ccc; padding:10px;"}
+<h6>📚 <strong>Avid reader</strong> - From philosophy to sci-fi <br><br> ✏️ <strong>Sketch artist</strong> - Drawing to relax and express creativity <br><br> 🚴 <strong>Cycling enthusiast</strong> - Exploring trails and chasing horizons <br><br> 🏃 <strong>Runner</strong> - Clearing my mind one mile at a time</h6>
+:::
+:::

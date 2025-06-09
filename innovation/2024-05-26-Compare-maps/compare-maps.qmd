@@ -1,0 +1,77 @@
+---
+title: "Comparing maps across spatial resolutions"
+description: |
+ A tutorial on comparing maps across multiple resolutions
+author:
+  - name: Paul Aimé Latsouck Faye
+    url: https://github.com/latsouckfaye
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  - name: Elodie Brunel
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  - name: Thomas Claverie
+    orcid: 0000-0002-6258-4991
+    affiliation: UMR ENTROPIE, IRD, IFREMER, Univ La Réunion, France
+    affiliation-url: https://sciences.univ-reunion.fr/recherche/ecologie-marine-entropie-umr-9220
+  - name: Solym Manou-Abi
+    orcid: 0000-0002-7220-4403
+    affiliation: CUFR, Université de Mayotte, France
+    affiliation-url: https://www.univ-mayotte.fr/fr/index.html
+  - name: Sophie Dabo
+    orcid: 0000-0002-4000-6752
+    affiliation: PAINLEVE UMR 8524, University of Lille, France
+    affiliation-url: https://math.univ-lille.fr/
+date: 2024-05-26
+slug: compmap2024
+categories: [Spatial data analysis, Multi-scale mapping, Metrics, GIS, R]
+image: statusmap.png
+
+format:
+  html:
+    css: styles.css
+---
+
+::: boxed
+<!-- First row: side-by-side maps -->
+
+::: columns
+::: {.column width="45%"}
+![](refmap.png)
+:::
+
+::: {.column width="10%"}
+<!-- spacer -->
+:::
+
+::: {.column width="45%"}
+![](predmap.png)
+:::
+:::
+
+<!-- Second row: single caption centered under both images -->
+
+::: columns
+::: {.column width="100%"}
+::: {style="margin: 0 auto; width: fit-content; text-align: center;"}
+**Figure.** Two maps at different spatial resolutions.
+:::
+:::
+:::
+
+<!-- Third row: buttons side-by-side -->
+
+::: columns
+::: {.column width="100%"}
+::: {style="display: flex; justify-content: center; gap: 20px;"}
+::: {style="display: flex; justify-content: center; align-items: center; text-align: center; gap: 20px;"}
+[[📚 Materials](https://latsouckfaye.github.io/CompareMap/){.btn role="button" target="_blank"}]{.outline}
+[[<img src='../../images/github-original.svg' width='20' style='vertical-align: middle;'/> Code](https://github.com/latsouckfaye/CompareMap){.btn role="button" target="_blank"}]{.outline}
+:::
+
+:::
+:::
+:::
+:::

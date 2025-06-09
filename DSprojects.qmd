@@ -1,0 +1,27 @@
+---
+title: "Paul FAYE"
+subtitle: "Data scientist"
+freeze: false
+---
+
+I share here a series of methodological advances addressing key challenges in data analysis combining theoretical insights with practical implementation. Each tutorial is designed to be accessible and reproducible, facilitating the adoption and further exploration of the techniques.
+
+## Comparing irregular gridded maps at different resolutions
+
+::: {style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;"}
+<iframe src="./Projects/MapComparison/MapComp.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen loading="lazy">
+
+</iframe>
+:::
+
+## Spatial sampling
+
+::: {style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;"}
+<iframe src="./Projects/Sampling/SCS_CDS.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen loading="lazy">
+
+</iframe>
+:::
+
+## Spatial compositional data analysis
+
+[In progress]{style="color: red;"}

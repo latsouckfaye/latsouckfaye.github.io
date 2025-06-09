@@ -1,0 +1,29 @@
+---
+title: "54th statistical days of SFDS"
+format: html
+editor: visual
+
+description: |
+  The 54th Statistical Days (Journées de Statistique) organized by the Société Française de Statistique (SFdS) is a major annual conference for the French-speaking statistical community, gathering researchers, educators, and professionals to discuss the latest developments in statistical theory and applications. The event covers a broad range of topics including statistical learning, high-dimensional data, risk and extreme value statistics, and non-parametric methods, while also fostering the growth of young statisticians through dedicated sessions and networking opportunities.
+
+author:
+  - name: Paul Aimé Latsouck Faye
+    url: https://github.com/latsouckfaye
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  
+date: 2023-07-03
+slug: jds2023
+categories: [Geomorphology, Multi-scale mapping, LiDAR data, R]
+image: sfds.png
+---
+
+::: boxed
+::: columns
+::: {.column width="100%"}
+![](sfds_bis.png)
+:::
+:::
+
+:::

@@ -1,0 +1,78 @@
+/* General text alignment */
+p {
+  text-align: justify;
+}
+
+
+/* Heading colors */
+
+h1.title{
+  color: #000000 !important;
+}
+
+h1{
+  color: #ff8000 !important;
+}
+
+h2 {
+  color: #8FD9FB!important;
+}
+
+h3 {
+  color: #0BDA51 !important;
+}
+
+h4 {
+  color: #EAE86F !important;
+}
+
+/* Highlight active navbar link */
+.navbar-nav .nav-link.active {
+  color: #ff8000 !important;
+  font-weight: bold;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Fixed navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #8FD9FB; /* corrected comment */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Navbar style on scroll */
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for active link */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #e60000;
+  }
+  to {
+    text-shadow: 0 0 15px #ff4d4d;
+  }
+}
+
+/* Profile picture styling */
+.profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  display: block;
+  margin: 1em auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.centered-text {
+  text-align: center;
+}
+

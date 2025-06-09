@@ -1,0 +1,62 @@
+project:
+  type: website
+#  resources:
+#    - Projects
+  
+freeze: false
+
+website:
+  title: ""
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Paul FAYE"
+      - href: portfolio.qmd
+        text: "Portfolio"
+      - href: teaching.qmd
+        text: "Academia"
+      - href: publications.qmd
+        text: "Publications"
+      - href: talks.qmd
+        text: "Workshops"
+      - href: innovation.qmd
+        text: "Code & Insight"
+      
+    right:
+      - icon: github
+        href: https://github.com/latsouckfaye
+      - text: get in touch!
+        menu:
+          - icon: linkedin
+            text: LinkedIn
+            href: https://www.linkedin.com/in/paulfaye
+            target: _blank
+          - icon: envelope
+            text: Email
+            href: mailto:pfaye@univ-lille.fr
+        
+  page-footer: 
+      left: © 2025 Paul FAYE
+      right: |
+        Built with
+        <a href="https://quarto.org" target="_blank" style="color: inherit;">
+        <img src="./images/quarto2.svg" alt="Quarto" style="height: 1.2rem; vertical-align: text-bottom;">
+        </a>
+        <a href="https://www.r-project.org/" target="_blank" style="color: inherit;">
+        <img src="https://www.r-project.org/logo/Rlogo.png" alt="R" style="height: 1.2rem; vertical-align: text-bottom;">
+        </a>
+        <a href="https://github.com/latsouckfaye" target="_blank" style="color: inherit; text-decoration: none;">
+        <i class="bi bi-github" style="font-size: 1.2rem;"></i>
+        </a>
+        
+format:
+  html:
+    theme:
+      light: Sanstone
+    css: styles.css
+    toc: true
+    toggle: true
+
+
+editor: visual
+

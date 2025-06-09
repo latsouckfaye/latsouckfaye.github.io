@@ -1,0 +1,28 @@
+---
+title: "Semdoc IMAG, Montpellier"
+format: html
+editor: visual
+
+description: |
+  The Semdoc IMAG Montpellier is a monthly seminar organized by the Institut Montpelliérain Alexander Grothendieck (IMAG) at the University of Montpellier. It provides PhD students with the opportunity to present their research in mathematics to the academic community. Covering a wide range of topics from pure mathematics to industrial applications, as well as didactics and epistemology, the seminar promotes interdisciplinary exchange and serves as an important platform for the professional development of early-career researchers.
+
+author:
+  - name: Paul Aimé Latsouck Faye
+    url: https://github.com/latsouckfaye
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  
+date: 2023-05-24
+slug: semdoc2023
+categories: [Geomorphology, Multi-scale mapping, LiDAR data, R]
+image: semdoc.png
+---
+
+::: boxed
+::: columns
+::: {.column width="100%"}
+![](semdocbis.png)
+:::
+:::
+:::

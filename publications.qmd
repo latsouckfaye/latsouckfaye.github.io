@@ -1,0 +1,65 @@
+---
+freeze: false
+---
+
+<ol reversed>
+
+<li>A novel nonparametric regression model for spatial compositional data with zeros using mixed covariates. [Coming soon]{style="color: red;"}</li>
+
+This study introduces a novel nonparametric regression estimator for spatial compositional data with zero components, incorporating both discrete and continuous covariates. The performance of the proposed model is first assessed through a series of simulation experiments and then validated on a real-world dataset, demonstrating its effectiveness and robustness in practical applications.
+
+::: boxed
+::: columns
+::: {.column width="45%"}
+![](./images/scattzero_n500_px1_rand.jpg)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+![](./images/TestVsTrue_ait_mle_500_2.jpg)
+:::
+:::
+
+<!-- Second row: captions aligned under the images -->
+
+::: columns
+::: {.column width="45%"}
+**Figure 1.** Scatterplot of simulated compositional data versus $x_1$ covariate.
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+**Figure 2.** True versus estimated values using the novel model.
+:::
+:::
+:::
+
+<li>Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms.</li>
+
+**Journal:** Earth Science Informatics
+
+**Date:** 2024-06-26
+
+**Authors:** Paul A. L. Faye, Elodie Brunel, Thomas Claverie, Solym Manou-Abi Sophie Dabo-Niang.
+
+This work develops an automated framework for creating marine geomorphological maps using statistical learning. By leveraging bathymetric data and terrain attributes, it applies clustering algorithms to identify ground truth locations and a random forest model for classification. The study evaluates the impact of DBM resolution, sample size, and sampling methods on map quality. Results show the framework produces high-quality maps, with the best performance achieved using a 100m DBM resolution, 200 samples, and complexity-dependent sampling, yielding a 90% match with the reference map.
+
+::: boxed
+::: columns
+::: {.column width="100%"}
+![](./images/Fig1.jpg) **Figure.** Geyser is an atoll in the Western Indian ocean, specifically located in the northern Mozambique channel between Mayotte and the Gloriosos Islands and covering approximately 268 km2. A Bathymetry data (in meters) collected by LIDAR technology and provided by Hydrography and Oceanography Service of the Navy (SHOM). B Geomorphologic structure identified for the Geyser atoll, as a part of the EPICURE project (Roos et al. 2017).
+:::
+
+[Publication](https://doi.org/10.1007/s12145-024-01347-x){style="text-decoration: none; color: #0BDA51;"}
+
+[Preprint](https://hal.science/hal-04624799/file/Revision_ESI-2.pdf){style="text-decoration: none; color: #0BDA51;"}
+
+**Cite this article:** Faye, P.A.L., Brunel, E., Claverie, T. et al. Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms. *Earth Sci Inform* 17, 3715--3732 (2024). https://doi.org/10.1007/s12145-024-01347-x
+:::
+:::
+
+</ol>

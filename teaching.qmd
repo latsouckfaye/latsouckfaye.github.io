@@ -1,0 +1,90 @@
+---
+freeze: false
+toc: true
+
+format:
+  html:
+    css: styles.css
+---
+
+::: {style="text-align: center;"}
+<h6 class="outlinebis">
+✏️ Teaching
+</h6>
+:::
+
+### 📊 Descriptive Statistics
+
+🎓 **BUT 1st Year --- Data Science**
+
+Practical sessions with EXCEL
+
+*Topics to cover:* Introduction to Excel and Getting Started, Data cleaning and preparation, Flat sorting and frequency tables, Measures of central tendency, Measures of dispersion, Data visualization, Pivot tables, Cross-analysis of two variables, Highlighting key indicators.
+
+### 💻 Statistical Programming
+
+🎓 **BUT 1st Year --- Data Science**
+
+Courses and practical sessions with R
+
+*Topics to cover:* Introduction to R and RStudio, Data structures (Matrices, Factors, Lists, Data Frames), Control structures and functions, Data import and export, preparation and manipulation, Univariate descriptive analysis, Bivariate descriptive analysis, Data visualization, Creating dynamic reports with RMarkdown and Quarto.
+
+🎓 **Bachelor 3rd Year --- Specialized Programs: Management Control, Real Estate, E-commerce, B2B, Procurement & Supply Chain, Security, International Law**
+
+Courses, tutorials and practical sessions with Excel
+
+*Topics to cover:* Basic concepts (Population, Sample and individuals, Variable and modalities, Statistical series), Statistical data and Representations (Statistical table, Bar chart, Pie chart, Histogram, etc.), Univariate descriptive statistics (Measures of central tendency, Measures of dispersion, Boxplot).
+
+### 🎲 Probability
+
+🎓 **Bachelor 1st Year --- Biology**
+
+Tutorials
+
+*Topics to cover:* sets, set operations, probability vocabulary, basic probability, contingency tables, probability trees, conditional probability, binomial distribution, geometric distribution, Poisson distribution, independent variables, expectation, variance, sum of random variables.
+
+### 📏 Linear Models
+
+🎓 **BUT 2nd Year --- Data Science**
+
+Courses, tutorials and practical sessions with R
+
+*Topics to cover:* Simple and Multiple Linear Regression: Introduction (Framework and exploration), Models (Equation, Fitting, Analysis of variance, Goodness of fit), Inference (Assumptions, Estimators and properties, Tests, Confidence and prediction intervals, Diagnostics, Validation, Model selection).
+
+### 💻 Stochastic modeling
+
+🎓 **Bachelor 3rd Year --- Mathematics**
+
+Practical sessions with R
+
+*Topics to cover:* pseudo-random generators, R simulations, law of large numbers and central limit theorem, inverse method & rejection sampling, Monte Carlo integration, variance reduction, antithetic variables, random walk.
+
+::: {style="text-align: center;"}
+<h6 class="outlinebis">
+📋 Monitoring
+</h6>
+:::
+
+### DataViz Challenge
+
+🎓 **BUT 1st Year --- Data Science**\
+
+*Role:* Evaluate student data visualization projects, provide feedback, and encourage creative storytelling with data.
+
+### Hackathon
+
+🎓 **BUT 1st Year --- Data Science**
+
+*Role:* Assess team-based solutions to real-world problems, focusing on creativity, feasibility, and technical execution.
+
+### Project Submission
+
+🎓 **Bachelor Levels**\
+
+*Role:* Evaluate student projects, review final reports, and provide constructive feedback.
+
+### Selection Committees
+
+🎓 **BUT Program**
+
+*Role:* Interview candidates, assess profiles, contribute to academic program recruitment.

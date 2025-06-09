@@ -1,0 +1,31 @@
+---
+title: "20th International Workshop in Spatial Econometrics and Statistics"
+format: html
+editor: visual
+
+description: |
+  The 20th International Workshop on Spatial Econometrics and Statistics took place on May 19–20, 2022, in Lille, France, hosted by the LEM (Department of Economics and Management of Lille), LPP (Department of Mathematics of Lille), INRIA-MODAL, ONCOLille Institute, and the Université de Lille.
+
+author:
+  - name: Paul Aimé Latsouck Faye
+    url: https://github.com/latsouckfaye
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  
+date: 2022-05-19
+slug: sew2022
+categories: [Geomorphology, Multi-scale mapping, LiDAR data, R]
+image: sew2022.png
+---
+
+A poster illustrating a data-driven approach to automated geomorphological mapping
+
+::: boxed
+::: columns
+::: {.column width="100%"}
+![](poster.png)
+:::
+:::
+
+:::

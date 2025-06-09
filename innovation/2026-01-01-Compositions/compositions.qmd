@@ -1,0 +1,55 @@
+---
+title: "Spatial compositional data analysis"
+description: |
+  A new regression model for spatial compositional data with zeros and mixed covariates
+author:
+  - name: Paul Aimé Latsouck Faye
+    url: https://github.com/latsouckfaye
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  - name: Elodie Brunel
+    orcid: 0009-0008-6908-1626
+    affiliation: IMAG, University of Montpellier, France
+    affiliation-url: https://imag.umontpellier.fr/
+  - name: Sophie Dabo
+    orcid: 0000-0002-4000-6752
+    affiliation: PAINLEVE UMR 8524, University of Lille, France
+    affiliation-url: https://math.univ-lille.fr/
+date: 2026-01-01
+slug: sampling2024
+categories: [Regression, Compositional data, Spatial data analysis, R]
+image: scattzero_n500_px1_rand.jpg
+---
+
+::: boxed
+::: columns
+::: {.column width="45%"}
+![](../../../images/scattzero_n500_px1_rand.jpg)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+![](../../../images/TestVsTrue_ait_mle_500_2.jpg)
+:::
+:::
+
+<!-- Second row: captions aligned under the images -->
+
+::: columns
+::: {.column width="45%"}
+**Figure 1.** Scatterplot of simulated compositional data versus $x_1$ covariate.
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+**Figure 2.** True versus estimated values using the novel model.
+:::
+
+[In progress]{style="color: red;"}
+:::
+:::

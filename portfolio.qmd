@@ -1,0 +1,189 @@
+---
+title: "Paul FAYE"
+subtitle: "Data scientist"
+freeze: false
+image: images/gitphoto.jpg
+toc: true
+about: 
+  template: trestles
+  image-shape: rounded
+  image-width: 10em
+  links:
+    - icon: github
+      href: https://github.com/latsouckfaye
+    - icon: envelope
+      href: mailto:pfaye@univ-lille.fr
+    - icon: linkedin
+      href: https://www.linkedin.com/in/paulfaye
+
+format:
+  html:
+    css: styles.css  # your CSS file
+    body-class: class-outline
+---
+
+::: {style="text-align: center;"}
+<h6 class="outline">
+
+💼 Work Experience
+
+</h6>
+:::
+
+📅 **Nov. 2023 - Aug. 2025**
+
+[**Teacher and Researcher in Statistics**]{style="color:#53759C"}
+
+::: right-align
+University of Lille (France)
+:::
+
+[**Activities:** Courses - Statistical programming, Descriptive Statistics, Linear models, Data analysis. - & Monitoring .]{style="color:#0AAA40"}
+
+📅 **Oct. 2020 - Aug. 2025**
+
+[**Ph.D. in Applied Statistics**]{style="color:#53759C"}
+
+::: right-align
+University of Montpellier (France)
+:::
+
+[**Topic:** Contribution to the statistical analysis of geomorphological and spatial composition data: application to the study of coral reef communities.]{style="color:#0AAA40"}
+
+📅 **Feb. - Aug. 2020**
+
+[**Intern in Data Science**]{style="color:#53759C"}
+
+::: right-align
+University of Lille (France)
+:::
+
+[**Topic:** Statistical analysis of community structure indicators in coral reef ecosystems.]{style="color:#0AAA40"}
+
+📅 **Jun. 2016 - Jul. 2017**
+
+[**Customer Service Representative**]{style="color:#53759C"}
+
+::: right-align
+Premium Contact Center International (Senegal)
+:::
+
+[**Role:** Customer information, support and loyalty building.]{style="color:#0AAA40"}
+
+::: {style="text-align: center;"}
+<h6 class="outline">
+
+🎓 Education
+
+</h6>
+:::
+
+📅 **2025**
+
+[**Ph.D. Applied Statistics**]{style="color:#53759C"}
+
+::: right-align
+University of Montpellier (France)
+:::
+
+📅 **2020**
+
+[**M.S. Applied Mathematics and Computer Science**]{style="color:#53759C"}
+
+::: right-align
+University of Lille (France)
+:::
+
+📅 **2017**
+
+[**M.S. Econometrics and Quantitative Finance**]{style="color:#53759C"}
+
+::: right-align
+University Cheikh Anta Diop (Senegal)
+:::
+
+::: {style="text-align: center;"}
+<h6 class="outline">
+
+🏆 Certificates
+
+</h6>
+:::
+
+-   [**Machine Learning with Scikit Learn**](https://github.com/latsouckfaye/Certificates/blob/main/attestation_suivi_course-v1_inria%2B41026%2Bsession02_9461cd9f4b4518ea2f3b47da448cf76d.pdf){style="text-decoration: none"}
+
+-   [**SQL for Data Science (with Python)**](https://www.udemy.com/certificate/UC-cb724d19-8b7b-41da-9c4d-a9327b6af742/){style="text-decoration: none"}
+
+-   [**SAS Programming**](https://www.youracclaim.com/badges/d7723949-77c3-4e2a-a5cc-c36af5a7dbbe/public_url){style="text-decoration: none"}
+
+-   [**Python Programming**](https://udemy.com/certificate/UC-be63f4ca-6da8-44f4-8690-d2d559326d07){style="text-decoration: none"}
+
+-   [**R Package Development**](https://github.com/latsouckfaye/Certificates/blob/main/Attestation_Formation_RdevPkg.pdf){style="text-decoration: none"}
+
+::: {style="text-align: center;"}
+<h6 class="outline">
+
+🛠️ Data Analytics Toolbox
+
+</h6>
+:::
+
+### 📊 Preparation & Exploration
+
+-   **Data Wrangling**: End-to-end ETL, robust cleaning, imputation, transformation, and outlier handling.
+-   **Descriptive Analytics**: Deep exploration through univariate, bivariate, and multivariate analyses.
+-   **Dimensionality Reduction**: PCA, FAMD, MFA, NMDS --- simplifying complexity, revealing structure.
+
+### 📈 Modeling & Forecasting
+
+-   **Statistical & Time Series Modeling**: ARIMA, ARCH/GARCH for trend detection and forecasting.
+-   **Machine Learning**:
+    -   *Regression*: Linear, logistic, polynomial, neural networks.\
+    -   *Classification*: Decision trees, random forests, ensemble models.\
+    -   *Clustering*: K-means, CLARA, HCPC, KNN.\
+    -   *Neural Architectures*: Feedforward, deep learning.
+
+### 🗺️ Spatial & Geostatistical Analysis
+
+-   Kriging, Cokriging, IDW --- deriving insight from location-based data.
+
+### 📊 Visualization & Communication
+
+-   **Data Visualization**: Clear, compelling graphics tailored to audience and context, creating dashboards.
+-   **Automated Reporting**: Reproducible, dynamic reports for stakeholders across domains.
+
+### ☁️ Computational Infrastructure
+
+-   **Scalable Computing**: Cloud platforms, high-performance and parallel computing for large-scale data workflows.
+
+::: {style="text-align: center;"}
+<h6 class="outline">
+
+🧰 Stack
+
+</h6>
+:::
+
+### IDE
+
+<img src="./images/quarto.png" alt="Quarto" width="40"/> <img src="./images/GoogleColab.png" alt="Google Colab" width="50"/> ![vscode](./images/vscode-original.svg){width="40"} ![Anaconda](./images/anaconda-original.svg){width="40"} ![rstudio](./images/rstudio-original.svg){width="40"} ![Jupyter](./images/jupyter-original-wordmark.svg){width="40"} ![GitHub icon](./images/github-original.svg){width="40"}
+
+### Programming
+
+![R](./images/r-original.svg){width="40"} ![python](./images/python-original.svg){width="40"} ![sas](./images/sas.svg){width="20"}
+
+### Statistics softwares
+
+![Eviews](./images/EViews.png){width="40"} ![Gretl](./images/Gretl.png){width="40"} ![Geoda](./images/Geoda.png){width="40"}
+
+### Business Intelligence
+
+![Azure](./images/azure-original-wordmark.svg){width="40"} ![Tableau](./images/tableau.jpg){width="40"} ![Shiny](./images/shiny.png){width="40"} ![Sql Server](./images/sqlserver.svg){width="40"} ![Mysql](./images/mysql-original-wordmark.svg){width="40"} ![Postgresql](./images/postgresql-original.svg){width="40"} ![Excel](./images/Excel.png){width="40"}
+
+### Web
+
+![Html 5](./images/html5-original-wordmark.svg){width="40"} ![CSS 3](./images/css3-original-wordmark.svg){width="40"} ![Php](./images/php-original.svg){width="40"} ![Bootstrap](./images/bootstrap-plain-wordmark.svg){width="40"} ![Javascript](./images/javascript-original.svg){width="40"} ![Worpress](./images/wordpress-original.svg){width="40"} ![Php Myadmin](./images/PhpMyAdmin.png){width="40"}
+
+### Communication
+
+![Rmarkdown](./images/rmarkdown.png){width="40"} ![Latex](./images/LaTeX.png){width="40"} ![Powerpoint](./images/powerpoint.png){width="40"}

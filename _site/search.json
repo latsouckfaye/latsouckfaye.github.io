@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "teaching.html",
+    "href": "teaching.html",
+    "title": "",
+    "section": "",
+    "text": "✏️ Teaching\n\n\n\n📊 Descriptive Statistics\n🎓 BUT 1st Year — Data Science\nPractical sessions with EXCEL\nTopics to cover: Introduction to Excel and Getting Started, Data cleaning and preparation, Flat sorting and frequency tables, Measures of central tendency, Measures of dispersion, Data visualization, Pivot tables, Cross-analysis of two variables, Highlighting key indicators.\n\n\n💻 Statistical Programming\n🎓 BUT 1st Year — Data Science\nCourses and practical sessions with R\nTopics to cover: Introduction to R and RStudio, Data structures (Matrices, Factors, Lists, Data Frames), Control structures and functions, Data import and export, preparation and manipulation, Univariate descriptive analysis, Bivariate descriptive analysis, Data visualization, Creating dynamic reports with RMarkdown and Quarto.\n🎓 Bachelor 3rd Year — Specialized Programs: Management Control, Real Estate, E-commerce, B2B, Procurement & Supply Chain, Security, International Law\nCourses, tutorials and practical sessions with Excel\nTopics to cover: Basic concepts (Population, Sample and individuals, Variable and modalities, Statistical series), Statistical data and Representations (Statistical table, Bar chart, Pie chart, Histogram, etc.), Univariate descriptive statistics (Measures of central tendency, Measures of dispersion, Boxplot).\n\n\n🎲 Probability\n🎓 Bachelor 1st Year — Biology\nTutorials\nTopics to cover: sets, set operations, probability vocabulary, basic probability, contingency tables, probability trees, conditional probability, binomial distribution, geometric distribution, Poisson distribution, independent variables, expectation, variance, sum of random variables.\n\n\n📏 Linear Models\n🎓 BUT 2nd Year — Data Science\nCourses, tutorials and practical sessions with R\nTopics to cover: Simple and Multiple Linear Regression: Introduction (Framework and exploration), Models (Equation, Fitting, Analysis of variance, Goodness of fit), Inference (Assumptions, Estimators and properties, Tests, Confidence and prediction intervals, Diagnostics, Validation, Model selection).\n\n\n💻 Stochastic modeling\n🎓 Bachelor 3rd Year — Mathematics\nPractical sessions with R\nTopics to cover: pseudo-random generators, R simulations, law of large numbers and central limit theorem, inverse method & rejection sampling, Monte Carlo integration, variance reduction, antithetic variables, random walk.\n\n\n📋 Monitoring\n\n\n\n\nDataViz Challenge\n🎓 BUT 1st Year — Data Science\n\nRole: Evaluate student data visualization projects, provide feedback, and encourage creative storytelling with data.\n\n\nHackathon\n🎓 BUT 1st Year — Data Science\nRole: Assess team-based solutions to real-world problems, focusing on creativity, feasibility, and technical execution.\n\n\nProject Submission\n🎓 Bachelor Levels\n\nRole: Evaluate student projects, review final reports, and provide constructive feedback.\n\n\nSelection Committees\n🎓 BUT Program\nRole: Interview candidates, assess profiles, contribute to academic program recruitment."
+  },
+  {
+    "objectID": "talks/2022_05_19/sew.html",
+    "href": "talks/2022_05_19/sew.html",
+    "title": "20th International Workshop in Spatial Econometrics and Statistics",
+    "section": "",
+    "text": "A poster illustrating a data-driven approach to automated geomorphological mapping"
+  },
+  {
+    "objectID": "portfolio.html",
+    "href": "portfolio.html",
+    "title": "Paul FAYE",
+    "section": "",
+    "text": "💼 Work Experience\n\n\n📅 Nov. 2023 - Aug. 2025\nTeacher and Researcher in Statistics\n\nUniversity of Lille (France)\n\nActivities: Courses - Statistical programming, Descriptive Statistics, Linear models, Data analysis. - & Monitoring .\n📅 Oct. 2020 - Aug. 2025\nPh.D. in Applied Statistics\n\nUniversity of Montpellier (France)\n\nTopic: Contribution to the statistical analysis of geomorphological and spatial composition data: application to the study of coral reef communities.\n📅 Feb. - Aug. 2020\nIntern in Data Science\n\nUniversity of Lille (France)\n\nTopic: Statistical analysis of community structure indicators in coral reef ecosystems.\n📅 Jun. 2016 - Jul. 2017\nCustomer Service Representative\n\nPremium Contact Center International (Senegal)\n\nRole: Customer information, support and loyalty building.\n\n\n🎓 Education\n\n\n📅 2025\nPh.D. Applied Statistics\n\nUniversity of Montpellier (France)\n\n📅 2020\nM.S. Applied Mathematics and Computer Science\n\nUniversity of Lille (France)\n\n📅 2017\nM.S. Econometrics and Quantitative Finance\n\nUniversity Cheikh Anta Diop (Senegal)\n\n\n\n🏆 Certificates\n\n\n\nMachine Learning with Scikit Learn\nSQL for Data Science (with Python)\nSAS Programming\nPython Programming\nR Package Development\n\n\n\n🛠️ Data Analytics Toolbox\n\n\n\n📊 Preparation & Exploration\n\nData Wrangling: End-to-end ETL, robust cleaning, imputation, transformation, and outlier handling.\nDescriptive Analytics: Deep exploration through univariate, bivariate, and multivariate analyses.\nDimensionality Reduction: PCA, FAMD, MFA, NMDS — simplifying complexity, revealing structure.\n\n\n\n📈 Modeling & Forecasting\n\nStatistical & Time Series Modeling: ARIMA, ARCH/GARCH for trend detection and forecasting.\nMachine Learning:\n\nRegression: Linear, logistic, polynomial, neural networks.\n\nClassification: Decision trees, random forests, ensemble models.\n\nClustering: K-means, CLARA, HCPC, KNN.\n\nNeural Architectures: Feedforward, deep learning.\n\n\n\n\n🗺️ Spatial & Geostatistical Analysis\n\nKriging, Cokriging, IDW — deriving insight from location-based data.\n\n\n\n📊 Visualization & Communication\n\nData Visualization: Clear, compelling graphics tailored to audience and context, creating dashboards.\nAutomated Reporting: Reproducible, dynamic reports for stakeholders across domains.\n\n\n\n☁️ Computational Infrastructure\n\nScalable Computing: Cloud platforms, high-performance and parallel computing for large-scale data workflows.\n\n\n\n🧰 Stack\n\n\n\n\nIDE\n      \n\n\nProgramming\n  \n\n\nStatistics softwares\n  \n\n\nBusiness Intelligence\n      \n\n\nWeb\n      \n\n\nCommunication"
+  },
+  {
+    "objectID": "innovation/2026-01-01-Compositions/compositions.html",
+    "href": "innovation/2026-01-01-Compositions/compositions.html",
+    "title": "Spatial compositional data analysis",
+    "section": "",
+    "text": "Figure 1. Scatterplot of simulated compositional data versus \\(x_1\\) covariate.\n\n\n\nFigure 2. True versus estimated values using the novel model.\nIn progress"
+  },
+  {
+    "objectID": "innovation/2024-05-26-Compare-maps/compare-maps.html",
+    "href": "innovation/2024-05-26-Compare-maps/compare-maps.html",
+    "title": "Comparing maps across spatial resolutions",
+    "section": "",
+    "text": "Figure. Two maps at different spatial resolutions.\n\n\n\n\n\n\n\n\n📚 Materials  Code"
+  },
+  {
+    "objectID": "DSprojects.html",
+    "href": "DSprojects.html",
+    "title": "Paul FAYE",
+    "section": "",
+    "text": "I share here a series of methodological advances addressing key challenges in data analysis combining theoretical insights with practical implementation. Each tutorial is designed to be accessible and reproducible, facilitating the adoption and further exploration of the techniques."
+  },
+  {
+    "objectID": "DSprojects.html#comparing-irregular-gridded-maps-at-different-resolutions",
+    "href": "DSprojects.html#comparing-irregular-gridded-maps-at-different-resolutions",
+    "title": "Paul FAYE",
+    "section": "Comparing irregular gridded maps at different resolutions",
+    "text": "Comparing irregular gridded maps at different resolutions"
+  },
+  {
+    "objectID": "DSprojects.html#spatial-sampling",
+    "href": "DSprojects.html#spatial-sampling",
+    "title": "Paul FAYE",
+    "section": "Spatial sampling",
+    "text": "Spatial sampling"
+  },
+  {
+    "objectID": "DSprojects.html#spatial-compositional-data-analysis",
+    "href": "DSprojects.html#spatial-compositional-data-analysis",
+    "title": "Paul FAYE",
+    "section": "Spatial compositional data analysis",
+    "text": "Spatial compositional data analysis\nIn progress"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\n\n",
+    "section": "",
+    "text": "Data Scientist\n\nI’m a data scientist and web development enthusiast with a passion for teaching and making knowledge accessible to everyone. Guided by curiosity, creativity and a drive to empower others through learning, I’m always building, exploring, and sharing.\n\n\n🌟 Professional Interests\n\n\nSince November 2023, I have held the position of Temporary Teaching and Research Associate (Attaché Temporaire d’Enseignement et de Recherche) at the University of Lille. I actively contribute to multiple academic programs, notably the BUT in Data Science and various Professional Bachelor’s degrees, delivering courses across diverse topics.\nMy teaching portfolio covers a wide spectrum of statistical methodologies, from Descriptive analysis to advanced statistical modeling. I design and lead lectures, tutorials, and hands-on sessions employing industry-standard tools such as R, Python, Excel and SAS to equip students with practical data analysis and programming skills.\nBeyond classroom teaching, I have successfully supervised numerous student projects, guiding them through the application of statistical techniques and data science principles to real-world datasets. This mentorship fosters critical thinking and practical problem-solving, ensuring student success in their academic and professional pursuits.\nMy research is centered on the analysis of large-scale and complex spatial data, where I develop and implement innovative statistical models tailored to address challenging problems in biostatistics and related fields. I have authored peer-reviewed publications that propose novel methodologies for spatial data analysis, reflecting my commitment to advancing the scientific community’s understanding of complex data structures.\n\n\n\n\n\n\n🎨 Outside the terminal\n\n\n\n\n📚 Avid reader - From philosophy to sci-fi  ✏️ Sketch artist - Drawing to relax and express creativity  🚴 Cycling enthusiast - Exploring trails and chasing horizons  🏃 Runner - Clearing my mind one mile at a time"
+  },
+  {
+    "objectID": "innovation/2024-05-26-Spatial-sampling/sampling-maps.html",
+    "href": "innovation/2024-05-26-Spatial-sampling/sampling-maps.html",
+    "title": "Strategic sampling methods",
+    "section": "",
+    "text": "Figure. Spatial coverage sampling (left) and Complexity dependent sampling (right).\n\n\n\n\n\n\n\n📚 Materials  Code"
+  },
+  {
+    "objectID": "innovation.html",
+    "href": "innovation.html",
+    "title": "",
+    "section": "",
+    "text": "A selection of my scientific research contributions, encompassing key areas of focus, publications, and current projects.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpatial compositional data analysis\n\n\n\nRegression\n\n\nCompositional data\n\n\nSpatial data analysis\n\n\nR\n\n\n\nA new regression model for spatial compositional data with zeros and mixed covariates\n\n\n\nPaul Aimé Latsouck Faye, Elodie Brunel, Sophie Dabo\n\n\nJan 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing maps across spatial resolutions\n\n\n\nSpatial data analysis\n\n\nMulti-scale mapping\n\n\nMetrics\n\n\nGIS\n\n\nR\n\n\n\nA tutorial on comparing maps across multiple resolutions\n\n\n\nPaul Aimé Latsouck Faye, Elodie Brunel, Thomas Claverie, Solym Manou-Abi, Sophie Dabo\n\n\nMay 26, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrategic sampling methods\n\n\n\nSampling\n\n\nSpatial data analysis\n\n\nClustering\n\n\nGeomorphology\n\n\nR\n\n\n\nA tutorial on designing sampling methods\n\n\n\nPaul Aimé Latsouck Faye, Elodie Brunel, Thomas Claverie, Solym Manou-Abi, Sophie Dabo\n\n\nMay 26, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "",
+    "section": "",
+    "text": "A novel nonparametric regression model for spatial compositional data with zeros using mixed covariates. Coming soon\n\nThis study introduces a novel nonparametric regression estimator for spatial compositional data with zero components, incorporating both discrete and continuous covariates. The performance of the proposed model is first assessed through a series of simulation experiments and then validated on a real-world dataset, demonstrating its effectiveness and robustness in practical applications.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1. Scatterplot of simulated compositional data versus \\(x_1\\) covariate.\n\n\n\nFigure 2. True versus estimated values using the novel model.\n\n\n\n\nAutomatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms.\n\nJournal: Earth Science Informatics\nDate: 2024-06-26\nAuthors: Paul A. L. Faye, Elodie Brunel, Thomas Claverie, Solym Manou-Abi Sophie Dabo-Niang.\nThis work develops an automated framework for creating marine geomorphological maps using statistical learning. By leveraging bathymetric data and terrain attributes, it applies clustering algorithms to identify ground truth locations and a random forest model for classification. The study evaluates the impact of DBM resolution, sample size, and sampling methods on map quality. Results show the framework produces high-quality maps, with the best performance achieved using a 100m DBM resolution, 200 samples, and complexity-dependent sampling, yielding a 90% match with the reference map.\n\n\n\n Figure. Geyser is an atoll in the Western Indian ocean, specifically located in the northern Mozambique channel between Mayotte and the Gloriosos Islands and covering approximately 268 km2. A Bathymetry data (in meters) collected by LIDAR technology and provided by Hydrography and Oceanography Service of the Navy (SHOM). B Geomorphologic structure identified for the Geyser atoll, as a part of the EPICURE project (Roos et al. 2017).\nPublicationPreprintCite this article: Faye, P.A.L., Brunel, E., Claverie, T. et al. Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms. Earth Sci Inform 17, 3715–3732 (2024). https://doi.org/10.1007/s12145-024-01347-x"
+  },
+  {
+    "objectID": "talks.html",
+    "href": "talks.html",
+    "title": "",
+    "section": "",
+    "text": "A selection of my work in scientific communication, showcasing major topics, published studies, and ongoing research initiatives.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n54th statistical days of SFDS\n\n\n\n\n\n\nGeomorphology\n\n\nMulti-scale mapping\n\n\nLiDAR data\n\n\nR\n\n\n\nThe 54th Statistical Days (Journées de Statistique) organized by the Société Française de Statistique (SFdS) is a major annual conference for the French-speaking statistical…\n\n\n\n\n\nJul 3, 2023\n\n\nPaul Aimé Latsouck Faye\n\n\n\n\n\n\n\n\n\n\n\n\nSemdoc IMAG, Montpellier\n\n\n\n\n\n\nGeomorphology\n\n\nMulti-scale mapping\n\n\nLiDAR data\n\n\nR\n\n\n\nThe Semdoc IMAG Montpellier is a monthly seminar organized by the Institut Montpelliérain Alexander Grothendieck (IMAG) at the University of Montpellier. It provides PhD…\n\n\n\n\n\nMay 24, 2023\n\n\nPaul Aimé Latsouck Faye\n\n\n\n\n\n\n\n\n\n\n\n\n20th International Workshop in Spatial Econometrics and Statistics\n\n\n\n\n\n\nGeomorphology\n\n\nMulti-scale mapping\n\n\nLiDAR data\n\n\nR\n\n\n\nThe 20th International Workshop on Spatial Econometrics and Statistics took place on May 19–20, 2022, in Lille, France, hosted by the LEM (Department of Economics and…\n\n\n\n\n\nMay 19, 2022\n\n\nPaul Aimé Latsouck Faye\n\n\n\n\n\n\nNo matching items"
+  }
+]
