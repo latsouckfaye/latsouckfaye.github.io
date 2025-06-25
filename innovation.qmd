@@ -19,4 +19,4 @@ format:
     css: styles.css
 ---
 
-A selection of my scientific research contributions, encompassing key areas of focus, publications, and current projects.
+A selection of my scientific research contributions, encompassing publications and current projects.

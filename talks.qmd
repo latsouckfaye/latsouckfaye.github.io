@@ -18,4 +18,4 @@ format:
     css: styles.css
 ---
 
-A selection of my work in scientific communication, showcasing major topics, published studies, and ongoing research initiatives.
+A selection of my scientific communication.

@@ -67,10 +67,8 @@ format:
 ::: {.column width="100%"}
 ::: {style="display: flex; justify-content: center; gap: 20px;"}
 ::: {style="display: flex; justify-content: center; align-items: center; text-align: center; gap: 20px;"}
-[[📚 Materials](https://latsouckfaye.github.io/CompareMap/){.btn role="button" target="_blank"}]{.outline}
-[[<img src='../../images/github-original.svg' width='20' style='vertical-align: middle;'/> Code](https://github.com/latsouckfaye/CompareMap){.btn role="button" target="_blank"}]{.outline}
+[[📚 Materials](https://latsouckfaye.github.io/CompareMap/){.btn role="button" target="_blank"}]{.outline} [[<img src="../../images/github-original.svg" width="20" style="vertical-align: middle;"/> Code](https://github.com/latsouckfaye/CompareMap){.btn role="button" target="_blank"}]{.outline}
 :::
-
 :::
 :::
 :::

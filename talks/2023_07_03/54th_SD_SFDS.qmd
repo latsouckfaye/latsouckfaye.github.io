@@ -4,7 +4,7 @@ format: html
 editor: visual
 
 description: |
-  The 54th Statistical Days (Journées de Statistique) organized by the Société Française de Statistique (SFdS) is a major annual conference for the French-speaking statistical community, gathering researchers, educators, and professionals to discuss the latest developments in statistical theory and applications. The event covers a broad range of topics including statistical learning, high-dimensional data, risk and extreme value statistics, and non-parametric methods, while also fostering the growth of young statisticians through dedicated sessions and networking opportunities.
+  The 54th Statistical Days (Journées de Statistique) organized by the Société Française de Statistique (SFdS) is a major annual conference for the French-speaking statistical community, gathering researchers, educators, and professionals to discuss the latest developments in statistical theory and applications. The event covers a broad range of topics including statistical learning, high-dimensional data, risk and extreme value statistics and non-parametric methods, while also fostering the growth of young statisticians through dedicated sessions and networking opportunities.
 
 author:
   - name: Paul Aimé Latsouck Faye
@@ -25,5 +25,4 @@ image: sfds.png
 ![](sfds_bis.png)
 :::
 :::
-
 :::

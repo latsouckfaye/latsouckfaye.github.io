@@ -19,7 +19,7 @@ categories: [Geomorphology, Multi-scale mapping, LiDAR data, R]
 image: sew2022.png
 ---
 
-A poster illustrating a data-driven approach to automated geomorphological mapping
+A part of a poster illustrating a data-driven approach to automated geomorphological mapping
 
 ::: boxed
 ::: columns
@@ -27,5 +27,4 @@ A poster illustrating a data-driven approach to automated geomorphological mappi
 ![](poster.png)
 :::
 :::
-
 :::
