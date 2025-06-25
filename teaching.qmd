@@ -8,10 +8,11 @@ format:
 ---
 
 ::: {style="text-align: center;"}
-<h6 class="outlinebis">
+<h6 class="outline">
 ✏️ Teaching
 </h6>
 :::
+
 
 ### 📊 Descriptive Statistics
 
@@ -62,10 +63,11 @@ Practical sessions with R
 *Topics to cover:* pseudo-random generators, R simulations, law of large numbers and central limit theorem, inverse method & rejection sampling, Monte Carlo integration, variance reduction, antithetic variables, random walk.
 
 ::: {style="text-align: center;"}
-<h6 class="outlinebis">
+<h6 class="outline">
 📋 Monitoring
 </h6>
 :::
+
 
 ### DataViz Challenge
 

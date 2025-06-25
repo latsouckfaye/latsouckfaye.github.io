@@ -11,22 +11,17 @@ format:
 <h1 style="text-align:center; font-size: 40px;">
 
 <img src="./images/photoprof.jpg" alt="Description" style="border-radius:220px; max-width:35%;"/>
-
 </h1>
 
 <h1 style="text-align:center; font-size: 40px;">
-
 **Data Scientist**
-
 </h1>
 
 I'm a data scientist and web development enthusiast with a passion for teaching and making knowledge accessible to everyone. Guided by curiosity, creativity and a drive to empower others through learning, I'm always building, exploring and sharing.
 :::
 
 <h1 style="text-align:center;">
-
 🌟 Professional Interests
-
 </h1>
 
 ::: {style="text-align: center; border:1px solid #ccc; padding:10px; border-radius:5px;"}
@@ -48,9 +43,7 @@ My research is centered on the **analysis of large-scale and complex spatial dat
 :::
 
 <h1 style="text-align:center;">
-
 🎨 Outside the terminal
-
 </h1>
 
 ::: {style="text-align: center; border:1px solid #ccc; padding:10px; border-radius:5px;"}
