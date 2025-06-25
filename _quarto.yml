@@ -24,7 +24,7 @@ website:
     right:
       - icon: github
         href: https://github.com/latsouckfaye
-      - text: get in touch!
+      - text: Get in touch!
         menu:
           - icon: linkedin
             text: LinkedIn
