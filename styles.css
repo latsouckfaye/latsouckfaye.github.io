@@ -1,0 +1,210 @@
+/* css styles */
+
+.quarto-grid-item {
+  min-height: 300px;     /* Adjust height */
+  min-width: 280px;      /* Adjust width if needed */
+}
+
+/* Optional: spacing between cards */
+.quarto-grid {
+  gap: 2rem;
+}
+
+body {
+  background-color: white; /* Light gray - change as desired */
+}
+
+
+
+/* Target each listing grid item */
+.quarto-grid-item {
+  background-color: white;   /* Light gray background */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;      /* Optional: add border */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional: subtle shadow */
+}
+
+.quarto-grid-item img {
+  max-width: 100%;
+  height: auto;
+  width: auto;         /* Adjust this % to control size */
+  display: block;
+  margin: 0 auto;      /* Center the image */
+  border-radius: 6px;  /* Optional: rounded corners */
+}
+
+
+
+a{
+  text-decoration: none;
+}
+
+
+
+/* Increase icon size and remove default styling */
+a.nav-link, .quarto-listing-category a, .quarto-about-toc a {
+  font-size: 1rem !important;
+  background: none !important;
+  border: none !important;
+  padding: 0.2rem;
+}
+
+/* Optional: make icons slightly hover-colored */
+a.nav-link:hover {
+  color: #FF7518; /* blue tint for LinkedIn-style */
+}
+
+
+/* About page content
+
+/* Make about-page icons larger and remove styling */
+.about-link {
+  font-size: 0.5rem;          /* Makes the icon bigger */
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.2rem !important;
+}
+.about-link i {
+  font-size: 1.5rem; /* Try 3rem or more for larger icons */
+}
+.about-contents p {
+  text-align: justify;
+}
+
+
+/* More specific style targeting common nav link containers */
+nav a.active, nav a.current, nav a.selected, nav a.is-active {
+  background-color:  white !important;  /* Medium sea green */
+  color: #FF7518 !important;
+  font-weight: 400;
+  padding: 0.2em 0.2em;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+
+
+.columns {
+  display: flex;
+  align-items: stretch;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-line {
+  border-left: 1px solid #ccc;
+  margin: auto;
+  height: 1000px;
+  width: 1px;
+}
+.vertical-line2 {
+  border-left: 1px solid #ccc;
+  margin: auto;
+  height: 2300px;
+  width: 1px;
+}
+
+/* Short bio */
+.vertical-linea {
+  border-left: 1px solid #ccc;
+  margin: auto;
+  height: 300px;
+  width: 1px;
+}
+
+.vertical-lineb {
+  border-left: 1px solid #ccc;
+  margin: auto;
+  height: 350px;
+  width: 1px;
+}
+
+.vertical-linec {
+  border-left: 1px solid #ccc;
+  margin: auto;
+  height: 350px;
+  width: 1px;
+}
+
+
+.right-align p,
+.right-align {
+  text-align: right !important;
+}
+
+
+p {
+  text-align: justify;
+   margin-top: 20px;
+  position: relative;
+  z-index: 0;
+}
+
+.title, .subtitle {
+  text-align: center;
+}
+
+
+
+/* Only center titles when the body has the class 'center-titles' */
+.left-titles,
+.left-titles{
+  text-align: left;
+}
+
+.outline {
+  border-radius: 12px;
+  padding: 10px 15px;
+  display: inline-block;
+  background-color: #f0f0f0;
+  outline: 2px solid;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.outlinebis {
+  border-radius: 12px;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  outline: 2px solid;
+  margin-bottom: 20px;
+}
+
+
+
+
+.boxed {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+
+
+
+.nav-footer {
+  background-color: #53759C !important;
+  color: white !important;
+}
+
+.nav-footer .nav-footer-right {
+  text-align: right;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+
+
+
