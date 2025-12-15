@@ -10,7 +10,7 @@ format:
 ::: {style="text-align:center; solid #ccc; padding:10px;"}
 <h1 style="text-align:center; font-size: 40px;">
 
-<img src="./images/photoprof.jpg" alt="Description" style="border-radius:220px; max-width:35%;"/>
+Paul FAYE
 
 </h1>
 
