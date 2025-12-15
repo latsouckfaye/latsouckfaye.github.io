@@ -8,11 +8,7 @@ format:
 ---
 
 ::: {style="text-align:center; solid #ccc; padding:10px;"}
-<h1 style="text-align:center; font-size: 40px;">
 
-Paul FAYE
-
-</h1>
 
 <h1 style="text-align:center; font-size: 40px;">
 
