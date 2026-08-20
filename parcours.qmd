@@ -45,18 +45,17 @@ freeze: false
 <div class="hero">
 <p class="h1" data-en="Career path" data-title-en="Career path — Paul Faye">Parcours</p>
 <p class="ld" data-en="Professional experience, education, and certifications: six years building a rigorous modeling practice, between academic research and field applications.">Expérience professionnelle, formation et certifications : six ans à construire une pratique rigoureuse de la modélisation, entre recherche académique et applications de terrain.</p>
-<p class="en-note" data-en="This page's detailed content (timeline, roles, certifications) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
 <div class="cta">
-<a class="btn" href="portfolio.qmd">Retour au portfolio <i class="bi bi-door-open"></i></a>
+<a class="btn" href="portfolio.qmd"><span data-en="Back to portfolio">Retour au portfolio</span> <i class="bi bi-door-open"></i></a>
 </div>
 </div>
 
-<div class="sec" style="padding-top:38px"><p class="h2">Expérience</p></div>
-<div class="segwrap" id="segExp" role="group" aria-label="Filtrer par poste"></div>
-<p class="hint" id="hintExp">Cliquez sur un poste ou une barre pour voir le détail</p>
+<div class="sec" style="padding-top:38px"><p class="h2"><span data-en="Experience">Expérience</span></p></div>
+<div class="segwrap" id="segExp" role="group" aria-label="Filtrer par poste / Filter by role"></div>
+<p class="hint" id="hintExp" data-en="Click a role or a bar to see the detail">Cliquez sur un poste ou une barre pour voir le détail</p>
 
 <div class="ganttwrap">
-<svg viewBox="0 0 640 210" role="img" aria-label="Frise chronologique des expériences professionnelles">
+<svg viewBox="0 0 640 210" role="img" aria-label="Frise chronologique des expériences professionnelles / Professional experience timeline">
 <g id="gaxis"></g>
 <g id="gbars"></g>
 </svg>
@@ -65,12 +64,12 @@ freeze: false
 <div class="panel" id="expPanel"></div>
 <div class="bub" id="expBub"></div>
 
-<div class="sec" style="padding-top:40px"><p class="h2">Formation</p></div>
-<div class="segwrap" id="segForm" role="group" aria-label="Filtrer par diplôme"></div>
-<p class="hint">Cliquez sur un diplôme ou un point pour voir le détail</p>
+<div class="sec" style="padding-top:40px"><p class="h2"><span data-en="Education">Formation</span></p></div>
+<div class="segwrap" id="segForm" role="group" aria-label="Filtrer par diplôme / Filter by degree"></div>
+<p class="hint" data-en="Click a degree or a dot to see the detail">Cliquez sur un diplôme ou un point pour voir le détail</p>
 
 <div class="ganttwrap" style="max-width:600px">
-<svg viewBox="0 0 640 100" role="img" aria-label="Frise chronologique des diplômes, de 2017 à 2025">
+<svg viewBox="0 0 640 100" role="img" aria-label="Frise chronologique des diplômes, de 2017 à 2025 / Degree timeline, 2017 to 2025">
 <g id="ftl"></g>
 </svg>
 </div>
@@ -80,10 +79,10 @@ freeze: false
 
 <div class="sec" style="padding-top:40px"><p class="h2">Certifications</p></div>
 <div class="certs">
-<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/attestation_suivi_course-v1_inria%2B41026%2Bsession02_9461cd9f4b4518ea2f3b47da448cf76d.pdf" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/inria.svg" alt="" loading="lazy"></span>Machine learning avec scikit-learn <i>Inria</i></a>
-<a class="cert" href="https://www.udemy.com/certificate/UC-cb724d19-8b7b-41da-9c4d-a9327b6af742/" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/udemy.svg" alt="" loading="lazy"></span>SQL pour la data science <i>Udemy</i></a>
-<a class="cert" href="https://www.youracclaim.com/badges/d7723949-77c3-4e2a-a5cc-c36af5a7dbbe/public_url" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/sas.svg" alt="" loading="lazy"></span>SAS : les bases pour l'analyse de données <i>Credly</i></a>
-<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/Attestation_Formation_RdevPkg.pdf" target="_blank" rel="noopener"><span class="clogo"><i class="bi bi-github"></i></span>Développement de packages R <i>GitHub</i></a>
+<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/attestation_suivi_course-v1_inria%2B41026%2Bsession02_9461cd9f4b4518ea2f3b47da448cf76d.pdf" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/inria.svg" alt="" loading="lazy"></span><span data-en="Machine learning with scikit-learn">Machine learning avec scikit-learn</span> <i>Inria</i></a>
+<a class="cert" href="https://www.udemy.com/certificate/UC-cb724d19-8b7b-41da-9c4d-a9327b6af742/" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/udemy.svg" alt="" loading="lazy"></span><span data-en="SQL for data science">SQL pour la data science</span> <i>Udemy</i></a>
+<a class="cert" href="https://www.youracclaim.com/badges/d7723949-77c3-4e2a-a5cc-c36af5a7dbbe/public_url" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/sas.svg" alt="" loading="lazy"></span><span data-en="SAS: fundamentals of data analysis">SAS : les bases pour l'analyse de données</span> <i>Credly</i></a>
+<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/Attestation_Formation_RdevPkg.pdf" target="_blank" rel="noopener"><span class="clogo"><i class="bi bi-github"></i></span><span data-en="R package development">Développement de packages R</span> <i>GitHub</i></a>
 </div>
 
 </div>
@@ -93,19 +92,36 @@ freeze: false
 <script>
 (function(){
 var NS="http://www.w3.org/2000/svg";
+var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 var EXP=[
- {key:"inria", title:"Ingénieur de Recherche", org:"Inria — Lille · 2025", logo:"images/logos/inria.svg", start:2025.0, end:2025.9, col:"var(--blue)",
-  desc:"Étude avec l'Institut ONCOLILLE : d'une base de dossiers cliniques à un modèle de pronostic interprétable, sur une cohorte nettoyée de 1 445 à 884 individus, et 48 variables candidates.",
-  kw:["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"]},
- {key:"ens", title:"Enseignant-Chercheur", org:"Université de Lille — depuis 2023", logo:"images/logos/lille.svg", start:2023.0, end:2026.6, col:"var(--third)",
-  desc:"Statistique appliquée à des publics techniques et non techniques, sur trois contrats successifs : ATER, vacataire, puis contractuel.",
-  kw:["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"]},
- {key:"doc", title:"Doctorant", org:"Université de Montpellier · 2020–2025", logo:"images/logos/montpellier.png", start:2020.0, end:2025.0, col:"var(--coral)",
-  desc:"Automatiser une expertise : deux ans de cartographie manuelle réduits à une chaîne statistique reproductible, en statistique spatiale.",
-  kw:["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"]},
- {key:"stage", title:"Data Scientist - Stage", org:"Université de Lille · 2020", logo:"images/logos/lille.svg", start:2019.85, end:2020.35, col:"var(--txt)",
-  desc:"Analyse statistique d'indicateurs de peuplement de communautés de récifs coralliens.",
-  kw:["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]}
+ {key:"inria", logo:"images/logos/inria.svg", start:2025.0, end:2025.9, col:"var(--blue)",
+  fr:{title:"Ingénieur de Recherche", org:"Inria — Lille · 2025",
+   desc:"Étude avec l'Institut ONCOLILLE : d'une base de dossiers cliniques à un modèle de pronostic interprétable, sur une cohorte nettoyée de 1 445 à 884 individus, et 48 variables candidates.",
+   kw:["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"]},
+  en:{title:"Research Engineer", org:"Inria — Lille · 2025",
+   desc:"A study with the ONCOLille Institute: from a database of clinical records to an interpretable prognostic model, on a cohort cleaned from 1,445 down to 884 patients, with 48 candidate variables.",
+   kw:["Medical decision support","Interpretable predictive model","Clinical study (1,445 → 884 patients)","Model simplification","Applied research","Scientific publication"]}},
+ {key:"ens", logo:"images/logos/lille.svg", start:2023.0, end:2026.6, col:"var(--third)",
+  fr:{title:"Enseignant-Chercheur", org:"Université de Lille — depuis 2023",
+   desc:"Statistique appliquée à des publics techniques et non techniques, sur trois contrats successifs : ATER, vacataire, puis contractuel.",
+   kw:["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"]},
+  en:{title:"Lecturer-Researcher", org:"University of Lille — since 2023",
+   desc:"Applied statistics for technical and non-technical audiences, across three successive contracts: ATER (temporary teaching/research post), part-time lecturer, then fixed-term staff.",
+   kw:["Professional training","Teaching & science communication","Project supervision","Business analysis","R and Python programming","Juries & assessment"]}},
+ {key:"doc", logo:"images/logos/montpellier.png", start:2020.0, end:2025.0, col:"var(--coral)",
+  fr:{title:"Doctorant", org:"Université de Montpellier · 2020–2025",
+   desc:"Automatiser une expertise : deux ans de cartographie manuelle réduits à une chaîne statistique reproductible, en statistique spatiale.",
+   kw:["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"]},
+  en:{title:"PhD Student", org:"University of Montpellier · 2020–2025",
+   desc:"Automating an area of expertise: two years of manual mapping reduced to a reproducible statistical pipeline, in spatial statistics.",
+   kw:["Process automation","Geospatial analysis","Methodological innovation","Time savings (2 years saved)","175 km² mapped","Applied research (5 years)"]}},
+ {key:"stage", logo:"images/logos/lille.svg", start:2019.85, end:2020.35, col:"var(--txt)",
+  fr:{title:"Data Scientist - Stage", org:"Université de Lille · 2020",
+   desc:"Analyse statistique d'indicateurs de peuplement de communautés de récifs coralliens.",
+   kw:["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]},
+  en:{title:"Data Scientist - Internship", org:"University of Lille · 2020",
+   desc:"Statistical analysis of population indicators for coral reef communities.",
+   kw:["Coral reefs","Population indicators","Exploratory statistical analysis"]}}
 ];
 
 var gx0=26, gx1=614, gy0=16, rowH=42, barH=24, yMin=2019.6, yMax=2026.6;
@@ -151,11 +167,12 @@ function renderExp(){
     el.style.opacity=on?1:.35;
   });
   var e=EXP.filter(function(x){return x.key===activeExp;})[0];
+  var t0=e[curLang];
   panel.innerHTML="<span class='orglogo'><img src='"+e.logo+"' alt=''></span><br>"+
-    "<strong style='color:"+e.col+";font-size:15px;font-weight:700'>"+e.title+"</strong>"+
-    "<span class='org'>"+e.org+"</span><span class='desc'>"+e.desc+"</span>";
+    "<strong style='color:"+e.col+";font-size:15px;font-weight:700'>"+t0.title+"</strong>"+
+    "<span class='org'>"+t0.org+"</span><span class='desc'>"+t0.desc+"</span>";
   expBub.innerHTML="";
-  e.kw.forEach(function(t,n){
+  t0.kw.forEach(function(t,n){
     var d=document.createElement("div"); d.className="bb"; d.textContent=t;
     d.style.borderColor=e.col; d.style.color="var(--txt)";
     d.style.background="color-mix(in srgb, "+e.col+" 14%, transparent)";
@@ -167,12 +184,13 @@ function renderExp(){
 function buildGantt(){
   gbars.innerHTML="";
   EXP.forEach(function(e,i){
+    var t0=e[curLang];
     var y=gy0+i*rowH, x1=X(e.start), x2=X(e.end);
     var lab=document.createElementNS(NS,"text");
     lab.setAttribute("x",x1); lab.setAttribute("y",y-6);
     lab.setAttribute("class","tx2 lab"); lab.setAttribute("data-key",e.key);
     lab.setAttribute("font-size","12"); lab.setAttribute("font-weight","600");
-    lab.setAttribute("font-family","Inter,sans-serif"); lab.textContent=e.title;
+    lab.setAttribute("font-family","Inter,sans-serif"); lab.textContent=t0.title;
     gbars.appendChild(lab);
 
     var r=document.createElementNS(NS,"rect");
@@ -180,7 +198,7 @@ function buildGantt(){
     r.setAttribute("width",Math.max(x2-x1,6).toFixed(1)); r.setAttribute("height",barH);
     r.setAttribute("rx",barH/2); r.setAttribute("fill",e.col); r.setAttribute("data-key",e.key);
     r.setAttribute("tabindex","0"); r.setAttribute("role","button");
-    r.setAttribute("aria-label",e.title+", "+e.org);
+    r.setAttribute("aria-label",t0.title+", "+t0.org);
     r.addEventListener("click",function(){selectExp(e.key);});
     r.addEventListener("focus",function(){selectExp(e.key);});
     gbars.appendChild(r);
@@ -189,25 +207,38 @@ function buildGantt(){
 
 var segExpWrap=document.getElementById("segExp"), segExp=document.createElement("div");
 segExp.className="seg"; segExpWrap.appendChild(segExp);
-EXP.forEach(function(e){
-  var b=document.createElement("button"); b.className="sgb"; b.textContent=e.title;
-  b.setAttribute("data-key",e.key);
-  b.setAttribute("aria-pressed", e.key===activeExp);
-  b.onclick=function(){selectExp(e.key);};
-  segExp.appendChild(b);
-});
+function buildExpButtons(){
+  segExp.innerHTML="";
+  EXP.forEach(function(e){
+    var b=document.createElement("button"); b.className="sgb"; b.textContent=e[curLang].title;
+    b.setAttribute("data-key",e.key);
+    b.setAttribute("aria-pressed", e.key===activeExp);
+    b.onclick=function(){selectExp(e.key);};
+    segExp.appendChild(b);
+  });
+}
+buildExpButtons();
 
 buildAxis();
 buildGantt();
 renderExp();
 
 var FORM=[
- {key:"dakar", short:"Dakar", title:"Master économétrie bancaire et finance quantitative", org:"Université Cheikh Anta Diop de Dakar · 2017", logo:"images/logos/ucad.svg", year:2017, col:"var(--third)",
-  kw:["Scoring et risque de crédit","PD, LGD, EAD","Réglementation bancaire","Gestion de portefeuille","Pricing d'options"]},
- {key:"lille", short:"Lille", title:"Master mathématiques et informatique appliquées", org:"Université de Lille · 2020", logo:"images/logos/lille.svg", year:2020, col:"var(--blue)",
-  kw:["Mathématiques appliquées","Statistique et probabilités","Informatique appliquée","Programmation scientifique"]},
- {key:"mtp", short:"Montpellier", title:"Doctorat en statistique et science des données", org:"Université de Montpellier · 2025", logo:"images/logos/montpellier.png", year:2025, col:"var(--coral)",
-  kw:["Statistique spatiale","Apprentissage supervisé","Apprentissage non supervisé","Big data","Calcul haute performance (HPC)"]}
+ {key:"dakar", short:"Dakar", logo:"images/logos/ucad.svg", year:2017, col:"var(--third)",
+  fr:{title:"Master économétrie bancaire et finance quantitative", org:"Université Cheikh Anta Diop de Dakar · 2017",
+   kw:["Scoring et risque de crédit","PD, LGD, EAD","Réglementation bancaire","Gestion de portefeuille","Pricing d'options"]},
+  en:{title:"Master's in Banking Econometrics and Quantitative Finance", org:"Cheikh Anta Diop University of Dakar · 2017",
+   kw:["Credit scoring & risk","PD, LGD, EAD","Banking regulation","Portfolio management","Option pricing"]}},
+ {key:"lille", short:"Lille", logo:"images/logos/lille.svg", year:2020, col:"var(--blue)",
+  fr:{title:"Master mathématiques et informatique appliquées", org:"Université de Lille · 2020",
+   kw:["Mathématiques appliquées","Statistique et probabilités","Informatique appliquée","Programmation scientifique"]},
+  en:{title:"Master's in Applied Mathematics and Computer Science", org:"University of Lille · 2020",
+   kw:["Applied mathematics","Statistics and probability","Applied computer science","Scientific programming"]}},
+ {key:"mtp", short:"Montpellier", logo:"images/logos/montpellier.png", year:2025, col:"var(--coral)",
+  fr:{title:"Doctorat en statistique et science des données", org:"Université de Montpellier · 2025",
+   kw:["Statistique spatiale","Apprentissage supervisé","Apprentissage non supervisé","Big data","Calcul haute performance (HPC)"]},
+  en:{title:"PhD in Statistics and Data Science", org:"University of Montpellier · 2025",
+   kw:["Spatial statistics","Supervised learning","Unsupervised learning","Big data","High-performance computing (HPC)"]}}
 ];
 var fx0=40, fx1=600, fy=52, fyMin=2016.3, fyMax=2025.7;
 function FX(y){return fx0+(y-fyMin)/(fyMax-fyMin)*(fx1-fx0);}
@@ -225,11 +256,12 @@ function renderForm(){
     el.style.opacity=on?1:.4;
   });
   var f=FORM.filter(function(x){return x.key===activeForm;})[0];
+  var t0=f[curLang];
   formPanel.innerHTML="<span class='orglogo'><img src='"+f.logo+"' alt=''></span><br>"+
-    "<strong style='color:"+f.col+";font-size:15px;font-weight:700'>"+f.title+"</strong>"+
-    "<span class='org'>"+f.org+"</span>";
+    "<strong style='color:"+f.col+";font-size:15px;font-weight:700'>"+t0.title+"</strong>"+
+    "<span class='org'>"+t0.org+"</span>";
   formBub.innerHTML="";
-  f.kw.forEach(function(t,n){
+  t0.kw.forEach(function(t,n){
     var d=document.createElement("div"); d.className="bb"; d.textContent=t;
     d.style.borderColor=f.col; d.style.color="var(--txt)";
     d.style.background="color-mix(in srgb, "+f.col+" 14%, transparent)";
@@ -245,6 +277,7 @@ function buildTimeline(){
   line.setAttribute("class","ax"); line.setAttribute("stroke-width","1.2");
   ftl.appendChild(line);
   FORM.forEach(function(f){
+    var t0=f[curLang];
     var x=FX(f.year);
     var yr=document.createElementNS(NS,"text");
     yr.setAttribute("x",x); yr.setAttribute("y",fy-16);
@@ -257,7 +290,7 @@ function buildTimeline(){
     c.setAttribute("cx",x); c.setAttribute("cy",fy); c.setAttribute("r",9);
     c.setAttribute("fill",f.col); c.setAttribute("stroke","var(--bg)"); c.setAttribute("stroke-width","2");
     c.setAttribute("data-key",f.key); c.setAttribute("tabindex","0"); c.setAttribute("role","button");
-    c.setAttribute("aria-label",f.title+", "+f.org);
+    c.setAttribute("aria-label",t0.title+", "+t0.org);
     c.addEventListener("click",function(){selectForm(f.key);});
     c.addEventListener("focus",function(){selectForm(f.key);});
     ftl.appendChild(c);
@@ -271,15 +304,25 @@ function buildTimeline(){
 }
 var segFormWrap=document.getElementById("segForm"), segForm=document.createElement("div");
 segForm.className="seg"; segFormWrap.appendChild(segForm);
-FORM.forEach(function(f){
-  var b=document.createElement("button"); b.className="sgb"; b.textContent=f.short;
-  b.setAttribute("data-key",f.key);
-  b.setAttribute("aria-pressed", f.key===activeForm);
-  b.onclick=function(){selectForm(f.key);};
-  segForm.appendChild(b);
-});
+function buildFormButtons(){
+  segForm.innerHTML="";
+  FORM.forEach(function(f){
+    var b=document.createElement("button"); b.className="sgb"; b.textContent=f.short;
+    b.setAttribute("data-key",f.key);
+    b.setAttribute("aria-pressed", f.key===activeForm);
+    b.onclick=function(){selectForm(f.key);};
+    segForm.appendChild(b);
+  });
+}
+buildFormButtons();
 buildTimeline();
 renderForm();
+
+window.addEventListener("sitelangchange", function(e){
+  curLang=e.detail.lang;
+  buildExpButtons(); buildGantt(); renderExp();
+  buildFormButtons(); buildTimeline(); renderForm();
+});
 })();
 </script>
 ```

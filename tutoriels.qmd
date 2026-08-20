@@ -77,25 +77,25 @@ body.tutmodal-lock{overflow:hidden}
 <p class="ld" data-en="Reproducible notebooks applying statistics and machine learning to real cases — in Python and R, from preprocessing to validation.">Des notebooks reproductibles pour appliquer la statistique et l'apprentissage automatique à des cas concrets — en Python et en R, du prétraitement à la validation.</p>
 <p class="en-note" data-en="The tutorials themselves are still French-only — translation coming.">Les tutoriels eux-mêmes restent pour l'instant en français — traduction à venir.</p>
 <div class="cta">
-<a class="btn" href="index.qmd">Retour à l'accueil <i class="bi bi-door-open"></i></a>
-<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener">Voir mon GitHub <i class="bi bi-door-open"></i></a>
+<a class="btn" href="index.qmd"><span data-en="Back to home">Retour à l'accueil</span> <i class="bi bi-door-open"></i></a>
+<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener"><span data-en="See my GitHub">Voir mon GitHub</span> <i class="bi bi-door-open"></i></a>
 </div>
 </div>
 
-<div class="segwrap" id="segTut" role="group" aria-label="Filtrer par langage"></div>
-<div class="domainrow" id="domainRow" role="group" aria-label="Filtrer par domaine d'application"></div>
+<div class="segwrap" id="segTut" role="group" aria-label="Filtrer par langage / Filter by language"></div>
+<div class="domainrow" id="domainRow" role="group" aria-label="Filtrer par domaine d'application / Filter by application domain"></div>
 
 <div class="statrow"><span class="statbig" id="statBig"></span><span class="statlabel" id="statLabel"></span></div>
-<p class="hook">Chaque notebook est pensé pour être rejoué : données, code et résultats documentés, du premier coup d'œil jusqu'au détail technique.</p>
+<p class="hook" data-en="Every notebook is built to be replayed: data, code, and results documented, from the first glance down to the technical detail.">Chaque notebook est pensé pour être rejoué : données, code et résultats documentés, du premier coup d'œil jusqu'au détail technique.</p>
 <p class="matchcount" id="matchCount"></p>
 
 <div class="tutgrid" id="tutGrid"></div>
 
 <div class="tutmore">
-<p>L'ensemble de mon code, y compris les travaux pas encore résumés ici, est disponible sur GitHub.</p>
+<p data-en="All of my code, including work not yet summarized here, is available on GitHub.">L'ensemble de mon code, y compris les travaux pas encore résumés ici, est disponible sur GitHub.</p>
 <div class="cta">
-<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener">Suivre l'avancement <i class="bi bi-door-open"></i></a>
-<a class="btn" href="projets.qmd">Voir les travaux <i class="bi bi-door-open"></i></a>
+<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener"><span data-en="Follow progress">Suivre l'avancement</span> <i class="bi bi-door-open"></i></a>
+<a class="btn" href="projets.qmd"><span data-en="View the work">Voir les travaux</span> <i class="bi bi-door-open"></i></a>
 </div>
 </div>
 
@@ -104,10 +104,10 @@ body.tutmodal-lock{overflow:hidden}
 <div class="tutmodal-panel">
 <div class="tutmodal-head">
 <span class="tutmodal-title" id="tutModalTitle"></span>
-<button class="tutmodal-close" id="tutModalClose" type="button" aria-label="Fermer">&times;</button>
+<button class="tutmodal-close" id="tutModalClose" type="button" aria-label="Fermer / Close">&times;</button>
 </div>
 <div class="tutmodal-body">
-<iframe id="tutModalFrame" title="Tutoriel" loading="lazy"></iframe>
+<iframe id="tutModalFrame" title="Tutoriel / Tutorial" loading="lazy"></iframe>
 </div>
 </div>
 </div>
@@ -118,38 +118,50 @@ body.tutmodal-lock{overflow:hidden}
 ```{=html}
 <script>
 (function(){
+var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 var TUTS=[
- {key:"cartes", title:"Comparer des cartes à différentes résolutions spatiales",
-  desc:"Désagrégation de résolution puis scores de concordance (Match, Balanced Match) entre carte prédite et référence — méthode issue d'un article publié.",
-  domains:["Analyse spatiale","Cartographie multi-échelle","SIG"],
+ {key:"cartes",
+  fr:{title:"Comparer des cartes à différentes résolutions spatiales",
+   desc:"Désagrégation de résolution puis scores de concordance (Match, Balanced Match) entre carte prédite et référence — méthode issue d'un article publié.",
+   domains:["Analyse spatiale","Cartographie multi-échelle","SIG"]},
+  en:{title:"Comparing maps at different spatial resolutions",
+   desc:"Resolution disaggregation followed by agreement scores (Match, Balanced Match) between predicted and reference maps — method from a published paper.",
+   domains:["Spatial analysis","Multi-scale mapping","GIS"]},
   langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/CompareMap", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#r"},
          {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/CompareMap/tree/main/python", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#python"}],
   images:["tutoriels/comparer-cartes/refmap.png","tutoriels/comparer-cartes/predmap.png"]},
- {key:"echantillonnage", title:"Méthodes d'échantillonnage stratégique",
-  desc:"Échantillonnage par couverture (k-means) et par complexité du terrain (médoïdes), sur un récif corallien réel.",
-  domains:["Analyse spatiale","Échantillonnage","Géomorphologie"],
+ {key:"echantillonnage",
+  fr:{title:"Méthodes d'échantillonnage stratégique",
+   desc:"Échantillonnage par couverture (k-means) et par complexité du terrain (médoïdes), sur un récif corallien réel.",
+   domains:["Analyse spatiale","Échantillonnage","Géomorphologie"]},
+  en:{title:"Strategic sampling methods",
+   desc:"Coverage-based sampling (k-means) and terrain-complexity sampling (medoids), on a real coral reef.",
+   domains:["Spatial analysis","Sampling","Geomorphology"]},
   langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling", readLink:"tutoriels/echantillonnage/echantillonnage.html#r"},
          {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling/tree/main/python", readLink:"tutoriels/echantillonnage/echantillonnage.html#python"}],
   images:["tutoriels/echantillonnage/Geyser_rough.png","tutoriels/echantillonnage/Geyser_cds.png"]},
- {key:"composition", title:"Analyse spatiale de données de composition",
-  desc:"Modèle de régression pour données compositionnelles spatiales, avec zéros structurels.",
-  domains:["Analyse spatiale","Données de composition","Régression"],
+ {key:"composition",
+  fr:{title:"Analyse spatiale de données de composition",
+   desc:"Modèle de régression pour données compositionnelles spatiales, avec zéros structurels.",
+   domains:["Analyse spatiale","Données de composition","Régression"]},
+  en:{title:"Spatial analysis of compositional data",
+   desc:"Regression model for spatial compositional data, with structural zeros.",
+   domains:["Spatial analysis","Compositional data","Regression"]},
   langs:[{lang:"r", status:"redaction", link:null},
          {lang:"python", status:"planned", link:null}],
   svg:"composition"}
 ];
 
 var SVGS={
- composition:"<svg viewBox='0 0 200 68' role='img' aria-label='Graphe de dépendance spatiale entre observations voisines'>"+
+ composition:"<svg viewBox='0 0 200 68' role='img' aria-label='Graphe de dépendance spatiale entre observations voisines / Spatial dependency graph between neighboring observations'>"+
   "<g stroke='var(--blue)' stroke-width='1' stroke-opacity='.4'><line x1='26' y1='18' x2='52' y2='34'/><line x1='52' y1='34' x2='40' y2='54'/><line x1='52' y1='34' x2='86' y2='24'/><line x1='86' y1='24' x2='112' y2='42'/><line x1='112' y1='42' x2='146' y2='30'/><line x1='146' y1='30' x2='176' y2='46'/><line x1='112' y1='42' x2='96' y2='58'/><line x1='40' y1='54' x2='70' y2='58'/></g>"+
   "<g class='b'><circle cx='26' cy='18' r='3.2'/><circle cx='52' cy='34' r='3.2'/><circle cx='40' cy='54' r='3.2'/><circle cx='86' cy='24' r='3.2'/><circle cx='112' cy='42' r='3.2'/><circle cx='146' cy='30' r='3.2'/><circle cx='176' cy='46' r='3.2'/><circle cx='96' cy='58' r='3.2'/><circle cx='70' cy='58' r='3.2'/></g></svg>"
 };
 
 var LANG_META={r:{label:"R", col:"var(--coral)"}, python:{label:"Python", col:"var(--blue)"}};
 var STATE_META={
-  publie:{color:"#3fbf7f", label:"Publié"},
-  redaction:{color:"#e3b341", label:"En cours de rédaction"},
-  planned:{color:"var(--muted)", label:"À venir"}
+  fr:{publie:{color:"#3fbf7f", label:"Publié"}, redaction:{color:"#e3b341", label:"En cours de rédaction"}, planned:{color:"var(--muted)", label:"À venir"}},
+  en:{publie:{color:"#3fbf7f", label:"Published"}, redaction:{color:"#e3b341", label:"Being written"}, planned:{color:"var(--muted)", label:"Coming soon"}}
 };
 function overallState(langs){
   if(langs.some(function(l){return l.status==="ready";})) return "publie";
@@ -158,7 +170,11 @@ function overallState(langs){
 }
 
 var ALL_DOMAINS=[];
-TUTS.forEach(function(t){ t.domains.forEach(function(d){ if(ALL_DOMAINS.indexOf(d)===-1) ALL_DOMAINS.push(d); }); });
+function computeAllDomains(){
+  ALL_DOMAINS=[];
+  TUTS.forEach(function(t){ t[curLang].domains.forEach(function(d){ if(ALL_DOMAINS.indexOf(d)===-1) ALL_DOMAINS.push(d); }); });
+}
+computeAllDomains();
 
 var statBig=document.getElementById("statBig"), statLabel=document.getElementById("statLabel"),
     tutGrid=document.getElementById("tutGrid"), segTutWrap=document.getElementById("segTut"),
@@ -196,7 +212,7 @@ tutGrid.addEventListener("click", function(e){
 
 function matchesFilters(t){
   var langOk = filtLang==="all" || t.langs.some(function(l){return l.lang===filtLang;});
-  var domOk = selectedDomains.length===0 || t.domains.some(function(d){return selectedDomains.indexOf(d)>-1;});
+  var domOk = selectedDomains.length===0 || t[curLang].domains.some(function(d){return selectedDomains.indexOf(d)>-1;});
   return langOk && domOk;
 }
 
@@ -204,14 +220,19 @@ function render(){
   var readyCount=TUTS.filter(function(t){return overallState(t.langs)==="publie";}).length;
   var otherCount=TUTS.length-readyCount;
   statBig.textContent=readyCount; statBig.style.color="var(--txt)";
-  statLabel.textContent=(readyCount>1?"tutoriels publiés":"tutoriel publié")+(otherCount?", "+otherCount+" en préparation":"");
+  if(curLang==="en"){
+    statLabel.textContent=(readyCount>1?"tutorials published":"tutorial published")+(otherCount?", "+otherCount+" in progress":"");
+  } else {
+    statLabel.textContent=(readyCount>1?"tutoriels publiés":"tutoriel publié")+(otherCount?", "+otherCount+" en préparation":"");
+  }
 
   tutGrid.innerHTML="";
   TUTS.forEach(function(t,i){
+    var tr=t[curLang];
     var card=document.createElement("div"); card.className="tutcard";
     card.style.animationDelay=(i*80)+"ms";
     card.setAttribute("data-key",t.key);
-    var state=overallState(t.langs), sm=STATE_META[state];
+    var state=overallState(t.langs), sm=STATE_META[curLang][state];
     var readyLangs = t.langs.filter(function(l){return l.status==="ready";});
     var accentStyle = readyLangs.length>1
       ? "--g1:"+LANG_META[readyLangs[0].lang].col+";--g2:"+LANG_META[readyLangs[1].lang].col
@@ -219,13 +240,14 @@ function render(){
     var langPills=t.langs.map(function(l){
       var lm=LANG_META[l.lang];
       if(l.readLink){
-        return "<a class='tutlang' href='"+l.readLink+"' data-title='"+t.title+" — "+lm.label+"' style='--pc:"+lm.col+"'>"+lm.label+"</a>";
+        return "<a class='tutlang' href='"+l.readLink+"' data-title='"+tr.title+" — "+lm.label+"' style='--pc:"+lm.col+"'>"+lm.label+"</a>";
       }
-      var title=lm.label+(l.status==="redaction"?" — en cours de rédaction":" — à venir");
+      var suffix = curLang==="en" ? (l.status==="redaction"?" — being written":" — coming soon") : (l.status==="redaction"?" — en cours de rédaction":" — à venir");
+      var title=lm.label+suffix;
       return "<span class='tutlang planned' style='--pc:"+lm.col+"' title='"+title+"'>"+lm.label+"</span>";
     }).join("");
     var visual = t.images
-      ? "<div class='tutimages'>"+t.images.map(function(src){return "<img src='"+src+"' alt='"+t.title+"' loading='lazy'>";}).join("")+"</div>"
+      ? "<div class='tutimages'>"+t.images.map(function(src){return "<img src='"+src+"' alt='"+tr.title+"' loading='lazy'>";}).join("")+"</div>"
       : SVGS[t.svg];
     card.innerHTML=
       "<div class='tutaccent"+(readyLangs.length>1?" grad":"")+"' style='"+accentStyle+"'></div>"+
@@ -234,9 +256,9 @@ function render(){
       "<span class='tutstatus'><span class='tutdot"+(state==="publie"?" live":"")+"' style='background:"+sm.color+"'></span>"+sm.label+"</span>"+
       "</div>"+
       visual+
-      "<p class='tuttitle'>"+t.title+"</p>"+
-      "<div class='tutdomains'>"+t.domains.map(function(d){return "<span>"+d+"</span>";}).join("")+"</div>"+
-      "<p class='tutdesc'>"+t.desc+"</p>";
+      "<p class='tuttitle'>"+tr.title+"</p>"+
+      "<div class='tutdomains'>"+tr.domains.map(function(d){return "<span>"+d+"</span>";}).join("")+"</div>"+
+      "<p class='tutdesc'>"+tr.desc+"</p>";
     tutGrid.appendChild(card);
   });
   applyFilters();
@@ -251,46 +273,69 @@ function applyFilters(){
     if(ok) visible++;
   });
   var filtered = filtLang!=="all" || selectedDomains.length>0;
-  matchCount.textContent = filtered ? (visible>1?visible+" tutoriels correspondent aux filtres":visible+" tutoriel correspond aux filtres") : "";
+  if(curLang==="en"){
+    matchCount.textContent = filtered ? (visible>1?visible+" tutorials match the filters":visible+" tutorial matches the filters") : "";
+  } else {
+    matchCount.textContent = filtered ? (visible>1?visible+" tutoriels correspondent aux filtres":visible+" tutoriel correspond aux filtres") : "";
+  }
   domainClearBtn.hidden = selectedDomains.length===0;
 }
 
 var segTut=document.createElement("div");
 segTut.className="seg"; segTutWrap.appendChild(segTut);
-[["all","Tout"],["python","Python"],["r","R"]].forEach(function(f){
-  var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
-  b.setAttribute("data-key",f[0]);
-  b.setAttribute("aria-pressed", f[0]===filtLang);
-  b.onclick=function(){
-    filtLang=f[0];
-    segTut.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filtLang);});
-    applyFilters();
-  };
-  segTut.appendChild(b);
-});
+function buildSegTut(){
+  segTut.innerHTML="";
+  var labs = curLang==="en" ? [["all","All"],["python","Python"],["r","R"]] : [["all","Tout"],["python","Python"],["r","R"]];
+  labs.forEach(function(f){
+    var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
+    b.setAttribute("data-key",f[0]);
+    b.setAttribute("aria-pressed", f[0]===filtLang);
+    b.onclick=function(){
+      filtLang=f[0];
+      segTut.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filtLang);});
+      applyFilters();
+    };
+    segTut.appendChild(b);
+  });
+}
+buildSegTut();
 
-ALL_DOMAINS.forEach(function(d){
-  var b=document.createElement("button"); b.className="domainchip"; b.textContent=d;
-  b.setAttribute("aria-pressed","false");
-  b.onclick=function(){
-    var idx=selectedDomains.indexOf(d);
-    if(idx>-1){ selectedDomains.splice(idx,1); b.setAttribute("aria-pressed","false"); }
-    else { selectedDomains.push(d); b.setAttribute("aria-pressed","true"); }
-    applyFilters();
-  };
-  domainRow.appendChild(b);
-});
 var domainClearBtn=document.createElement("button");
-domainClearBtn.className="domainclear"; domainClearBtn.textContent="Réinitialiser";
+domainClearBtn.className="domainclear";
 domainClearBtn.hidden=true;
 domainClearBtn.onclick=function(){
   selectedDomains=[];
   domainRow.querySelectorAll(".domainchip").forEach(function(b){b.setAttribute("aria-pressed","false");});
   applyFilters();
 };
-domainRow.appendChild(domainClearBtn);
+function buildDomainRow(){
+  domainRow.innerHTML="";
+  ALL_DOMAINS.forEach(function(d){
+    var b=document.createElement("button"); b.className="domainchip"; b.textContent=d;
+    b.setAttribute("aria-pressed", selectedDomains.indexOf(d)>-1);
+    b.onclick=function(){
+      var idx=selectedDomains.indexOf(d);
+      if(idx>-1){ selectedDomains.splice(idx,1); b.setAttribute("aria-pressed","false"); }
+      else { selectedDomains.push(d); b.setAttribute("aria-pressed","true"); }
+      applyFilters();
+    };
+    domainRow.appendChild(b);
+  });
+  domainClearBtn.textContent = curLang==="en" ? "Reset" : "Réinitialiser";
+  domainRow.appendChild(domainClearBtn);
+}
+buildDomainRow();
 
 render();
+
+window.addEventListener("sitelangchange", function(e){
+  curLang=e.detail.lang;
+  selectedDomains=[];
+  computeAllDomains();
+  buildSegTut();
+  buildDomainRow();
+  render();
+});
 })();
 </script>
 ```

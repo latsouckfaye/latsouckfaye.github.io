@@ -29,7 +29,13 @@
     document.querySelectorAll(".navlang button").forEach(function(b){
       b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang);
     });
+
+    window.dispatchEvent(new CustomEvent("sitelangchange", {detail: {lang: lang}}));
   }
+
+  window.getSiteLang = function(){
+    return (window.localStorage && localStorage.getItem(STORAGE_KEY)) || "fr";
+  };
 
   function inject(){
     var tools = document.querySelector(".quarto-navbar-tools");

@@ -58,19 +58,18 @@ freeze: false
 <div class="hero">
 <p class="h1" data-en="Portfolio" data-title-en="Portfolio — Paul Faye">Portfolio</p>
 <p class="ld" data-en="Skills, tools, and experience, at a glance.">Compétences, outils et expériences, en un coup d'œil.</p>
-<p class="en-note" data-en="This page's detailed content (radar, timeline, case studies) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
 <div class="cta">
-<a class="btn" href="index.qmd">Retour à l'accueil <i class="bi bi-door-open"></i></a>
+<a class="btn" href="index.qmd"><span data-en="Back to home">Retour à l'accueil</span> <i class="bi bi-door-open"></i></a>
 </div>
 </div>
 
-<div class="segwrap" id="segwrap" role="group" aria-label="Filtrer"></div>
-<div class="togglewrap" id="toggle" role="group" aria-label="Choisir la visualisation"></div>
+<div class="segwrap" id="segwrap" role="group" aria-label="Filtrer / Filter"></div>
+<div class="togglewrap" id="toggle" role="group" aria-label="Choisir la visualisation / Choose visualization"></div>
 <p class="hint" id="hint"><i class="bi bi-hand-index-thumb hint-icon" aria-hidden="true"></i><span id="hintText"></span></p>
 
 <div class="view on" id="viewRadar">
 <div class="radwrap">
-<svg viewBox="0 0 520 330" role="img" aria-label="Radar interactif des compétences, outils et expériences">
+<svg viewBox="0 0 520 330" role="img" aria-label="Radar interactif des compétences, outils et expériences / Interactive radar of skills, tools, and experience">
 <g class="gl" stroke-width=".9" fill="none" id="web"></g>
 <g id="polys"></g>
 <g id="axLabels"></g>
@@ -82,7 +81,7 @@ freeze: false
 
 <div class="view" id="viewChiffres">
 <div class="donutwrap">
-<svg viewBox="0 0 400 400" role="img" aria-label="Chiffres clés : modélisation, code et outils, articles scientifiques">
+<svg viewBox="0 0 400 400" role="img" aria-label="Chiffres clés : modélisation, code et outils, articles scientifiques / Key figures: modeling, code and tools, scientific papers">
 <g id="donut"></g>
 <text id="donutTotal" x="200" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="38" font-weight="700"></text>
 <text id="donutLabel" x="200" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="var(--muted)"></text>
@@ -94,16 +93,16 @@ freeze: false
 <div class="explorerow">
 <a class="explorebtn" href="parcours.qmd" style="--hc:var(--blue)">
 <span class="explorebtn-icon"><i class="bi bi-signpost-split"></i></span>
-<span>Parcours</span>
+<span data-en="Career path">Parcours</span>
 </a>
 <div class="explorebtn explorebtn-center">
 <i class="bi bi-chevron-left explore-arrow explore-arrow-left" aria-hidden="true"></i>
-<span class="explorebtn-center-label">Explorer</span>
+<span class="explorebtn-center-label" data-en="Explore">Explorer</span>
 <i class="bi bi-chevron-right explore-arrow explore-arrow-right" aria-hidden="true"></i>
 </div>
 <a class="explorebtn" href="projets.qmd" style="--hc:var(--third)">
 <span class="explorebtn-icon"><i class="bi bi-graph-up-arrow"></i></span>
-<span>Travaux</span>
+<span data-en="Work">Travaux</span>
 </a>
 </div>
 
@@ -114,13 +113,17 @@ freeze: false
 var NS="http://www.w3.org/2000/svg";
 
 var CX=260, CY=160, R=115;
+var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
+
 // Compétences et Outils partagent une grille de compétences ; Expériences est à part, sur les postes occupés.
 var SKILL_ANG=[-90,-18,54,126,198].map(function(d){return d*Math.PI/180;});
-var SKILL_AXES=["Analyse","Modélisation","Expérimentation","Ingénierie","Communication"];
+var SKILL_AXES_FR=["Analyse","Modélisation","Expérimentation","Ingénierie","Communication"];
+var SKILL_AXES_EN=["Analysis","Modeling","Experimentation","Engineering","Communication"];
 var EXP_ANG=[-90,0,90,180].map(function(d){return d*Math.PI/180;});
-var EXP_AXES=["Ingénieur de Recherche","Enseignant-Chercheur","Doctorant","Data Scientist - Stage"];
-var curAngArr=SKILL_ANG, curAxesArr=SKILL_AXES;
-var S={
+var EXP_AXES_FR=["Ingénieur de Recherche","Enseignant-Chercheur","Doctorant","Data Scientist - Stage"];
+var EXP_AXES_EN=["Research Engineer","Lecturer-Researcher","PhD Student","Data Scientist - Intern"];
+
+var S_FR={
  comp:{lab:"Compétences",col:"var(--blue)",v:[.75,.95,.78,.82,.80],
   tip:["Exploration & restitution","Scoring & prédiction","Plans & simulation","Calcul & industrialisation","Restitution & pédagogie"],
   it:[["Collecte","Préparation","Gestion des valeurs manquantes","Construction de variables","Exploration des données","Détection d'anomalies"],
@@ -150,6 +153,37 @@ var S={
       ["Gain de temps (2 ans économisés)","Mise en production","Programmation R et Python","Automatisation de processus"],
       ["Formation professionnelle","Pédagogie & vulgarisation","Publication scientifique","Encadrement de projets"]]}
 };
+var S_EN={
+ comp:{lab:"Skills",col:"var(--blue)",v:[.75,.95,.78,.82,.80],
+  tip:["Exploration & reporting","Scoring & prediction","Design & simulation","Computing & deployment","Communication & teaching"],
+  it:[["Data collection","Data preparation","Missing value handling","Feature engineering","Data exploration","Anomaly detection"],
+      ["Credit scoring (PD, LGD, EAD)","Segmentation and scorecards","Logistic regression, GLM","Survival analysis (Kaplan-Meier, Cox)","Time series (ARIMA)","Factor analysis","Clustering","Hypothesis testing","Gradient boosting, random forests","Kriging and spatial dependence","Compositional data"],
+      ["Experimental design","Simulations","Cross-validation","Monte Carlo","Model comparison","Bootstrap"],
+      ["Big data","High-performance computing (HPC)","Reproducibility","Version control (Git)","Data architecture","Production deployment"],
+      ["Non-technical reporting","Teaching and training","Science communication","Writing and publishing"]]},
+ outil:{lab:"Tools",col:"var(--coral)",v:[.85,.85,.65,.70,.90],
+  tip:["SQL · Python · R","Python · R · SAS","SciPy · Jupyter","Git · Azure · HPC","Power BI · Tableau · Quarto"],
+  it:[["SQL","Python (Pandas, NumPy)","R (tidyverse, data.table)","Excel"],
+      ["Python (scikit-learn, XGBoost, statsmodels)","R (caret, tidymodels, survival)","SAS (SAS/STAT)"],
+      ["Python (SciPy, statsmodels)","R (caret, boot, DoE.base)","Jupyter (notebooks, simulations)"],
+      ["Git","Azure","HPC (clusters, parallel computing)"],
+      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]},
+ exp:{lab:"Experience",col:"var(--third)",v:[.65,.80,.95,.40],
+  tip:["Inria, Lille (2025)","University of Lille (since 2023)","University of Montpellier (2020–2025)","University of Lille (2020)"],
+  it:[["Medical decision support","Interpretable predictive model","Clinical study (1,445 → 884 patients)","Model simplification","Applied research","Scientific publication"],
+      ["Professional training","Teaching & outreach","Project supervision","Business analysis","R and Python programming","Juries & assessment"],
+      ["Process automation","Geospatial analysis","Methodological innovation","Time saved (2 years)","175 km² mapped","Applied research (5 years)"],
+      ["Coral reefs","Population indicators","Exploratory statistical analysis"]],
+  vSkill:[.80,.85,.75,.70,.85],
+  tipSkill:["Real data, all domains","4 roles, end-to-end models","Field, clinical, ecological","Automation, HPC computing","Teaching, publications"],
+  itSkill:[["Clinical study (1,445 → 884 patients)","Geospatial analysis","Business analysis","Exploratory statistical analysis"],
+      ["Interpretable predictive model","Process automation","Methodological innovation","Applied research (5 years)"],
+      ["Coral reefs","Population indicators","175 km² mapped","Clinical study (1,445 → 884 patients)"],
+      ["Time saved (2 years)","Production deployment","R and Python programming","Process automation"],
+      ["Professional training","Teaching & outreach","Scientific publication","Project supervision"]]}
+};
+var SKILL_AXES=SKILL_AXES_FR, EXP_AXES=EXP_AXES_FR, S=S_FR;
+var curAngArr=SKILL_ANG, curAxesArr=SKILL_AXES;
 function dataFor(k){
   if(k==="exp" && curAxesArr===SKILL_AXES) return {lab:S.exp.lab, col:S.exp.col, v:S.exp.vSkill, tip:S.exp.tipSkill, it:S.exp.itSkill};
   return S[k];
@@ -157,7 +191,7 @@ function dataFor(k){
 function pt(i,v){var a=curAngArr[i]; return [CX+R*v*Math.cos(a), CY+R*v*Math.sin(a)];}
 
 // En chiffres : mêmes clés que le radar (comp/outil/exp) pour partager le même filtre.
-var C=[
+var C_FR=[
  {key:"comp", lab:"Modélisation", labLines:["Modélisation"], col:"var(--blue)", total:9,
   items:[["Modèles industrialisés",3],["Domaines d'application",4],["Jeux massifs traités",2]]},
  {key:"outil", lab:"Code et outils", labLines:["Code et outils"], col:"var(--coral)", total:15,
@@ -165,6 +199,15 @@ var C=[
  {key:"exp", lab:"Articles scientifiques", labLines:["Articles","scientifiques"], col:"var(--third)", total:4,
   items:[["Publiés",1],["Soumis",2],["En rédaction",1]]}
 ];
+var C_EN=[
+ {key:"comp", lab:"Modeling", labLines:["Modeling"], col:"var(--blue)", total:9,
+  items:[["Deployed models",3],["Application domains",4],["Large datasets handled",2]]},
+ {key:"outil", lab:"Code & tools", labLines:["Code & tools"], col:"var(--coral)", total:15,
+  items:[["Languages",5],["Certifications",4],["Public repos",6]]},
+ {key:"exp", lab:"Scientific papers", labLines:["Scientific","papers"], col:"var(--third)", total:4,
+  items:[["Published",1],["Submitted",2],["In progress",1]]}
+];
+var C=C_FR;
 var grandTotal=C.reduce(function(a,c){return a+c.total;},0);
 var CX2=200, CY2=200, R2=98, SW=30, CIRC=2*Math.PI*R2;
 var donut=document.getElementById("donut"), bubC=document.getElementById("bubC"),
@@ -224,7 +267,7 @@ function renderChiffres(){
   var active=filt==="all"?null:C.filter(function(c){return c.key===filt;})[0];
   dTotal.textContent=active?active.total:grandTotal;
   dTotal.setAttribute("fill", active?active.col:"var(--txt)");
-  dLabel.textContent=active?active.lab:"chiffres clés, au total";
+  dLabel.textContent=active?active.lab:(curLang==="en"?"key figures, total":"chiffres clés, au total");
 
   bubC.innerHTML="";
   if(active){
@@ -298,7 +341,7 @@ var polys=document.getElementById("polys"), det=document.getElementById("det"),
 
 function bubbles(key,i){
   var s=dataFor(key), list=s.it[i];
-  det.innerHTML="<strong style='color:"+s.col+"'>"+curAxesArr[i]+" · "+s.lab+"</strong><span>"+list.length+" éléments</span>";
+  det.innerHTML="<strong style='color:"+s.col+"'>"+curAxesArr[i]+" · "+s.lab+"</strong><span>"+list.length+(curLang==="en"?" items":" éléments")+"</span>";
   bub.innerHTML="";
   list.forEach(function(t,n){
     var d=document.createElement("div"); d.className="bb"; d.textContent=t;
@@ -325,7 +368,7 @@ function draw(){
   buildGrid();
   buildAxLabels();
   polys.innerHTML=""; bub.innerHTML="";
-  det.innerHTML="<strong>"+(filt==="all"?"Compétences, outils et expériences":S[filt].lab)+"</strong>";
+  det.innerHTML="<strong>"+(filt==="all"?(curLang==="en"?"Skills, tools, and experience":"Compétences, outils et expériences"):S[filt].lab)+"</strong>";
   var series = expMode ? ["exp"] : (filt==="all" ? ["comp","outil","exp"] : [filt]);
   series.forEach(function(k,gi){
     var s=dataFor(k);
@@ -353,41 +396,74 @@ function draw(){
     });
   });
 }
+var FILTER_LABELS={fr:["Tout","Compétences","Outils","Expériences"], en:["All","Skills","Tools","Experience"]};
 var segwrap=document.getElementById("segwrap");
-var segAll=document.createElement("div"); segAll.className="seg"; segAll.setAttribute("role","group"); segAll.setAttribute("aria-label","Tout");
-var segSkills=document.createElement("div"); segSkills.className="seg"; segSkills.setAttribute("role","group"); segSkills.setAttribute("aria-label","Compétences et outils");
-var segExp=document.createElement("div"); segExp.className="seg"; segExp.setAttribute("role","group"); segExp.setAttribute("aria-label","Expériences");
+var segAll=document.createElement("div"); segAll.className="seg"; segAll.setAttribute("role","group");
+var segSkills=document.createElement("div"); segSkills.className="seg"; segSkills.setAttribute("role","group");
+var segExp=document.createElement("div"); segExp.className="seg"; segExp.setAttribute("role","group");
 segwrap.appendChild(segAll); segwrap.appendChild(segSkills); segwrap.appendChild(segExp);
-[["all","Tout",segAll],["comp","Compétences",segSkills],["outil","Outils",segSkills],["exp","Expériences",segExp]].forEach(function(f){
-  var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
-  b.setAttribute("data-key",f[0]);
-  b.setAttribute("aria-pressed", f[0]===filt);
-  b.onclick=function(){applyFilter(f[0]);};
-  f[2].appendChild(b);
-});
+function buildFilterButtons(){
+  segAll.innerHTML=""; segSkills.innerHTML=""; segExp.innerHTML="";
+  var lab=FILTER_LABELS[curLang];
+  segAll.setAttribute("aria-label",lab[0]);
+  segSkills.setAttribute("aria-label",lab[1]+(curLang==="en"?" and ":" et ")+lab[2].toLowerCase());
+  segExp.setAttribute("aria-label",lab[3]);
+  [["all",lab[0],segAll],["comp",lab[1],segSkills],["outil",lab[2],segSkills],["exp",lab[3],segExp]].forEach(function(f){
+    var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
+    b.setAttribute("data-key",f[0]);
+    b.setAttribute("aria-pressed", f[0]===filt);
+    b.onclick=function(){applyFilter(f[0]);};
+    f[2].appendChild(b);
+  });
+}
+buildFilterButtons();
 draw();
 buildDonut();
 renderChiffres();
 
 var toggleEl=document.getElementById("toggle"), hintTextEl=document.getElementById("hintText"),
     viewRadar=document.getElementById("viewRadar"), viewChiffres=document.getElementById("viewChiffres");
-var HINTS={radar:"Cliquez sur un sommet pour voir ce qu'il contient", chiffres:"Cliquez sur une part du camembert pour voir le détail"};
+var HINTS={
+  fr:{radar:"Cliquez sur un sommet pour voir ce qu'il contient", chiffres:"Cliquez sur une part du camembert pour voir le détail"},
+  en:{radar:"Click a vertex to see what it contains", chiffres:"Click a pie slice to see the detail"}
+};
+var TOGGLE_LABELS={fr:["Radar","En chiffres"], en:["Radar","By the numbers"]};
 var view="radar";
 function setView(v){
   view=v;
   viewRadar.classList.toggle("on", v==="radar");
   viewChiffres.classList.toggle("on", v==="chiffres");
-  hintTextEl.textContent=HINTS[v];
+  hintTextEl.textContent=HINTS[curLang][v];
   toggleEl.querySelectorAll(".tgb").forEach(function(b){b.setAttribute("aria-pressed", b.dataset.view===v);});
 }
-[["radar","Radar","bi-diagram-3"],["chiffres","En chiffres","bi-bar-chart-line"]].forEach(function(f){
-  var b=document.createElement("button"); b.className="tgb"; b.dataset.view=f[0];
-  b.innerHTML="<i class='bi "+f[2]+"'></i>"+f[1];
-  b.setAttribute("aria-pressed", f[0]===view);
-  b.onclick=function(){setView(f[0]);};
-  toggleEl.appendChild(b);
-});
+function buildToggleButtons(){
+  toggleEl.innerHTML="";
+  var lab=TOGGLE_LABELS[curLang];
+  [["radar",lab[0],"bi-diagram-3"],["chiffres",lab[1],"bi-bar-chart-line"]].forEach(function(f){
+    var b=document.createElement("button"); b.className="tgb"; b.dataset.view=f[0];
+    b.innerHTML="<i class='bi "+f[2]+"'></i>"+f[1];
+    b.setAttribute("aria-pressed", f[0]===view);
+    b.onclick=function(){setView(f[0]);};
+    toggleEl.appendChild(b);
+  });
+}
+buildToggleButtons();
 setView("radar");
+
+window.addEventListener("sitelangchange", function(e){
+  curLang=e.detail.lang;
+  SKILL_AXES = curLang==="en" ? SKILL_AXES_EN : SKILL_AXES_FR;
+  EXP_AXES = curLang==="en" ? EXP_AXES_EN : EXP_AXES_FR;
+  S = curLang==="en" ? S_EN : S_FR;
+  C = curLang==="en" ? C_EN : C_FR;
+  curAxesArr = (curAxesArr===EXP_AXES || curAxesArr===EXP_AXES_FR || curAxesArr===EXP_AXES_EN) ? EXP_AXES : SKILL_AXES;
+  buildFilterButtons();
+  buildToggleButtons();
+  draw();
+  buildDonut();
+  renderChiffres();
+  setView(view);
+});
 })();
 </script>
 ```

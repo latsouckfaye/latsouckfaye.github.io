@@ -98,16 +98,15 @@ body.quarto-light .v8{--teal:#0E8577;--violet:#6D28D9;--rose:#BE3455;--emerald:#
 <div class="hero">
 <p class="h1" data-en="Work" data-title-en="Work — Paul Faye">Travaux</p>
 <p class="ld" data-en="From data to decision: models built and validated for industrialization, knowledge shared through teaching.">De la donnée à la décision : modèles construits et validés pour l'industrialisation, savoirs transmis par l'enseignement.</p>
-<p class="en-note" data-en="This page's detailed content (case studies, courses) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
 <div class="cta">
-<a class="btn" href="portfolio.qmd">Retour au portfolio <i class="bi bi-door-open"></i></a>
-<a class="btn" href="parcours.qmd">Voir le parcours <i class="bi bi-door-open"></i></a>
+<a class="btn" href="portfolio.qmd"><span data-en="Back to portfolio">Retour au portfolio</span> <i class="bi bi-door-open"></i></a>
+<a class="btn" href="parcours.qmd"><span data-en="View career path">Voir le parcours</span> <i class="bi bi-door-open"></i></a>
 </div>
 </div>
 
 <div class="industsection">
 
-<div class="sec" id="sec-industrialisation"><p class="h2" style="color:var(--blue);border-color:var(--blue)"><i class="bi bi-gear-fill"></i>Industrialisation</p></div>
+<div class="sec" id="sec-industrialisation"><p class="h2" style="color:var(--blue);border-color:var(--blue)"><i class="bi bi-gear-fill"></i><span data-en="Industrialization">Industrialisation</span></p></div>
 
 <div class="togglewrap" id="segProj" role="group" aria-label="Filtrer par travail"></div>
 <div class="projctx" id="projCtx"></div>
@@ -121,8 +120,8 @@ body.quarto-light .v8{--teal:#0E8577;--violet:#6D28D9;--rose:#BE3455;--emerald:#
 
 <div class="teachsection">
 
-<div class="sec" id="sec-enseignements"><p class="h2" style="color:var(--coral);border-color:var(--coral)"><i class="bi bi-mortarboard-fill"></i>Enseignements</p></div>
-<p class="teachlede">Transmettre la statistique et la donnée — toujours par la pratique.</p>
+<div class="sec" id="sec-enseignements"><p class="h2" style="color:var(--coral);border-color:var(--coral)"><i class="bi bi-mortarboard-fill"></i><span data-en="Teaching">Enseignements</span></p></div>
+<p class="teachlede" data-en="Teaching statistics and data — always through practice.">Transmettre la statistique et la donnée — toujours par la pratique.</p>
 
 <div class="togglewrap" id="segCourse" role="group" aria-label="Filtrer par enseignement"></div>
 <div class="projctx" id="courseCtx"></div>
@@ -133,13 +132,13 @@ body.quarto-light .v8{--teal:#0E8577;--violet:#6D28D9;--rose:#BE3455;--emerald:#
 
 <div class="animsection">
 
-<div class="sec" id="sec-animations"><p class="h2" style="color:var(--magenta);border-color:var(--magenta)"><i class="bi bi-stars"></i>Animations</p></div>
-<p class="teachlede">Au-delà des cours : temps forts pédagogiques, recrutement et jurys.</p>
+<div class="sec" id="sec-animations"><p class="h2" style="color:var(--magenta);border-color:var(--magenta)"><i class="bi bi-stars"></i><span data-en="Outreach">Animations</span></p></div>
+<p class="teachlede" data-en="Beyond the classroom: outreach events, recruitment, and juries.">Au-delà des cours : temps forts pédagogiques, recrutement et jurys.</p>
 
 <div class="tacols">
-<div class="tacol"><h4><i class="bi bi-megaphone-fill"></i>Animations</h4><div class="tabadges"><span class="tabadge">Journées Portes Ouvertes (JPO)</span><span class="tabadge">Salon de l'étudiant</span><span class="tabadge">Journées Pédagogiques Nationales (JPN)</span></div></div>
-<div class="tacol"><h4><i class="bi bi-person-check-fill"></i>Recrutement / Sélections</h4><div class="tabadges"><span class="tabadge">Parcoursup</span><span class="tabadge">Profils d'alternants</span></div></div>
-<div class="tacol"><h4><i class="bi bi-award-fill"></i>Jurys</h4><div class="tabadges"><span class="tabadge">Stages</span><span class="tabadge">Alternance</span><span class="tabadge">SAE</span><span class="tabadge">Hackathon</span><span class="tabadge">Challenge national Dataviz</span></div></div>
+<div class="tacol"><h4><i class="bi bi-megaphone-fill"></i><span data-en="Outreach">Animations</span></h4><div class="tabadges"><span class="tabadge" data-en="Open House Days (JPO)">Journées Portes Ouvertes (JPO)</span><span class="tabadge" data-en="Student fair">Salon de l'étudiant</span><span class="tabadge" data-en="National Teaching Days (JPN)">Journées Pédagogiques Nationales (JPN)</span></div></div>
+<div class="tacol"><h4><i class="bi bi-person-check-fill"></i><span data-en="Recruitment / Selection">Recrutement / Sélections</span></h4><div class="tabadges"><span class="tabadge" data-en="Parcoursup (admissions)">Parcoursup</span><span class="tabadge" data-en="Work-study candidate profiles">Profils d'alternants</span></div></div>
+<div class="tacol"><h4><i class="bi bi-award-fill"></i><span data-en="Juries">Jurys</span></h4><div class="tabadges"><span class="tabadge" data-en="Internships">Stages</span><span class="tabadge" data-en="Work-study">Alternance</span><span class="tabadge" data-en="Capstone projects (SAE)">SAE</span><span class="tabadge">Hackathon</span><span class="tabadge" data-en="National Dataviz Challenge">Challenge national Dataviz</span></div></div>
 </div>
 
 </div>
@@ -151,58 +150,104 @@ body.quarto-light .v8{--teal:#0E8577;--violet:#6D28D9;--rose:#BE3455;--emerald:#
 <script>
 (function(){
 var PROJ=[
- {key:"lgd", short:"Prévision de composition", title:"Estimateur de répartition en parts", col:"var(--blue)",
-  statBig:"66,5 %", statLabel:"de zéros sur une composante, gérés sans imputation",
-  hook:"Un nouvel estimateur du taux de recouvrement : les composantes nulles sont traitées comme un fait plutôt qu'imputées. Covariables mixtes et dépendance spatiale intégrées, avec une performance supérieure établie sur simulations puis validée sur données réelles.",
-  org:"Université de Montpellier", orgLogo:"images/logos/montpellier.png",
-  period:"2026", pubState:"soumis",
-  dataReal:["490 stations de mesure (atoll de Geyser)","3 composantes : sable, dalle, corail dur","Jusqu'à 66,5 % de zéros sur une composante","Covariables : profondeur + coordonnées géographiques"],
-  dataSim:["Tailles d'échantillon : 250 et 500 observations","30 réplications par scénario","20 % des observations avec un zéro simulé","Covariables continues et catégorielles combinées","Comparaison à plusieurs méthodes concurrentes"],
-  skills:["Régression non paramétrique","Dépendance spatiale","Zéros structurels","Simulations comparatives"],
-  tools:["R","Git","LaTeX"],
+ {key:"lgd", col:"var(--blue)", orgLogo:"images/logos/montpellier.png", period:"2026", pubState:"soumis",
   article:null, preprint:null, code:"https://github.com/latsouckfaye",
-  steps:[
-   {items:["Zéros structurels non ignorables","Covariables numériques et catégorielles combinées","Dépendance spatiale entre observations voisines"]},
-   {items:["Estimateur non paramétrique construit sur mesure","Zéros traités tels quels, sans imputation","Position géographique intégrée au modèle"]},
-   {items:["Zéros gérés sans imputation","Covariables mixtes et dépendance spatiale intégrées","Performance supérieure : simulations puis données réelles"]}
-  ]},
- {key:"duree", short:"Prédiction d'échéances", title:"Modèle de durée sur données censurées", col:"var(--coral)",
-  statBig:"48 → 6", statLabel:"variables, sans perte d'interprétabilité",
-  hook:"1 445 patients au départ, nettoyés pour n'en garder que 884, et 48 variables candidates — avec, pour certains, un événement qui n'arrive jamais dans la fenêtre d'observation. De quoi tester la solidité d'un modèle de pronostic.",
-  org:"Inria, étude ONCOLILLE", orgLogo:"images/logos/inria.svg",
-  period:"2026", pubState:"soumis",
-  dataReal:["1 445 patients au départ, nettoyés à 884","48 variables candidates","Données censurées à droite"],
-  skills:["Kaplan-Meier","Modèles de Cox","Sélection de variables","Modèle parcimonieux"],
-  tools:["Python","R","Git"],
+  fr:{short:"Prévision de composition", title:"Estimateur de répartition en parts",
+   statBig:"66,5 %", statLabel:"de zéros sur une composante, gérés sans imputation",
+   hook:"Un nouvel estimateur du taux de recouvrement : les composantes nulles sont traitées comme un fait plutôt qu'imputées. Covariables mixtes et dépendance spatiale intégrées, avec une performance supérieure établie sur simulations puis validée sur données réelles.",
+   org:"Université de Montpellier",
+   dataReal:["490 stations de mesure (atoll de Geyser)","3 composantes : sable, dalle, corail dur","Jusqu'à 66,5 % de zéros sur une composante","Covariables : profondeur + coordonnées géographiques"],
+   dataSim:["Tailles d'échantillon : 250 et 500 observations","30 réplications par scénario","20 % des observations avec un zéro simulé","Covariables continues et catégorielles combinées","Comparaison à plusieurs méthodes concurrentes"],
+   skills:["Régression non paramétrique","Dépendance spatiale","Zéros structurels","Simulations comparatives"], tools:["R","Git","LaTeX"],
+   steps:[
+    {items:["Zéros structurels non ignorables","Covariables numériques et catégorielles combinées","Dépendance spatiale entre observations voisines"]},
+    {items:["Estimateur non paramétrique construit sur mesure","Zéros traités tels quels, sans imputation","Position géographique intégrée au modèle"]},
+    {items:["Zéros gérés sans imputation","Covariables mixtes et dépendance spatiale intégrées","Performance supérieure : simulations puis données réelles"]}
+   ]},
+  en:{short:"Composition forecasting", title:"Share allocation estimator",
+   statBig:"66.5%", statLabel:"zeros on one component, handled without imputation",
+   hook:"A new estimator for cover rate: zero components are treated as a fact rather than imputed. Mixed covariates and spatial dependence are built in, with superior performance established on simulations then validated on real data.",
+   org:"University of Montpellier",
+   dataReal:["490 measurement stations (Geyser atoll)","3 components: sand, pavement, hard coral","Up to 66.5% zeros on one component","Covariates: depth + geographic coordinates"],
+   dataSim:["Sample sizes: 250 and 500 observations","30 replications per scenario","20% of observations with a simulated zero","Combined continuous and categorical covariates","Compared against several competing methods"],
+   skills:["Nonparametric regression","Spatial dependence","Structural zeros","Comparative simulations"], tools:["R","Git","LaTeX"],
+   steps:[
+    {items:["Non-ignorable structural zeros","Combined numeric and categorical covariates","Spatial dependence between neighboring observations"]},
+    {items:["Custom-built nonparametric estimator","Zeros handled as-is, without imputation","Geographic position built into the model"]},
+    {items:["Zeros handled without imputation","Mixed covariates and spatial dependence built in","Superior performance: simulations then real data"]}
+   ]}},
+ {key:"duree", col:"var(--coral)", orgLogo:"images/logos/inria.svg", period:"2026", pubState:"soumis",
   article:null, preprint:null, code:"https://github.com/latsouckfaye",
-  steps:[
-   {items:["1 445 individus au départ, nettoyés à 884, 48 variables candidates","Données censurées à droite","Événement non observé pour une partie de la cohorte"]},
-   {items:["Courbes de survie par Kaplan-Meier","Modèles de Cox à risques proportionnels","Hypothèse de proportionnalité vérifiée, pas supposée"]},
-   {items:["48 variables réduites à 6, sans perte de pouvoir prédictif","Chaque variable défendable devant un non-spécialiste","Hypothèse de proportionnalité vérifiée"]}
-  ]},
- {key:"classif", short:"Cartographie grande échelle", title:"Classification supervisée à grande échelle", col:"var(--third)",
-  statBig:"90 %+", statLabel:"de concordance avec la référence experte",
-  hook:"Deux ans de cartographie manuelle. Une chaîne statistique reproductible qui arrive au même résultat, avec plus de 90 % de concordance — mesurée, pas supposée.",
-  org:"Université de Montpellier", orgLogo:"images/logos/montpellier.png",
-  period:"2024", pubState:"publie",
-  dataReal:["48 millions de mesures bathymétriques (profondeur), géoréférencées sur 175 km²","Carte experte construite manuellement"],
-  skills:["Cartographie géomorphologique en milieu marin","Modélisation bathymétrique multi-résolution","Construction de variables discriminantes","Plan d'expériences","Benchmark de modèles (dont forêts aléatoires)","Sélection de variables discriminantes"],
-  tools:["R","Calcul haute performance (HPC)","Git"],
+  fr:{short:"Prédiction d'échéances", title:"Modèle de durée sur données censurées",
+   statBig:"48 → 6", statLabel:"variables, sans perte d'interprétabilité",
+   hook:"1 445 patients au départ, nettoyés pour n'en garder que 884, et 48 variables candidates — avec, pour certains, un événement qui n'arrive jamais dans la fenêtre d'observation. De quoi tester la solidité d'un modèle de pronostic.",
+   org:"Inria, étude ONCOLILLE",
+   dataReal:["1 445 patients au départ, nettoyés à 884","48 variables candidates","Données censurées à droite"],
+   skills:["Kaplan-Meier","Modèles de Cox","Sélection de variables","Modèle parcimonieux"], tools:["Python","R","Git"],
+   steps:[
+    {items:["1 445 individus au départ, nettoyés à 884, 48 variables candidates","Données censurées à droite","Événement non observé pour une partie de la cohorte"]},
+    {items:["Courbes de survie par Kaplan-Meier","Modèles de Cox à risques proportionnels","Hypothèse de proportionnalité vérifiée, pas supposée"]},
+    {items:["48 variables réduites à 6, sans perte de pouvoir prédictif","Chaque variable défendable devant un non-spécialiste","Hypothèse de proportionnalité vérifiée"]}
+   ]},
+  en:{short:"Time-to-event prediction", title:"Duration model on censored data",
+   statBig:"48 → 6", statLabel:"variables, without losing interpretability",
+   hook:"1,445 patients to start, cleaned down to 884, and 48 candidate variables — with, for some, an event that never occurs within the observation window. Enough to test how solid a prognostic model really is.",
+   org:"Inria, ONCOLILLE study",
+   dataReal:["1,445 patients to start, cleaned down to 884","48 candidate variables","Right-censored data"],
+   skills:["Kaplan-Meier","Cox models","Variable selection","Parsimonious model"], tools:["Python","R","Git"],
+   steps:[
+    {items:["1,445 individuals to start, cleaned down to 884, 48 candidate variables","Right-censored data","Event unobserved for part of the cohort"]},
+    {items:["Kaplan-Meier survival curves","Cox proportional hazards models","Proportionality assumption tested, not assumed"]},
+    {items:["48 variables reduced to 6, without losing predictive power","Every variable defensible to a non-specialist","Proportionality assumption verified"]}
+   ]}},
+ {key:"classif", col:"var(--third)", orgLogo:"images/logos/montpellier.png", period:"2024", pubState:"publie",
   article:"https://doi.org/10.1007/s12145-024-01347-x", preprint:"https://hal.science/hal-04624799/file/Revision_ESI-2.pdf", code:"https://github.com/latsouckfaye/CompareMap",
-  steps:[
-   {items:["Cartographie géomorphologique en milieu marin","Expertise manuelle mobilisée pendant deux ans","Détourage manuel des habitats, non reproductible"]},
-   {items:["Modèles bathymétriques à plusieurs résolutions","Variables construites pour discriminer les typologies d'habitats","Sélection des covariables pertinentes et benchmark de plusieurs modèles","Plan d'expérience pour optimiser l'échantillonnage sur la carte experte","Outils de comparaison de cartes géomorphologiques multi-résolutions"]},
-   {items:["Forêts aléatoires : meilleur modèle du benchmark","Plus de 90 % de concordance avec la référence experte","Deux ans de travail manuel ramenés à une chaîne automatisée"]}
-  ]}
+  fr:{short:"Cartographie grande échelle", title:"Classification supervisée à grande échelle",
+   statBig:"90 %+", statLabel:"de concordance avec la référence experte",
+   hook:"Deux ans de cartographie manuelle. Une chaîne statistique reproductible qui arrive au même résultat, avec plus de 90 % de concordance — mesurée, pas supposée.",
+   org:"Université de Montpellier",
+   dataReal:["48 millions de mesures bathymétriques (profondeur), géoréférencées sur 175 km²","Carte experte construite manuellement"],
+   skills:["Cartographie géomorphologique en milieu marin","Modélisation bathymétrique multi-résolution","Construction de variables discriminantes","Plan d'expériences","Benchmark de modèles (dont forêts aléatoires)","Sélection de variables discriminantes"],
+   tools:["R","Calcul haute performance (HPC)","Git"],
+   steps:[
+    {items:["Cartographie géomorphologique en milieu marin","Expertise manuelle mobilisée pendant deux ans","Détourage manuel des habitats, non reproductible"]},
+    {items:["Modèles bathymétriques à plusieurs résolutions","Variables construites pour discriminer les typologies d'habitats","Sélection des covariables pertinentes et benchmark de plusieurs modèles","Plan d'expérience pour optimiser l'échantillonnage sur la carte experte","Outils de comparaison de cartes géomorphologiques multi-résolutions"]},
+    {items:["Forêts aléatoires : meilleur modèle du benchmark","Plus de 90 % de concordance avec la référence experte","Deux ans de travail manuel ramenés à une chaîne automatisée"]}
+   ]},
+  en:{short:"Large-scale mapping", title:"Large-scale supervised classification",
+   statBig:"90%+", statLabel:"agreement with the expert reference",
+   hook:"Two years of manual mapping. A reproducible statistical pipeline reaching the same result, with over 90% agreement — measured, not assumed.",
+   org:"University of Montpellier",
+   dataReal:["48 million bathymetric (depth) measurements, geo-referenced over 175 km²","Expert map built by hand"],
+   skills:["Marine geomorphological mapping","Multi-resolution bathymetric modeling","Discriminant variable engineering","Design of experiments","Model benchmarking (incl. random forests)","Discriminant variable selection"],
+   tools:["R","High-performance computing (HPC)","Git"],
+   steps:[
+    {items:["Marine geomorphological mapping","Two years of manual expert work","Manual habitat outlining, not reproducible"]},
+    {items:["Bathymetric models at several resolutions","Variables engineered to discriminate habitat types","Relevant covariate selection and benchmarking of several models","Experimental design to optimize sampling on the expert map","Tools for comparing multi-resolution geomorphological maps"]},
+    {items:["Random forests: best model in the benchmark","Over 90% agreement with the expert reference","Two years of manual work reduced to an automated pipeline"]}
+   ]}}
 ];
 
 var PHASE_SHAPES=["pentagon","circle","hexagon"];
 var PHASE_COLORS=["var(--teal)","var(--violet)","var(--rose)"];
-var PHASE_LABELS=["Problème","Démarche","Résultat"];
+var PHASE_LABELS={fr:["Problème","Démarche","Résultat"], en:["Problem","Approach","Result"]};
+var TOGGLE_META={
+  fr:[{label:"Données", icon:"bi-bar-chart-fill"},{label:"Compétences & outils", icon:"bi-tools"},{label:"Publication", icon:"bi-journal-richtext"}],
+  en:[{label:"Data", icon:"bi-bar-chart-fill"},{label:"Skills & tools", icon:"bi-tools"},{label:"Publication", icon:"bi-journal-richtext"}]
+};
+var SUB_LABELS={
+  fr:{dataReal:"Données réelles", dataSim:"Données simulées", skills:"Compétences", tools:"Outils", status:"Statut", articles:"Articles", code:"Code", article:"Article", preprint:"Preprint"},
+  en:{dataReal:"Real data", dataSim:"Simulated data", skills:"Skills", tools:"Tools", status:"Status", articles:"Articles", code:"Code", article:"Article", preprint:"Preprint"}
+};
+var PUBSTATE_META={
+  fr:{publie:{icon:"bi-patch-check-fill", label:"Publié"}, soumis:{icon:"bi-send-fill", label:"Soumis"}, redaction:{icon:"bi-pencil-fill", label:"En cours de rédaction"}},
+  en:{publie:{icon:"bi-patch-check-fill", label:"Published"}, soumis:{icon:"bi-send-fill", label:"Submitted"}, redaction:{icon:"bi-pencil-fill", label:"In progress"}}
+};
 var segProjWrap=document.getElementById("segProj"), stepsEl=document.getElementById("steps"),
     statBig=document.getElementById("statBig"), statLabel=document.getElementById("statLabel"),
     projHook=document.getElementById("projHook"), projCtx=document.getElementById("projCtx");
 var activeProj="lgd";
+var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 
 function selectProj(key){
   activeProj=key;
@@ -210,23 +255,36 @@ function selectProj(key){
   renderProj();
 }
 
+function buildProjSeg(){
+  segProjWrap.innerHTML="";
+  PROJ.forEach(function(p){
+    var b=document.createElement("button"); b.className="tgb"; b.textContent=p[curLang].short;
+    b.setAttribute("data-key",p.key);
+    b.setAttribute("aria-pressed", p.key===activeProj);
+    b.onclick=function(){selectProj(p.key);};
+    segProjWrap.appendChild(b);
+  });
+}
+
 function renderProj(){
   var p=PROJ.filter(function(x){return x.key===activeProj;})[0];
-  statBig.textContent=p.statBig; statBig.style.color=p.col;
-  statLabel.textContent=p.statLabel;
-  projHook.textContent=p.hook;
-  projCtx.innerHTML="<span class='orgmini'><img src='"+p.orgLogo+"' alt=''></span><span>"+p.org+"</span>";
+  var t=p[curLang];
+  var phaseLabels=PHASE_LABELS[curLang], toggleMeta=TOGGLE_META[curLang], subLabels=SUB_LABELS[curLang], pubMeta=PUBSTATE_META[curLang];
+  statBig.textContent=t.statBig; statBig.style.color=p.col;
+  statLabel.textContent=t.statLabel;
+  projHook.textContent=t.hook;
+  projCtx.innerHTML="<span class='orgmini'><img src='"+p.orgLogo+"' alt=''></span><span>"+t.org+"</span>";
 
   stepsEl.innerHTML="";
-  p.steps.forEach(function(s,i){
+  t.steps.forEach(function(s,i){
     var pc=PHASE_COLORS[i];
     var card=document.createElement("div"); card.className="stepcard";
     card.style.animationDelay=(i*90)+"ms";
     var shp="shp-"+PHASE_SHAPES[i];
 
     function tagRow(items){
-      return "<div class='bub'>"+items.map(function(t){
-        return "<div class='bb' style='border-color:"+pc+";color:var(--txt);background:color-mix(in srgb, "+pc+" 14%, transparent)'>"+t+"</div>";
+      return "<div class='bub'>"+items.map(function(x){
+        return "<div class='bb' style='border-color:"+pc+";color:var(--txt);background:color-mix(in srgb, "+pc+" 14%, transparent)'>"+x+"</div>";
       }).join("")+"</div>";
     }
     function linksRow(items){
@@ -237,46 +295,39 @@ function renderProj(){
         return "<span class='btn btn-off' aria-disabled='true'>"+it[0]+" <i class='bi "+it[2]+"'></i></span>";
       }).join("")+"</div>";
     }
-    var toggleLabel, toggleIcon, detailHtml;
+    var toggleLabel=toggleMeta[i].label, toggleIcon=toggleMeta[i].icon, detailHtml;
     if(i===0){
-      toggleLabel="Données"; toggleIcon="bi-bar-chart-fill";
       detailHtml=
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-globe-americas'></i>Données réelles</span>"+tagRow(p.dataReal)+"</div>";
-      if(p.dataSim && p.dataSim.length){
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-globe-americas'></i>"+subLabels.dataReal+"</span>"+tagRow(t.dataReal)+"</div>";
+      if(t.dataSim && t.dataSim.length){
         detailHtml+=
-          "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-dice-5-fill'></i>Données simulées</span>"+tagRow(p.dataSim)+"</div>";
+          "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-dice-5-fill'></i>"+subLabels.dataSim+"</span>"+tagRow(t.dataSim)+"</div>";
       }
     } else if(i===1){
-      toggleLabel="Compétences & outils"; toggleIcon="bi-tools";
       detailHtml=
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-mortarboard-fill'></i>Compétences</span>"+tagRow(p.skills)+"</div>"+
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-cpu-fill'></i>Outils</span>"+tagRow(p.tools)+"</div>";
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-mortarboard-fill'></i>"+subLabels.skills+"</span>"+tagRow(t.skills)+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-cpu-fill'></i>"+subLabels.tools+"</span>"+tagRow(t.tools)+"</div>";
     } else {
-      toggleLabel="Publication"; toggleIcon="bi-journal-richtext";
-      var stateMeta={
-        publie:{icon:"bi-patch-check-fill", label:"Publié"},
-        soumis:{icon:"bi-send-fill", label:"Soumis"},
-        redaction:{icon:"bi-pencil-fill", label:"En cours de rédaction"}
-      }[p.pubState];
+      var stateMeta=pubMeta[p.pubState];
       var statusText = stateMeta.label + (p.pubState==="redaction" ? "" : " · "+p.period);
       var statusPill="<div class='bub'><div class='bb pubstatus' style='border-color:"+pc+";color:var(--txt);background:color-mix(in srgb, "+pc+" 14%, transparent)'><i class='bi "+stateMeta.icon+"'></i>"+statusText+"</div></div>";
       detailHtml=
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-info-circle-fill'></i>Statut</span>"+statusPill+"</div>"+
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-file-earmark-text'></i>Articles</span>"+linksRow([["Article",p.article,"bi-file-earmark-text"],["Preprint",p.preprint,"bi-file-earmark-richtext"]])+"</div>"+
-        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-github'></i>Code</span>"+linksRow([["Code",p.code,"bi-github"]])+"</div>";
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-info-circle-fill'></i>"+subLabels.status+"</span>"+statusPill+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-file-earmark-text'></i>"+subLabels.articles+"</span>"+linksRow([[subLabels.article,p.article,"bi-file-earmark-text"],[subLabels.preprint,p.preprint,"bi-file-earmark-richtext"]])+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-github'></i>"+subLabels.code+"</span>"+linksRow([[subLabels.code,p.code,"bi-github"]])+"</div>";
     }
 
     function itemList(items){
-      return "<ul class='stepitems'>"+items.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";
+      return "<ul class='stepitems'>"+items.map(function(x){return "<li>"+x+"</li>";}).join("")+"</ul>";
     }
     var previewItems=s.items.slice(0,3), hasMore=s.items.length>previewItems.length;
 
     card.innerHTML=
       "<div class='stepshape "+shp+"' style='background:"+pc+"'>"+
       "<div class='shapeinner "+shp+"'>"+
-      "<div class='stepheadtop' style='color:"+pc+"'>"+PHASE_LABELS[i]+"</div>"+
+      "<div class='stepheadtop' style='color:"+pc+"'>"+phaseLabels[i]+"</div>"+
       "<div class='steptext"+(hasMore?" clamped":"")+"' style='--pc:"+pc+"'>"+itemList(previewItems)+"</div></div></div>"+
-      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+PHASE_LABELS[i]+"</span>"+itemList(s.items)+"</div>"+
+      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+phaseLabels[i]+"</span>"+itemList(s.items)+"</div>"+
       "<button type='button' class='steptoggle' aria-expanded='false' style='--pc:"+pc+"'>"+
       "<span class='toggleicon'><i class='bi "+toggleIcon+"'></i></span>"+toggleLabel+" <i class='bi bi-chevron-down'></i></button>"+
       "<div class='stepdetail'><div class='stepdetail-inner' style='--pc:"+pc+"'>"+detailHtml+"</div></div>";
@@ -290,67 +341,89 @@ function renderProj(){
   });
 }
 
-PROJ.forEach(function(p){
-  var b=document.createElement("button"); b.className="tgb"; b.textContent=p.short;
-  b.setAttribute("data-key",p.key);
-  b.setAttribute("aria-pressed", p.key===activeProj);
-  b.onclick=function(){selectProj(p.key);};
-  segProjWrap.appendChild(b);
-});
-
+buildProjSeg();
 renderProj();
+
+window.addEventListener("sitelangchange", function(e){
+  curLang=e.detail.lang;
+  buildProjSeg();
+  renderProj();
+});
 })();
 
 (function(){
 var COURSES=[
- {key:"lineaire", group:"technique", label:"Modèles linéaires", title:"Modèles linéaires",
-  public:"BUT 2 — Science des Données", format:"TD, TP, SAE",
-  programme:["Régression linéaire simple et multiple : cadre et exploration","Modèles : équation, ajustement, analyse de la variance, qualité de l'ajustement","Inférence (hypothèses, estimateurs et propriétés, tests, intervalles de confiance et de prédiction, diagnostics, validation, sélection de modèles)"],
-  competences:["Régression linéaire simple et multiple","Analyse de la variance (ANOVA)","Tests d'hypothèses et intervalles de confiance","Diagnostics de modèle et validation","Sélection de modèles"],
+ {key:"lineaire", group:"technique", label:"Modèles linéaires", labelEn:"Linear models",
+  fr:{public:"BUT 2 — Science des Données", format:"TD, TP, SAE",
+   programme:["Régression linéaire simple et multiple : cadre et exploration","Modèles : équation, ajustement, analyse de la variance, qualité de l'ajustement","Inférence (hypothèses, estimateurs et propriétés, tests, intervalles de confiance et de prédiction, diagnostics, validation, sélection de modèles)"],
+   competences:["Régression linéaire simple et multiple","Analyse de la variance (ANOVA)","Tests d'hypothèses et intervalles de confiance","Diagnostics de modèle et validation","Sélection de modèles"]},
+  en:{public:"BUT 2 — Data Science", format:"Tutorials, Labs, Capstone project",
+   programme:["Simple and multiple linear regression: framework and exploration","Models: equation, fit, analysis of variance, goodness of fit","Inference (hypotheses, estimators and properties, tests, confidence and prediction intervals, diagnostics, validation, model selection)"],
+   competences:["Simple and multiple linear regression","Analysis of variance (ANOVA)","Hypothesis tests and confidence intervals","Model diagnostics and validation","Model selection"]},
   outils:["R"]},
- {key:"progr", group:"technique", label:"Programmation R", title:"Programmation R",
-  public:"BUT 1 — Science des Données", format:"TP",
-  programme:["Introduction à R et RStudio","Structures de données (matrices, facteurs, listes, data frames)","Structures de contrôle et fonctions","Importation et exportation de données"],
-  competences:["Prise en main d'un langage de programmation","Manipulation de structures de données (matrices, listes, data frames)","Écriture de fonctions et structures de contrôle","Import et export de données"],
+ {key:"progr", group:"technique", label:"Programmation R", labelEn:"R programming",
+  fr:{public:"BUT 1 — Science des Données", format:"TP",
+   programme:["Introduction à R et RStudio","Structures de données (matrices, facteurs, listes, data frames)","Structures de contrôle et fonctions","Importation et exportation de données"],
+   competences:["Prise en main d'un langage de programmation","Manipulation de structures de données (matrices, listes, data frames)","Écriture de fonctions et structures de contrôle","Import et export de données"]},
+  en:{public:"BUT 1 — Data Science", format:"Labs",
+   programme:["Introduction to R and RStudio","Data structures (matrices, factors, lists, data frames)","Control structures and functions","Data import and export"],
+   competences:["Getting started with a programming language","Working with data structures (matrices, lists, data frames)","Writing functions and control structures","Data import and export"]},
   outils:["R","RStudio"]},
- {key:"statdesc", group:"technique", label:"Statistiques descriptives", title:"Statistiques descriptives",
-  public:"BUT 1 — Science des Données", format:"TP · Excel",
-  programme:["Introduction à Excel et prise en main","Nettoyage et préparation des données","Tris simples et tableaux de fréquences","Mesures de tendance centrale et de dispersion","Représentations graphiques","Tableaux croisés dynamiques"],
-  competences:["Nettoyage et préparation de données","Tris à plat et tableaux de fréquences","Indicateurs de tendance centrale et de dispersion","Construction de représentations graphiques","Tableaux croisés dynamiques"],
+ {key:"statdesc", group:"technique", label:"Statistiques descriptives", labelEn:"Descriptive statistics",
+  fr:{public:"BUT 1 — Science des Données", format:"TP · Excel",
+   programme:["Introduction à Excel et prise en main","Nettoyage et préparation des données","Tris simples et tableaux de fréquences","Mesures de tendance centrale et de dispersion","Représentations graphiques","Tableaux croisés dynamiques"],
+   competences:["Nettoyage et préparation de données","Tris à plat et tableaux de fréquences","Indicateurs de tendance centrale et de dispersion","Construction de représentations graphiques","Tableaux croisés dynamiques"]},
+  en:{public:"BUT 1 — Data Science", format:"Labs · Excel",
+   programme:["Introduction to Excel","Data cleaning and preparation","Simple tabulations and frequency tables","Central tendency and dispersion measures","Graphical representations","Pivot tables"],
+   competences:["Data cleaning and preparation","Tabulations and frequency tables","Central tendency and dispersion indicators","Building graphical representations","Pivot tables"]},
   outils:["Excel"]},
- {key:"proba", group:"technique", label:"Probabilités", title:"Probabilités",
-  public:"Licence 1 — Biologie", format:"TD",
-  programme:["Ensembles et opérations sur les ensembles","Arbres de probabilités et probabilité conditionnelle","Lois usuelles : uniforme, binomiale, de Poisson, etc.","Indépendance, espérance, variance","Somme de variables aléatoires"],
-  competences:["Manipulation d'ensembles et dénombrement","Arbres de probabilité et probabilité conditionnelle","Lois usuelles (uniforme, binomiale, Poisson…)","Indépendance d'événements","Espérance et variance d'une variable aléatoire","Sommes de variables aléatoires"],
+ {key:"proba", group:"technique", label:"Probabilités", labelEn:"Probability",
+  fr:{public:"Licence 1 — Biologie", format:"TD",
+   programme:["Ensembles et opérations sur les ensembles","Arbres de probabilités et probabilité conditionnelle","Lois usuelles : uniforme, binomiale, de Poisson, etc.","Indépendance, espérance, variance","Somme de variables aléatoires"],
+   competences:["Manipulation d'ensembles et dénombrement","Arbres de probabilité et probabilité conditionnelle","Lois usuelles (uniforme, binomiale, Poisson…)","Indépendance d'événements","Espérance et variance d'une variable aléatoire","Sommes de variables aléatoires"]},
+  en:{public:"Bachelor's 1 — Biology", format:"Tutorials",
+   programme:["Sets and set operations","Probability trees and conditional probability","Common distributions: uniform, binomial, Poisson, etc.","Independence, expectation, variance","Sums of random variables"],
+   competences:["Set manipulation and counting","Probability trees and conditional probability","Common distributions (uniform, binomial, Poisson…)","Independence of events","Expectation and variance of a random variable","Sums of random variables"]},
   outils:[]},
- {key:"modstoch", group:"technique", label:"Modélisation stochastique", title:"Modélisation stochastique",
-  public:"Licence 3 — Mathématiques", format:"TP",
-  programme:["Générateurs pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de la variance et variables antithétiques","Marche aléatoire","Préparation et manipulation des données, analyses descriptives univariée et bivariée, visualisation","Création de rapports dynamiques avec RMarkdown et Quarto"],
-  competences:["Génération de nombres pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de variance (variables antithétiques)","Simulation de marches aléatoires","Analyses descriptives univariée et bivariée","Production de rapports reproductibles"],
+ {key:"modstoch", group:"technique", label:"Modélisation stochastique", labelEn:"Stochastic modeling",
+  fr:{public:"Licence 3 — Mathématiques", format:"TP",
+   programme:["Générateurs pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de la variance et variables antithétiques","Marche aléatoire","Préparation et manipulation des données, analyses descriptives univariée et bivariée, visualisation","Création de rapports dynamiques avec RMarkdown et Quarto"],
+   competences:["Génération de nombres pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de variance (variables antithétiques)","Simulation de marches aléatoires","Analyses descriptives univariée et bivariée","Production de rapports reproductibles"]},
+  en:{public:"Bachelor's 3 — Mathematics", format:"Labs",
+   programme:["Pseudo-random number generators","Law of large numbers and central limit theorem","Inverse transform method and rejection sampling","Monte Carlo integration","Variance reduction and antithetic variables","Random walks","Data preparation and handling, univariate and bivariate descriptive analysis, visualization","Building reproducible reports with RMarkdown and Quarto"],
+   competences:["Pseudo-random number generation","Law of large numbers and central limit theorem","Inverse transform method and rejection sampling","Monte Carlo integration","Variance reduction (antithetic variables)","Random walk simulation","Univariate and bivariate descriptive analysis","Producing reproducible reports"]},
   outils:["R","RMarkdown","Quarto"]},
- {key:"tqr", group:"general", label:"Techniques quantitatives", title:"Techniques quantitatives et représentations",
-  public:"BUT 1 — Techniques de Commercialisation", format:"TD, TP · Excel",
-  programme:["Calcul financier : intérêts simples, intérêts composés, emprunts","Série à deux caractères : ajustement, corrélation","Chroniques","Tableau de contingence","Tests d'indépendance"],
-  competences:["Calcul d'intérêts simples et composés","Analyse d'emprunts","Ajustement et corrélation sur séries à deux caractères","Analyse de chroniques","Tableaux de contingence et tests d'indépendance"],
+ {key:"tqr", group:"general", label:"Techniques quantitatives", labelEn:"Quantitative techniques",
+  fr:{public:"BUT 1 — Techniques de Commercialisation", format:"TD, TP · Excel",
+   programme:["Calcul financier : intérêts simples, intérêts composés, emprunts","Série à deux caractères : ajustement, corrélation","Chroniques","Tableau de contingence","Tests d'indépendance"],
+   competences:["Calcul d'intérêts simples et composés","Analyse d'emprunts","Ajustement et corrélation sur séries à deux caractères","Analyse de chroniques","Tableaux de contingence et tests d'indépendance"]},
+  en:{public:"BUT 1 — Marketing & Sales", format:"Tutorials, Labs · Excel",
+   programme:["Financial calculations: simple interest, compound interest, loans","Two-variable series: fitting, correlation","Time series","Contingency tables","Independence tests"],
+   competences:["Simple and compound interest calculations","Loan analysis","Fitting and correlation on two-variable series","Time series analysis","Contingency tables and independence tests"]},
   outils:["Excel"]},
- {key:"exploit", group:"general", label:"Exploitation de données", title:"Exploitation de données",
-  public:"Licences Professionnelles", format:"TD, TP · Excel",
-  programme:["Concepts de base : population, échantillon, individu, caractère et modalité, série statistique","Données statistiques et représentations : tableaux et graphiques (bâtons, barres, secteurs, histogrammes, courbes…)","Statistiques descriptives univariées : indicateurs de tendance et de dispersion"],
-  competences:["Structuration de données statistiques (population, individu, caractère)","Construction de tableaux et graphiques statistiques","Calcul d'indicateurs de tendance centrale et de dispersion","Lecture et interprétation de résultats descriptifs"],
+ {key:"exploit", group:"general", label:"Exploitation de données", labelEn:"Data analysis",
+  fr:{public:"Licences Professionnelles", format:"TD, TP · Excel",
+   programme:["Concepts de base : population, échantillon, individu, caractère et modalité, série statistique","Données statistiques et représentations : tableaux et graphiques (bâtons, barres, secteurs, histogrammes, courbes…)","Statistiques descriptives univariées : indicateurs de tendance et de dispersion"],
+   competences:["Structuration de données statistiques (population, individu, caractère)","Construction de tableaux et graphiques statistiques","Calcul d'indicateurs de tendance centrale et de dispersion","Lecture et interprétation de résultats descriptifs"]},
+  en:{public:"Professional Bachelor's programs", format:"Tutorials, Labs · Excel",
+   programme:["Basic concepts: population, sample, individual, variable and category, statistical series","Statistical data and representations: tables and charts (bar, pie, histograms, curves…)","Univariate descriptive statistics: central tendency and dispersion indicators"],
+   competences:["Structuring statistical data (population, individual, variable)","Building statistical tables and charts","Computing central tendency and dispersion indicators","Reading and interpreting descriptive results"]},
   outils:["Excel"]}
 ];
 
 var CPHASE_SHAPES=["square","octagon"];
 var CPHASE_COLORS=["var(--emerald)","var(--indigo)"];
-var CPHASE_LABELS=["Programme","Compétences & outils"];
+var CPHASE_LABELS={fr:["Programme","Compétences & outils"], en:["Curriculum","Skills & tools"]};
+var TOOLS_PREFIX={fr:"Outils : ", en:"Tools: "};
 var segWrap=document.getElementById("segCourse"),
     courseStepsEl=document.getElementById("courseSteps"), courseCtx=document.getElementById("courseCtx");
 var activeCourse="lineaire";
+var curLang2=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 
 function buildSeg(){
   segWrap.innerHTML="";
   COURSES.forEach(function(c){
-    var b=document.createElement("button"); b.className="tgb"; b.textContent=c.label;
+    var b=document.createElement("button"); b.className="tgb"; b.textContent=curLang2==="en" ? c.labelEn : c.label;
     b.setAttribute("data-key", c.key);
     b.setAttribute("aria-pressed", c.key===activeCourse);
     b.onclick=function(){selectCourse(c.key);};
@@ -366,12 +439,14 @@ function selectCourse(key){
 
 function renderCourse(){
   var c=COURSES.filter(function(x){return x.key===activeCourse;})[0];
-  courseCtx.innerHTML="<span class='orgmini' style='background:transparent;box-shadow:none'><i class='bi bi-mortarboard-fill' style='font-size:20px;color:var(--txt)'></i></span><span>"+c.public+" · "+c.format+"</span>";
+  var t=c[curLang2];
+  var phaseLabels=CPHASE_LABELS[curLang2];
+  courseCtx.innerHTML="<span class='orgmini' style='background:transparent;box-shadow:none'><i class='bi bi-mortarboard-fill' style='font-size:20px;color:var(--txt)'></i></span><span>"+t.public+" · "+t.format+"</span>";
 
   courseStepsEl.innerHTML="";
-  var competencesFull=c.competences.slice();
-  if(c.outils && c.outils.length){ competencesFull.push("Outils : "+c.outils.join(", ")); }
-  var facets=[c.programme, competencesFull];
+  var competencesFull=t.competences.slice();
+  if(c.outils && c.outils.length){ competencesFull.push(TOOLS_PREFIX[curLang2]+c.outils.join(", ")); }
+  var facets=[t.programme, competencesFull];
   facets.forEach(function(items,i){
     var pc=CPHASE_COLORS[i];
     var card=document.createElement("div"); card.className="stepcard";
@@ -379,22 +454,28 @@ function renderCourse(){
     var shp="shp-"+CPHASE_SHAPES[i];
 
     function itemList(arr){
-      return "<ul class='stepitems'>"+arr.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";
+      return "<ul class='stepitems'>"+arr.map(function(x){return "<li>"+x+"</li>";}).join("")+"</ul>";
     }
     var previewItems=items.slice(0,3), hasMore=items.length>previewItems.length;
 
     card.innerHTML=
       "<div class='stepshape "+shp+"' style='background:"+pc+"'>"+
       "<div class='shapeinner "+shp+"'>"+
-      "<div class='stepheadtop' style='color:"+pc+"'>"+CPHASE_LABELS[i]+"</div>"+
+      "<div class='stepheadtop' style='color:"+pc+"'>"+phaseLabels[i]+"</div>"+
       "<div class='steptext"+(hasMore?" clamped":"")+"' style='--pc:"+pc+"'>"+itemList(previewItems)+"</div></div></div>"+
-      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+CPHASE_LABELS[i]+"</span>"+itemList(items)+"</div>";
+      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+phaseLabels[i]+"</span>"+itemList(items)+"</div>";
     courseStepsEl.appendChild(card);
   });
 }
 
 buildSeg();
 renderCourse();
+
+window.addEventListener("sitelangchange", function(e){
+  curLang2=e.detail.lang;
+  buildSeg();
+  renderCourse();
+});
 })();
 </script>
 ```
