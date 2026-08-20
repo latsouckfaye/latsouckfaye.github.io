@@ -1,0 +1,5 @@
+freeze: false
+toc: false
+format:
+  html:
+    css: ../assets/blogpost.css

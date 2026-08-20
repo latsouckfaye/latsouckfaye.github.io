@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Paul Faye</title>
+<link>https://latsouckfaye.github.io/blog.html</link>
+<atom:link href="https://latsouckfaye.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description>Data &amp; Tech, Finance &amp; Investissement, Projets &amp; Build — ce que j&#39;apprends, ce que je construis, ce qui m&#39;intéresse.</description>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Thu, 20 Aug 2026 16:13:08 GMT</lastBuildDate>
+</channel>
+</rss>

@@ -1,0 +1,96 @@
+---
+pagetitle: "Blog — Paul Faye"
+description: "Data & Tech, Finance & Investissement, Projets & Build — ce que j'apprends, ce que je construis, ce qui m'intéresse."
+toc: false
+freeze: false
+page-layout: full
+listing:
+  contents: blog
+  type: default
+  categories: true
+  sort: "date desc"
+  fields: [image, date, title, description, categories, reading-time]
+  feed: true
+  id: bloglisting
+---
+
+::: column-screen
+```{=html}
+<link rel="stylesheet" href="assets/v8.css">
+<style>
+.v8{--cyan:#22D3EE;--purple:#C084FC;--pink:#FB7185}
+body.quarto-light .v8{--cyan:#0E7490;--purple:#7E22CE;--pink:#BE123C}
+.v8 .cta{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.v8 .soonbadge{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--faint);border:1px solid var(--line);border-radius:20px;padding:6px 14px;margin:0 0 18px}
+.v8 .soonbadge .dot{width:7px;height:7px;border-radius:50%;background:var(--third);position:relative;flex:none}
+.v8 .soonbadge .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:soonpulse 2.2s ease-out infinite}
+@keyframes soonpulse{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+@media (prefers-reduced-motion:reduce){.v8 .soonbadge .dot::after{animation:none;display:none}}
+.v8 .soonwrap{padding:8px 20px 40px;text-align:center}
+.v8 .hubminibadge{display:inline-block;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:6px 14px;border-radius:14px;margin-right:5px;border:1.5px solid currentColor}
+.v8 .blogcats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0 0}
+
+/* La listing Quarto est injectée par le moteur en dehors du wrapper .v8 (Quarto ne
+   propose pas de shortcode de placement manuel en 1.10) : on la restyle donc en
+   ciblant directement ses classes natives, sans dépendre de .v8. On réexpose les
+   mêmes variables de couleur pour rester visuellement cohérent avec le reste du site. */
+#quarto-content{--blue:#5B8FE8;--coral:#E08767;--third:#E3B341;--green:#3FBF7F;--cyan:#22D3EE;--purple:#C084FC;--pink:#FB7185;--panel:#131A23;--line:rgba(255,255,255,.1);--muted:#97A3B0;--txt:#E8EDF2}
+body.quarto-light #quarto-content{--blue:#2F63C7;--coral:#C4643F;--third:#9A6700;--green:#1E8F52;--cyan:#0E7490;--purple:#7E22CE;--pink:#BE123C;--panel:#F7F8FA;--line:rgba(0,0,0,.12);--muted:#5B646E;--txt:#14171A}
+
+.quarto-listing-container-default{max-width:1000px;margin:0 auto;padding:0 20px 60px}
+.quarto-listing-category-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+.quarto-listing-category{display:flex;flex-direction:column;gap:2px}
+.quarto-listing-category .category{font-size:13px;color:var(--muted);padding:4px 0;cursor:pointer;border:none;background:transparent}
+.quarto-listing-category .category:hover,.quarto-listing-category .category.active{color:var(--blue)}
+.quarto-listing-category .quarto-category-count{color:var(--muted);font-weight:400}
+
+.quarto-post{position:relative;display:flex;align-items:center;gap:26px;padding:24px 26px;margin-bottom:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.quarto-post::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--muted)}
+.quarto-post[data-categories*="RGF0YSUyMCUyNiUyMFRlY2g="]::before{background:var(--cyan)}
+.quarto-post[data-categories*="RmluYW5jZSUyMCUyNiUyMEludmVzdGlzc2VtZW50"]::before{background:var(--purple)}
+.quarto-post[data-categories*="UHJvamV0cyUyMCUyNiUyMEJ1aWxk"]::before{background:var(--pink)}
+.quarto-post:hover{transform:translateY(-4px);box-shadow:0 22px 44px -22px rgba(0,0,0,.45);border-color:var(--muted)}
+.quarto-post .thumbnail{flex:0 0 170px;border-radius:12px;overflow:hidden;background:#fff}
+.quarto-post .thumbnail-image{width:100%;height:120px;object-fit:cover;display:block}
+.quarto-post .body{flex:1;min-width:0}
+.quarto-post .listing-title{font-size:18px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+.quarto-post .listing-title a{color:var(--txt);text-decoration:none}
+.quarto-post .listing-title a:hover{color:var(--blue)}
+.quarto-post .listing-categories{margin:0 0 8px;order:-1}
+.quarto-post .listing-category{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 10px;border-radius:10px;margin-right:5px;border:1px solid var(--line);color:var(--muted);cursor:pointer}
+.quarto-post .listing-description{font-size:12.5px;color:var(--muted);line-height:1.6}
+.quarto-post .listing-description a{color:inherit;text-decoration:none}
+.quarto-post .metadata{flex:0 0 110px;text-align:right;font-size:11px;color:var(--muted)}
+.quarto-post .metadata a{color:inherit;text-decoration:none}
+.quarto-post .listing-date{margin-bottom:4px}
+@media (max-width:640px){.quarto-post{flex-direction:column;align-items:stretch;text-align:center}.quarto-post .metadata{text-align:center;flex:none}.quarto-post .thumbnail{flex:none}}
+</style>
+<div class="v8" id="v8">
+
+<div class="hero">
+<p class="h1" data-en="Blog" data-title-en="Blog — Paul Faye">Blog</p>
+<p class="ld" data-en="Data scientist by trade, curious by nature. I write about data and tech, investing, what I build, and what interests me — through learning, experimenting, and sharing.">Data scientist de métier, curieux par nature. J'écris sur la data et la tech, l'investissement, ce que je construis, et ce qui m'intéresse — au fil de l'apprentissage, de l'expérimentation et du partage.</p>
+<div class="blogcats">
+<span class="hubminibadge" style="color:var(--cyan)" data-en="Data & Tech">Data & Tech</span>
+<span class="hubminibadge" style="color:var(--purple)" data-en="Finance & Investing">Finance & Investissement</span>
+<span class="hubminibadge" style="color:var(--pink)" data-en="Projects & Build">Projets & Build</span>
+</div>
+</div>
+
+<div class="soonwrap">
+<p class="soonbadge"><span class="dot"></span><span data-en="First posts coming soon">Premiers articles à venir</span></p>
+<p class="ld" data-en="This section is just getting started — in the meantime, check out the tutorials already published, or follow my GitHub to hear about upcoming posts.">Cette section démarre tout juste — en attendant, jetez un œil aux tutoriels déjà publiés, ou suivez mon GitHub pour être informé des prochains articles.</p>
+<div class="cta">
+<a class="btn" href="tutoriels.qmd">Voir les tutoriels <i class="bi bi-door-open"></i></a>
+<a class="btn" href="portfolio.qmd">Voir le portfolio <i class="bi bi-door-open"></i></a>
+<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener">Suivre sur GitHub <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="sec" style="padding-bottom:0">
+<p class="h2">Derniers articles</p>
+</div>
+
+</div>
+```
+:::

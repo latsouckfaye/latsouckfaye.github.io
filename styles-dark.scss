@@ -1,0 +1,505 @@
+/*-----------------------------------------------------------------
+  Paul Faye — identité visuelle (thème sombre)
+  Contrepartie sombre de styles.scss, mêmes classes, palette inversée.
+-----------------------------------------------------------------*/
+
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+$taille-texte: 16px;
+$taille-titre: 1.9rem;
+$interligne:   1.65;
+
+$accent: #5B8FE8;
+
+// ---------- Palette ----------
+$noir:       #E8EDF2;
+$gris:       #97A3B0;
+$gris-clair: #B7C0C9;
+$trait:      rgba(255, 255, 255, .12);
+$fond:       #0B0F14;
+$fond-doux:  #131A23;
+
+// ---------- Typographie : une seule famille ----------
+$font-family-sans-serif: "Inter", -apple-system, "Segoe UI", sans-serif;
+$font-family-monospace:  ui-monospace, "SFMono-Regular", "Consolas", monospace;
+$headings-font-family:   $font-family-sans-serif;
+
+$font-size-root:       $taille-texte;
+$line-height-base:     $interligne;
+$headings-font-weight: 600;
+$headings-line-height: 1.3;
+
+$h1-font-size: $taille-titre;
+$h2-font-size: 1.3rem;
+$h3-font-size: 1.02rem;
+
+// ---------- Couleurs Bootstrap ----------
+$body-bg:          $fond;
+$body-color:       $noir;
+$headings-color:   $noir;
+$link-color:       $accent;
+$link-hover-color: lighten($accent, 10%);
+$border-color:     $trait;
+
+$code-color: $noir;
+$code-bg:    $fond-doux;
+
+// ---------- Chrome Quarto ----------
+$navbar-bg: $fond-doux;
+$navbar-fg: $noir;
+$navbar-hl: $accent;
+$footer-bg: $fond;
+$footer-fg: $gris;
+
+
+/*-- scss:rules --*/
+
+/*----------------------------------------------------------------
+  1. Fondations
+----------------------------------------------------------------*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+}
+
+main.content p,
+main.content li { max-width: 68ch; }
+
+main.content li { margin-bottom: 0.25rem; }
+main.content   { padding-top: 0; }
+
+h1 { letter-spacing: -0.022em; }
+
+h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.014em;
+}
+
+h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+}
+
+a {
+  text-underline-offset: 0.16em;
+  text-decoration-thickness: 1px;
+}
+
+strong { font-weight: 600; }
+
+hr, .bande, .bande--fine {
+  height: 1px;
+  border: 0;
+  background: $trait;
+  margin: 2.4rem 0;
+  opacity: 1;
+}
+
+.bande { margin: 0 0 1.8rem 0; }
+
+/*----------------------------------------------------------------
+  2. Navigation
+----------------------------------------------------------------*/
+
+.navbar {
+  border-bottom: 1px solid $trait;
+  padding-block: 0.5rem;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.navbar-brand-container { display: none; }
+
+.navbar-nav .nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-inline: 0.8rem !important;
+}
+
+.navbar-nav .dropdown-menu {
+  border: 1px solid $trait;
+  border-radius: 10px;
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.55);
+  padding: 0.4rem;
+  margin-top: 0.5rem;
+  animation: navdrop 0.16s ease;
+}
+
+@keyframes navdrop {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar-nav .dropdown-item {
+  border-radius: 6px;
+  font-size: 0.88rem;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.navbar-nav .dropdown-item:hover,
+.navbar-nav .dropdown-item:focus {
+  background: $fond-doux;
+  color: $accent;
+}
+
+.navbar-nav .dropdown-item .bi { color: $accent; }
+
+.navlang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(127, 127, 127, 0.1);
+  border: 1px solid $trait;
+  border-radius: 20px;
+  padding: 2px;
+  margin-right: 0.5rem;
+}
+
+.navlang button {
+  border: none;
+  background: transparent;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 16px;
+  cursor: pointer;
+  color: $gris;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navlang button[aria-pressed="true"] {
+  background: $accent;
+  color: #0B0F14;
+}
+
+.navlang button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/*----------------------------------------------------------------
+  3. Overlay de navigation plein écran
+----------------------------------------------------------------*/
+
+.navmenu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: $body-color;
+  cursor: pointer;
+  margin: 0.3rem 0.5rem;
+  font-family: inherit;
+  transition: color 0.2s ease, transform 0.15s ease;
+  order: -1;
+}
+.navmenu-trigger:hover { color: $accent; }
+.navmenu-trigger:active { transform: scale(0.88); }
+.navmenu-bars { display: inline-flex; flex-direction: column; gap: 4px; width: 17px; }
+.navmenu-bars span { display: block; height: 2px; background: currentColor; border-radius: 1px; transition: transform 0.3s ease, opacity 0.2s ease; }
+.navmenu-trigger[aria-expanded="true"] .navmenu-bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.navmenu-trigger[aria-expanded="true"] .navmenu-bars span:nth-child(2) { opacity: 0; transform: translateX(-6px); }
+.navmenu-trigger[aria-expanded="true"] .navmenu-bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+body.navmenu-lock { overflow: hidden; }
+
+$nm-blue: #5B8FE8;
+$nm-coral: #E08767;
+$nm-third: #E3B341;
+$nm-green: #3FBF7F;
+
+.navmenu-overlay { position: fixed; inset: 0; z-index: 2000; display: none; }
+.navmenu-overlay.open { display: block; }
+.navmenu-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(6, 9, 13, 0.55);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.navmenu-overlay.open .navmenu-backdrop { opacity: 1; }
+.navmenu-panel {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: min(340px, 86vw);
+  display: flex; flex-direction: column;
+  padding: 24px 24px 4vh;
+  overflow-y: auto;
+  background: $fond-doux;
+  border-right: 1px solid $trait;
+  box-shadow: 24px 0 50px -28px rgba(0, 0, 0, 0.55);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+.navmenu-overlay.open .navmenu-panel { transform: translateX(0); }
+.navmenu-panel::-webkit-scrollbar { width: 6px; }
+.navmenu-panel::-webkit-scrollbar-track { background: transparent; }
+.navmenu-panel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 8px; }
+.navmenu-panel::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.35); }
+.navmenu-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid $trait;
+  background: transparent; color: $body-color;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px;
+  transition: transform 0.3s ease, border-color 0.2s, color 0.2s;
+}
+.navmenu-close:hover { transform: rotate(90deg); border-color: $accent; color: $accent; }
+.navmenu-greeting {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: $gris; margin: 6px 42px 16px 0;
+}
+.navmenu-search {
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid $trait;
+  padding-bottom: 12px; margin-bottom: 4px;
+  color: $gris;
+}
+.navmenu-search input {
+  flex: 1; background: transparent; border: none; outline: none;
+  font-size: 0.96rem; color: $body-color; font-family: inherit;
+}
+.navmenu-search input::placeholder { color: $gris-clair; }
+.navmenu-main { display: flex; flex-direction: column; margin: 16px 0 20px; }
+.navmenu-link {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 1.06rem; font-weight: 700;
+  color: $body-color; text-decoration: none; letter-spacing: -0.01em;
+  padding: 10px 10px; margin: 0 -10px; border-radius: 12px;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+.navmenu-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.25rem; flex: none;
+  font-size: 0.96rem; color: var(--nm, #{$accent}); opacity: .9;
+  transition: transform 0.25s ease;
+}
+.navmenu-link:hover, .navmenu-link:focus-visible {
+  color: var(--nm, $accent);
+  background: color-mix(in srgb, var(--nm, $accent) 10%, transparent);
+  transform: translateX(4px);
+}
+.navmenu-link:hover .navmenu-icon, .navmenu-link:focus-visible .navmenu-icon { transform: scale(1.15); }
+.navmenu-link.c-apropos { --nm: #{$nm-green}; }
+.navmenu-link.c-portfolio { --nm: #{$nm-blue}; }
+.navmenu-link.c-tutoriels { --nm: #{$nm-coral}; }
+.navmenu-link.c-blog { --nm: #{$nm-third}; }
+.navmenu-link.navmenu-hidden, .navmenu-sublink.navmenu-hidden { display: none; }
+.navmenu-subgrid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.navmenu-subgroup.navmenu-hidden { display: none; }
+.navmenu-grouplabel {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: $gris; margin-bottom: 8px;
+}
+.navmenu-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--nm, #{$accent}); flex: none; }
+.navmenu-grouplabel.c-apropos { --nm: #{$nm-green}; }
+.navmenu-grouplabel.c-portfolio { --nm: #{$nm-blue}; }
+.navmenu-grouplabel.c-tutoriels { --nm: #{$nm-coral}; }
+.navmenu-grouplabel.c-blog { --nm: #{$nm-third}; }
+.navmenu-sublink {
+  display: block; font-size: 0.85rem; color: $gris;
+  text-decoration: none; padding: 7px 10px; margin: 0 -10px; border-radius: 9px;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+.navmenu-sublink:hover {
+  color: var(--nm, $accent);
+  background: color-mix(in srgb, var(--nm, $accent) 10%, transparent);
+  transform: translateX(3px);
+}
+.navmenu-sublink.c-apropos { --nm: #{$nm-green}; }
+.navmenu-sublink.c-portfolio { --nm: #{$nm-blue}; }
+.navmenu-sublink.c-tutoriels { --nm: #{$nm-coral}; }
+.navmenu-sublink.c-blog { --nm: #{$nm-third}; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navmenu-backdrop, .navmenu-panel, .navmenu-link, .navmenu-close, .navmenu-bars span { transition: none !important; }
+}
+
+/*----------------------------------------------------------------
+  3bis. Identité et pied de page partagés (toutes les pages)
+----------------------------------------------------------------*/
+
+footer.footer { display: none; }
+
+.sitebanner {
+  padding: 34px 20px 30px;
+  text-align: center;
+  border-bottom: 1px solid $trait;
+  background: $fond-doux;
+}
+
+.idtag {
+  font-family: $font-family-monospace;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  color: $gris;
+  margin: 0 0 22px;
+}
+.idtag .idpunc { color: $gris-clair; }
+.idtag .idname { color: $body-color; font-weight: 600; }
+.idtag .idattr { color: $gris; }
+.idtag .idval { color: $accent; }
+
+.pillarrow { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; padding: 0 20px; }
+.pillshape { position: relative; display: block; width: 124px; aspect-ratio: 1; background: var(--hc); text-decoration: none; transition: transform 0.2s ease; }
+.pillshape:hover { transform: translateY(-3px); }
+.pillshapeinner {
+  position: absolute; inset: 3px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  background: $fond; color: var(--hc); font-size: 15px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.03em;
+  transition: background 0.2s ease;
+}
+.pillshape:hover .pillshapeinner { background: color-mix(in srgb, var(--hc) 12%, $fond); }
+.pillshapeinner i { font-size: 22px; }
+.pillshape.circle, .pillshape.circle .pillshapeinner { border-radius: 50%; }
+.pillshape.hexagon, .pillshape.hexagon .pillshapeinner { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.pillshape.pentagon, .pillshape.pentagon .pillshapeinner { clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+.pillshape.pentagon .pillshapeinner { padding-top: 10px; }
+.pillshape.c-portfolio { --hc: #{$nm-blue}; }
+.pillshape.c-tutoriels { --hc: #{$nm-coral}; }
+.pillshape.c-blog { --hc: #{$nm-third}; }
+
+.sitefooter { padding: 44px 20px 40px; }
+.sitefooter .contactrow { display: flex; justify-content: center; align-items: center; gap: 26px; flex-wrap: wrap; }
+.sitefooter .iconbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 36px; line-height: 1; text-decoration: none;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.sitefooter .iconbtn:hover { transform: translateY(-3px); opacity: 0.8; }
+.sitefooter .iconbtn.ic-linkedin { color: #0A66C2; }
+.sitefooter .iconbtn.ic-github { color: #A569BD; }
+.sitefooter .iconbtn.ic-email { color: #{$nm-coral}; }
+.sitefooter .licenseline {
+  text-align: center; font-size: 0.82rem; color: $gris;
+  margin: 26px 0 0; padding: 1.1rem 20px 0; border-top: 1px solid $trait;
+}
+.sitefooter .licenseline a { color: $gris; text-decoration: underline; text-underline-offset: 2px; }
+.sitefooter .licenseline a:hover { color: $body-color; }
+
+/*----------------------------------------------------------------
+  4. En-tête des pages intérieures
+----------------------------------------------------------------*/
+
+.eyebrow {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: $accent;
+  margin-bottom: 0.6rem;
+}
+
+.nom {
+  font-size: clamp(1.7rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.45rem;
+}
+
+.lede {
+  font-size: 1.06rem;
+  line-height: 1.6;
+  color: $gris;
+  max-width: 60ch;
+  margin-bottom: 1.5rem;
+}
+
+.lede strong { color: $noir; font-weight: 600; }
+
+/*----------------------------------------------------------------
+  6. Encadré « transfert au risque »
+----------------------------------------------------------------*/
+
+.transfert {
+  background: $fond-doux;
+  border-left: 2px solid $accent;
+  padding: 1rem 1.25rem;
+  margin: 1.8rem 0;
+  font-size: 0.96rem;
+}
+
+.transfert::before {
+  content: "Transfert au risque";
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: $accent;
+  margin-bottom: 0.45rem;
+}
+
+.transfert p { margin-bottom: 0; }
+.transfert p:not(:last-child) { margin-bottom: 0.6rem; }
+
+/*----------------------------------------------------------------
+  9. Tableaux
+----------------------------------------------------------------*/
+
+.table { font-size: 0.92rem; border-color: $trait; }
+
+.table thead th {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $gris;
+  border-bottom: 1px solid $noir;
+}
+
+.table td { font-variant-numeric: tabular-nums; }
+
+/*----------------------------------------------------------------
+  10. Figures et pied de page
+----------------------------------------------------------------*/
+
+figure img, main.content img {
+  border: 1px solid $trait;
+  border-radius: 4px;
+}
+
+figcaption { font-size: 0.84rem; color: $gris; margin-top: 0.5rem; }
+
+.nav-footer {
+  border-top: 1px solid $trait;
+  font-size: 0.84rem;
+  padding-block: 1.3rem;
+}
+
+/*----------------------------------------------------------------
+  11. Plancher de qualité
+----------------------------------------------------------------*/
+
+:focus-visible { outline: 2px solid $accent; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@media (max-width: 575px) {
+  .lede { font-size: 1rem; }
+}

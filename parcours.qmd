@@ -1,0 +1,286 @@
+---
+pagetitle: "Parcours — Paul Faye"
+description: "Formation, certifications et expérience professionnelle."
+toc: false
+freeze: false
+---
+
+::: column-screen
+```{=html}
+<link rel="stylesheet" href="assets/v8.css">
+<style>
+.v8 .sgb[data-key="inria"][aria-pressed="true"]{background:var(--blue)}
+.v8 .sgb[data-key="ens"][aria-pressed="true"]{background:var(--third)}
+.v8 .sgb[data-key="doc"][aria-pressed="true"]{background:var(--coral)}
+.v8 .sgb[data-key="stage"][aria-pressed="true"]{background:var(--txt);color:var(--onblue)}
+.v8 .sgb[data-key="dakar"][aria-pressed="true"]{background:var(--third)}
+.v8 .sgb[data-key="lille"][aria-pressed="true"]{background:var(--blue)}
+.v8 .sgb[data-key="mtp"][aria-pressed="true"]{background:var(--coral)}
+.v8 #ftl circle{cursor:pointer;outline:none;transition:opacity .18s,filter .18s}
+.v8 #ftl circle:hover{filter:brightness(1.15)}
+.v8 #ftl circle:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.v8 #ftl text{cursor:pointer;pointer-events:none}
+.v8 .cta{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.v8 .ganttwrap{max-width:680px;margin:6px auto 0;padding:0 14px}
+.v8 .ganttwrap svg{width:100%;height:auto;display:block}
+.v8 #gbars rect{cursor:pointer;outline:none;transition:opacity .18s,filter .18s}
+.v8 #gbars rect:hover{filter:brightness(1.12)}
+.v8 #gbars rect:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.v8 #gbars text{cursor:pointer;pointer-events:none}
+.v8 .panel{max-width:640px;margin:18px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-align:center}
+.v8 .panel .orglogo{width:38px;height:38px;border-radius:9px;background:#fff;padding:5px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.v8 .panel .orglogo img{max-width:100%;max-height:100%;object-fit:contain}
+.v8 .panel .org{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.v8 .panel .desc{font-size:13px;color:var(--muted);line-height:1.6;max-width:56ch;margin:10px auto 0}
+.v8 .certs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;max-width:760px;margin:0 auto;padding:0 20px}
+.v8 .cert{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:500;color:var(--txt);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:7px 15px 7px 8px;text-decoration:none;transition:all .18s}
+.v8 .cert:hover{border-color:var(--blue);color:var(--blue)}
+.v8 .cert i{font-style:normal;color:var(--muted);font-size:11px}
+.v8 .cert .clogo{width:24px;height:24px;border-radius:6px;background:#fff;padding:3px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.v8 .cert .clogo img{max-width:100%;max-height:100%;object-fit:contain}
+.v8 .cert .clogo i{font-size:14px;color:#181717}
+</style>
+<div class="v8" id="v8">
+
+<div class="hero">
+<p class="h1" data-en="Career path" data-title-en="Career path — Paul Faye">Parcours</p>
+<p class="ld" data-en="Professional experience, education, and certifications: six years building a rigorous modeling practice, between academic research and field applications.">Expérience professionnelle, formation et certifications : six ans à construire une pratique rigoureuse de la modélisation, entre recherche académique et applications de terrain.</p>
+<p class="en-note" data-en="This page's detailed content (timeline, roles, certifications) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
+<div class="cta">
+<a class="btn" href="portfolio.qmd">Retour au portfolio <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="sec" style="padding-top:38px"><p class="h2">Expérience</p></div>
+<div class="segwrap" id="segExp" role="group" aria-label="Filtrer par poste"></div>
+<p class="hint" id="hintExp">Cliquez sur un poste ou une barre pour voir le détail</p>
+
+<div class="ganttwrap">
+<svg viewBox="0 0 640 210" role="img" aria-label="Frise chronologique des expériences professionnelles">
+<g id="gaxis"></g>
+<g id="gbars"></g>
+</svg>
+</div>
+
+<div class="panel" id="expPanel"></div>
+<div class="bub" id="expBub"></div>
+
+<div class="sec" style="padding-top:40px"><p class="h2">Formation</p></div>
+<div class="segwrap" id="segForm" role="group" aria-label="Filtrer par diplôme"></div>
+<p class="hint">Cliquez sur un diplôme ou un point pour voir le détail</p>
+
+<div class="ganttwrap" style="max-width:600px">
+<svg viewBox="0 0 640 100" role="img" aria-label="Frise chronologique des diplômes, de 2017 à 2025">
+<g id="ftl"></g>
+</svg>
+</div>
+
+<div class="panel" id="formPanel"></div>
+<div class="bub" id="formBub"></div>
+
+<div class="sec" style="padding-top:40px"><p class="h2">Certifications</p></div>
+<div class="certs">
+<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/attestation_suivi_course-v1_inria%2B41026%2Bsession02_9461cd9f4b4518ea2f3b47da448cf76d.pdf" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/inria.svg" alt="" loading="lazy"></span>Machine learning avec scikit-learn <i>Inria</i></a>
+<a class="cert" href="https://www.udemy.com/certificate/UC-cb724d19-8b7b-41da-9c4d-a9327b6af742/" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/udemy.svg" alt="" loading="lazy"></span>SQL pour la data science <i>Udemy</i></a>
+<a class="cert" href="https://www.youracclaim.com/badges/d7723949-77c3-4e2a-a5cc-c36af5a7dbbe/public_url" target="_blank" rel="noopener"><span class="clogo"><img src="images/logos/sas.svg" alt="" loading="lazy"></span>SAS : les bases pour l'analyse de données <i>Credly</i></a>
+<a class="cert" href="https://github.com/latsouckfaye/Certificates/blob/main/Attestation_Formation_RdevPkg.pdf" target="_blank" rel="noopener"><span class="clogo"><i class="bi bi-github"></i></span>Développement de packages R <i>GitHub</i></a>
+</div>
+
+</div>
+```
+
+```{=html}
+<script>
+(function(){
+var NS="http://www.w3.org/2000/svg";
+var EXP=[
+ {key:"inria", title:"Ingénieur de Recherche", org:"Inria — Lille · 2025", logo:"images/logos/inria.svg", start:2025.0, end:2025.9, col:"var(--blue)",
+  desc:"Étude avec l'Institut ONCOLILLE : d'une base de dossiers cliniques à un modèle de pronostic interprétable, sur une cohorte nettoyée de 1 445 à 884 individus, et 48 variables candidates.",
+  kw:["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"]},
+ {key:"ens", title:"Enseignant-Chercheur", org:"Université de Lille — depuis 2023", logo:"images/logos/lille.svg", start:2023.0, end:2026.6, col:"var(--third)",
+  desc:"Statistique appliquée à des publics techniques et non techniques, sur trois contrats successifs : ATER, vacataire, puis contractuel.",
+  kw:["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"]},
+ {key:"doc", title:"Doctorant", org:"Université de Montpellier · 2020–2025", logo:"images/logos/montpellier.png", start:2020.0, end:2025.0, col:"var(--coral)",
+  desc:"Automatiser une expertise : deux ans de cartographie manuelle réduits à une chaîne statistique reproductible, en statistique spatiale.",
+  kw:["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"]},
+ {key:"stage", title:"Data Scientist - Stage", org:"Université de Lille · 2020", logo:"images/logos/lille.svg", start:2019.85, end:2020.35, col:"var(--txt)",
+  desc:"Analyse statistique d'indicateurs de peuplement de communautés de récifs coralliens.",
+  kw:["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]}
+];
+
+var gx0=26, gx1=614, gy0=16, rowH=42, barH=24, yMin=2019.6, yMax=2026.6;
+function X(y){return gx0+(y-yMin)/(yMax-yMin)*(gx1-gx0);}
+
+var gaxis=document.getElementById("gaxis"), gbars=document.getElementById("gbars"),
+    panel=document.getElementById("expPanel"), expBub=document.getElementById("expBub");
+var activeExp="inria";
+
+function buildAxis(){
+  gaxis.innerHTML="";
+  var baseY=gy0+EXP.length*rowH-(rowH-barH)+10;
+  var axisLine=document.createElementNS(NS,"line");
+  axisLine.setAttribute("x1",gx0); axisLine.setAttribute("y1",baseY);
+  axisLine.setAttribute("x2",gx1); axisLine.setAttribute("y2",baseY);
+  axisLine.setAttribute("class","ax"); axisLine.setAttribute("stroke-width",".8");
+  gaxis.appendChild(axisLine);
+  for(var yr=2020; yr<=2026; yr++){
+    var gx=X(yr);
+    var t=document.createElementNS(NS,"text");
+    t.setAttribute("x",gx); t.setAttribute("y",baseY+16);
+    t.setAttribute("class","tx"); t.setAttribute("font-size","9.5");
+    t.setAttribute("font-family","Inter,sans-serif"); t.setAttribute("text-anchor","middle");
+    t.textContent=yr;
+    gaxis.appendChild(t);
+    var tick=document.createElementNS(NS,"line");
+    tick.setAttribute("x1",gx); tick.setAttribute("y1",baseY-2);
+    tick.setAttribute("x2",gx); tick.setAttribute("y2",baseY+2);
+    tick.setAttribute("class","ax"); tick.setAttribute("stroke-width",".8");
+    gaxis.appendChild(tick);
+  }
+}
+
+function selectExp(key){
+  activeExp=key;
+  document.querySelectorAll("#segExp .sgb").forEach(function(b){b.setAttribute("aria-pressed", b.getAttribute("data-key")===key);});
+  renderExp();
+}
+
+function renderExp(){
+  gbars.querySelectorAll("rect,text.lab").forEach(function(el){
+    var on=el.getAttribute("data-key")===activeExp;
+    el.style.opacity=on?1:.35;
+  });
+  var e=EXP.filter(function(x){return x.key===activeExp;})[0];
+  panel.innerHTML="<span class='orglogo'><img src='"+e.logo+"' alt=''></span><br>"+
+    "<strong style='color:"+e.col+";font-size:15px;font-weight:700'>"+e.title+"</strong>"+
+    "<span class='org'>"+e.org+"</span><span class='desc'>"+e.desc+"</span>";
+  expBub.innerHTML="";
+  e.kw.forEach(function(t,n){
+    var d=document.createElement("div"); d.className="bb"; d.textContent=t;
+    d.style.borderColor=e.col; d.style.color="var(--txt)";
+    d.style.background="color-mix(in srgb, "+e.col+" 14%, transparent)";
+    d.style.animationDelay=(n*60)+"ms";
+    expBub.appendChild(d);
+  });
+}
+
+function buildGantt(){
+  gbars.innerHTML="";
+  EXP.forEach(function(e,i){
+    var y=gy0+i*rowH, x1=X(e.start), x2=X(e.end);
+    var lab=document.createElementNS(NS,"text");
+    lab.setAttribute("x",x1); lab.setAttribute("y",y-6);
+    lab.setAttribute("class","tx2 lab"); lab.setAttribute("data-key",e.key);
+    lab.setAttribute("font-size","12"); lab.setAttribute("font-weight","600");
+    lab.setAttribute("font-family","Inter,sans-serif"); lab.textContent=e.title;
+    gbars.appendChild(lab);
+
+    var r=document.createElementNS(NS,"rect");
+    r.setAttribute("x",x1.toFixed(1)); r.setAttribute("y",y);
+    r.setAttribute("width",Math.max(x2-x1,6).toFixed(1)); r.setAttribute("height",barH);
+    r.setAttribute("rx",barH/2); r.setAttribute("fill",e.col); r.setAttribute("data-key",e.key);
+    r.setAttribute("tabindex","0"); r.setAttribute("role","button");
+    r.setAttribute("aria-label",e.title+", "+e.org);
+    r.addEventListener("click",function(){selectExp(e.key);});
+    r.addEventListener("focus",function(){selectExp(e.key);});
+    gbars.appendChild(r);
+  });
+}
+
+var segExpWrap=document.getElementById("segExp"), segExp=document.createElement("div");
+segExp.className="seg"; segExpWrap.appendChild(segExp);
+EXP.forEach(function(e){
+  var b=document.createElement("button"); b.className="sgb"; b.textContent=e.title;
+  b.setAttribute("data-key",e.key);
+  b.setAttribute("aria-pressed", e.key===activeExp);
+  b.onclick=function(){selectExp(e.key);};
+  segExp.appendChild(b);
+});
+
+buildAxis();
+buildGantt();
+renderExp();
+
+var FORM=[
+ {key:"dakar", short:"Dakar", title:"Master économétrie bancaire et finance quantitative", org:"Université Cheikh Anta Diop de Dakar · 2017", logo:"images/logos/ucad.svg", year:2017, col:"var(--third)",
+  kw:["Scoring et risque de crédit","PD, LGD, EAD","Réglementation bancaire","Gestion de portefeuille","Pricing d'options"]},
+ {key:"lille", short:"Lille", title:"Master mathématiques et informatique appliquées", org:"Université de Lille · 2020", logo:"images/logos/lille.svg", year:2020, col:"var(--blue)",
+  kw:["Mathématiques appliquées","Statistique et probabilités","Informatique appliquée","Programmation scientifique"]},
+ {key:"mtp", short:"Montpellier", title:"Doctorat en statistique et science des données", org:"Université de Montpellier · 2025", logo:"images/logos/montpellier.png", year:2025, col:"var(--coral)",
+  kw:["Statistique spatiale","Apprentissage supervisé","Apprentissage non supervisé","Big data","Calcul haute performance (HPC)"]}
+];
+var fx0=40, fx1=600, fy=52, fyMin=2016.3, fyMax=2025.7;
+function FX(y){return fx0+(y-fyMin)/(fyMax-fyMin)*(fx1-fx0);}
+var ftl=document.getElementById("ftl"), formPanel=document.getElementById("formPanel"), formBub=document.getElementById("formBub");
+var activeForm="mtp";
+
+function selectForm(key){
+  activeForm=key;
+  document.querySelectorAll("#segForm .sgb").forEach(function(b){b.setAttribute("aria-pressed", b.getAttribute("data-key")===key);});
+  renderForm();
+}
+function renderForm(){
+  ftl.querySelectorAll("circle,text.flab").forEach(function(el){
+    var on=el.getAttribute("data-key")===activeForm;
+    el.style.opacity=on?1:.4;
+  });
+  var f=FORM.filter(function(x){return x.key===activeForm;})[0];
+  formPanel.innerHTML="<span class='orglogo'><img src='"+f.logo+"' alt=''></span><br>"+
+    "<strong style='color:"+f.col+";font-size:15px;font-weight:700'>"+f.title+"</strong>"+
+    "<span class='org'>"+f.org+"</span>";
+  formBub.innerHTML="";
+  f.kw.forEach(function(t,n){
+    var d=document.createElement("div"); d.className="bb"; d.textContent=t;
+    d.style.borderColor=f.col; d.style.color="var(--txt)";
+    d.style.background="color-mix(in srgb, "+f.col+" 14%, transparent)";
+    d.style.animationDelay=(n*60)+"ms";
+    formBub.appendChild(d);
+  });
+}
+function buildTimeline(){
+  ftl.innerHTML="";
+  var line=document.createElementNS(NS,"line");
+  line.setAttribute("x1",fx0); line.setAttribute("y1",fy);
+  line.setAttribute("x2",fx1); line.setAttribute("y2",fy);
+  line.setAttribute("class","ax"); line.setAttribute("stroke-width","1.2");
+  ftl.appendChild(line);
+  FORM.forEach(function(f){
+    var x=FX(f.year);
+    var yr=document.createElementNS(NS,"text");
+    yr.setAttribute("x",x); yr.setAttribute("y",fy-16);
+    yr.setAttribute("class","tx2 flab"); yr.setAttribute("data-key",f.key);
+    yr.setAttribute("font-size","12"); yr.setAttribute("font-weight","700");
+    yr.setAttribute("font-family","Inter,sans-serif"); yr.setAttribute("text-anchor","middle");
+    yr.textContent=f.year;
+    ftl.appendChild(yr);
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",x); c.setAttribute("cy",fy); c.setAttribute("r",9);
+    c.setAttribute("fill",f.col); c.setAttribute("stroke","var(--bg)"); c.setAttribute("stroke-width","2");
+    c.setAttribute("data-key",f.key); c.setAttribute("tabindex","0"); c.setAttribute("role","button");
+    c.setAttribute("aria-label",f.title+", "+f.org);
+    c.addEventListener("click",function(){selectForm(f.key);});
+    c.addEventListener("focus",function(){selectForm(f.key);});
+    ftl.appendChild(c);
+    var inst=document.createElementNS(NS,"text");
+    inst.setAttribute("x",x); inst.setAttribute("y",fy+26);
+    inst.setAttribute("class","tx flab"); inst.setAttribute("data-key",f.key);
+    inst.setAttribute("font-size","10.5"); inst.setAttribute("font-family","Inter,sans-serif");
+    inst.setAttribute("text-anchor","middle"); inst.textContent=f.short;
+    ftl.appendChild(inst);
+  });
+}
+var segFormWrap=document.getElementById("segForm"), segForm=document.createElement("div");
+segForm.className="seg"; segFormWrap.appendChild(segForm);
+FORM.forEach(function(f){
+  var b=document.createElement("button"); b.className="sgb"; b.textContent=f.short;
+  b.setAttribute("data-key",f.key);
+  b.setAttribute("aria-pressed", f.key===activeForm);
+  b.onclick=function(){selectForm(f.key);};
+  segForm.appendChild(b);
+});
+buildTimeline();
+renderForm();
+})();
+</script>
+```
+:::

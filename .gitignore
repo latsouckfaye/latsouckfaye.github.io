@@ -2,5 +2,16 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rprofile
+*.Rproj
 
 /.quarto/
+_environment.local
+
+**/*.quarto_ipynb
+
+/_*.local
+
+# Documents personnels : jamais publiés, même par erreur.
+/cv/
+/_site/

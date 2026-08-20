@@ -1,0 +1,54 @@
+---
+title: "Titre de l'article"
+description: "Une phrase de résumé, utilisée dans la liste et les métadonnées SEO."
+date: 2026-01-01
+categories: [Data & Tech]   # une seule, parmi : Data & Tech / Finance & Investissement / Projets & Build
+tags: [Python]              # libre, pour les croisements (ex. Python, Vélo, ETF...)
+image: cover.png            # optionnel, co-localisé dans ce même dossier
+draft: true                 # true = Draft (invisible dans la liste) ; false = Published
+freeze: false
+# summary: "Résumé en 2-3 phrases (TL;DR), affiché en encadré en tête d'article
+#   si ce champ est renseigné — décommenter aussi le bloc {=html} ci-dessous."
+---
+
+<!-- Badge de catégorie affiché en haut de l'article — copier la classe qui
+     correspond à `categories:` ci-dessus : .data / .finance / .projets -->
+```{=html}
+<span class="postcat data">Data & Tech</span>
+```
+
+<!-- TL;DR optionnel — décommenter si `summary:` est renseigné dans le
+     front-matter ci-dessus, et copier son texte ici. -->
+<!--
+```{=html}
+<div class="tldr"><strong>TL;DR —</strong> Résumé en 2-3 phrases.</div>
+```
+-->
+
+Texte d'intro — une ou deux phrases qui donnent le contexte et l'angle de l'article
+(ce que j'ai appris / construit / le problème rencontré).
+
+## Un titre de section
+
+Corps de l'article, en Markdown Quarto classique (titres, code, images...).
+
+<!-- Optionnel : si l'article raconte un projet déjà présent dans le portfolio,
+     décommenter et adapter le lien ci-dessous. -->
+<!--
+```{=html}
+<div class="relatedproject">
+<i class="bi bi-box-arrow-up-right"></i>
+<span>Voir le projet correspondant dans le <a href="../../projets.qmd">Portfolio</a></span>
+</div>
+```
+-->
+
+<!-- Optionnel : liste de tags en bas d'article, en plus de tags: dans le front-matter. -->
+<!--
+```{=html}
+<div class="posttags">
+<span class="tag">Python</span>
+<span class="tag">Backtest</span>
+</div>
+```
+-->

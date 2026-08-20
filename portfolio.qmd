@@ -1,189 +1,394 @@
 ---
-title: "Paul FAYE"
-subtitle: "Data scientist"
+pagetitle: "Portfolio — Paul Faye"
+description: "Docteur en statistique. Construction, validation et industrialisation de modèles prédictifs."
+toc: false
 freeze: false
-image: images/gitphoto.jpg
-toc: true
-about: 
-  template: trestles
-  image-shape: rounded
-  image-width: 10em
-  links:
-    - icon: github
-      href: https://github.com/latsouckfaye
-    - icon: envelope
-      href: mailto:pfaye@univ-lille.fr
-    - icon: linkedin
-      href: https://www.linkedin.com/in/paulfaye
-
-format:
-  html:
-    css: styles.css  # your CSS file
-    body-class: class-outline
 ---
 
-::: {style="text-align: center;"}
-<h6 class="outline">
+::: column-screen
+```{=html}
+<link rel="stylesheet" href="assets/v8.css">
+<style>
+.v8 .sgb[data-key="all"][aria-pressed="true"]{background:var(--txt)}
+.v8 .sgb[data-key="comp"][aria-pressed="true"]{background:var(--blue)}
+.v8 .sgb[data-key="outil"][aria-pressed="true"]{background:var(--coral)}
+.v8 .sgb[data-key="exp"][aria-pressed="true"]{background:var(--third)}
+.v8 .radwrap{max-width:800px;margin:0 auto;padding:0 14px}
+.v8 .radwrap svg{width:100%;height:auto;display:block;overflow:visible}
+.v8 #polys circle{outline:none}
+.v8 #polys circle:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.v8 .donutwrap{max-width:440px;margin:14px auto 0}
+.v8 .donutwrap svg{width:100%;height:auto;display:block;overflow:visible}
+.v8 .det strong{font-size:17px}
+.v8 .det span{font-size:14px}
+.v8 #donut circle[data-key]{cursor:pointer;outline:none;transition:stroke-opacity .2s,filter .2s}
+.v8 #donut circle[data-key]:hover{filter:brightness(1.12)}
+.v8 #donut circle[data-key]:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.v8 #donut text[data-key]{cursor:pointer;outline:none;transition:opacity .2s}
 
-💼 Work Experience
+/* Bulle d'indice cliquable, mise en exergue par un léger sautillement de l'icône. */
+.v8 .hint{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.v8 .hint-icon{display:inline-block;color:var(--coral);font-size:15px;animation:hintBounce 1.4s ease-in-out infinite}
+@keyframes hintBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-10deg)}}
+@media (prefers-reduced-motion:reduce){.v8 .hint-icon{animation:none}}
 
-</h6>
+/* De vraies bulles rondes, assez grandes pour porter le texte des compétences. */
+.v8 #bub .bb{width:142px;height:142px;border-radius:50%;padding:18px;box-sizing:border-box;font-size:11px;line-height:1.35;flex:none}
+.v8 #bubC .bb{width:118px;height:118px;border-radius:50%;padding:14px;box-sizing:border-box;flex:none}
+
+/* Explorer : Parcours et Travaux en rectangles arrondis, étirés vers les bords,
+   et "Explorer" au centre dans un cercle, encadré de chevrons vers l'un ou l'autre. */
+.v8 .explorerow{display:flex;align-items:center;justify-content:center;gap:20px;max-width:860px;margin:0 auto;padding:44px 20px 44px;flex-wrap:wrap}
+.v8 .explorebtn{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:14px;flex:1 1 220px;max-width:320px;height:96px;padding:0 30px;border-radius:28px;background:var(--panel);border:2px solid var(--hc);color:var(--txt);text-decoration:none;font-weight:700;font-size:16px;letter-spacing:-.01em;transition:transform .25s ease,box-shadow .25s ease,background .2s ease;animation:exploreFloat 3.6s ease-in-out infinite}
+.v8 .explorebtn:first-child{animation-delay:0s;justify-content:center}
+.v8 .explorebtn:last-child{animation-delay:1.2s;justify-content:center}
+.v8 .explorebtn-icon{font-size:30px;color:var(--hc)}
+.v8 .explorebtn:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 22px 44px -18px rgba(0,0,0,.5);background:color-mix(in srgb, var(--hc) 10%, var(--panel))}
+.v8 .explorebtn-center{flex:0 0 auto;width:112px;height:112px;padding:0;border-radius:50%;flex-direction:row;gap:7px;background:var(--faint);border:2px dashed var(--line);cursor:default;animation:none}
+.v8 .explorebtn-center-label{font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--txt)}
+.v8 .explore-arrow{font-size:14px;color:var(--muted)}
+.v8 .explore-arrow-left{animation:exploreArrowLeft 1.6s ease-in-out infinite}
+.v8 .explore-arrow-right{animation:exploreArrowRight 1.6s ease-in-out infinite}
+@keyframes exploreArrowLeft{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(-4px)}}
+@keyframes exploreArrowRight{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.v8 .explorebtn{animation:none}.v8 .explore-arrow{animation:none}}
+</style>
+<div class="v8" id="v8">
+
+<div class="hero">
+<p class="h1" data-en="Portfolio" data-title-en="Portfolio — Paul Faye">Portfolio</p>
+<p class="ld" data-en="Skills, tools, and experience, at a glance.">Compétences, outils et expériences, en un coup d'œil.</p>
+<p class="en-note" data-en="This page's detailed content (radar, timeline, case studies) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
+<div class="cta">
+<a class="btn" href="index.qmd">Retour à l'accueil <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="segwrap" id="segwrap" role="group" aria-label="Filtrer"></div>
+<div class="togglewrap" id="toggle" role="group" aria-label="Choisir la visualisation"></div>
+<p class="hint" id="hint"><i class="bi bi-hand-index-thumb hint-icon" aria-hidden="true"></i><span id="hintText"></span></p>
+
+<div class="view on" id="viewRadar">
+<div class="radwrap">
+<svg viewBox="0 0 520 330" role="img" aria-label="Radar interactif des compétences, outils et expériences">
+<g class="gl" stroke-width=".9" fill="none" id="web"></g>
+<g id="polys"></g>
+<g id="axLabels"></g>
+</svg>
+<div class="det" id="det"></div>
+</div>
+<div class="bub" id="bub"></div>
+</div>
+
+<div class="view" id="viewChiffres">
+<div class="donutwrap">
+<svg viewBox="0 0 400 400" role="img" aria-label="Chiffres clés : modélisation, code et outils, articles scientifiques">
+<g id="donut"></g>
+<text id="donutTotal" x="200" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="38" font-weight="700"></text>
+<text id="donutLabel" x="200" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="var(--muted)"></text>
+</svg>
+</div>
+<div class="bub" id="bubC"></div>
+</div>
+
+<div class="explorerow">
+<a class="explorebtn" href="parcours.qmd" style="--hc:var(--blue)">
+<span class="explorebtn-icon"><i class="bi bi-signpost-split"></i></span>
+<span>Parcours</span>
+</a>
+<div class="explorebtn explorebtn-center">
+<i class="bi bi-chevron-left explore-arrow explore-arrow-left" aria-hidden="true"></i>
+<span class="explorebtn-center-label">Explorer</span>
+<i class="bi bi-chevron-right explore-arrow explore-arrow-right" aria-hidden="true"></i>
+</div>
+<a class="explorebtn" href="projets.qmd" style="--hc:var(--third)">
+<span class="explorebtn-icon"><i class="bi bi-graph-up-arrow"></i></span>
+<span>Travaux</span>
+</a>
+</div>
+
+</div>
+
+<script>
+(function(){
+var NS="http://www.w3.org/2000/svg";
+
+var CX=260, CY=160, R=115;
+// Compétences et Outils partagent une grille de compétences ; Expériences est à part, sur les postes occupés.
+var SKILL_ANG=[-90,-18,54,126,198].map(function(d){return d*Math.PI/180;});
+var SKILL_AXES=["Analyse","Modélisation","Expérimentation","Ingénierie","Communication"];
+var EXP_ANG=[-90,0,90,180].map(function(d){return d*Math.PI/180;});
+var EXP_AXES=["Ingénieur de Recherche","Enseignant-Chercheur","Doctorant","Data Scientist - Stage"];
+var curAngArr=SKILL_ANG, curAxesArr=SKILL_AXES;
+var S={
+ comp:{lab:"Compétences",col:"var(--blue)",v:[.75,.95,.78,.82,.80],
+  tip:["Exploration & restitution","Scoring & prédiction","Plans & simulation","Calcul & industrialisation","Restitution & pédagogie"],
+  it:[["Collecte","Préparation","Gestion des valeurs manquantes","Construction de variables","Exploration des données","Détection d'anomalies"],
+      ["Scoring crédit (PD, LGD, EAD)","Segmentation et grilles de score","Régression logistique, GLM","Analyse de survie (Kaplan-Meier, Cox)","Séries temporelles (ARIMA)","Analyses factorielles","Clustering","Tests d'hypothèses","Gradient boosting, forêts aléatoires","Krigeage et dépendances spatiales","Données de composition"],
+      ["Plans d'expérimentation","Simulations","Validation croisée","Monte Carlo","Comparaison de modèles","Bootstrap"],
+      ["Big data","Calcul haute performance (HPC)","Reproductibilité","Versionning (Git)","Architecture de données","Mise en production"],
+      ["Restitution non-technique","Enseignement et formation","Vulgarisation scientifique","Rédaction et publication"]]},
+ outil:{lab:"Outils",col:"var(--coral)",v:[.85,.85,.65,.70,.90],
+  tip:["SQL · Python · R","Python · R · SAS","SciPy · Jupyter","Git · Azure · HPC","Power BI · Tableau · Quarto"],
+  it:[["SQL","Python (Pandas, NumPy)","R (tidyverse, data.table)","Excel"],
+      ["Python (scikit-learn, XGBoost, statsmodels)","R (caret, tidymodels, survival)","SAS (SAS/STAT)"],
+      ["Python (SciPy, statsmodels)","R (caret, boot, DoE.base)","Jupyter (notebooks, simulations)"],
+      ["Git","Azure","HPC (clusters, calcul parallèle)"],
+      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]},
+ exp:{lab:"Expériences",col:"var(--third)",v:[.65,.80,.95,.40],
+  tip:["Inria, Lille (2025)","Université de Lille (depuis 2023)","Université de Montpellier (2020–2025)","Université de Lille (2020)"],
+  it:[["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"],
+      ["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"],
+      ["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"],
+      ["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]],
+  // Même expérience, relue sur les 5 axes de compétence pour se superposer à Compétences et Outils dans la vue "Tout".
+  vSkill:[.80,.85,.75,.70,.85],
+  tipSkill:["Données réelles, tous domaines","4 postes, modèles bout-en-bout","Terrain, clinique, écologie","Automatisation, calcul HPC","Enseignement, publications"],
+  itSkill:[["Étude clinique (1 445 → 884 patients)","Analyse géospatiale","Analyse commerciale","Analyse statistique exploratoire"],
+      ["Modèle prédictif interprétable","Automatisation de processus","Innovation méthodologique","Recherche appliquée (5 ans)"],
+      ["Récifs coralliens","Indicateurs de peuplement","175 km² cartographiés","Étude clinique (1 445 → 884 patients)"],
+      ["Gain de temps (2 ans économisés)","Mise en production","Programmation R et Python","Automatisation de processus"],
+      ["Formation professionnelle","Pédagogie & vulgarisation","Publication scientifique","Encadrement de projets"]]}
+};
+function dataFor(k){
+  if(k==="exp" && curAxesArr===SKILL_AXES) return {lab:S.exp.lab, col:S.exp.col, v:S.exp.vSkill, tip:S.exp.tipSkill, it:S.exp.itSkill};
+  return S[k];
+}
+function pt(i,v){var a=curAngArr[i]; return [CX+R*v*Math.cos(a), CY+R*v*Math.sin(a)];}
+
+// En chiffres : mêmes clés que le radar (comp/outil/exp) pour partager le même filtre.
+var C=[
+ {key:"comp", lab:"Modélisation", labLines:["Modélisation"], col:"var(--blue)", total:9,
+  items:[["Modèles industrialisés",3],["Domaines d'application",4],["Jeux massifs traités",2]]},
+ {key:"outil", lab:"Code et outils", labLines:["Code et outils"], col:"var(--coral)", total:15,
+  items:[["Langages",5],["Certifications",4],["Dépôts publics",6]]},
+ {key:"exp", lab:"Articles scientifiques", labLines:["Articles","scientifiques"], col:"var(--third)", total:4,
+  items:[["Publiés",1],["Soumis",2],["En rédaction",1]]}
+];
+var grandTotal=C.reduce(function(a,c){return a+c.total;},0);
+var CX2=200, CY2=200, R2=98, SW=30, CIRC=2*Math.PI*R2;
+var donut=document.getElementById("donut"), bubC=document.getElementById("bubC"),
+    dTotal=document.getElementById("donutTotal"), dLabel=document.getElementById("donutLabel");
+
+function buildDonut(){
+  donut.innerHTML="";
+  var track=document.createElementNS(NS,"circle");
+  track.setAttribute("cx",CX2); track.setAttribute("cy",CY2); track.setAttribute("r",R2);
+  track.setAttribute("fill","none"); track.setAttribute("stroke","var(--faint)"); track.setAttribute("stroke-width",SW);
+  donut.appendChild(track);
+  var offset=0;
+  C.forEach(function(c){
+    var len=(c.total/grandTotal)*CIRC;
+    var seg=document.createElementNS(NS,"circle");
+    seg.setAttribute("cx",CX2); seg.setAttribute("cy",CY2); seg.setAttribute("r",R2);
+    seg.setAttribute("fill","none"); seg.setAttribute("stroke",c.col); seg.setAttribute("stroke-width",SW);
+    seg.setAttribute("stroke-dasharray", len.toFixed(1)+" "+(CIRC-len).toFixed(1));
+    seg.setAttribute("stroke-dashoffset", (-offset).toFixed(1));
+    seg.setAttribute("transform","rotate(-90 "+CX2+" "+CY2+")");
+    seg.setAttribute("data-key",c.key);
+    seg.setAttribute("tabindex","0"); seg.setAttribute("role","button");
+    seg.setAttribute("aria-label",c.lab+" : "+c.total);
+    seg.addEventListener("click",function(){applyFilter(c.key);});
+    seg.addEventListener("focus",function(){applyFilter(c.key);});
+    donut.appendChild(seg);
+
+    var midAng=((offset+len/2)/CIRC)*360-90, rad=midAng*Math.PI/180;
+    var r=R2+SW/2+42, lx=CX2+r*Math.cos(rad), ly=CY2+r*Math.sin(rad);
+    var t=document.createElementNS(NS,"text");
+    t.setAttribute("text-anchor","middle"); t.setAttribute("font-family","Inter,sans-serif");
+    t.setAttribute("fill",c.col); t.setAttribute("data-key",c.key); t.style.cursor="pointer";
+    var n=document.createElementNS(NS,"tspan"); n.setAttribute("x",lx.toFixed(1)); n.setAttribute("y",ly.toFixed(1));
+    n.setAttribute("font-size","17"); n.setAttribute("font-weight","700"); n.textContent=c.total;
+    t.appendChild(n);
+    c.labLines.forEach(function(line){
+      var l=document.createElementNS(NS,"tspan"); l.setAttribute("x",lx.toFixed(1)); l.setAttribute("dy","12");
+      l.setAttribute("font-size","9.5"); l.setAttribute("font-weight","500"); l.textContent=line;
+      t.appendChild(l);
+    });
+    t.addEventListener("click",function(){applyFilter(c.key);});
+    donut.appendChild(t);
+    offset+=len;
+  });
+}
+
+function renderChiffres(){
+  donut.querySelectorAll("circle[data-key]").forEach(function(el){
+    var on=(filt==="all"||filt===el.getAttribute("data-key"));
+    el.setAttribute("stroke-opacity", on?1:.2);
+  });
+  donut.querySelectorAll("text[data-key]").forEach(function(el){
+    var k=el.getAttribute("data-key");
+    // Le libellé du secteur actif est déjà affiché au centre : on l'y masque pour éviter le doublon.
+    el.style.opacity = filt==="all" ? 1 : (k===filt ? 0 : .35);
+  });
+  var active=filt==="all"?null:C.filter(function(c){return c.key===filt;})[0];
+  dTotal.textContent=active?active.total:grandTotal;
+  dTotal.setAttribute("fill", active?active.col:"var(--txt)");
+  dLabel.textContent=active?active.lab:"chiffres clés, au total";
+
+  bubC.innerHTML="";
+  if(active){
+    active.items.forEach(function(it,n){
+      var d=document.createElement("div"); d.className="bb";
+      d.style.borderColor=active.col; d.style.color="var(--txt)";
+      d.style.background="color-mix(in srgb, "+active.col+" 14%, transparent)";
+      d.style.animationDelay=(n*60)+"ms";
+      d.style.flexDirection="column";
+      d.innerHTML="<span style='margin-bottom:4px'>"+it[0]+
+        "</span><strong style='font-size:18px;font-weight:700;line-height:1.1'>"+it[1]+"</strong>";
+      bubC.appendChild(d);
+    });
+  }
+}
+
+var web=document.getElementById("web"), axLabels=document.getElementById("axLabels");
+function buildGrid(){
+  web.innerHTML="";
+  [.25,.5,.75,1].forEach(function(s){
+    var p=document.createElementNS(NS,"polygon");
+    p.setAttribute("points", curAngArr.map(function(a){return (CX+R*s*Math.cos(a)).toFixed(1)+","+(CY+R*s*Math.sin(a)).toFixed(1);}).join(" "));
+    web.appendChild(p);
+  });
+  curAngArr.forEach(function(a){
+    var l=document.createElementNS(NS,"line");
+    l.setAttribute("x1",CX); l.setAttribute("y1",CY);
+    l.setAttribute("x2",CX+R*Math.cos(a)); l.setAttribute("y2",CY+R*Math.sin(a));
+    web.appendChild(l);
+  });
+}
+// Coupe un libellé trop long en 2 lignes (sur un espace ou un tiret proche du
+// milieu) pour qu'il ne dépasse jamais latéralement, quelle que soit sa longueur.
+function axisLabelLines(name){
+  if(name.length<=13) return [name];
+  var mid=Math.floor(name.length/2), cut=-1;
+  for(var d=0; d<mid; d++){
+    if(" -".indexOf(name.charAt(mid-d))>=0){ cut=mid-d; break; }
+    if(" -".indexOf(name.charAt(mid+d))>=0){ cut=mid+d; break; }
+  }
+  if(cut<0) return [name];
+  var sep=name.charAt(cut);
+  var a=name.slice(0, sep==="-"?cut+1:cut).trim();
+  var b=name.slice(cut+1).trim();
+  return (a && b) ? [a,b] : [name];
+}
+function buildAxLabels(){
+  axLabels.innerHTML="";
+  curAxesArr.forEach(function(name,i){
+    var a=curAngArr[i], ca=Math.cos(a), sa=Math.sin(a), lx=CX+(R+24)*ca, ly=CY+(R+24)*sa;
+    var lines=axisLabelLines(name);
+    var t=document.createElementNS(NS,"text");
+    t.setAttribute("x",lx.toFixed(1));
+    t.setAttribute("fill","var(--txt)"); t.setAttribute("font-size","14.5");
+    t.setAttribute("font-family","Inter,sans-serif"); t.setAttribute("font-weight","600");
+    t.setAttribute("text-anchor", Math.abs(ca)<.3?"middle":(ca>0?"start":"end"));
+    t.style.pointerEvents="none";
+    var startY = lines.length>1 ? ly-3 : ly+4;
+    lines.forEach(function(line,li){
+      var ts=document.createElementNS(NS,"tspan");
+      ts.setAttribute("x",lx.toFixed(1)); ts.setAttribute("y",(startY+li*17).toFixed(1));
+      ts.textContent=line;
+      t.appendChild(ts);
+    });
+    axLabels.appendChild(t);
+  });
+}
+
+var polys=document.getElementById("polys"), det=document.getElementById("det"),
+    bub=document.getElementById("bub"), filt="all";
+
+function bubbles(key,i){
+  var s=dataFor(key), list=s.it[i];
+  det.innerHTML="<strong style='color:"+s.col+"'>"+curAxesArr[i]+" · "+s.lab+"</strong><span>"+list.length+" éléments</span>";
+  bub.innerHTML="";
+  list.forEach(function(t,n){
+    var d=document.createElement("div"); d.className="bb"; d.textContent=t;
+    d.style.borderColor=s.col; d.style.color="var(--txt)";
+    d.style.background="color-mix(in srgb, "+s.col+" 14%, transparent)";
+    d.style.animationDelay=(n*60)+"ms";
+    bub.appendChild(d);
+  });
+}
+function applyFilter(k){
+  filt=k;
+  segwrap.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filt);});
+  draw();
+  renderChiffres();
+}
+function selectVertex(k,i){
+  applyFilter(k);
+  bubbles(k,i);
+}
+function draw(){
+  var expMode = filt==="exp";
+  curAngArr = expMode ? EXP_ANG : SKILL_ANG;
+  curAxesArr = expMode ? EXP_AXES : SKILL_AXES;
+  buildGrid();
+  buildAxLabels();
+  polys.innerHTML=""; bub.innerHTML="";
+  det.innerHTML="<strong>"+(filt==="all"?"Compétences, outils et expériences":S[filt].lab)+"</strong>";
+  var series = expMode ? ["exp"] : (filt==="all" ? ["comp","outil","exp"] : [filt]);
+  series.forEach(function(k,gi){
+    var s=dataFor(k);
+    var p=document.createElementNS(NS,"polygon");
+    p.setAttribute("points", s.v.map(function(v,i){return pt(i,v).map(function(n){return n.toFixed(1);}).join(",");}).join(" "));
+    p.setAttribute("fill",s.col); p.setAttribute("fill-opacity", filt==="all"?.10:.18);
+    p.setAttribute("stroke",s.col); p.setAttribute("stroke-width",2); p.setAttribute("stroke-opacity",.95);
+    polys.appendChild(p);
+    s.v.forEach(function(v,i){
+      var q=pt(i,v);
+      var h=document.createElementNS(NS,"circle");
+      h.setAttribute("cx",q[0]); h.setAttribute("cy",q[1]); h.setAttribute("r",9);
+      h.setAttribute("fill",s.col); h.setAttribute("class","halo");
+      h.style.animationDelay=(i*160+gi*90)+"ms"; h.style.pointerEvents="none";
+      polys.appendChild(h);
+      var c=document.createElementNS(NS,"circle");
+      c.setAttribute("cx",q[0]); c.setAttribute("cy",q[1]); c.setAttribute("r",5);
+      c.setAttribute("fill",s.col); c.setAttribute("stroke","var(--bg)"); c.setAttribute("stroke-width",1.6);
+      c.setAttribute("tabindex","0"); c.setAttribute("role","button");
+      c.setAttribute("aria-label",curAxesArr[i]+", "+s.lab+" : "+s.tip[i]); c.style.cursor="pointer";
+      var onPick = (k==="exp" && filt==="all") ? function(){bubbles(k,i);} : function(){selectVertex(k,i);};
+      c.addEventListener("click",onPick);
+      c.addEventListener("focus",onPick);
+      polys.appendChild(c);
+    });
+  });
+}
+var segwrap=document.getElementById("segwrap");
+var segAll=document.createElement("div"); segAll.className="seg"; segAll.setAttribute("role","group"); segAll.setAttribute("aria-label","Tout");
+var segSkills=document.createElement("div"); segSkills.className="seg"; segSkills.setAttribute("role","group"); segSkills.setAttribute("aria-label","Compétences et outils");
+var segExp=document.createElement("div"); segExp.className="seg"; segExp.setAttribute("role","group"); segExp.setAttribute("aria-label","Expériences");
+segwrap.appendChild(segAll); segwrap.appendChild(segSkills); segwrap.appendChild(segExp);
+[["all","Tout",segAll],["comp","Compétences",segSkills],["outil","Outils",segSkills],["exp","Expériences",segExp]].forEach(function(f){
+  var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
+  b.setAttribute("data-key",f[0]);
+  b.setAttribute("aria-pressed", f[0]===filt);
+  b.onclick=function(){applyFilter(f[0]);};
+  f[2].appendChild(b);
+});
+draw();
+buildDonut();
+renderChiffres();
+
+var toggleEl=document.getElementById("toggle"), hintTextEl=document.getElementById("hintText"),
+    viewRadar=document.getElementById("viewRadar"), viewChiffres=document.getElementById("viewChiffres");
+var HINTS={radar:"Cliquez sur un sommet pour voir ce qu'il contient", chiffres:"Cliquez sur une part du camembert pour voir le détail"};
+var view="radar";
+function setView(v){
+  view=v;
+  viewRadar.classList.toggle("on", v==="radar");
+  viewChiffres.classList.toggle("on", v==="chiffres");
+  hintTextEl.textContent=HINTS[v];
+  toggleEl.querySelectorAll(".tgb").forEach(function(b){b.setAttribute("aria-pressed", b.dataset.view===v);});
+}
+[["radar","Radar","bi-diagram-3"],["chiffres","En chiffres","bi-bar-chart-line"]].forEach(function(f){
+  var b=document.createElement("button"); b.className="tgb"; b.dataset.view=f[0];
+  b.innerHTML="<i class='bi "+f[2]+"'></i>"+f[1];
+  b.setAttribute("aria-pressed", f[0]===view);
+  b.onclick=function(){setView(f[0]);};
+  toggleEl.appendChild(b);
+});
+setView("radar");
+})();
+</script>
+```
 :::
-
-📅 **Nov. 2023 - Aug. 2025**
-
-[**Teacher and Researcher in Statistics**]{style="color:#53759C"}
-
-::: right-align
-University of Lille (France)
-:::
-
-[**Activities:** Courses - Statistical programming, Descriptive Statistics, Linear models, Data analysis. - & Monitoring .]{style="color:#0AAA40"}
-
-📅 **Oct. 2020 - Aug. 2025**
-
-[**Ph.D. in Applied Statistics**]{style="color:#53759C"}
-
-::: right-align
-University of Montpellier (France)
-:::
-
-[**Topic:** Contribution to the statistical analysis of geomorphological and spatial composition data: application to the study of coral reef communities.]{style="color:#0AAA40"}
-
-📅 **Feb. - Aug. 2020**
-
-[**Intern in Data Science**]{style="color:#53759C"}
-
-::: right-align
-University of Lille (France)
-:::
-
-[**Topic:** Statistical analysis of community structure indicators in coral reef ecosystems.]{style="color:#0AAA40"}
-
-📅 **Jun. 2016 - Jul. 2017**
-
-[**Customer Service Representative**]{style="color:#53759C"}
-
-::: right-align
-Premium Contact Center International (Senegal)
-:::
-
-[**Role:** Customer information, support and loyalty building.]{style="color:#0AAA40"}
-
-::: {style="text-align: center;"}
-<h6 class="outline">
-
-🎓 Education
-
-</h6>
-:::
-
-📅 **2025**
-
-[**Ph.D. Applied Statistics**]{style="color:#53759C"}
-
-::: right-align
-University of Montpellier (France)
-:::
-
-📅 **2020**
-
-[**M.S. Applied Mathematics and Computer Science**]{style="color:#53759C"}
-
-::: right-align
-University of Lille (France)
-:::
-
-📅 **2017**
-
-[**M.S. Econometrics and Quantitative Finance**]{style="color:#53759C"}
-
-::: right-align
-University Cheikh Anta Diop (Senegal)
-:::
-
-::: {style="text-align: center;"}
-<h6 class="outline">
-
-🏆 Certificates
-
-</h6>
-:::
-
--   [**Machine Learning with Scikit Learn**](https://github.com/latsouckfaye/Certificates/blob/main/attestation_suivi_course-v1_inria%2B41026%2Bsession02_9461cd9f4b4518ea2f3b47da448cf76d.pdf){style="text-decoration: none"}
-
--   [**SQL for Data Science (with Python)**](https://www.udemy.com/certificate/UC-cb724d19-8b7b-41da-9c4d-a9327b6af742/){style="text-decoration: none"}
-
--   [**SAS Programming**](https://www.youracclaim.com/badges/d7723949-77c3-4e2a-a5cc-c36af5a7dbbe/public_url){style="text-decoration: none"}
-
--   [**Python Programming**](https://udemy.com/certificate/UC-be63f4ca-6da8-44f4-8690-d2d559326d07){style="text-decoration: none"}
-
--   [**R Package Development**](https://github.com/latsouckfaye/Certificates/blob/main/Attestation_Formation_RdevPkg.pdf){style="text-decoration: none"}
-
-::: {style="text-align: center;"}
-<h6 class="outline">
-
-🛠️ Data Analytics Toolbox
-
-</h6>
-:::
-
-### 📊 Preparation & Exploration
-
--   **Data Wrangling**: End-to-end ETL, robust cleaning, imputation, transformation, and outlier handling.
--   **Descriptive Analytics**: Deep exploration through univariate, bivariate, and multivariate analyses.
--   **Dimensionality Reduction**: PCA, FAMD, MFA, NMDS --- simplifying complexity, revealing structure.
-
-### 📈 Modeling & Forecasting
-
--   **Statistical & Time Series Modeling**: ARIMA, ARCH/GARCH for trend detection and forecasting.
--   **Machine Learning**:
-    -   *Regression*: Linear, logistic, polynomial, neural networks.\
-    -   *Classification*: Decision trees, random forests, ensemble models.\
-    -   *Clustering*: K-means, CLARA, HCPC, KNN.\
-    -   *Neural Architectures*: Feedforward, deep learning.
-
-### 🗺️ Spatial & Geostatistical Analysis
-
--   Kriging, Cokriging, IDW --- deriving insight from location-based data.
-
-### 📊 Visualization & Communication
-
--   **Data Visualization**: Clear, compelling graphics tailored to audience and context, creating dashboards.
--   **Automated Reporting**: Reproducible, dynamic reports for stakeholders across domains.
-
-### ☁️ Computational Infrastructure
-
--   **Scalable Computing**: Cloud platforms, high-performance and parallel computing for large-scale data workflows.
-
-::: {style="text-align: center;"}
-<h6 class="outline">
-
-🧰 Stack
-
-</h6>
-:::
-
-### IDE
-
-<img src="./images/quarto.png" alt="Quarto" width="40"/> <img src="./images/GoogleColab.png" alt="Google Colab" width="50"/> ![vscode](./images/vscode-original.svg){width="40"} ![Anaconda](./images/anaconda-original.svg){width="40"} ![rstudio](./images/rstudio-original.svg){width="40"} ![Jupyter](./images/jupyter-original-wordmark.svg){width="40"} ![GitHub icon](./images/github-original.svg){width="40"}
-
-### Programming
-
-![R](./images/r-original.svg){width="40"} ![python](./images/python-original.svg){width="40"} ![sas](./images/sas.svg){width="20"}
-
-### Statistics softwares
-
-![Eviews](./images/EViews.png){width="40"} ![Gretl](./images/Gretl.png){width="40"} ![Geoda](./images/Geoda.png){width="40"}
-
-### Business Intelligence
-
-![Azure](./images/azure-original-wordmark.svg){width="40"} ![Tableau](./images/tableau.jpg){width="40"} ![Shiny](./images/shiny.png){width="40"} ![Sql Server](./images/sqlserver.svg){width="40"} ![Mysql](./images/mysql-original-wordmark.svg){width="40"} ![Postgresql](./images/postgresql-original.svg){width="40"} ![Excel](./images/Excel.png){width="40"}
-
-### Web
-
-![Html 5](./images/html5-original-wordmark.svg){width="40"} ![CSS 3](./images/css3-original-wordmark.svg){width="40"} ![Php](./images/php-original.svg){width="40"} ![Bootstrap](./images/bootstrap-plain-wordmark.svg){width="40"} ![Javascript](./images/javascript-original.svg){width="40"} ![Worpress](./images/wordpress-original.svg){width="40"} ![Php Myadmin](./images/PhpMyAdmin.png){width="40"}
-
-### Communication
-
-![Rmarkdown](./images/rmarkdown.png){width="40"} ![Latex](./images/LaTeX.png){width="40"} ![Powerpoint](./images/powerpoint.png){width="40"}

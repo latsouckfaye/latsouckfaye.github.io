@@ -1,0 +1,452 @@
+---
+title: "Comparer des cartes à différentes résolutions spatiales"
+description: "Désagrégation de résolution, score de concordance et score équilibré par classe, pour comparer une carte prédite à une carte de référence — en R et en Python."
+pagetitle: "Comparer des cartes — Tutoriels — Paul Faye"
+author: "Paul Faye"
+date: 2024-05-26
+categories: [Analyse spatiale, Cartographie multi-échelle, SIG, R, Python]
+image: statusmap.png
+toc: true
+toc-title: "Sommaire"
+code-fold: true
+code-summary: "Afficher le code"
+code-copy: true
+theme:
+  dark: [darkly, ../../styles-dark.scss]
+  light: [cosmo, ../../styles.scss]
+include-after-body: ../../assets/navlang-include.html
+format: live-html
+engine: jupyter
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+nav.navbar{display:none !important}
+body.nav-fixed{padding-top:0 !important}
+.lang-python{display:none}
+body[data-lang="python"] .lang-r{display:none}
+body[data-lang="python"] .lang-python{display:block}
+
+:root{--lr-r:#E08767;--lr-py:#5B8FE8}
+body.quarto-light{--lr-r:#C4643F;--lr-py:#2F63C7}
+.langtoggle{position:sticky;top:12px;z-index:40;display:inline-flex;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);box-shadow:0 8px 20px -12px rgba(0,0,0,.35);margin:18px 0 26px}
+.langtoggle-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--bs-body-bg,#fff);box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
+.langtoggle button{position:relative;z-index:1;border:none;background:transparent;padding:8px 24px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;color:inherit;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
+.langtoggle button::before{content:"";width:7px;height:7px;border-radius:50%;flex:none}
+.langtoggle button[data-lang="r"]::before{background:var(--lr-r)}
+.langtoggle button[data-lang="python"]::before{background:var(--lr-py)}
+.langtoggle button[aria-pressed="true"]{opacity:1}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var h = window.location.hash.replace("#","").toLowerCase();
+  var initial = h==="python" ? "python" : "r";
+  var wrap = document.querySelector(".langtoggle");
+  var indicator = document.getElementById("langIndicator");
+  var buttons = document.querySelectorAll(".langtoggle button");
+  function setLang(lang){
+    document.body.setAttribute("data-lang", lang);
+    buttons.forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-lang")===lang); });
+    indicator.style.transform = lang==="python" ? "translateX(100%)" : "translateX(0)";
+  }
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); });
+  });
+  setLang(initial);
+});
+</script>
+```
+
+[← Retour aux tutoriels](../../tutoriels.qmd)
+
+## Le problème
+
+Deux cartes géomorphologiques obtenues à des résolutions spatiales différentes ne se comparent pas cellule à cellule telles quelles : la carte prédite doit d'abord être ramenée à la résolution de la carte de référence, puis leur concordance mesurée — sans se limiter à un seul score global, qui favoriserait les classes majoritaires.
+
+Le code et les fonctions utilisées ici sont ceux employés pour la validation du modèle présenté dans [« Cartographie grande échelle »](../../projets.qmd) sur la page Travaux. Choisissez le langage qui vous intéresse ci-dessous — la méthode et les résultats sont les mêmes, seul le code (et parfois la figure) diffère.
+
+```{=html}
+<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<span class="langtoggle-indicator" id="langIndicator"></span>
+<button type="button" data-lang="r" aria-pressed="true">R</button>
+<button type="button" data-lang="python" aria-pressed="false">Python</button>
+</div>
+```
+
+::: {.callout-note title="En bref"}
+- La carte prédite est **désagrégée** pour retrouver la résolution de la carte de référence, cellule par cellule.
+- **Score de concordance ("Match")** : proportion de cellules identiques entre les deux cartes.
+- **Score équilibré ("Balanced Match")** : moyenne des rappels par classe — chaque classe compte autant que les autres, indépendamment de sa fréquence.
+- Sur l'exemple ci-dessous, le score équilibré passe de **0,86** à **0,56** selon la façon dont les cellules non prédites sont comptabilisées — l'écart à lui seul illustre pourquoi le choix de la métrique compte.
+:::
+
+## La méthode
+
+Une zone d'étude est délimitée puis discrétisée en grille. La carte prédite — produite à une résolution plus grossière — est désagrégée pour retrouver la résolution de la carte de référence, et chaque cellule est classée selon son statut : hors zone, prédite, ou non prédite.
+
+::: {.lang-block .lang-r}
+
+::: {.callout-tip collapse="true" title="Prérequis techniques"}
+Packages R : `ggplot2`, `dplyr`, `stringr`, `sp`, `sf`, `ggspatial`, `ggpubr`, `ggnewscale`, `raster`. Les 4 fonctions utilisées ici (désagrégation, statut des cellules, score de concordance, score équilibré) sont publiées séparément sur Zenodo pour être réutilisables indépendamment de ce notebook.
+
+[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+:::
+
+```r
+library(ggplot2)
+library(sp)
+library(sf)
+library(raster)
+
+# Zone d'étude : polygone WGS84 discrétisé en grille
+crdref <- CRS('+proj=longlat +datum=WGS84')
+lon <- c(-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7)
+lat <- c(41.3, 42.9, 42.4, 39.8, 37.9, 38.3, 38.6)
+pols <- Polygons(list(Polygon(cbind(lon, lat))), ID = "1")
+pols <- SpatialPolygons(list(pols), proj4string = crdref)
+
+ref_sp <- raster(xmn = extent(pols)[1], xmx = extent(pols)[2],
+                  ymn = extent(pols)[3], ymx = extent(pols)[4], res = c(.5, .5))
+crs(ref_sp) <- crdref
+
+# Carte de référence (résolution fine, 5 classes) et carte prédite (résolution grossière)
+r <- raster(xmn = extent(pols)[1], xmx = extent(pols)[2],
+            ymn = extent(pols)[3], ymx = extent(pols)[4], res = c(1, 1))
+set.seed(12)
+values(r) <- sample(1:5, ncell(r), replace = TRUE)
+values(ref_sp) <- values(raster::disaggregate(r, fact = 2))
+ref_sp_mask <- mask(ref_sp, pols, updateNA = TRUE)
+
+pred_sp <- r
+pred_sp[[1]][c(9, 17, 21)] <- c(5, 1, 4)
+pred_sp_mask <- mask(pred_sp, pols, updateNA = TRUE)
+
+# Désagrégation de la carte prédite + statut des cellules (hors zone / prédite / non prédite)
+source('disaggregate.R'); source('status-prop.R')
+pred_sp_dis <- disagRast(pols, pred_sp_mask, ref_sp, crdref)
+
+ref_spbis <- ref_sp
+ref_spbis[is.na(ref_spbis)] <- 999
+outstudy <- mask(ref_spbis, pols, updateNA = TRUE)
+status <- statusProp(pred_sp_dis, ref_sp, outstudy[[1]], pols, 4326)
+PropNL <- status[[4]]  # proportion de cellules non prédites
+PropL  <- status[[5]]  # proportion de cellules prédites
+```
+
+::: {layout-ncol="4"}
+![Référence](refmap.png)
+
+![Prédite](predmap.png)
+
+![Désagrégée](predismap.png)
+
+![Statut](statusmap.png)
+:::
+
+De la référence à la carte de statut : la carte prédite (résolution grossière) est désagrégée pour retrouver la résolution de la référence, puis chaque cellule de la zone d'étude est classée hors zone, prédite (vert) ou non prédite (orange). Sur cet exemple, 45 cellules sont hors zone, et parmi les 82 restantes, 72 sont prédites (88 %) contre 10 non prédites (12 %) — cette dernière proportion conditionne l'écart entre score brut et score corrigé ci-dessous.
+
+> La désagrégation de la carte prédite génère des effets de bord en périphérie de zone — visibles sur la carte de statut ci-dessus.
+
+:::
+
+::: {.lang-block .lang-python}
+
+::: {.callout-tip collapse="true" title="Prérequis techniques"}
+Seuls `numpy` et `matplotlib` sont nécessaires — pas de `geopandas`/`shapely`/`rasterio` : le test point-dans-polygone utilise `matplotlib.path.Path`, et les grilles sont de simples tableaux numpy. Code complet : [`compare_maps.py`](compare_maps.py).
+:::
+
+```{python}
+#| label: methode
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.colors import ListedColormap, BoundaryNorm
+
+# Zone d'étude
+POLY_LON = [-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7]
+POLY_LAT = [41.3, 42.9, 42.4, 39.8, 37.9, 38.3, 38.6]
+POLYGON = np.column_stack([POLY_LON, POLY_LAT])
+XMIN, XMAX, YMIN, YMAX = -117.7, -111.9, 37.9, 42.9
+NA = np.nan
+
+# Carte de référence (fine, 10x12) et carte prédite (grossière, 5x6)
+REFERENCE = np.array([
+    [NA, NA, NA, NA, NA, NA,  5,  5, NA, NA, NA, NA],
+    [NA, NA, NA, NA, NA,  3,  5,  5,  5,  5, NA, NA],
+    [NA, NA, NA,  3,  2,  2,  5,  5,  2,  2, NA, NA],
+    [NA, NA,  3,  3,  2,  2,  5,  5,  2,  2,  1, NA],
+    [NA,  4,  2,  2,  2,  2,  5,  5,  4,  4,  1, NA],
+    [NA,  4,  2,  2,  2,  2,  5,  5,  4,  4,  1, NA],
+    [NA,  2,  3,  3,  5,  5,  4,  4,  5,  5,  5, NA],
+    [ 2,  2,  3,  3,  5,  5,  4,  4,  5,  5, NA, NA],
+    [ 1,  1,  2,  2,  2,  2,  4,  4,  4, NA, NA, NA],
+    [NA, NA, NA, NA, NA, NA,  4,  4, NA, NA, NA, NA],
+], dtype=float)
+
+PRED_COARSE = np.array([
+    [NA, NA, NA,  5,  5, NA],
+    [NA,  3,  5,  5,  2, NA],
+    [NA,  2,  2,  5,  1,  1],
+    [ 2,  3,  4,  4,  5, NA],
+    [NA, NA,  2,  4, NA, NA],
+], dtype=float)
+
+def cell_polygon_mask(xs, ys, polygon):
+    """True pour les cellules dont le centre est à l'intérieur du polygone."""
+    xx, yy = np.meshgrid(xs, ys)
+    pts = np.column_stack([xx.ravel(), yy.ravel()])
+    return Path(polygon).contains_points(pts).reshape(len(ys), len(xs))
+
+def disaggregate(coarse, factor):
+    """Désagrège une grille grossière en répétant chaque cellule factor x factor fois."""
+    return np.repeat(np.repeat(coarse, factor, axis=0), factor, axis=1)
+
+xs_f = XMIN + 0.5 * (np.arange(12) + 0.5)
+ys_f = YMAX - 0.5 * (np.arange(10) + 0.5)
+mask_ref = cell_polygon_mask(xs_f, ys_f, POLYGON)
+
+reference = np.where(mask_ref, REFERENCE, np.nan)
+predicted = np.where(mask_ref, disaggregate(PRED_COARSE, 2), np.nan)
+```
+
+```{python}
+#| label: fig-methode
+#| fig-cap: "De la référence à la carte prédite désagrégée"
+#| code-fold: true
+CLASS_COLORS = ["#dee273", "#dcbf64", "#a5bfdd", "#1f77b6", "#02426d"]
+
+def plot_class(ax, grid, title):
+    cmap = ListedColormap(CLASS_COLORS)
+    norm = BoundaryNorm(np.arange(0.5, 6.5, 1), cmap.N)
+    ax.pcolormesh(np.linspace(XMIN, XMAX, grid.shape[1] + 1),
+                  np.linspace(YMAX, YMIN, grid.shape[0] + 1),
+                  np.ma.masked_invalid(grid), cmap=cmap, norm=norm,
+                  edgecolors="black", linewidth=0.3)
+    ax.plot(np.append(POLY_LON, POLY_LON[0]), np.append(POLY_LAT, POLY_LAT[0]), color="blue", linewidth=1)
+    ax.set_title(title, fontsize=10)
+    ax.set_xticks([]); ax.set_yticks([])
+
+fig, axes = plt.subplots(1, 3, figsize=(11, 4))
+plot_class(axes[0], reference, "Référence (fine)")
+plot_class(axes[1], PRED_COARSE, "Prédite (grossière)")
+plot_class(axes[2], predicted, "Prédite désagrégée")
+fig.tight_layout()
+plt.show()
+```
+
+:::
+
+## Les résultats
+
+Deux familles de scores mesurent la concordance entre les deux cartes : un **score de concordance** simple (proportion de cellules identiques), et un **score équilibré par classe** qui neutralise l'effet des classes dominantes [d'après @grandini2020metrics]. Chacun se décline en une version *non corrigée* (qui ignore les cellules non prédites) et une ou deux versions *corrigées* (qui les comptent comme des erreurs, plus ou moins sévèrement).
+
+::: {.lang-block .lang-r}
+
+| Score | Valeur | Ce qu'il mesure |
+|---|---|---|
+| Concordance — non corrigée | **0,82** | Cellules identiques, cellules non prédites ignorées |
+| Concordance — corrigée | **0,71** | Idem, cellules non prédites comptées comme erreurs |
+| Balanced Match — brut (NCBM) | **0,86** | Moyenne des rappels par classe, cellules non prédites ignorées |
+| Balanced Match — corrigé, prop. 1 | **0,76** | NCBM pénalisé par la proportion de cellules non prédites |
+| Balanced Match — corrigé, prop. 2 | **0,56** | Cellules non prédites réintégrées, rappel fixé à 0 |
+
+::: {layout-ncol="2"}
+![Concordance non corrigée](pmapcomp.png)
+
+![Concordance corrigée](pmapcompcorr.png)
+:::
+
+:::
+
+::: {.lang-block .lang-python}
+
+```{python}
+#| label: scores
+def match_score(pred, ref, mask, correct=False):
+    valid_ref = mask & ~np.isnan(ref)
+    if correct:
+        return float((valid_ref & (pred == ref)).sum() / valid_ref.sum())
+    valid = valid_ref & ~np.isnan(pred)
+    return float(np.mean(pred[valid] == ref[valid]))
+
+def balanced_match(pred, ref, mask, classes):
+    valid_ref = mask & ~np.isnan(ref)
+    valid_pred = valid_ref & ~np.isnan(pred)
+    recalls_ncbm, recalls_cbm2 = [], []
+    for k in classes:
+        idx_pred = valid_pred & (ref == k)
+        if idx_pred.sum() > 0:
+            recalls_ncbm.append(float((idx_pred & (pred == k)).sum() / idx_pred.sum()))
+        idx_ref = valid_ref & (ref == k)
+        if idx_ref.sum() > 0:
+            recalls_cbm2.append(float((idx_ref & (pred == k)).sum() / idx_ref.sum()))
+    n_L = (mask & ~np.isnan(pred)).sum()
+    n_NL = (mask & np.isnan(pred) & ~np.isnan(ref)).sum()
+    ncbm = float(np.mean(recalls_ncbm))
+    cbm1 = ncbm * (n_L / (n_L + n_NL))
+    cbm2 = float(sum(recalls_cbm2) / (len(recalls_cbm2) + 1))
+    return ncbm, cbm1, cbm2
+
+match_nc = match_score(predicted, reference, mask_ref, correct=False)
+match_c = match_score(predicted, reference, mask_ref, correct=True)
+ncbm, cbm1, cbm2 = balanced_match(predicted, reference, mask_ref, [1, 2, 3, 4, 5])
+
+print(f"Match non corrigé : {match_nc:.2f}")
+print(f"Match corrigé     : {match_c:.2f}")
+print(f"NCBM (brut)       : {ncbm:.2f}")
+print(f"CBM1 (corrigé, prop. 1) : {cbm1:.2f}")
+print(f"CBM2 (corrigé, prop. 2) : {cbm2:.2f}")
+```
+
+| Score | Valeur | Ce qu'il mesure |
+|---|---|---|
+| Concordance — non corrigée | **0,81** | Cellules identiques, cellules non prédites ignorées |
+| Concordance — corrigée | **0,70** | Idem, cellules non prédites comptées comme erreurs |
+| Balanced Match — brut (NCBM) | **0,86** | Moyenne des rappels par classe, cellules non prédites ignorées |
+| Balanced Match — corrigé, prop. 1 | **0,74** | NCBM pénalisé par la proportion de cellules non prédites |
+| Balanced Match — corrigé, prop. 2 | **0,56** | Cellules non prédites réintégrées, rappel fixé à 0 |
+
+```{python}
+#| label: fig-scores
+#| fig-cap: "Concordance non corrigée (gauche) et corrigée (droite)"
+#| code-fold: true
+valid_ref = mask_ref & ~np.isnan(reference)
+predicted_here = ~np.isnan(predicted)
+
+cat_nc = np.full(reference.shape, np.nan)
+cat_nc[valid_ref & predicted_here & (predicted == reference)] = 1
+cat_nc[valid_ref & predicted_here & (predicted != reference)] = 0
+cat_nc[valid_ref & ~predicted_here] = 2
+
+cat_c = np.where(valid_ref, 0.0, np.nan)
+cat_c[valid_ref & predicted_here & (predicted == reference)] = 1
+
+def plot_match(ax, grid, colors, bounds, title):
+    cmap = ListedColormap(colors)
+    norm = BoundaryNorm(bounds, cmap.N)
+    ax.pcolormesh(np.linspace(XMIN, XMAX, grid.shape[1] + 1),
+                  np.linspace(YMAX, YMIN, grid.shape[0] + 1),
+                  np.ma.masked_invalid(grid), cmap=cmap, norm=norm,
+                  edgecolors="black", linewidth=0.3)
+    ax.plot(np.append(POLY_LON, POLY_LON[0]), np.append(POLY_LAT, POLY_LAT[0]), color="blue", linewidth=1)
+    ax.set_title(title, fontsize=10)
+    ax.set_xticks([]); ax.set_yticks([])
+
+fig, axes = plt.subplots(1, 2, figsize=(8, 4))
+plot_match(axes[0], cat_nc, ["#dcbf64", "#3f8f5f", "#d97a3e"], [-0.5, 0.5, 1.5, 2.5],
+           f"Non corrigée — {match_nc:.2f}")
+plot_match(axes[1], cat_c, ["#dcbf64", "#3f8f5f"], [-0.5, 0.5, 1.5],
+           f"Corrigée — {match_c:.2f}")
+fig.tight_layout()
+plt.show()
+```
+
+:::
+
+Ces cinq nombres mesurent la même carte prédite, mais répondent à des questions différentes : *quelle est ma précision là où j'ai prédit ?* (versions non corrigées) contre *quelle est ma précision compte tenu de tout ce que je n'ai pas prédit ?* (versions corrigées). Le bon score dépend de l'usage qu'on veut en faire, pas d'une convention universelle.
+
+::: {.callout-tip title="Détail mathématique"}
+$$
+Match\ (Yes) = \frac{N_{+}}{N_{+} + N_{-}}
+\qquad\qquad
+Recall_{k} = \frac{TP_{k}}{TP_{k} + FN_{k}}
+$$
+
+$$
+NCBM = \frac{1}{K}\sum_{k=1}^{K} Recall_{k}
+\qquad
+CBM_{1} = NCBM \times (1 - \%NL)
+\qquad
+CBM_{2} = \frac{1}{K}\sum_{k \neq 99}^{K} Recall_{k}
+$$
+
+où $N_{+}$/$N_{-}$ sont les cellules aux classes identiques/différentes entre les deux cartes, et $K$ le nombre de classes (5 pour NCBM et CBM₁, 6 pour CBM₂ qui réintègre la classe des cellules non prédites, avec un rappel conventionnellement fixé à 0).
+:::
+
+## Testez par vous-même
+
+Le calcul réel ci-dessus s'appuie sur des structures trop lourdes pour tourner directement dans un navigateur (`sf`/`raster` en R, une grille fine en Python). Voici une version simplifiée sur un petit exemple 4×4 à 3 classes : modifiez les valeurs de `pred` ci-dessous et cliquez sur *Exécuter* pour voir les scores changer — exécuté directement dans votre navigateur, sans serveur.
+
+::: {.callout-warning}
+Version simplifiée à but pédagogique, sur un petit exemple jouet — le calcul réel sur des cartes complètes est celui de la section précédente.
+:::
+
+::: {.lang-block .lang-r}
+
+::: {.callout-note title="Ce que fait ce code"}
+`ref` et `pred` sont deux petites grilles 4×4 à 3 classes (référence et prédiction). `match_score` calcule la proportion de cellules identiques entre les deux ; `balanced_match` fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l'essentiel. Changez quelques valeurs de `pred` et relancez pour voir les deux scores bouger différemment.
+:::
+
+```{webr}
+ref <- matrix(c(1,1,2,2,
+                1,2,2,3,
+                2,2,3,3,
+                2,3,3,3), nrow = 4, byrow = TRUE)
+
+pred <- matrix(c(1,1,2,3,
+                  1,2,2,3,
+                  2,3,3,3,
+                  2,3,2,3), nrow = 4, byrow = TRUE)
+
+match_score <- function(pred, ref) mean(pred == ref)
+
+balanced_match <- function(pred, ref) {
+  classes <- sort(unique(as.vector(ref)))
+  recalls <- sapply(classes, function(k) mean(pred[ref == k] == k))
+  mean(recalls)
+}
+
+cat("Concordance (Match)          :", round(match_score(pred, ref), 2), "\n")
+cat("Score équilibré (Balanced Match) :", round(balanced_match(pred, ref), 2), "\n")
+```
+
+:::
+
+::: {.lang-block .lang-python}
+
+::: {.callout-note title="Ce que fait ce code"}
+`ref` et `pred` sont deux petites grilles 4×4 à 3 classes (référence et prédiction). `match_score` calcule la proportion de cellules identiques entre les deux ; `balanced_match` fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l'essentiel. Changez quelques valeurs de `pred` et relancez pour voir les deux scores bouger différemment.
+:::
+
+```{pyodide}
+import numpy as np
+
+ref = np.array([[1,1,2,2],
+                 [1,2,2,3],
+                 [2,2,3,3],
+                 [2,3,3,3]])
+
+pred = np.array([[1,1,2,3],
+                  [1,2,2,3],
+                  [2,3,3,3],
+                  [2,3,2,3]])
+
+def match_score(pred, ref):
+    return np.mean(pred == ref)
+
+def balanced_match(pred, ref):
+    classes = sorted(set(ref.flatten()))
+    recalls = [np.mean(pred[ref == k] == k) for k in classes]
+    return float(np.mean(recalls))
+
+print("Concordance (Match)             :", round(match_score(pred, ref), 2))
+print("Score équilibré (Balanced Match) :", round(balanced_match(pred, ref), 2))
+```
+
+:::
+
+## Pour aller plus loin
+
+:::: {.d-flex .gap-2 .flex-wrap style="margin:14px 0 28px"}
+[<i class="bi bi-github"></i> Code R sur GitHub](https://github.com/latsouckfaye/CompareMap){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-github"></i> Code Python sur GitHub](https://github.com/latsouckfaye/CompareMap/tree/main/python){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+[<i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »](../../projets.qmd){.btn .btn-outline-secondary role="button"}
+[<i class="bi bi-door-open"></i> Retour aux tutoriels](../../tutoriels.qmd){.btn .btn-outline-secondary role="button"}
+::::
+
+Cette méthode a servi à valider le modèle de cartographie géomorphologique automatique décrit dans @faye2024automatic.
+
+::: {#refs}
+:::

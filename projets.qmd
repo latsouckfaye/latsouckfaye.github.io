@@ -1,0 +1,401 @@
+---
+pagetitle: "Travaux — Paul Faye"
+description: "Trois modèles construits, validés et documentés : le problème, la démarche, le résultat."
+toc: false
+freeze: false
+---
+
+::: column-screen
+```{=html}
+<link rel="stylesheet" href="assets/v8.css">
+<style>
+.v8{--teal:#2DBFAE;--violet:#9B7EDE;--rose:#E8749A;--emerald:#34D399;--indigo:#818CF8;--magenta:#E879C9}
+body.quarto-light .v8{--teal:#0E8577;--violet:#6D28D9;--rose:#BE3455;--emerald:#0E9F6E;--indigo:#4F46E5;--magenta:#B23592}
+#segProj .tgb,#segCourse .tgb{width:auto;min-width:138px}
+#segProj,#segCourse{flex-wrap:wrap}
+#segProj .tgb[data-key="lgd"][aria-pressed="true"]{background:var(--blue);border-color:var(--blue)}
+#segProj .tgb[data-key="duree"][aria-pressed="true"]{background:var(--coral);border-color:var(--coral)}
+#segProj .tgb[data-key="classif"][aria-pressed="true"]{background:var(--third);border-color:var(--third)}
+.v8 .cta{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.v8 .sec .h2 i{margin-right:9px}
+.v8 .statrow{display:flex;align-items:baseline;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:16px}
+.v8 .statbig{font-size:34px;font-weight:700;line-height:1}
+.v8 .statlabel{font-size:12.5px;color:var(--muted)}
+.v8 .hook{max-width:540px;margin:10px auto 0;padding:0 20px;text-align:center;font-size:14.5px;color:var(--txt);line-height:1.55}
+.v8 .projctx{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px}
+.v8 .projctx .orgmini{width:46px;height:46px;border-radius:10px;background:#fff;padding:6px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px -2px rgba(0,0,0,.25)}
+.v8 .projctx .orgmini img{max-width:100%;max-height:100%;object-fit:contain}
+.v8 .projctx span{font-size:13.5px;color:var(--muted)}
+.v8 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px 20px;max-width:1140px;margin:26px auto 0;padding:0 20px}
+.v8 .stepcard{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(6px);animation:v8stepin .35s ease forwards}
+@keyframes v8stepin{to{opacity:1;transform:translateY(0)}}
+.v8 .stepshape{width:100%;max-width:380px;aspect-ratio:1;padding:2.5px;box-sizing:border-box;overflow:hidden}
+.v8 .shp-circle{clip-path:circle(50% at 50% 50%)}
+.v8 .shp-pentagon{clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%)}
+.v8 .shp-hexagon{clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%)}
+.v8 .shapeinner.shp-circle .steptext{padding:4px 20% 20%}
+.v8 .shapeinner.shp-pentagon .steptext{padding:4px 16% 14%}
+.v8 .shapeinner.shp-hexagon .steptext{padding:4px 13% 15%}
+.v8 .shapeinner{width:100%;height:100%;background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
+.v8 .stepheadtop{flex:0 0 27%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:21px;font-weight:700;letter-spacing:.01em;background:var(--bg)}
+.v8 .steptext{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 14% 14%}
+.v8 .stepitems{list-style:none;margin:0;padding:0;width:100%;text-align:left}
+.v8 .stepitems li{position:relative;padding-left:13px;font-size:13px;color:var(--muted);line-height:1.42;margin-bottom:8px}
+.v8 .stepitems li:last-child{margin-bottom:0}
+.v8 .stepitems li::before{content:"";position:absolute;left:0;top:.5em;width:5px;height:5px;border-radius:50%;background:var(--pc,currentColor);opacity:.8}
+.v8 .steptext.clamped{cursor:pointer}
+.v8 .textfull{position:absolute;top:0;left:50%;width:100%;max-width:320px;transform:translate(-50%,-8px) scale(.96);box-sizing:border-box;text-align:left;background:var(--panel);border:1.5px solid var(--pc);border-radius:16px;padding:16px 18px;box-shadow:0 20px 44px -16px rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:40}
+.v8 .textfull .capfull{display:block;font-size:11px;color:var(--pc);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
+.v8 .textfull .stepitems li{font-size:13px;color:var(--txt);line-height:1.5;margin-bottom:9px}
+.v8 .stepshape:hover ~ .textfull,.v8 .textfull:hover{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1);pointer-events:auto}
+.v8 .steptoggle{--pc:var(--blue);margin-top:18px;width:100%;max-width:230px;justify-content:center;font-size:12px;font-weight:700;letter-spacing:.01em;cursor:pointer;display:inline-flex;align-items:center;gap:10px;border-radius:26px;padding:5px 18px 5px 5px;font-family:inherit;background:var(--panel);border:1.5px solid var(--pc);color:var(--pc);transition:background .22s,color .22s,transform .2s,box-shadow .22s}
+.v8 .steptoggle .toggleicon{width:28px;height:28px;border-radius:50%;background:var(--pc);color:var(--onblue);display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none;transition:background .22s,color .22s}
+.v8 .steptoggle:hover{background:var(--pc);color:var(--onblue);transform:translateY(-2px);box-shadow:0 10px 22px -8px var(--pc)}
+.v8 .steptoggle:hover .toggleicon{background:var(--onblue);color:var(--pc)}
+.v8 .steptoggle:active{transform:translateY(0)}
+.v8 .steptoggle i.bi-chevron-down{font-size:9px;transition:transform .25s}
+.v8 .steptoggle[aria-expanded="true"] i.bi-chevron-down{transform:rotate(180deg)}
+.v8 .stepdetail{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.8,.32,1),opacity .3s ease,transform .3s ease;opacity:0;transform:translateY(-6px) scale(.97);text-align:center;width:100%;max-width:420px}
+.v8 .stepdetail.open{max-height:1400px;opacity:1;transform:translateY(0) scale(1);margin-top:16px}
+.v8 .stepdetail-inner{--pc:var(--blue);position:relative;border-radius:14px;padding:20px 19px 18px;background:var(--panel);box-shadow:0 14px 30px -12px rgba(0,0,0,.35)}
+.v8 .stepdetail-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;border-radius:14px 14px 0 0;background:var(--pc)}
+.v8 .stepdetail p{font-size:13px;color:var(--txt);line-height:1.62;margin:0}
+.v8 .stepdetail .bub{justify-content:center;padding:0;margin:0;min-height:0;gap:9px 10px}
+.v8 .detailgroup:not(:first-child){margin-top:18px}
+.v8 .detailsub{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}
+.v8 .detailsub i{font-size:11px}
+.v8 .stepdetail .bb{font-size:10.5px;padding:6px 12px;transition:transform .15s,box-shadow .15s}
+.v8 .pubstatus{display:inline-flex;flex-direction:row;align-items:center;font-weight:700}
+.v8 .pubstatus i{margin-right:6px;font-size:12px}
+.v8 .stepdetail .bb:hover{transform:translateY(-2px);box-shadow:0 4px 10px -4px rgba(0,0,0,.3)}
+.v8 .stepdetail .tlinks{margin-top:12px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.v8 .stepdetail .tlinks:first-child{margin-top:0}
+.v8 .stepdetail .tlinks .btn{margin-top:0;font-size:10.5px;padding:6px 10px;white-space:nowrap}
+.v8 .btn-off{opacity:.32;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.v8 .stepcard{animation:none;opacity:1;transform:none}}
+
+.v8 .industsection{border-top:1px solid var(--line);margin-top:40px;padding:44px 0 0}
+.v8 .industsection .sec{padding-top:0}
+.v8 .teachsection{background:var(--panel);border-top:1px solid var(--line);margin-top:56px;padding:52px 0 64px}
+.v8 .teachsection .sec{padding-top:0}
+.v8 .teachlede{max-width:640px;margin:-8px auto 0;padding:0 20px;text-align:center;font-size:14px;color:var(--muted);line-height:1.6}
+
+.v8 .shp-square,.v8 .shapeinner.shp-square{border-radius:26px}
+.v8 .shp-octagon{clip-path:polygon(16% 0%,84% 0%,100% 16%,100% 84%,84% 100%,16% 100%,0% 84%,0% 16%)}
+.v8 .shapeinner.shp-square .steptext{padding:4px 11% 11%}
+.v8 .shapeinner.shp-octagon .steptext{padding:4px 14% 14%}
+
+.v8 .animsection{border-top:1px solid var(--line);padding:52px 0 64px}
+.v8 .animsection .sec{padding-top:0}
+.v8 .animsection .tacols{max-width:900px;margin:34px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:26px}
+.v8 .animsection .tacol h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 12px;text-align:center}
+.v8 .animsection .tacol h4 i{margin-right:5px;color:var(--magenta)}
+.v8 .animsection .tabadges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.v8 .animsection .tabadge{font-size:14px;color:var(--txt);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px 13px}
+</style>
+<div class="v8" id="v8">
+
+<div class="hero">
+<p class="h1" data-en="Work" data-title-en="Work — Paul Faye">Travaux</p>
+<p class="ld" data-en="From data to decision: models built and validated for industrialization, knowledge shared through teaching.">De la donnée à la décision : modèles construits et validés pour l'industrialisation, savoirs transmis par l'enseignement.</p>
+<p class="en-note" data-en="This page's detailed content (case studies, courses) is still French-only — translation coming.">Le contenu détaillé de cette page reste pour l'instant en français — traduction à venir.</p>
+<div class="cta">
+<a class="btn" href="portfolio.qmd">Retour au portfolio <i class="bi bi-door-open"></i></a>
+<a class="btn" href="parcours.qmd">Voir le parcours <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="industsection">
+
+<div class="sec" id="sec-industrialisation"><p class="h2" style="color:var(--blue);border-color:var(--blue)"><i class="bi bi-gear-fill"></i>Industrialisation</p></div>
+
+<div class="togglewrap" id="segProj" role="group" aria-label="Filtrer par travail"></div>
+<div class="projctx" id="projCtx"></div>
+
+<div class="statrow"><span class="statbig" id="statBig"></span><span class="statlabel" id="statLabel"></span></div>
+<p class="hook" id="projHook"></p>
+
+<div class="steps" id="steps"></div>
+
+</div>
+
+<div class="teachsection">
+
+<div class="sec" id="sec-enseignements"><p class="h2" style="color:var(--coral);border-color:var(--coral)"><i class="bi bi-mortarboard-fill"></i>Enseignements</p></div>
+<p class="teachlede">Transmettre la statistique et la donnée — toujours par la pratique.</p>
+
+<div class="togglewrap" id="segCourse" role="group" aria-label="Filtrer par enseignement"></div>
+<div class="projctx" id="courseCtx"></div>
+
+<div class="steps" id="courseSteps"></div>
+
+</div>
+
+<div class="animsection">
+
+<div class="sec" id="sec-animations"><p class="h2" style="color:var(--magenta);border-color:var(--magenta)"><i class="bi bi-stars"></i>Animations</p></div>
+<p class="teachlede">Au-delà des cours : temps forts pédagogiques, recrutement et jurys.</p>
+
+<div class="tacols">
+<div class="tacol"><h4><i class="bi bi-megaphone-fill"></i>Animations</h4><div class="tabadges"><span class="tabadge">Journées Portes Ouvertes (JPO)</span><span class="tabadge">Salon de l'étudiant</span><span class="tabadge">Journées Pédagogiques Nationales (JPN)</span></div></div>
+<div class="tacol"><h4><i class="bi bi-person-check-fill"></i>Recrutement / Sélections</h4><div class="tabadges"><span class="tabadge">Parcoursup</span><span class="tabadge">Profils d'alternants</span></div></div>
+<div class="tacol"><h4><i class="bi bi-award-fill"></i>Jurys</h4><div class="tabadges"><span class="tabadge">Stages</span><span class="tabadge">Alternance</span><span class="tabadge">SAE</span><span class="tabadge">Hackathon</span><span class="tabadge">Challenge national Dataviz</span></div></div>
+</div>
+
+</div>
+
+</div>
+```
+
+```{=html}
+<script>
+(function(){
+var PROJ=[
+ {key:"lgd", short:"Prévision de composition", title:"Estimateur de répartition en parts", col:"var(--blue)",
+  statBig:"66,5 %", statLabel:"de zéros sur une composante, gérés sans imputation",
+  hook:"Un nouvel estimateur du taux de recouvrement : les composantes nulles sont traitées comme un fait plutôt qu'imputées. Covariables mixtes et dépendance spatiale intégrées, avec une performance supérieure établie sur simulations puis validée sur données réelles.",
+  org:"Université de Montpellier", orgLogo:"images/logos/montpellier.png",
+  period:"2026", pubState:"soumis",
+  dataReal:["490 stations de mesure (atoll de Geyser)","3 composantes : sable, dalle, corail dur","Jusqu'à 66,5 % de zéros sur une composante","Covariables : profondeur + coordonnées géographiques"],
+  dataSim:["Tailles d'échantillon : 250 et 500 observations","30 réplications par scénario","20 % des observations avec un zéro simulé","Covariables continues et catégorielles combinées","Comparaison à plusieurs méthodes concurrentes"],
+  skills:["Régression non paramétrique","Dépendance spatiale","Zéros structurels","Simulations comparatives"],
+  tools:["R","Git","LaTeX"],
+  article:null, preprint:null, code:"https://github.com/latsouckfaye",
+  steps:[
+   {items:["Zéros structurels non ignorables","Covariables numériques et catégorielles combinées","Dépendance spatiale entre observations voisines"]},
+   {items:["Estimateur non paramétrique construit sur mesure","Zéros traités tels quels, sans imputation","Position géographique intégrée au modèle"]},
+   {items:["Zéros gérés sans imputation","Covariables mixtes et dépendance spatiale intégrées","Performance supérieure : simulations puis données réelles"]}
+  ]},
+ {key:"duree", short:"Prédiction d'échéances", title:"Modèle de durée sur données censurées", col:"var(--coral)",
+  statBig:"48 → 6", statLabel:"variables, sans perte d'interprétabilité",
+  hook:"1 445 patients au départ, nettoyés pour n'en garder que 884, et 48 variables candidates — avec, pour certains, un événement qui n'arrive jamais dans la fenêtre d'observation. De quoi tester la solidité d'un modèle de pronostic.",
+  org:"Inria, étude ONCOLILLE", orgLogo:"images/logos/inria.svg",
+  period:"2026", pubState:"soumis",
+  dataReal:["1 445 patients au départ, nettoyés à 884","48 variables candidates","Données censurées à droite"],
+  skills:["Kaplan-Meier","Modèles de Cox","Sélection de variables","Modèle parcimonieux"],
+  tools:["Python","R","Git"],
+  article:null, preprint:null, code:"https://github.com/latsouckfaye",
+  steps:[
+   {items:["1 445 individus au départ, nettoyés à 884, 48 variables candidates","Données censurées à droite","Événement non observé pour une partie de la cohorte"]},
+   {items:["Courbes de survie par Kaplan-Meier","Modèles de Cox à risques proportionnels","Hypothèse de proportionnalité vérifiée, pas supposée"]},
+   {items:["48 variables réduites à 6, sans perte de pouvoir prédictif","Chaque variable défendable devant un non-spécialiste","Hypothèse de proportionnalité vérifiée"]}
+  ]},
+ {key:"classif", short:"Cartographie grande échelle", title:"Classification supervisée à grande échelle", col:"var(--third)",
+  statBig:"90 %+", statLabel:"de concordance avec la référence experte",
+  hook:"Deux ans de cartographie manuelle. Une chaîne statistique reproductible qui arrive au même résultat, avec plus de 90 % de concordance — mesurée, pas supposée.",
+  org:"Université de Montpellier", orgLogo:"images/logos/montpellier.png",
+  period:"2024", pubState:"publie",
+  dataReal:["48 millions de mesures bathymétriques (profondeur), géoréférencées sur 175 km²","Carte experte construite manuellement"],
+  skills:["Cartographie géomorphologique en milieu marin","Modélisation bathymétrique multi-résolution","Construction de variables discriminantes","Plan d'expériences","Benchmark de modèles (dont forêts aléatoires)","Sélection de variables discriminantes"],
+  tools:["R","Calcul haute performance (HPC)","Git"],
+  article:"https://doi.org/10.1007/s12145-024-01347-x", preprint:"https://hal.science/hal-04624799/file/Revision_ESI-2.pdf", code:"https://github.com/latsouckfaye/CompareMap",
+  steps:[
+   {items:["Cartographie géomorphologique en milieu marin","Expertise manuelle mobilisée pendant deux ans","Détourage manuel des habitats, non reproductible"]},
+   {items:["Modèles bathymétriques à plusieurs résolutions","Variables construites pour discriminer les typologies d'habitats","Sélection des covariables pertinentes et benchmark de plusieurs modèles","Plan d'expérience pour optimiser l'échantillonnage sur la carte experte","Outils de comparaison de cartes géomorphologiques multi-résolutions"]},
+   {items:["Forêts aléatoires : meilleur modèle du benchmark","Plus de 90 % de concordance avec la référence experte","Deux ans de travail manuel ramenés à une chaîne automatisée"]}
+  ]}
+];
+
+var PHASE_SHAPES=["pentagon","circle","hexagon"];
+var PHASE_COLORS=["var(--teal)","var(--violet)","var(--rose)"];
+var PHASE_LABELS=["Problème","Démarche","Résultat"];
+var segProjWrap=document.getElementById("segProj"), stepsEl=document.getElementById("steps"),
+    statBig=document.getElementById("statBig"), statLabel=document.getElementById("statLabel"),
+    projHook=document.getElementById("projHook"), projCtx=document.getElementById("projCtx");
+var activeProj="lgd";
+
+function selectProj(key){
+  activeProj=key;
+  document.querySelectorAll("#segProj .tgb").forEach(function(b){b.setAttribute("aria-pressed", b.getAttribute("data-key")===key);});
+  renderProj();
+}
+
+function renderProj(){
+  var p=PROJ.filter(function(x){return x.key===activeProj;})[0];
+  statBig.textContent=p.statBig; statBig.style.color=p.col;
+  statLabel.textContent=p.statLabel;
+  projHook.textContent=p.hook;
+  projCtx.innerHTML="<span class='orgmini'><img src='"+p.orgLogo+"' alt=''></span><span>"+p.org+"</span>";
+
+  stepsEl.innerHTML="";
+  p.steps.forEach(function(s,i){
+    var pc=PHASE_COLORS[i];
+    var card=document.createElement("div"); card.className="stepcard";
+    card.style.animationDelay=(i*90)+"ms";
+    var shp="shp-"+PHASE_SHAPES[i];
+
+    function tagRow(items){
+      return "<div class='bub'>"+items.map(function(t){
+        return "<div class='bb' style='border-color:"+pc+";color:var(--txt);background:color-mix(in srgb, "+pc+" 14%, transparent)'>"+t+"</div>";
+      }).join("")+"</div>";
+    }
+    function linksRow(items){
+      return "<div class='tlinks'>"+items.map(function(it){
+        if(it[1]){
+          return "<a class='btn' href='"+it[1]+"' target='_blank' rel='noopener'>"+it[0]+" <i class='bi "+it[2]+"'></i></a>";
+        }
+        return "<span class='btn btn-off' aria-disabled='true'>"+it[0]+" <i class='bi "+it[2]+"'></i></span>";
+      }).join("")+"</div>";
+    }
+    var toggleLabel, toggleIcon, detailHtml;
+    if(i===0){
+      toggleLabel="Données"; toggleIcon="bi-bar-chart-fill";
+      detailHtml=
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-globe-americas'></i>Données réelles</span>"+tagRow(p.dataReal)+"</div>";
+      if(p.dataSim && p.dataSim.length){
+        detailHtml+=
+          "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-dice-5-fill'></i>Données simulées</span>"+tagRow(p.dataSim)+"</div>";
+      }
+    } else if(i===1){
+      toggleLabel="Compétences & outils"; toggleIcon="bi-tools";
+      detailHtml=
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-mortarboard-fill'></i>Compétences</span>"+tagRow(p.skills)+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-cpu-fill'></i>Outils</span>"+tagRow(p.tools)+"</div>";
+    } else {
+      toggleLabel="Publication"; toggleIcon="bi-journal-richtext";
+      var stateMeta={
+        publie:{icon:"bi-patch-check-fill", label:"Publié"},
+        soumis:{icon:"bi-send-fill", label:"Soumis"},
+        redaction:{icon:"bi-pencil-fill", label:"En cours de rédaction"}
+      }[p.pubState];
+      var statusText = stateMeta.label + (p.pubState==="redaction" ? "" : " · "+p.period);
+      var statusPill="<div class='bub'><div class='bb pubstatus' style='border-color:"+pc+";color:var(--txt);background:color-mix(in srgb, "+pc+" 14%, transparent)'><i class='bi "+stateMeta.icon+"'></i>"+statusText+"</div></div>";
+      detailHtml=
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-info-circle-fill'></i>Statut</span>"+statusPill+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-file-earmark-text'></i>Articles</span>"+linksRow([["Article",p.article,"bi-file-earmark-text"],["Preprint",p.preprint,"bi-file-earmark-richtext"]])+"</div>"+
+        "<div class='detailgroup'><span class='detailsub' style='color:"+pc+"'><i class='bi bi-github'></i>Code</span>"+linksRow([["Code",p.code,"bi-github"]])+"</div>";
+    }
+
+    function itemList(items){
+      return "<ul class='stepitems'>"+items.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";
+    }
+    var previewItems=s.items.slice(0,3), hasMore=s.items.length>previewItems.length;
+
+    card.innerHTML=
+      "<div class='stepshape "+shp+"' style='background:"+pc+"'>"+
+      "<div class='shapeinner "+shp+"'>"+
+      "<div class='stepheadtop' style='color:"+pc+"'>"+PHASE_LABELS[i]+"</div>"+
+      "<div class='steptext"+(hasMore?" clamped":"")+"' style='--pc:"+pc+"'>"+itemList(previewItems)+"</div></div></div>"+
+      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+PHASE_LABELS[i]+"</span>"+itemList(s.items)+"</div>"+
+      "<button type='button' class='steptoggle' aria-expanded='false' style='--pc:"+pc+"'>"+
+      "<span class='toggleicon'><i class='bi "+toggleIcon+"'></i></span>"+toggleLabel+" <i class='bi bi-chevron-down'></i></button>"+
+      "<div class='stepdetail'><div class='stepdetail-inner' style='--pc:"+pc+"'>"+detailHtml+"</div></div>";
+    stepsEl.appendChild(card);
+
+    var toggle=card.querySelector(".steptoggle"), detail=card.querySelector(".stepdetail");
+    toggle.addEventListener("click", function(){
+      var open=detail.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+}
+
+PROJ.forEach(function(p){
+  var b=document.createElement("button"); b.className="tgb"; b.textContent=p.short;
+  b.setAttribute("data-key",p.key);
+  b.setAttribute("aria-pressed", p.key===activeProj);
+  b.onclick=function(){selectProj(p.key);};
+  segProjWrap.appendChild(b);
+});
+
+renderProj();
+})();
+
+(function(){
+var COURSES=[
+ {key:"lineaire", group:"technique", label:"Modèles linéaires", title:"Modèles linéaires",
+  public:"BUT 2 — Science des Données", format:"TD, TP, SAE",
+  programme:["Régression linéaire simple et multiple : cadre et exploration","Modèles : équation, ajustement, analyse de la variance, qualité de l'ajustement","Inférence (hypothèses, estimateurs et propriétés, tests, intervalles de confiance et de prédiction, diagnostics, validation, sélection de modèles)"],
+  competences:["Régression linéaire simple et multiple","Analyse de la variance (ANOVA)","Tests d'hypothèses et intervalles de confiance","Diagnostics de modèle et validation","Sélection de modèles"],
+  outils:["R"]},
+ {key:"progr", group:"technique", label:"Programmation R", title:"Programmation R",
+  public:"BUT 1 — Science des Données", format:"TP",
+  programme:["Introduction à R et RStudio","Structures de données (matrices, facteurs, listes, data frames)","Structures de contrôle et fonctions","Importation et exportation de données"],
+  competences:["Prise en main d'un langage de programmation","Manipulation de structures de données (matrices, listes, data frames)","Écriture de fonctions et structures de contrôle","Import et export de données"],
+  outils:["R","RStudio"]},
+ {key:"statdesc", group:"technique", label:"Statistiques descriptives", title:"Statistiques descriptives",
+  public:"BUT 1 — Science des Données", format:"TP · Excel",
+  programme:["Introduction à Excel et prise en main","Nettoyage et préparation des données","Tris simples et tableaux de fréquences","Mesures de tendance centrale et de dispersion","Représentations graphiques","Tableaux croisés dynamiques"],
+  competences:["Nettoyage et préparation de données","Tris à plat et tableaux de fréquences","Indicateurs de tendance centrale et de dispersion","Construction de représentations graphiques","Tableaux croisés dynamiques"],
+  outils:["Excel"]},
+ {key:"proba", group:"technique", label:"Probabilités", title:"Probabilités",
+  public:"Licence 1 — Biologie", format:"TD",
+  programme:["Ensembles et opérations sur les ensembles","Arbres de probabilités et probabilité conditionnelle","Lois usuelles : uniforme, binomiale, de Poisson, etc.","Indépendance, espérance, variance","Somme de variables aléatoires"],
+  competences:["Manipulation d'ensembles et dénombrement","Arbres de probabilité et probabilité conditionnelle","Lois usuelles (uniforme, binomiale, Poisson…)","Indépendance d'événements","Espérance et variance d'une variable aléatoire","Sommes de variables aléatoires"],
+  outils:[]},
+ {key:"modstoch", group:"technique", label:"Modélisation stochastique", title:"Modélisation stochastique",
+  public:"Licence 3 — Mathématiques", format:"TP",
+  programme:["Générateurs pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de la variance et variables antithétiques","Marche aléatoire","Préparation et manipulation des données, analyses descriptives univariée et bivariée, visualisation","Création de rapports dynamiques avec RMarkdown et Quarto"],
+  competences:["Génération de nombres pseudo-aléatoires","Loi des grands nombres et théorème central limite","Méthode de l'inverse et échantillonnage par rejet","Intégration de Monte Carlo","Réduction de variance (variables antithétiques)","Simulation de marches aléatoires","Analyses descriptives univariée et bivariée","Production de rapports reproductibles"],
+  outils:["R","RMarkdown","Quarto"]},
+ {key:"tqr", group:"general", label:"Techniques quantitatives", title:"Techniques quantitatives et représentations",
+  public:"BUT 1 — Techniques de Commercialisation", format:"TD, TP · Excel",
+  programme:["Calcul financier : intérêts simples, intérêts composés, emprunts","Série à deux caractères : ajustement, corrélation","Chroniques","Tableau de contingence","Tests d'indépendance"],
+  competences:["Calcul d'intérêts simples et composés","Analyse d'emprunts","Ajustement et corrélation sur séries à deux caractères","Analyse de chroniques","Tableaux de contingence et tests d'indépendance"],
+  outils:["Excel"]},
+ {key:"exploit", group:"general", label:"Exploitation de données", title:"Exploitation de données",
+  public:"Licences Professionnelles", format:"TD, TP · Excel",
+  programme:["Concepts de base : population, échantillon, individu, caractère et modalité, série statistique","Données statistiques et représentations : tableaux et graphiques (bâtons, barres, secteurs, histogrammes, courbes…)","Statistiques descriptives univariées : indicateurs de tendance et de dispersion"],
+  competences:["Structuration de données statistiques (population, individu, caractère)","Construction de tableaux et graphiques statistiques","Calcul d'indicateurs de tendance centrale et de dispersion","Lecture et interprétation de résultats descriptifs"],
+  outils:["Excel"]}
+];
+
+var CPHASE_SHAPES=["square","octagon"];
+var CPHASE_COLORS=["var(--emerald)","var(--indigo)"];
+var CPHASE_LABELS=["Programme","Compétences & outils"];
+var segWrap=document.getElementById("segCourse"),
+    courseStepsEl=document.getElementById("courseSteps"), courseCtx=document.getElementById("courseCtx");
+var activeCourse="lineaire";
+
+function buildSeg(){
+  segWrap.innerHTML="";
+  COURSES.forEach(function(c){
+    var b=document.createElement("button"); b.className="tgb"; b.textContent=c.label;
+    b.setAttribute("data-key", c.key);
+    b.setAttribute("aria-pressed", c.key===activeCourse);
+    b.onclick=function(){selectCourse(c.key);};
+    segWrap.appendChild(b);
+  });
+}
+
+function selectCourse(key){
+  activeCourse=key;
+  document.querySelectorAll("#segCourse .tgb").forEach(function(b){b.setAttribute("aria-pressed", b.getAttribute("data-key")===key);});
+  renderCourse();
+}
+
+function renderCourse(){
+  var c=COURSES.filter(function(x){return x.key===activeCourse;})[0];
+  courseCtx.innerHTML="<span class='orgmini' style='background:transparent;box-shadow:none'><i class='bi bi-mortarboard-fill' style='font-size:20px;color:var(--txt)'></i></span><span>"+c.public+" · "+c.format+"</span>";
+
+  courseStepsEl.innerHTML="";
+  var competencesFull=c.competences.slice();
+  if(c.outils && c.outils.length){ competencesFull.push("Outils : "+c.outils.join(", ")); }
+  var facets=[c.programme, competencesFull];
+  facets.forEach(function(items,i){
+    var pc=CPHASE_COLORS[i];
+    var card=document.createElement("div"); card.className="stepcard";
+    card.style.animationDelay=(i*90)+"ms";
+    var shp="shp-"+CPHASE_SHAPES[i];
+
+    function itemList(arr){
+      return "<ul class='stepitems'>"+arr.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";
+    }
+    var previewItems=items.slice(0,3), hasMore=items.length>previewItems.length;
+
+    card.innerHTML=
+      "<div class='stepshape "+shp+"' style='background:"+pc+"'>"+
+      "<div class='shapeinner "+shp+"'>"+
+      "<div class='stepheadtop' style='color:"+pc+"'>"+CPHASE_LABELS[i]+"</div>"+
+      "<div class='steptext"+(hasMore?" clamped":"")+"' style='--pc:"+pc+"'>"+itemList(previewItems)+"</div></div></div>"+
+      "<div class='textfull' style='--pc:"+pc+"'><span class='capfull'>"+CPHASE_LABELS[i]+"</span>"+itemList(items)+"</div>";
+    courseStepsEl.appendChild(card);
+  });
+}
+
+buildSeg();
+renderCourse();
+})();
+</script>
+```
+:::

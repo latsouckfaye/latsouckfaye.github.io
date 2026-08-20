@@ -1,0 +1,297 @@
+---
+pagetitle: "Tutoriels — Paul Faye"
+description: "Notebooks reproductibles en Python et en R, du prétraitement à la validation."
+toc: false
+freeze: false
+---
+
+::: column-screen
+```{=html}
+<link rel="stylesheet" href="assets/v8.css">
+<style>
+.v8 .cta{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.v8 .statrow{display:flex;align-items:baseline;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:16px}
+.v8 .statbig{font-size:34px;font-weight:700;line-height:1}
+.v8 .statlabel{font-size:12.5px;color:var(--muted)}
+.v8 .hook{max-width:540px;margin:10px auto 0;padding:0 20px;text-align:center;font-size:14.5px;color:var(--txt);line-height:1.55}
+.v8 .sgb[data-key="all"][aria-pressed="true"]{background:var(--txt)}
+.v8 .sgb[data-key="python"][aria-pressed="true"]{background:var(--blue)}
+.v8 .sgb[data-key="r"][aria-pressed="true"]{background:var(--coral)}
+
+.v8 .domainrow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;max-width:700px;margin:14px auto 0;padding:0 20px}
+.v8 .domainchip{font-size:11.5px;font-family:inherit;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.v8 .domainchip:hover{color:var(--txt);border-color:var(--axis)}
+.v8 .domainchip[aria-pressed="true"]{color:var(--onblue);background:var(--txt);border-color:var(--txt);font-weight:600}
+.v8 .domainclear{font-size:11px;color:var(--muted);background:none;border:none;text-decoration:underline;cursor:pointer;padding:6px 4px;font-family:inherit}
+.v8 .domainclear:hover{color:var(--txt)}
+.v8 .domainclear[hidden]{display:none}
+
+.v8 .matchcount{text-align:center;font-size:12px;color:var(--muted);margin-top:16px;min-height:1em}
+
+.v8 .tutgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;max-width:1040px;margin:8px auto 0;padding:0 20px 8px}
+.v8 .tutcard{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;opacity:0;transform:translateY(8px);animation:tutin .4s ease forwards;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.v8 .tutcard:hover{transform:translateY(-4px);box-shadow:0 18px 34px -18px rgba(0,0,0,.45);border-color:var(--axis)}
+.v8 .tutcard.hidden{display:none}
+.v8 .tutaccent{position:absolute;top:0;left:0;right:0;height:3px}
+.v8 .tutaccent.grad{background:linear-gradient(90deg,var(--g1),var(--g2))}
+@keyframes tutin{to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.v8 .tutcard{animation:none;opacity:1;transform:none}}
+.v8 .tutcard svg{width:100%;height:auto;display:block;margin:14px 0}
+.v8 .tutimages{display:flex;gap:6px;margin:14px 0;border-radius:8px;overflow:hidden}
+.v8 .tutimages img{width:50%;height:140px;object-fit:cover;object-position:top;display:block;background:#fff;transition:transform .35s ease}
+.v8 .tutcard:hover .tutimages img{transform:scale(1.06)}
+.v8 .tuttop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding-top:4px}
+.v8 .tutlangs{display:flex;gap:6px;flex-wrap:wrap}
+.v8 .tutlang{display:inline-flex;align-items:center;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:20px;border:1px solid var(--pc);color:var(--pc);background:color-mix(in srgb, var(--pc) 12%, transparent);text-decoration:none;transition:background .18s,color .18s}
+a.tutlang:hover{background:var(--pc);color:var(--onblue)}
+.v8 .tutlang.planned{opacity:.4;border-style:dashed;background:transparent;cursor:default}
+.v8 .tutstatus{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--muted);white-space:nowrap;flex:none;margin-top:5px}
+.v8 .tutdot{width:8px;height:8px;border-radius:50%;flex:none;position:relative}
+.v8 .tutdot.live::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:tutpulse 2.2s ease-out infinite}
+@keyframes tutpulse{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+@media (prefers-reduced-motion:reduce){.v8 .tutdot.live::after{animation:none;display:none}}
+.v8 .tuttitle{font-size:16px;font-weight:700;margin:2px 0 12px;color:var(--txt)}
+.v8 .tutdomains{display:flex;flex-wrap:wrap;gap:6px}
+.v8 .tutdomains span{font-size:10px;color:var(--muted);background:var(--faint);border-radius:10px;padding:3px 9px}
+.v8 .tutdesc{font-size:12px;color:var(--muted);line-height:1.5;margin:10px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.v8 .tutmore{text-align:center;padding:36px 20px 8px}
+.v8 .tutmore p{text-align:center;font-size:13.5px;color:var(--muted);margin:0 auto 14px;max-width:520px}
+
+.v8 .tutmodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.v8 .tutmodal.open{display:flex}
+.v8 .tutmodal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.v8 .tutmodal-panel{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:16px;width:min(1100px,100%);height:min(88vh,900px);display:flex;flex-direction:column;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);overflow:hidden}
+.v8 .tutmodal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel)}
+.v8 .tutmodal-title{font-size:14px;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v8 .tutmodal-close{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
+.v8 .tutmodal-close:hover{background:var(--coral);color:#fff;transform:rotate(90deg)}
+.v8 .tutmodal-body{flex:1;position:relative;background:var(--bg)}
+.v8 .tutmodal-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+body.tutmodal-lock{overflow:hidden}
+@media (max-width:640px){.v8 .tutmodal{padding:0}.v8 .tutmodal-panel{width:100%;height:100%;border-radius:0}}
+</style>
+<div class="v8" id="v8">
+
+<div class="hero">
+<p class="h1" data-en="Tutorials" data-title-en="Tutorials — Paul Faye">Tutoriels</p>
+<p class="ld" data-en="Reproducible notebooks applying statistics and machine learning to real cases — in Python and R, from preprocessing to validation.">Des notebooks reproductibles pour appliquer la statistique et l'apprentissage automatique à des cas concrets — en Python et en R, du prétraitement à la validation.</p>
+<p class="en-note" data-en="The tutorials themselves are still French-only — translation coming.">Les tutoriels eux-mêmes restent pour l'instant en français — traduction à venir.</p>
+<div class="cta">
+<a class="btn" href="index.qmd">Retour à l'accueil <i class="bi bi-door-open"></i></a>
+<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener">Voir mon GitHub <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="segwrap" id="segTut" role="group" aria-label="Filtrer par langage"></div>
+<div class="domainrow" id="domainRow" role="group" aria-label="Filtrer par domaine d'application"></div>
+
+<div class="statrow"><span class="statbig" id="statBig"></span><span class="statlabel" id="statLabel"></span></div>
+<p class="hook">Chaque notebook est pensé pour être rejoué : données, code et résultats documentés, du premier coup d'œil jusqu'au détail technique.</p>
+<p class="matchcount" id="matchCount"></p>
+
+<div class="tutgrid" id="tutGrid"></div>
+
+<div class="tutmore">
+<p>L'ensemble de mon code, y compris les travaux pas encore résumés ici, est disponible sur GitHub.</p>
+<div class="cta">
+<a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener">Suivre l'avancement <i class="bi bi-door-open"></i></a>
+<a class="btn" href="projets.qmd">Voir les travaux <i class="bi bi-door-open"></i></a>
+</div>
+</div>
+
+<div class="tutmodal" id="tutModal" role="dialog" aria-modal="true" aria-hidden="true">
+<div class="tutmodal-backdrop" id="tutModalBackdrop"></div>
+<div class="tutmodal-panel">
+<div class="tutmodal-head">
+<span class="tutmodal-title" id="tutModalTitle"></span>
+<button class="tutmodal-close" id="tutModalClose" type="button" aria-label="Fermer">&times;</button>
+</div>
+<div class="tutmodal-body">
+<iframe id="tutModalFrame" title="Tutoriel" loading="lazy"></iframe>
+</div>
+</div>
+</div>
+
+</div>
+```
+
+```{=html}
+<script>
+(function(){
+var TUTS=[
+ {key:"cartes", title:"Comparer des cartes à différentes résolutions spatiales",
+  desc:"Désagrégation de résolution puis scores de concordance (Match, Balanced Match) entre carte prédite et référence — méthode issue d'un article publié.",
+  domains:["Analyse spatiale","Cartographie multi-échelle","SIG"],
+  langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/CompareMap", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#r"},
+         {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/CompareMap/tree/main/python", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#python"}],
+  images:["tutoriels/comparer-cartes/refmap.png","tutoriels/comparer-cartes/predmap.png"]},
+ {key:"echantillonnage", title:"Méthodes d'échantillonnage stratégique",
+  desc:"Échantillonnage par couverture (k-means) et par complexité du terrain (médoïdes), sur un récif corallien réel.",
+  domains:["Analyse spatiale","Échantillonnage","Géomorphologie"],
+  langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling", readLink:"tutoriels/echantillonnage/echantillonnage.html#r"},
+         {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling/tree/main/python", readLink:"tutoriels/echantillonnage/echantillonnage.html#python"}],
+  images:["tutoriels/echantillonnage/Geyser_rough.png","tutoriels/echantillonnage/Geyser_cds.png"]},
+ {key:"composition", title:"Analyse spatiale de données de composition",
+  desc:"Modèle de régression pour données compositionnelles spatiales, avec zéros structurels.",
+  domains:["Analyse spatiale","Données de composition","Régression"],
+  langs:[{lang:"r", status:"redaction", link:null},
+         {lang:"python", status:"planned", link:null}],
+  svg:"composition"}
+];
+
+var SVGS={
+ composition:"<svg viewBox='0 0 200 68' role='img' aria-label='Graphe de dépendance spatiale entre observations voisines'>"+
+  "<g stroke='var(--blue)' stroke-width='1' stroke-opacity='.4'><line x1='26' y1='18' x2='52' y2='34'/><line x1='52' y1='34' x2='40' y2='54'/><line x1='52' y1='34' x2='86' y2='24'/><line x1='86' y1='24' x2='112' y2='42'/><line x1='112' y1='42' x2='146' y2='30'/><line x1='146' y1='30' x2='176' y2='46'/><line x1='112' y1='42' x2='96' y2='58'/><line x1='40' y1='54' x2='70' y2='58'/></g>"+
+  "<g class='b'><circle cx='26' cy='18' r='3.2'/><circle cx='52' cy='34' r='3.2'/><circle cx='40' cy='54' r='3.2'/><circle cx='86' cy='24' r='3.2'/><circle cx='112' cy='42' r='3.2'/><circle cx='146' cy='30' r='3.2'/><circle cx='176' cy='46' r='3.2'/><circle cx='96' cy='58' r='3.2'/><circle cx='70' cy='58' r='3.2'/></g></svg>"
+};
+
+var LANG_META={r:{label:"R", col:"var(--coral)"}, python:{label:"Python", col:"var(--blue)"}};
+var STATE_META={
+  publie:{color:"#3fbf7f", label:"Publié"},
+  redaction:{color:"#e3b341", label:"En cours de rédaction"},
+  planned:{color:"var(--muted)", label:"À venir"}
+};
+function overallState(langs){
+  if(langs.some(function(l){return l.status==="ready";})) return "publie";
+  if(langs.some(function(l){return l.status==="redaction";})) return "redaction";
+  return "planned";
+}
+
+var ALL_DOMAINS=[];
+TUTS.forEach(function(t){ t.domains.forEach(function(d){ if(ALL_DOMAINS.indexOf(d)===-1) ALL_DOMAINS.push(d); }); });
+
+var statBig=document.getElementById("statBig"), statLabel=document.getElementById("statLabel"),
+    tutGrid=document.getElementById("tutGrid"), segTutWrap=document.getElementById("segTut"),
+    domainRow=document.getElementById("domainRow"), matchCount=document.getElementById("matchCount");
+var filtLang="all", selectedDomains=[];
+
+var tutModal=document.getElementById("tutModal"), tutModalFrame=document.getElementById("tutModalFrame"),
+    tutModalTitle=document.getElementById("tutModalTitle");
+
+function openTutModal(url, title){
+  tutModalTitle.textContent=title||"";
+  tutModalFrame.src=url;
+  tutModal.classList.add("open");
+  tutModal.setAttribute("aria-hidden","false");
+  document.body.classList.add("tutmodal-lock");
+}
+function closeTutModal(){
+  tutModal.classList.remove("open");
+  tutModal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("tutmodal-lock");
+  tutModalFrame.src="about:blank";
+}
+document.getElementById("tutModalClose").addEventListener("click", closeTutModal);
+document.getElementById("tutModalBackdrop").addEventListener("click", closeTutModal);
+document.addEventListener("keydown", function(e){
+  if(e.key==="Escape" && tutModal.classList.contains("open")) closeTutModal();
+});
+tutGrid.addEventListener("click", function(e){
+  var pill=e.target.closest("a.tutlang");
+  if(!pill) return;
+  if(e.ctrlKey || e.metaKey || e.shiftKey || e.button===1) return;
+  e.preventDefault();
+  openTutModal(pill.getAttribute("href"), pill.getAttribute("data-title"));
+});
+
+function matchesFilters(t){
+  var langOk = filtLang==="all" || t.langs.some(function(l){return l.lang===filtLang;});
+  var domOk = selectedDomains.length===0 || t.domains.some(function(d){return selectedDomains.indexOf(d)>-1;});
+  return langOk && domOk;
+}
+
+function render(){
+  var readyCount=TUTS.filter(function(t){return overallState(t.langs)==="publie";}).length;
+  var otherCount=TUTS.length-readyCount;
+  statBig.textContent=readyCount; statBig.style.color="var(--txt)";
+  statLabel.textContent=(readyCount>1?"tutoriels publiés":"tutoriel publié")+(otherCount?", "+otherCount+" en préparation":"");
+
+  tutGrid.innerHTML="";
+  TUTS.forEach(function(t,i){
+    var card=document.createElement("div"); card.className="tutcard";
+    card.style.animationDelay=(i*80)+"ms";
+    card.setAttribute("data-key",t.key);
+    var state=overallState(t.langs), sm=STATE_META[state];
+    var readyLangs = t.langs.filter(function(l){return l.status==="ready";});
+    var accentStyle = readyLangs.length>1
+      ? "--g1:"+LANG_META[readyLangs[0].lang].col+";--g2:"+LANG_META[readyLangs[1].lang].col
+      : "background:"+LANG_META[(readyLangs[0]||t.langs[0]).lang].col;
+    var langPills=t.langs.map(function(l){
+      var lm=LANG_META[l.lang];
+      if(l.readLink){
+        return "<a class='tutlang' href='"+l.readLink+"' data-title='"+t.title+" — "+lm.label+"' style='--pc:"+lm.col+"'>"+lm.label+"</a>";
+      }
+      var title=lm.label+(l.status==="redaction"?" — en cours de rédaction":" — à venir");
+      return "<span class='tutlang planned' style='--pc:"+lm.col+"' title='"+title+"'>"+lm.label+"</span>";
+    }).join("");
+    var visual = t.images
+      ? "<div class='tutimages'>"+t.images.map(function(src){return "<img src='"+src+"' alt='"+t.title+"' loading='lazy'>";}).join("")+"</div>"
+      : SVGS[t.svg];
+    card.innerHTML=
+      "<div class='tutaccent"+(readyLangs.length>1?" grad":"")+"' style='"+accentStyle+"'></div>"+
+      "<div class='tuttop'>"+
+      "<div class='tutlangs'>"+langPills+"</div>"+
+      "<span class='tutstatus'><span class='tutdot"+(state==="publie"?" live":"")+"' style='background:"+sm.color+"'></span>"+sm.label+"</span>"+
+      "</div>"+
+      visual+
+      "<p class='tuttitle'>"+t.title+"</p>"+
+      "<div class='tutdomains'>"+t.domains.map(function(d){return "<span>"+d+"</span>";}).join("")+"</div>"+
+      "<p class='tutdesc'>"+t.desc+"</p>";
+    tutGrid.appendChild(card);
+  });
+  applyFilters();
+}
+
+function applyFilters(){
+  var visible=0;
+  tutGrid.querySelectorAll(".tutcard").forEach(function(c){
+    var t=TUTS.filter(function(x){return x.key===c.getAttribute("data-key");})[0];
+    var ok=matchesFilters(t);
+    c.classList.toggle("hidden", !ok);
+    if(ok) visible++;
+  });
+  var filtered = filtLang!=="all" || selectedDomains.length>0;
+  matchCount.textContent = filtered ? (visible>1?visible+" tutoriels correspondent aux filtres":visible+" tutoriel correspond aux filtres") : "";
+  domainClearBtn.hidden = selectedDomains.length===0;
+}
+
+var segTut=document.createElement("div");
+segTut.className="seg"; segTutWrap.appendChild(segTut);
+[["all","Tout"],["python","Python"],["r","R"]].forEach(function(f){
+  var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
+  b.setAttribute("data-key",f[0]);
+  b.setAttribute("aria-pressed", f[0]===filtLang);
+  b.onclick=function(){
+    filtLang=f[0];
+    segTut.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filtLang);});
+    applyFilters();
+  };
+  segTut.appendChild(b);
+});
+
+ALL_DOMAINS.forEach(function(d){
+  var b=document.createElement("button"); b.className="domainchip"; b.textContent=d;
+  b.setAttribute("aria-pressed","false");
+  b.onclick=function(){
+    var idx=selectedDomains.indexOf(d);
+    if(idx>-1){ selectedDomains.splice(idx,1); b.setAttribute("aria-pressed","false"); }
+    else { selectedDomains.push(d); b.setAttribute("aria-pressed","true"); }
+    applyFilters();
+  };
+  domainRow.appendChild(b);
+});
+var domainClearBtn=document.createElement("button");
+domainClearBtn.className="domainclear"; domainClearBtn.textContent="Réinitialiser";
+domainClearBtn.hidden=true;
+domainClearBtn.onclick=function(){
+  selectedDomains=[];
+  domainRow.querySelectorAll(".domainchip").forEach(function(b){b.setAttribute("aria-pressed","false");});
+  applyFilters();
+};
+domainRow.appendChild(domainClearBtn);
+
+render();
+})();
+</script>
+```
+:::

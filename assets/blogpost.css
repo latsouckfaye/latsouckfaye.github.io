@@ -1,0 +1,20 @@
+/* Habillage léger et partagé pour toutes les pages d'articles de blog/*.
+   Chargé via blog/_metadata.yml, pas de mise en page custom à refaire par article. */
+:root{--bp-blue:#5B8FE8;--bp-coral:#E08767;--bp-third:#E3B341;--bp-green:#3FBF7F;--bp-panel:#131A23;--bp-line:rgba(255,255,255,.1);--bp-muted:#97A3B0}
+body.quarto-light{--bp-blue:#2F63C7;--bp-coral:#C4643F;--bp-third:#9A6700;--bp-green:#1E8F52;--bp-panel:#F7F8FA;--bp-line:rgba(0,0,0,.12);--bp-muted:#5B646E}
+
+.postcat{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:20px;margin:0 0 14px;border:1px solid currentColor}
+.postcat.data{color:var(--bp-blue)}
+.postcat.finance{color:var(--bp-coral)}
+.postcat.projets{color:var(--bp-third)}
+
+.tldr{margin:0 0 24px;padding:14px 18px;border-left:3px solid var(--bp-blue);border-radius:6px;background:var(--bp-panel);font-size:14px;line-height:1.6}
+.tldr strong{color:var(--bp-blue)}
+
+.relatedproject{display:flex;align-items:center;gap:12px;margin:28px 0;padding:14px 18px;border:1px solid var(--bp-line);border-radius:12px;background:var(--bp-panel);font-size:14px}
+.relatedproject i{color:var(--bp-blue);font-size:16px}
+.relatedproject a{color:inherit;font-weight:600;text-decoration:none}
+.relatedproject a:hover{color:var(--bp-blue)}
+
+.posttags{margin:36px 0 0;padding-top:16px;border-top:1px solid var(--bp-line)}
+.posttags .tag{display:inline-block;font-size:11px;color:var(--bp-muted);background:var(--bp-panel);border:1px solid var(--bp-line);border-radius:14px;padding:3px 10px;margin:0 6px 6px 0}
