@@ -7,6 +7,8 @@
 
 /.quarto/
 _environment.local
+__pycache__/
+*.pyc
 
 **/*.quarto_ipynb
 
