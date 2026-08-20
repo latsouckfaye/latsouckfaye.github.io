@@ -1,15 +1,15 @@
 ---
-title: "Méthodes d'échantillonnage stratégique"
-description: "Échantillonnage spatial par couverture (k-means) et par complexité du terrain (médoïdes), appliqués à la cartographie de récifs coralliens — en R et en Python."
-pagetitle: "Échantillonnage stratégique — Tutoriels — Paul Faye"
+title: "Strategic sampling methods"
+description: "Spatial sampling by coverage (k-means) and by terrain complexity (medoids), applied to coral reef mapping — in R and in Python."
+pagetitle: "Strategic sampling — Tutorials — Paul Faye"
 author: "Paul Faye"
 date: 2026-08-19
-categories: [Analyse spatiale, Échantillonnage, Géomorphologie, R, Python]
+categories: [Spatial analysis, Sampling, Geomorphology, R, Python]
 image: Geyser_cds.png
 toc: true
-toc-title: "Sommaire"
+toc-title: "Contents"
 code-fold: true
-code-summary: "Afficher le code"
+code-summary: "Show code"
 code-copy: true
 theme:
   dark: [darkly, ../../styles-dark.scss]
@@ -18,6 +18,7 @@ include-after-body: ../../assets/navlang-include.html
 format: live-html
 engine: jupyter
 bibliography: references.bib
+lang: en
 ---
 
 ```{=html}
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 (function(){
   var PAIR = {fr: "echantillonnage.html", en: "echantillonnage-en.html"};
-  var THIS_LANG = "fr";
+  var THIS_LANG = "en";
   var firstLangEvent = true;
   window.addEventListener("sitelangchange", function(e){
     if(firstLangEvent){ firstLangEvent = false; return; }
@@ -70,38 +71,38 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 ```
 
-[← Retour aux tutoriels](../../tutoriels.qmd)
+[← Back to tutorials](../../tutoriels.qmd)
 
-## Le problème
+## The problem
 
-Choisir où échantillonner sur le terrain n'est pas anodin : un tirage aléatoire simple peut sur-représenter certaines zones et en laisser d'autres complètement absentes, surtout quand la zone d'étude est irrégulière. Il faut un plan d'échantillonnage qui garantisse une **couverture spatiale homogène** — ou, mieux encore, qui concentre l'effort là où le terrain est le plus complexe, donc le plus difficile à prédire.
+Choosing where to sample in the field is not a trivial matter: simple random sampling can over-represent some zones and leave others completely absent, especially when the study area is irregular. What's needed is a sampling design that guarantees **homogeneous spatial coverage** — or, better still, that concentrates effort where the terrain is most complex, and therefore hardest to predict.
 
-Le code et les fonctions utilisées ici sont ceux employés pour constituer les données d'entraînement du modèle décrit dans [« Cartographie grande échelle »](../../projets.qmd) sur la page Travaux, appliqués à une zone récifale réelle (le banc du Geyser, à Mayotte). Choisissez le langage qui vous intéresse ci-dessous.
+The code and functions used here are the ones employed to build the training data for the model described in [“Large-scale mapping”](../../projets.qmd) on the Work page, applied to a real reef area (the Geyser bank, off Mayotte). Pick the language you're interested in below.
 
 ```{=html}
-<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<div class="langtoggle" role="group" aria-label="Choose language">
 <span class="langtoggle-indicator" id="langIndicator"></span>
 <button type="button" data-lang="r" aria-pressed="true">R</button>
 <button type="button" data-lang="python" aria-pressed="false">Python</button>
 </div>
 ```
 
-::: {.callout-note title="En bref"}
-- **SCS-KMeans** : k-means sur les coordonnées d'une grille régulière — couverture uniforme, les points échantillonnés sont les centres des clusters.
-- **SCS-CLARA** : même objectif, mais chaque point échantillonné est une vraie cellule du terrain (son médoïde), pas un centre calculé — c'est l'algorithme CLARA/PAM en R.
-- **CD-CLARA** *(complexity-dependent)* : le clustering se fait sur la profondeur et la rugosité du terrain plutôt que sur les coordonnées — l'échantillonnage se concentre là où le relief est le plus complexe.
+::: {.callout-note title="In short"}
+- **SCS-KMeans**: k-means on the coordinates of a regular grid — uniform coverage, sampled points are the cluster centers.
+- **SCS-CLARA**: same goal, but each sampled point is an actual cell of the terrain (its medoid), not a computed center — this is the CLARA/PAM algorithm in R.
+- **CD-CLARA** *(complexity-dependent)*: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.
 :::
 
-## La méthode
+## The method
 
-Le terrain est décrit par un raster réel à 50 m de résolution (profondeur et rugosité, entre autres variables), sur lequel les trois méthodes sont appliquées.
+The terrain is described by a real raster at 50 m resolution (depth and roughness, among other variables), on which the three methods are applied.
 
 ::: {.lang-block .lang-r}
 
-::: {.callout-tip collapse="true" title="Prérequis techniques"}
-Packages R : `raster`, `terra`, `sf`, `sp`, `ggplot2`, `ggspatial`, `ggnewscale`. Les fonctions `scsKM`, `scsCLARA`, `cdCLARA` et `plotPoints` sont publiées séparément sur Zenodo.
+::: {.callout-tip collapse="true" title="Technical prerequisites"}
+R packages: `raster`, `terra`, `sf`, `sp`, `ggplot2`, `ggspatial`, `ggnewscale`. The functions `scsKM`, `scsCLARA`, `cdCLARA`, and `plotPoints` are published separately on Zenodo.
 
-[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+[<i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
 :::
 
 ```r
@@ -111,12 +112,12 @@ library(ggplot2)
 library(ggspatial)
 library(ggnewscale)
 
-source("scs-kmeans.R")   # scsKM()   : k-means sur les coordonnées
-source("scs-clara.R")    # scsCLARA(): médoïdes (CLARA) sur les coordonnées
-source("cd-clara.R")     # cdCLARA() : médoïdes (CLARA) sur profondeur + rugosité
+source("scs-kmeans.R")   # scsKM()   : k-means on coordinates
+source("scs-clara.R")    # scsCLARA(): medoids (CLARA) on coordinates
+source("cd-clara.R")     # cdCLARA() : medoids (CLARA) on depth + roughness
 source("sample-points-plot.R")
 
-# Raster réel du terrain (50 m de résolution) : profondeur, rugosité, ...
+# Real terrain raster (50 m resolution): depth, roughness, ...
 Terrain_Attr_50 <- terra::rast("50m_rast_Attr2.tif")
 Terrain_Attr_50_df <- as.data.frame(Terrain_Attr_50, xy = TRUE)
 names(Terrain_Attr_50_df) <- append(c("Longitude", "Latitude"), all_predicteurs)
@@ -133,19 +134,19 @@ Roughness_plot <- ggplot(shp2) +
 ```
 
 ::: {layout-ncol="2"}
-![Profondeur](Geyser_depth.png)
+![Depth](Geyser_depth.png)
 
-![Rugosité](Geyser_rough.png)
+![Roughness](Geyser_rough.png)
 :::
 
-Ces deux variables — profondeur et rugosité — décrivent la complexité du relief : c'est sur elles que se base l'échantillonnage CD-CLARA, alors que SCS-KMeans et SCS-CLARA ignorent le relief et ne considèrent que la position géographique.
+These two variables — depth and roughness — describe the complexity of the relief: they are what CD-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.
 
 :::
 
 ::: {.lang-block .lang-python}
 
-::: {.callout-tip collapse="true" title="Prérequis techniques"}
-Seuls `numpy`, `matplotlib` et `scikit-learn` sont nécessaires. Le raster source est un GeoTIFF multi-bandes compressé LZW, illisible par les librairies géospatiales habituelles indisponibles ici (`rasterio`, `GDAL`) — un petit lecteur TIFF/LZW pur Python s'en charge à la place. Code complet : [`terrain_reader.py`](terrain_reader.py), [`sampling.py`](sampling.py).
+::: {.callout-tip collapse="true" title="Technical prerequisites"}
+Only `numpy`, `matplotlib`, and `scikit-learn` are needed. The source raster is an LZW-compressed multi-band GeoTIFF, unreadable by the usual geospatial libraries unavailable here (`rasterio`, `GDAL`) — a small pure-Python TIFF/LZW reader handles it instead. Full code: [`terrain_reader.py`](terrain_reader.py), [`sampling.py`](sampling.py).
 :::
 
 ```{python}
@@ -156,33 +157,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 from terrain_reader import read_tiff_bands, read_geotransform, utm_to_latlon
 
-# Raster réel du terrain (50 m de résolution, 9 bandes) : bande 0 = profondeur, bande 1 = rugosité
+# Real terrain raster (50 m resolution, 9 bands): band 0 = depth, band 1 = roughness
 bands = read_tiff_bands("50m_rast_Attr2.tif")
 depth, rough = bands[0], bands[1]
 H, W = depth.shape
 
-# Géoréférencement réel (UTM 38S), lu dans les tags du GeoTIFF : la ligne 0 est le nord
+# Real georeferencing (UTM 38S), read from the GeoTIFF's own tags: row 0 is north
 scale_x, scale_y, tie_x, tie_y = read_geotransform("50m_rast_Attr2.tif")
 rows, cols = np.mgrid[0:H, 0:W]
 EASTING, NORTHING = tie_x + cols * scale_x, tie_y - rows * scale_y
 LAT, LON = utm_to_latlon(EASTING, NORTHING)
 
 valid = ~np.isnan(depth) & ~np.isnan(rough)
-coords = np.column_stack([EASTING[valid], NORTHING[valid]])  # mètres UTM, pour le clustering
-lonlat = np.column_stack([LON[valid], LAT[valid]])           # degrés, pour l'affichage
+coords = np.column_stack([EASTING[valid], NORTHING[valid]])  # UTM meters, for clustering
+lonlat = np.column_stack([LON[valid], LAT[valid]])           # degrees, for display
 complexity = np.column_stack([depth[valid], rough[valid]])
 ```
 
 ```{python}
 #| label: fig-methode
-#| fig-cap: "Profondeur et rugosité du terrain réel (banc du Geyser)"
+#| fig-cap: "Depth and roughness of the real terrain (Geyser bank)"
 #| code-fold: true
 fig, axes = plt.subplots(1, 2, figsize=(9, 4))
 sc0 = axes[0].scatter(lonlat[:, 0], lonlat[:, 1], c=depth[valid], cmap="terrain", s=2)
-axes[0].set_title("Profondeur", fontsize=10)
+axes[0].set_title("Depth", fontsize=10)
 fig.colorbar(sc0, ax=axes[0], shrink=0.8)
 sc1 = axes[1].scatter(lonlat[:, 0], lonlat[:, 1], c=rough[valid], cmap="Blues", s=2)
-axes[1].set_title("Rugosité", fontsize=10)
+axes[1].set_title("Roughness", fontsize=10)
 fig.colorbar(sc1, ax=axes[1], shrink=0.8)
 for ax in axes:
     ax.set_aspect("equal"); ax.set_xlabel("Longitude"); ax.set_ylabel("Latitude")
@@ -194,9 +195,9 @@ plt.show()
 
 :::
 
-## Les résultats
+## The results
 
-Les trois méthodes sont appliquées à la même zone, avec le même nombre de points échantillonnés (K = 50), mais des critères différents : couvrir uniformément l'espace, ou se concentrer sur le relief complexe.
+The three methods are applied to the same area, with the same number of sampled points (K = 50), but different criteria: covering the space uniformly, or concentrating on complex relief.
 
 ::: {.lang-block .lang-r}
 
@@ -219,7 +220,7 @@ pvtcdcl <- cdCLARA(data = Terrain_Attr_50_df, var1 = c("Longitude", "Latitude"),
 ![CD-CLARA](Geyser_cds.png)
 :::
 
-Les deux premières méthodes produisent une grille de points régulièrement espacés sur toute la zone. La troisième s'en écarte nettement : les points se resserrent le long des bords, là où la rugosité est la plus forte.
+The first two methods produce a grid of points regularly spaced across the whole area. The third departs from that clearly: points cluster along the edges, where roughness is highest.
 
 :::
 
@@ -243,7 +244,7 @@ print("CD-CLARA    :", cd_clara_pts.shape[0], "points")
 
 ```{python}
 #| label: fig-sampling
-#| fig-cap: "Points échantillonnés par les trois méthodes, sur fond de rugosité"
+#| fig-cap: "Points sampled by the three methods, over a roughness background"
 #| code-fold: true
 def to_lonlat(pts_utm):
     lat_p, lon_p = utm_to_latlon(pts_utm[:, 0], pts_utm[:, 1])
@@ -265,28 +266,28 @@ plt.show()
 
 :::
 
-Les deux premières méthodes produisent une grille de points régulièrement espacés sur toute la zone. La troisième s'en écarte nettement : les points se resserrent le long des bords, là où la rugosité est la plus forte.
+The first two methods produce a grid of points regularly spaced across the whole area. The third departs from that clearly: points cluster along the edges, where roughness is highest.
 
-::: {.callout-tip title="Détail : ce que minimise le k-means"}
+::: {.callout-tip title="Detail: what k-means minimizes"}
 $$
 MSSD = \frac{1}{N}\sum_{i=1}^{N} \min_{k} \lVert x_i - c_k \rVert^2
 $$
 
-où $x_i$ sont les cellules du terrain et $c_k$ les $K$ points échantillonnés : le k-means choisit les $c_k$ qui minimisent la distance quadratique moyenne au point échantillonné le plus proche — d'où la couverture régulière. **SCS-CLARA** et **CD-CLARA** reprennent ce même critère, mais imposent en plus que chaque $c_k$ soit une cellule réelle du terrain (un médoïde), pas un centre recalculé.
+where $x_i$ are the terrain cells and $c_k$ the $K$ sampled points: k-means chooses the $c_k$ that minimize the average squared distance to the nearest sampled point — hence the regular coverage. **SCS-CLARA** and **CD-CLARA** use this same criterion, but additionally require each $c_k$ to be an actual cell of the terrain (a medoid), not a recomputed center.
 :::
 
-## Testez par vous-même
+## Try it yourself
 
-Le calcul réel ci-dessus porte sur plus de 100 000 cellules — trop pour un navigateur. Voici la même idée sur un petit nuage de 16 points en 2D, regroupés en 3 amas visibles à l'œil nu : modifiez `k` et cliquez sur *Exécuter* pour voir quels points sont retenus comme échantillons.
+The actual computation above covers over 100,000 cells — too many for a browser. Here is the same idea on a small cloud of 16 points in 2D, grouped into 3 visually distinct clusters: change `k` and click *Run* to see which points get chosen as samples.
 
 ::: {.callout-warning}
-Version simplifiée à but pédagogique, sur un exemple jouet — le calcul réel sur les données complètes est celui de la section précédente.
+Simplified version for teaching purposes, on a toy example — the real computation on the full data is the one from the previous section.
 :::
 
 ::: {.lang-block .lang-r}
 
-::: {.callout-note title="Ce que fait ce code"}
-16 points 2D sont regroupés en `k` amas : l'algorithme alterne entre l'affectation de chaque point au centre le plus proche et le recalcul des centres, jusqu'à convergence — puis retient, pour chaque amas, le point réellement observé le plus proche de son centre (le médoïde), plutôt que le centre lui-même qui n'est en général pas un point du jeu de données. Changez `k` et relancez pour voir le découpage en amas s'adapter.
+::: {.callout-note title="What this code does"}
+16 2D points are grouped into `k` clusters: the algorithm alternates between assigning each point to its nearest center and recomputing the centers, until convergence — then, for each cluster, keeps the actual observed point closest to its center (the medoid), rather than the center itself, which is generally not a point in the dataset. Change `k` and rerun to see the clustering adapt.
 :::
 
 ```{webr}
@@ -321,7 +322,7 @@ kmeans_medoids <- function(pts, k, iters = 20) {
   pts[medoids, , drop = FALSE]
 }
 
-cat("Points échantillonnés :\n")
+cat("Sampled points:\n")
 print(kmeans_medoids(pts, k))
 ```
 
@@ -329,8 +330,8 @@ print(kmeans_medoids(pts, k))
 
 ::: {.lang-block .lang-python}
 
-::: {.callout-note title="Ce que fait ce code"}
-16 points 2D sont regroupés en `k` amas : l'algorithme alterne entre l'affectation de chaque point au centre le plus proche et le recalcul des centres, jusqu'à convergence — puis retient, pour chaque amas, le point réellement observé le plus proche de son centre (le médoïde), plutôt que le centre lui-même qui n'est en général pas un point du jeu de données. Changez `k` et relancez pour voir le découpage en amas s'adapter.
+::: {.callout-note title="What this code does"}
+16 2D points are grouped into `k` clusters: the algorithm alternates between assigning each point to its nearest center and recomputing the centers, until convergence — then, for each cluster, keeps the actual observed point closest to its center (the medoid), rather than the center itself, which is generally not a point in the dataset. Change `k` and rerun to see the clustering adapt.
 :::
 
 ```{pyodide}
@@ -365,23 +366,23 @@ def kmeans_medoids(pts, k, iters=20, seed=1):
         medoids.append(idx[np.argmin(dd)])
     return pts[medoids]
 
-print("Points échantillonnés :")
+print("Sampled points:")
 print(kmeans_medoids(pts, k))
 ```
 
 :::
 
-## Pour aller plus loin
+## Go further
 
 :::: {.d-flex .gap-2 .flex-wrap style="margin:14px 0 28px"}
-[<i class="bi bi-github"></i> Code R sur GitHub](https://github.com/latsouckfaye/SpatialSampling){.btn .btn-outline-secondary role="button" target="_blank"}
-[<i class="bi bi-github"></i> Code Python sur GitHub](https://github.com/latsouckfaye/SpatialSampling/tree/main/python){.btn .btn-outline-secondary role="button" target="_blank"}
-[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
-[<i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »](../../projets.qmd){.btn .btn-outline-secondary role="button"}
-[<i class="bi bi-door-open"></i> Retour aux tutoriels](../../tutoriels.qmd){.btn .btn-outline-secondary role="button"}
+[<i class="bi bi-github"></i> R code on GitHub](https://github.com/latsouckfaye/SpatialSampling){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-github"></i> Python code on GitHub](https://github.com/latsouckfaye/SpatialSampling/tree/main/python){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+[<i class="bi bi-door-open"></i> View the “Large-scale mapping” project](../../projets.qmd){.btn .btn-outline-secondary role="button"}
+[<i class="bi bi-door-open"></i> Back to tutorials](../../tutoriels.qmd){.btn .btn-outline-secondary role="button"}
 ::::
 
-Ces méthodes d'échantillonnage ont servi à constituer les données d'entraînement du modèle de cartographie géomorphologique automatique décrit dans @FaDa2024.
+These sampling methods were used to build the training data for the automatic geomorphological mapping model described in @FaDa2024.
 
 ::: {#refs}
 :::

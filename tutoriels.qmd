@@ -75,7 +75,6 @@ body.tutmodal-lock{overflow:hidden}
 <div class="hero">
 <p class="h1" data-en="Tutorials" data-title-en="Tutorials — Paul Faye">Tutoriels</p>
 <p class="ld" data-en="Reproducible notebooks applying statistics and machine learning to real cases — in Python and R, from preprocessing to validation.">Des notebooks reproductibles pour appliquer la statistique et l'apprentissage automatique à des cas concrets — en Python et en R, du prétraitement à la validation.</p>
-<p class="en-note" data-en="The tutorials themselves are still French-only — translation coming.">Les tutoriels eux-mêmes restent pour l'instant en français — traduction à venir.</p>
 <div class="cta">
 <a class="btn" href="index.qmd"><span data-en="Back to home">Retour à l'accueil</span> <i class="bi bi-door-open"></i></a>
 <a class="btn" href="https://github.com/latsouckfaye" target="_blank" rel="noopener"><span data-en="See my GitHub">Voir mon GitHub</span> <i class="bi bi-door-open"></i></a>
@@ -240,7 +239,8 @@ function render(){
     var langPills=t.langs.map(function(l){
       var lm=LANG_META[l.lang];
       if(l.readLink){
-        return "<a class='tutlang' href='"+l.readLink+"' data-title='"+tr.title+" — "+lm.label+"' style='--pc:"+lm.col+"'>"+lm.label+"</a>";
+        var href = curLang==="en" ? l.readLink.replace(".html", "-en.html") : l.readLink;
+        return "<a class='tutlang' href='"+href+"' data-title='"+tr.title+" — "+lm.label+"' style='--pc:"+lm.col+"'>"+lm.label+"</a>";
       }
       var suffix = curLang==="en" ? (l.status==="redaction"?" — being written":" — coming soon") : (l.status==="redaction"?" — en cours de rédaction":" — à venir");
       var title=lm.label+suffix;

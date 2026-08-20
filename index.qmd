@@ -143,7 +143,7 @@ freeze: false
 <p class="panelhint reveal" data-en="Complete notebooks, in Python and R, from preprocessing to validation — not just the result, the whole approach.">Des notebooks complets, en Python et en R, du prétraitement à la validation — pas seulement le résultat, toute la démarche.</p>
 <p class="roleline reveal" id="roleTypeTutoriels" style="color:var(--coral)"></p>
 <div class="showcase">
-<a class="showrow media reveal" href="tutoriels/comparer-cartes/comparer-cartes.html" style="--hc:var(--coral)">
+<a class="showrow media reveal" id="tutlinkCartes" href="tutoriels/comparer-cartes/comparer-cartes.html" style="--hc:var(--coral)">
 <div class="showcontent">
 <div class="showimg"><img id="showimgCartes" src="tutoriels/comparer-cartes/refmap.png" alt="Carte géomorphologique de référence, utilisée pour illustrer la comparaison de cartes à différentes résolutions spatiales" loading="lazy"></div>
 <div class="showbody">
@@ -153,7 +153,7 @@ freeze: false
 </div>
 </div>
 </a>
-<a class="showrow media reveal" href="tutoriels/echantillonnage/echantillonnage.html" style="--hc:var(--coral)">
+<a class="showrow media reveal" id="tutlinkEch" href="tutoriels/echantillonnage/echantillonnage.html" style="--hc:var(--coral)">
 <div class="showcontent">
 <div class="showimg"><img id="showimgEch" src="tutoriels/echantillonnage/Geyser_cds.png" alt="Carte d'échantillonnage spatial par couverture, utilisée pour illustrer les méthodes d'échantillonnage stratégique" loading="lazy"></div>
 <div class="showbody">
@@ -248,6 +248,14 @@ var IMG_ALT_EN = {
   showimgCartes: "Reference geomorphological map, used to illustrate the comparison of maps at different spatial resolutions",
   showimgEch: "Coverage-based spatial sampling map, used to illustrate strategic sampling methods"
 };
+var TUT_LINKS_FR = {
+  tutlinkCartes: "tutoriels/comparer-cartes/comparer-cartes.html",
+  tutlinkEch: "tutoriels/echantillonnage/echantillonnage.html"
+};
+var TUT_LINKS_EN = {
+  tutlinkCartes: "tutoriels/comparer-cartes/comparer-cartes-en.html",
+  tutlinkEch: "tutoriels/echantillonnage/echantillonnage-en.html"
+};
 function applyHomeLang(lang){
   var words = lang==="en" ? TYPEWORDS_EN : TYPEWORDS_FR;
   Object.keys(words).forEach(function(id){ startTypewriter(id, words[id]); });
@@ -255,6 +263,11 @@ function applyHomeLang(lang){
   Object.keys(alts).forEach(function(id){
     var img = document.getElementById(id);
     if(img) img.setAttribute("alt", alts[id]);
+  });
+  var links = lang==="en" ? TUT_LINKS_EN : TUT_LINKS_FR;
+  Object.keys(links).forEach(function(id){
+    var a = document.getElementById(id);
+    if(a) a.setAttribute("href", links[id]);
   });
 }
 applyHomeLang((window.localStorage && localStorage.getItem("site-lang")) || "fr");

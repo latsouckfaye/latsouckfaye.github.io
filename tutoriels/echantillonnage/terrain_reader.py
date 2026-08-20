@@ -112,3 +112,53 @@ def read_tiff_bands(path):
         band[band <= NODATA] = np.nan
         bands.append(band)
     return bands
+
+
+def read_geotransform(path):
+    """Return (scale_x, scale_y, tie_x, tie_y): the pixel size in meters and
+    the projected (UTM) coordinate of the top-left pixel, read from the
+    GeoTIFF's ModelPixelScaleTag (33550) / ModelTiepointTag (33922)."""
+    with open(path, "rb") as f:
+        data = f.read()
+    endian = "<" if data[0:2] == b"II" else ">"
+    ifd_offset = struct.unpack(endian + "I", data[4:8])[0]
+    e = _read_ifd(data, ifd_offset, endian)
+    scale_x, scale_y, _ = struct.unpack(endian + "3d", e[33550][:24])
+    _, _, _, tie_x, tie_y, _ = struct.unpack(endian + "6d", e[33922][:48])
+    return scale_x, scale_y, tie_x, tie_y
+
+
+def utm_to_latlon(easting, northing, zone=38, southern=True):
+    """Inverse UTM projection (WGS84 ellipsoid), pure numpy — no pyproj/GDAL.
+    Standard Snyder (1987) closed-form formulas. Accepts scalars or arrays."""
+    easting = np.asarray(easting, dtype=np.float64)
+    northing = np.asarray(northing, dtype=np.float64)
+    a = 6378137.0
+    f = 1 / 298.257223563
+    e2 = f * (2 - f)
+    k0 = 0.9996
+    e1 = (1 - np.sqrt(1 - e2)) / (1 + np.sqrt(1 - e2))
+    x = easting - 500000.0
+    y = northing - 10000000.0 if southern else northing
+    lon0 = np.radians(-183 + 6 * zone)
+
+    M = y / k0
+    mu = M / (a * (1 - e2 / 4 - 3 * e2**2 / 64 - 5 * e2**3 / 256))
+    phi1 = (mu + (3 * e1 / 2 - 27 * e1**3 / 32) * np.sin(2 * mu)
+            + (21 * e1**2 / 16 - 55 * e1**4 / 32) * np.sin(4 * mu)
+            + (151 * e1**3 / 96) * np.sin(6 * mu)
+            + (1097 * e1**4 / 512) * np.sin(8 * mu))
+
+    N1 = a / np.sqrt(1 - e2 * np.sin(phi1)**2)
+    T1 = np.tan(phi1)**2
+    C1 = e2 * np.cos(phi1)**2 / (1 - e2)
+    R1 = a * (1 - e2) / (1 - e2 * np.sin(phi1)**2)**1.5
+    D = x / (N1 * k0)
+
+    lat = phi1 - (N1 * np.tan(phi1) / R1) * (
+        D**2 / 2
+        - (5 + 3 * T1 + 10 * C1 - 4 * C1**2 - 9 * e2) * D**4 / 24
+        + (61 + 90 * T1 + 298 * C1 + 45 * T1**2 - 252 * e2 - 3 * C1**2) * D**6 / 720)
+    lon = lon0 + (D - (1 + 2 * T1 + C1) * D**3 / 6
+                  + (5 - 2 * C1 + 28 * T1 - 3 * C1**2 + 8 * e2 + 24 * T1**2) * D**5 / 120) / np.cos(phi1)
+    return np.degrees(lat), np.degrees(lon)

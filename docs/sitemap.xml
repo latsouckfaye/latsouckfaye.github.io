@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://latsouckfaye.github.io/tutoriels.html</loc>
-    <lastmod>2026-08-20T16:52:20.949Z</lastmod>
+    <lastmod>2026-08-20T17:46:19.000Z</lastmod>
   </url>
   <url>
-    <loc>https://latsouckfaye.github.io/tutoriels/comparer-cartes/comparer-cartes.html</loc>
-    <lastmod>2026-08-20T15:37:54.929Z</lastmod>
+    <loc>https://latsouckfaye.github.io/tutoriels/echantillonnage/echantillonnage-en.html</loc>
+    <lastmod>2026-08-20T19:11:00.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://latsouckfaye.github.io/tutoriels/comparer-cartes/comparer-cartes-en.html</loc>
+    <lastmod>2026-08-20T18:24:38.278Z</lastmod>
   </url>
   <url>
     <loc>https://latsouckfaye.github.io/portfolio.html</loc>
@@ -14,7 +18,7 @@
   </url>
   <url>
     <loc>https://latsouckfaye.github.io/index.html</loc>
-    <lastmod>2026-08-20T17:18:16.574Z</lastmod>
+    <lastmod>2026-08-20T19:19:08.913Z</lastmod>
   </url>
   <url>
     <loc>https://latsouckfaye.github.io/blog.html</loc>
@@ -29,7 +33,11 @@
     <lastmod>2026-08-20T16:38:11.773Z</lastmod>
   </url>
   <url>
+    <loc>https://latsouckfaye.github.io/tutoriels/comparer-cartes/comparer-cartes.html</loc>
+    <lastmod>2026-08-20T18:24:28.786Z</lastmod>
+  </url>
+  <url>
     <loc>https://latsouckfaye.github.io/tutoriels/echantillonnage/echantillonnage.html</loc>
-    <lastmod>2026-08-20T15:38:20.701Z</lastmod>
+    <lastmod>2026-08-20T19:10:50.213Z</lastmod>
   </url>
 </urlset>

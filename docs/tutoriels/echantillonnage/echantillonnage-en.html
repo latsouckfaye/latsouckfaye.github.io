@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Paul Faye">
-<meta name="description" content="Échantillonnage spatial par couverture (k-means) et par complexité du terrain (médoïdes), appliqués à la cartographie de récifs coralliens — en R et en Python.">
+<meta name="dcterms.date" content="2026-08-19">
+<meta name="description" content="Spatial sampling by coverage (k-means) and by terrain complexity (medoids), applied to coral reef mapping — in R and in Python.">
 
-<title>Échantillonnage stratégique — Tutoriels — Paul Faye – Paul Faye</title>
+<title>Strategic sampling — Tutorials — Paul Faye – Paul Faye</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -120,17 +121,17 @@ div.csl-indent {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Pas de résultats",
-    "search-matching-documents-text": "documents trouvés",
-    "search-copy-link-title": "Copier le lien vers la recherche",
-    "search-hide-matches-text": "Cacher les correspondances additionnelles",
-    "search-more-match-text": "correspondance de plus dans ce document",
-    "search-more-matches-text": "correspondances de plus dans ce document",
-    "search-clear-button-title": "Effacer",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer",
-    "search-label": "Recherche"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
@@ -340,9 +341,9 @@ window.Quarto = {
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Basculer le mode sombre"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Recherche"></div>
+          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -352,14 +353,14 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sommaire</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#le-problème" id="toc-le-problème" class="nav-link active" data-scroll-target="#le-problème">Le problème</a></li>
-  <li><a href="#la-méthode" id="toc-la-méthode" class="nav-link" data-scroll-target="#la-méthode">La méthode</a></li>
-  <li><a href="#les-résultats" id="toc-les-résultats" class="nav-link" data-scroll-target="#les-résultats">Les résultats</a></li>
-  <li><a href="#testez-par-vous-même" id="toc-testez-par-vous-même" class="nav-link" data-scroll-target="#testez-par-vous-même">Testez par vous-même</a></li>
-  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a></li>
+  <li><a href="#the-method" id="toc-the-method" class="nav-link" data-scroll-target="#the-method">The method</a></li>
+  <li><a href="#the-results" id="toc-the-results" class="nav-link" data-scroll-target="#the-results">The results</a></li>
+  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself">Try it yourself</a></li>
+  <li><a href="#go-further" id="toc-go-further" class="nav-link" data-scroll-target="#go-further">Go further</a></li>
   </ul>
 </nav>
     </div>
@@ -369,11 +370,11 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Méthodes d’échantillonnage stratégique</h1>
+<h1 class="title">Strategic sampling methods</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Analyse spatiale</div>
-    <div class="quarto-category">Échantillonnage</div>
-    <div class="quarto-category">Géomorphologie</div>
+    <div class="quarto-category">Spatial analysis</div>
+    <div class="quarto-category">Sampling</div>
+    <div class="quarto-category">Geomorphology</div>
     <div class="quarto-category">R</div>
     <div class="quarto-category">Python</div>
   </div>
@@ -381,7 +382,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Échantillonnage spatial par couverture (k-means) et par complexité du terrain (médoïdes), appliqués à la cartographie de récifs coralliens — en R et en Python.
+    Spatial sampling by coverage (k-means) and by terrain complexity (medoids), applied to coral reef mapping — in R and in Python.
   </div>
 </div>
 
@@ -389,16 +390,16 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
              <p>Paul Faye </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19 août 2026</p>
+      <p class="date">August 19, 2026</p>
     </div>
   </div>
   
@@ -447,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 (function(){
   var PAIR = {fr: "echantillonnage.html", en: "echantillonnage-en.html"};
-  var THIS_LANG = "fr";
+  var THIS_LANG = "en";
   var firstLangEvent = true;
   window.addEventListener("sitelangchange", function(e){
     if(firstLangEvent){ firstLangEvent = false; return; }
@@ -457,52 +458,52 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 })();
 </script>
-<p><a href="../../tutoriels.html">← Retour aux tutoriels</a></p>
-<section id="le-problème" class="level2">
-<h2 class="anchored" data-anchor-id="le-problème">Le problème</h2>
-<p>Choisir où échantillonner sur le terrain n’est pas anodin : un tirage aléatoire simple peut sur-représenter certaines zones et en laisser d’autres complètement absentes, surtout quand la zone d’étude est irrégulière. Il faut un plan d’échantillonnage qui garantisse une <strong>couverture spatiale homogène</strong> — ou, mieux encore, qui concentre l’effort là où le terrain est le plus complexe, donc le plus difficile à prédire.</p>
-<p>Le code et les fonctions utilisées ici sont ceux employés pour constituer les données d’entraînement du modèle décrit dans <a href="../../projets.html">« Cartographie grande échelle »</a> sur la page Travaux, appliqués à une zone récifale réelle (le banc du Geyser, à Mayotte). Choisissez le langage qui vous intéresse ci-dessous.</p>
-<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<p><a href="../../tutoriels.html">← Back to tutorials</a></p>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
+<p>Choosing where to sample in the field is not a trivial matter: simple random sampling can over-represent some zones and leave others completely absent, especially when the study area is irregular. What’s needed is a sampling design that guarantees <strong>homogeneous spatial coverage</strong> — or, better still, that concentrates effort where the terrain is most complex, and therefore hardest to predict.</p>
+<p>The code and functions used here are the ones employed to build the training data for the model described in <a href="../../projets.html">“Large-scale mapping”</a> on the Work page, applied to a real reef area (the Geyser bank, off Mayotte). Pick the language you’re interested in below.</p>
+<div class="langtoggle" role="group" aria-label="Choose language">
 <span class="langtoggle-indicator" id="langIndicator"></span>
 <button type="button" data-lang="r" aria-pressed="true">R</button>
 <button type="button" data-lang="python" aria-pressed="false">Python</button>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="En bref">
+<div class="callout callout-style-default callout-note callout-titled" title="In short">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>En bref
+<span class="screen-reader-only">Note</span>In short
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><strong>SCS-KMeans</strong> : k-means sur les coordonnées d’une grille régulière — couverture uniforme, les points échantillonnés sont les centres des clusters.</li>
-<li><strong>SCS-CLARA</strong> : même objectif, mais chaque point échantillonné est une vraie cellule du terrain (son médoïde), pas un centre calculé — c’est l’algorithme CLARA/PAM en R.</li>
-<li><strong>CD-CLARA</strong> <em>(complexity-dependent)</em> : le clustering se fait sur la profondeur et la rugosité du terrain plutôt que sur les coordonnées — l’échantillonnage se concentre là où le relief est le plus complexe.</li>
+<li><strong>SCS-KMeans</strong>: k-means on the coordinates of a regular grid — uniform coverage, sampled points are the cluster centers.</li>
+<li><strong>SCS-CLARA</strong>: same goal, but each sampled point is an actual cell of the terrain (its medoid), not a computed center — this is the CLARA/PAM algorithm in R.</li>
+<li><strong>CD-CLARA</strong> <em>(complexity-dependent)</em>: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="la-méthode" class="level2">
-<h2 class="anchored" data-anchor-id="la-méthode">La méthode</h2>
-<p>Le terrain est décrit par un raster réel à 50 m de résolution (profondeur et rugosité, entre autres variables), sur lequel les trois méthodes sont appliquées.</p>
+<section id="the-method" class="level2">
+<h2 class="anchored" data-anchor-id="the-method">The method</h2>
+<p>The terrain is described by a real raster at 50 m resolution (depth and roughness, among other variables), on which the three methods are applied.</p>
 <div class="lang-block lang-r">
-<div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
+<div class="callout callout-style-default callout-tip callout-titled" title="Technical prerequisites">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Prérequis techniques
+<span class="screen-reader-only">Tip</span>Technical prerequisites
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Packages R : <code>raster</code>, <code>terra</code>, <code>sf</code>, <code>sp</code>, <code>ggplot2</code>, <code>ggspatial</code>, <code>ggnewscale</code>. Les fonctions <code>scsKM</code>, <code>scsCLARA</code>, <code>cdCLARA</code> et <code>plotPoints</code> sont publiées séparément sur Zenodo.</p>
-<p><a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo</a></p>
+<p>R packages: <code>raster</code>, <code>terra</code>, <code>sf</code>, <code>sp</code>, <code>ggplot2</code>, <code>ggspatial</code>, <code>ggnewscale</code>. The functions <code>scsKM</code>, <code>scsCLARA</code>, <code>cdCLARA</code>, and <code>plotPoints</code> are published separately on Zenodo.</p>
+<p><a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo</a></p>
 </div>
 </div>
 </div>
@@ -512,12 +513,12 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggnewscale)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scs-kmeans.R"</span>)   <span class="co"># scsKM()   : k-means sur les coordonnées</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scs-clara.R"</span>)    <span class="co"># scsCLARA(): médoïdes (CLARA) sur les coordonnées</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"cd-clara.R"</span>)     <span class="co"># cdCLARA() : médoïdes (CLARA) sur profondeur + rugosité</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scs-kmeans.R"</span>)   <span class="co"># scsKM()   : k-means on coordinates</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scs-clara.R"</span>)    <span class="co"># scsCLARA(): medoids (CLARA) on coordinates</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"cd-clara.R"</span>)     <span class="co"># cdCLARA() : medoids (CLARA) on depth + roughness</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"sample-points-plot.R"</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Raster réel du terrain (50 m de résolution) : profondeur, rugosité, ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Real terrain raster (50 m resolution): depth, roughness, ...</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Terrain_Attr_50 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">"50m_rast_Attr2.tif"</span>)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Terrain_Attr_50_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(Terrain_Attr_50, <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Terrain_Attr_50_df) <span class="ot">&lt;-</span> <span class="fu">append</span>(<span class="fu">c</span>(<span class="st">"Longitude"</span>, <span class="st">"Latitude"</span>), all_predicteurs)</span>
@@ -530,14 +531,14 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Roughness_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(shp2) <span class="sc">+</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> Terrain_Attr_50_df, <span class="fu">aes</span>(Longitude, Latitude, <span class="at">fill =</span> rough)) <span class="sc">+</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="st">"Rough"</span>, <span class="at">colours =</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">5</span>, <span class="st">"Blues"</span>), <span class="at">na.value =</span> <span class="st">"gray"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="st">"Rough"</span>, <span class="at">colours =</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">5</span>, <span class="st">"Blues"</span>), <span class="at">na.value =</span> <span class="st">"gray"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Geyser_depth.png" class="img-fluid figure-img"></p>
-<figcaption>Profondeur</figcaption>
+<figcaption>Depth</figcaption>
 </figure>
 </div>
 </div>
@@ -545,82 +546,82 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Geyser_rough.png" class="img-fluid figure-img"></p>
-<figcaption>Rugosité</figcaption>
+<figcaption>Roughness</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>Ces deux variables — profondeur et rugosité — décrivent la complexité du relief : c’est sur elles que se base l’échantillonnage CD-CLARA, alors que SCS-KMeans et SCS-CLARA ignorent le relief et ne considèrent que la position géographique.</p>
+<p>These two variables — depth and roughness — describe the complexity of the relief: they are what CD-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.</p>
 </div>
 <div class="lang-block lang-python">
-<div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
+<div class="callout callout-style-default callout-tip callout-titled" title="Technical prerequisites">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Prérequis techniques
+<span class="screen-reader-only">Tip</span>Technical prerequisites
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Seuls <code>numpy</code>, <code>matplotlib</code> et <code>scikit-learn</code> sont nécessaires. Le raster source est un GeoTIFF multi-bandes compressé LZW, illisible par les librairies géospatiales habituelles indisponibles ici (<code>rasterio</code>, <code>GDAL</code>) — un petit lecteur TIFF/LZW pur Python s’en charge à la place. Code complet : <a href="terrain_reader.py"><code>terrain_reader.py</code></a>, <a href="sampling.py"><code>sampling.py</code></a>.</p>
+<p>Only <code>numpy</code>, <code>matplotlib</code>, and <code>scikit-learn</code> are needed. The source raster is an LZW-compressed multi-band GeoTIFF, unreadable by the usual geospatial libraries unavailable here (<code>rasterio</code>, <code>GDAL</code>) — a small pure-Python TIFF/LZW reader handles it instead. Full code: <a href="terrain_reader.py"><code>terrain_reader.py</code></a>, <a href="sampling.py"><code>sampling.py</code></a>.</p>
 </div>
 </div>
 </div>
 <div id="methode" class="cell" data-execution_count="1">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">"."</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> terrain_reader <span class="im">import</span> read_tiff_bands, read_geotransform, utm_to_latlon</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Raster réel du terrain (50 m de résolution, 9 bandes) : bande 0 = profondeur, bande 1 = rugosité</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Real terrain raster (50 m resolution, 9 bands): band 0 = depth, band 1 = roughness</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>bands <span class="op">=</span> read_tiff_bands(<span class="st">"50m_rast_Attr2.tif"</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>depth, rough <span class="op">=</span> bands[<span class="dv">0</span>], bands[<span class="dv">1</span>]</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>H, W <span class="op">=</span> depth.shape</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Géoréférencement réel (UTM 38S), lu dans les tags du GeoTIFF : la ligne 0 est le nord</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Real georeferencing (UTM 38S), read from the GeoTIFF's own tags: row 0 is north</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>scale_x, scale_y, tie_x, tie_y <span class="op">=</span> read_geotransform(<span class="st">"50m_rast_Attr2.tif"</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> np.mgrid[<span class="dv">0</span>:H, <span class="dv">0</span>:W]</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>EASTING, NORTHING <span class="op">=</span> tie_x <span class="op">+</span> cols <span class="op">*</span> scale_x, tie_y <span class="op">-</span> rows <span class="op">*</span> scale_y</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>LAT, LON <span class="op">=</span> utm_to_latlon(EASTING, NORTHING)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> <span class="op">~</span>np.isnan(depth) <span class="op">&amp;</span> <span class="op">~</span>np.isnan(rough)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> np.column_stack([EASTING[valid], NORTHING[valid]])  <span class="co"># mètres UTM, pour le clustering</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>lonlat <span class="op">=</span> np.column_stack([LON[valid], LAT[valid]])           <span class="co"># degrés, pour l'affichage</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>complexity <span class="op">=</span> np.column_stack([depth[valid], rough[valid]])</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> np.column_stack([EASTING[valid], NORTHING[valid]])  <span class="co"># UTM meters, for clustering</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>lonlat <span class="op">=</span> np.column_stack([LON[valid], LAT[valid]])           <span class="co"># degrees, for display</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>complexity <span class="op">=</span> np.column_stack([depth[valid], rough[valid]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="cell-fig-methode" class="cell" data-execution_count="2">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sc0 <span class="op">=</span> axes[<span class="dv">0</span>].scatter(lonlat[:, <span class="dv">0</span>], lonlat[:, <span class="dv">1</span>], c<span class="op">=</span>depth[valid], cmap<span class="op">=</span><span class="st">"terrain"</span>, s<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Profondeur"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Depth"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig.colorbar(sc0, ax<span class="op">=</span>axes[<span class="dv">0</span>], shrink<span class="op">=</span><span class="fl">0.8</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sc1 <span class="op">=</span> axes[<span class="dv">1</span>].scatter(lonlat[:, <span class="dv">0</span>], lonlat[:, <span class="dv">1</span>], c<span class="op">=</span>rough[valid], cmap<span class="op">=</span><span class="st">"Blues"</span>, s<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Rugosité"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Roughness"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fig.colorbar(sc1, ax<span class="op">=</span>axes[<span class="dv">1</span>], shrink<span class="op">=</span><span class="fl">0.8</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)<span class="op">;</span> ax.set_xlabel(<span class="st">"Longitude"</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">"Latitude"</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MaxNLocator(<span class="dv">4</span>))</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>, labelrotation<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-methode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-methode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="echantillonnage_files/figure-html/fig-methode-output-1.png" width="844" height="341" class="figure-img">
+<img src="echantillonnage-en_files/figure-html/fig-methode-output-1.png" width="844" height="340" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-methode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
+Figure&nbsp;1: Depth and roughness of the real terrain (Geyser bank)
 </figcaption>
 </figure>
 </div>
@@ -628,9 +629,9 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 </div>
 </div>
 </section>
-<section id="les-résultats" class="level2">
-<h2 class="anchored" data-anchor-id="les-résultats">Les résultats</h2>
-<p>Les trois méthodes sont appliquées à la même zone, avec le même nombre de points échantillonnés (K = 50), mais des critères différents : couvrir uniformément l’espace, ou se concentrer sur le relief complexe.</p>
+<section id="the-results" class="level2">
+<h2 class="anchored" data-anchor-id="the-results">The results</h2>
+<p>The three methods are applied to the same area, with the same number of sampled points (K = 50), but different criteria: covering the space uniformly, or concentrating on complex relief.</p>
 <div class="lang-block lang-r">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pvtscskm <span class="ot">&lt;-</span> <span class="fu">scsKM</span>(<span class="at">shp =</span> Geyser_bathy, <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"Longitude"</span>, <span class="st">"Latitude"</span>),</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">iter =</span> <span class="dv">12</span>, <span class="at">sampsize =</span> <span class="dv">50</span>, <span class="at">nT =</span> <span class="dv">10</span>)</span>
@@ -639,7 +640,7 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">iter =</span> <span class="dv">1</span>, <span class="at">sampsize =</span> <span class="dv">50</span>, <span class="at">disT =</span> <span class="st">"euclidean"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>pvtcdcl <span class="ot">&lt;-</span> <span class="fu">cdCLARA</span>(<span class="at">data =</span> Terrain_Attr_50_df, <span class="at">var1 =</span> <span class="fu">c</span>(<span class="st">"Longitude"</span>, <span class="st">"Latitude"</span>),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var2 =</span> <span class="fu">c</span>(<span class="st">"Prof_Moyenne"</span>, <span class="st">"rough"</span>), <span class="at">iter =</span> <span class="dv">12</span>, <span class="at">sampsize =</span> <span class="dv">50</span>, <span class="at">disT =</span> <span class="st">"manhattan"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var2 =</span> <span class="fu">c</span>(<span class="st">"Prof_Moyenne"</span>, <span class="st">"rough"</span>), <span class="at">iter =</span> <span class="dv">12</span>, <span class="at">sampsize =</span> <span class="dv">50</span>, <span class="at">disT =</span> <span class="st">"manhattan"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-layout-panel" data-layout-ncol="3">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
@@ -668,12 +669,12 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 </div>
 </div>
 </div>
-<p>Les deux premières méthodes produisent une grille de points régulièrement espacés sur toute la zone. La troisième s’en écarte nettement : les points se resserrent le long des bords, là où la rugosité est la plus forte.</p>
+<p>The first two methods produce a grid of points regularly spaced across the whole area. The third departs from that clearly: points cluster along the edges, where roughness is highest.</p>
 </div>
 <div class="lang-block lang-python">
 <div id="sampling" class="cell" data-execution_count="3">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sampling <span class="im">import</span> kmeans_medoids</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -685,7 +686,7 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-KMeans  :"</span>, scs_kmeans_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-CLARA   :"</span>, scs_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CD-CLARA    :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CD-CLARA    :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>SCS-KMeans  : 50 points
@@ -695,7 +696,7 @@ CD-CLARA    : 50 points</code></pre>
 </div>
 <div id="cell-fig-sampling" class="cell" data-execution_count="4">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lonlat(pts_utm):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    lat_p, lon_p <span class="op">=</span> utm_to_latlon(pts_utm[:, <span class="dv">0</span>], pts_utm[:, <span class="dv">1</span>])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.column_stack([lon_p, lat_p])</span>
@@ -711,68 +712,68 @@ CD-CLARA    : 50 points</code></pre>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MaxNLocator(<span class="dv">4</span>))</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelsize<span class="op">=</span><span class="fl">6.5</span>, labelrotation<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-sampling" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sampling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="echantillonnage_files/figure-html/fig-sampling-output-1.png" width="1239" height="395" class="figure-img">
+<img src="echantillonnage-en_files/figure-html/fig-sampling-output-1.png" width="1239" height="395" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Points échantillonnés par les trois méthodes, sur fond de rugosité
+Figure&nbsp;2: Points sampled by the three methods, over a roughness background
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>Les deux premières méthodes produisent une grille de points régulièrement espacés sur toute la zone. La troisième s’en écarte nettement : les points se resserrent le long des bords, là où la rugosité est la plus forte.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Détail : ce que minimise le k-means">
+<p>The first two methods produce a grid of points regularly spaced across the whole area. The third departs from that clearly: points cluster along the edges, where roughness is highest.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Detail: what k-means minimizes">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Détail : ce que minimise le k-means
+<span class="screen-reader-only">Tip</span>Detail: what k-means minimizes
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[
 MSSD = \frac{1}{N}\sum_{i=1}^{N} \min_{k} \lVert x_i - c_k \rVert^2
 \]</span></p>
-<p>où <span class="math inline">\(x_i\)</span> sont les cellules du terrain et <span class="math inline">\(c_k\)</span> les <span class="math inline">\(K\)</span> points échantillonnés : le k-means choisit les <span class="math inline">\(c_k\)</span> qui minimisent la distance quadratique moyenne au point échantillonné le plus proche — d’où la couverture régulière. <strong>SCS-CLARA</strong> et <strong>CD-CLARA</strong> reprennent ce même critère, mais imposent en plus que chaque <span class="math inline">\(c_k\)</span> soit une cellule réelle du terrain (un médoïde), pas un centre recalculé.</p>
+<p>where <span class="math inline">\(x_i\)</span> are the terrain cells and <span class="math inline">\(c_k\)</span> the <span class="math inline">\(K\)</span> sampled points: k-means chooses the <span class="math inline">\(c_k\)</span> that minimize the average squared distance to the nearest sampled point — hence the regular coverage. <strong>SCS-CLARA</strong> and <strong>CD-CLARA</strong> use this same criterion, but additionally require each <span class="math inline">\(c_k\)</span> to be an actual cell of the terrain (a medoid), not a recomputed center.</p>
 </div>
 </div>
 </section>
-<section id="testez-par-vous-même" class="level2">
-<h2 class="anchored" data-anchor-id="testez-par-vous-même">Testez par vous-même</h2>
-<p>Le calcul réel ci-dessus porte sur plus de 100 000 cellules — trop pour un navigateur. Voici la même idée sur un petit nuage de 16 points en 2D, regroupés en 3 amas visibles à l’œil nu : modifiez <code>k</code> et cliquez sur <em>Exécuter</em> pour voir quels points sont retenus comme échantillons.</p>
+<section id="try-it-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="try-it-yourself">Try it yourself</h2>
+<p>The actual computation above covers over 100,000 cells — too many for a browser. Here is the same idea on a small cloud of 16 points in 2D, grouped into 3 visually distinct clusters: change <code>k</code> and click <em>Run</em> to see which points get chosen as samples.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Avertissement
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Version simplifiée à but pédagogique, sur un exemple jouet — le calcul réel sur les données complètes est celui de la section précédente.</p>
+<p>Simplified version for teaching purposes, on a toy example — the real computation on the full data is the one from the previous section.</p>
 </div>
 </div>
 <div class="lang-block lang-r">
-<div class="callout callout-style-default callout-note callout-titled" title="Ce que fait ce code">
+<div class="callout callout-style-default callout-note callout-titled" title="What this code does">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ce que fait ce code
+<span class="screen-reader-only">Note</span>What this code does
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>16 points 2D sont regroupés en <code>k</code> amas : l’algorithme alterne entre l’affectation de chaque point au centre le plus proche et le recalcul des centres, jusqu’à convergence — puis retient, pour chaque amas, le point réellement observé le plus proche de son centre (le médoïde), plutôt que le centre lui-même qui n’est en général pas un point du jeu de données. Changez <code>k</code> et relancez pour voir le découpage en amas s’adapter.</p>
+<p>16 2D points are grouped into <code>k</code> clusters: the algorithm alternates between assigning each point to its nearest center and recomputing the centers, until convergence — then, for each cluster, keeps the actual observed point closest to its center (the medoid), rather than the center itself, which is generally not a point in the dataset. Change <code>k</code> and rerun to see the clustering adapt.</p>
 </div>
 </div>
 <div>
@@ -780,22 +781,22 @@ Avertissement
 
 </div>
 <script type="webr-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHRzIDwtIG1hdHJpeChjKFxuICAxLDEsIDEsMywgMiwyLCA0LDEsIDQsMywgNSwyLFxuICA4LDgsIDgsMTAsIDksOSwgMTEsOCwgMTEsMTAsIDEyLDksXG4gIDIsOCwgMyw5LCA4LDIsIDksM1xuKSwgbmNvbCA9IDIsIGJ5cm93ID0gVFJVRSlcblxuayA8LSAzXG5cbmttZWFuc19tZWRvaWRzIDwtIGZ1bmN0aW9uKHB0cywgaywgaXRlcnMgPSAyMCkge1xuICBzZXQuc2VlZCgxKVxuICBjZW50ZXJzIDwtIHB0c1tzYW1wbGUobnJvdyhwdHMpLCBrKSwgLCBkcm9wID0gRkFMU0VdXG4gIGZvciAoaXQgaW4gMTppdGVycykge1xuICAgIGQgPC0gYXMubWF0cml4KGRpc3QocmJpbmQoY2VudGVycywgcHRzKSkpWzE6aywgKGsgKyAxKTooayArIG5yb3cocHRzKSksIGRyb3AgPSBGQUxTRV1cbiAgICBsYWJlbHMgPC0gYXBwbHkoZCwgMiwgd2hpY2gubWluKVxuICAgIGZvciAoYyBpbiAxOmspIHtcbiAgICAgIGlkeCA8LSB3aGljaChsYWJlbHMgPT0gYylcbiAgICAgIGlmIChsZW5ndGgoaWR4KSA+IDApIGNlbnRlcnNbYywgXSA8LSBjb2xNZWFucyhwdHNbaWR4LCAsIGRyb3AgPSBGQUxTRV0pXG4gICAgfVxuICB9XG4gIGQgPC0gYXMubWF0cml4KGRpc3QocmJpbmQoY2VudGVycywgcHRzKSkpWzE6aywgKGsgKyAxKTooayArIG5yb3cocHRzKSksIGRyb3AgPSBGQUxTRV1cbiAgbGFiZWxzIDwtIGFwcGx5KGQsIDIsIHdoaWNoLm1pbilcbiAgbWVkb2lkcyA8LSBpbnRlZ2VyKDApXG4gIGZvciAoYyBpbiAxOmspIHtcbiAgICBpZHggPC0gd2hpY2gobGFiZWxzID09IGMpXG4gICAgaWYgKGxlbmd0aChpZHgpID09IDApIG5leHRcbiAgICBkZCA8LSBzcXJ0KHJvd1N1bXMoKHB0c1tpZHgsICwgZHJvcCA9IEZBTFNFXSAtIG1hdHJpeChjZW50ZXJzW2MsIF0sIGxlbmd0aChpZHgpLCAyLCBieXJvdyA9IFRSVUUpKV4yKSlcbiAgICBtZWRvaWRzIDwtIGMobWVkb2lkcywgaWR4W3doaWNoLm1pbihkZCldKVxuICB9XG4gIHB0c1ttZWRvaWRzLCAsIGRyb3AgPSBGQUxTRV1cbn1cblxuY2F0KFwiUG9pbnRzIMOpY2hhbnRpbGxvbm7DqXMgOlxcblwiKVxucHJpbnQoa21lYW5zX21lZG9pZHMocHRzLCBrKSkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHRzIDwtIG1hdHJpeChjKFxuICAxLDEsIDEsMywgMiwyLCA0LDEsIDQsMywgNSwyLFxuICA4LDgsIDgsMTAsIDksOSwgMTEsOCwgMTEsMTAsIDEyLDksXG4gIDIsOCwgMyw5LCA4LDIsIDksM1xuKSwgbmNvbCA9IDIsIGJ5cm93ID0gVFJVRSlcblxuayA8LSAzXG5cbmttZWFuc19tZWRvaWRzIDwtIGZ1bmN0aW9uKHB0cywgaywgaXRlcnMgPSAyMCkge1xuICBzZXQuc2VlZCgxKVxuICBjZW50ZXJzIDwtIHB0c1tzYW1wbGUobnJvdyhwdHMpLCBrKSwgLCBkcm9wID0gRkFMU0VdXG4gIGZvciAoaXQgaW4gMTppdGVycykge1xuICAgIGQgPC0gYXMubWF0cml4KGRpc3QocmJpbmQoY2VudGVycywgcHRzKSkpWzE6aywgKGsgKyAxKTooayArIG5yb3cocHRzKSksIGRyb3AgPSBGQUxTRV1cbiAgICBsYWJlbHMgPC0gYXBwbHkoZCwgMiwgd2hpY2gubWluKVxuICAgIGZvciAoYyBpbiAxOmspIHtcbiAgICAgIGlkeCA8LSB3aGljaChsYWJlbHMgPT0gYylcbiAgICAgIGlmIChsZW5ndGgoaWR4KSA+IDApIGNlbnRlcnNbYywgXSA8LSBjb2xNZWFucyhwdHNbaWR4LCAsIGRyb3AgPSBGQUxTRV0pXG4gICAgfVxuICB9XG4gIGQgPC0gYXMubWF0cml4KGRpc3QocmJpbmQoY2VudGVycywgcHRzKSkpWzE6aywgKGsgKyAxKTooayArIG5yb3cocHRzKSksIGRyb3AgPSBGQUxTRV1cbiAgbGFiZWxzIDwtIGFwcGx5KGQsIDIsIHdoaWNoLm1pbilcbiAgbWVkb2lkcyA8LSBpbnRlZ2VyKDApXG4gIGZvciAoYyBpbiAxOmspIHtcbiAgICBpZHggPC0gd2hpY2gobGFiZWxzID09IGMpXG4gICAgaWYgKGxlbmd0aChpZHgpID09IDApIG5leHRcbiAgICBkZCA8LSBzcXJ0KHJvd1N1bXMoKHB0c1tpZHgsICwgZHJvcCA9IEZBTFNFXSAtIG1hdHJpeChjZW50ZXJzW2MsIF0sIGxlbmd0aChpZHgpLCAyLCBieXJvdyA9IFRSVUUpKV4yKSlcbiAgICBtZWRvaWRzIDwtIGMobWVkb2lkcywgaWR4W3doaWNoLm1pbihkZCldKVxuICB9XG4gIHB0c1ttZWRvaWRzLCAsIGRyb3AgPSBGQUxTRV1cbn1cblxuY2F0KFwiU2FtcGxlZCBwb2ludHM6XFxuXCIpXG5wcmludChrbWVhbnNfbWVkb2lkcyhwdHMsIGspKSJ9
 </script>
 </div>
 </div>
 <div class="lang-block lang-python">
-<div class="callout callout-style-default callout-note callout-titled" title="Ce que fait ce code">
+<div class="callout callout-style-default callout-note callout-titled" title="What this code does">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ce que fait ce code
+<span class="screen-reader-only">Note</span>What this code does
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>16 points 2D sont regroupés en <code>k</code> amas : l’algorithme alterne entre l’affectation de chaque point au centre le plus proche et le recalcul des centres, jusqu’à convergence — puis retient, pour chaque amas, le point réellement observé le plus proche de son centre (le médoïde), plutôt que le centre lui-même qui n’est en général pas un point du jeu de données. Changez <code>k</code> et relancez pour voir le découpage en amas s’adapter.</p>
+<p>16 2D points are grouped into <code>k</code> clusters: the algorithm alternates between assigning each point to its nearest center and recomputing the centers, until convergence — then, for each cluster, keeps the actual observed point closest to its center (the medoid), rather than the center itself, which is generally not a point in the dataset. Change <code>k</code> and rerun to see the clustering adapt.</p>
 </div>
 </div>
 <div>
@@ -803,20 +804,20 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHRzIDwtIG1hdHJpeChjKFxu
 
 </div>
 <script type="pyodide-2-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5cbnB0cyA9IG5wLmFycmF5KFtcbiAgICBbMSwxXSxbMSwzXSxbMiwyXSxbNCwxXSxbNCwzXSxbNSwyXSxcbiAgICBbOCw4XSxbOCwxMF0sWzksOV0sWzExLDhdLFsxMSwxMF0sWzEyLDldLFxuICAgIFsyLDhdLFszLDldLFs4LDJdLFs5LDNdLFxuXSwgZHR5cGU9ZmxvYXQpXG5cbmsgPSAzXG5cbmRlZiBrbWVhbnNfbWVkb2lkcyhwdHMsIGssIGl0ZXJzPTIwLCBzZWVkPTEpOlxuICAgIHJuZyA9IG5wLnJhbmRvbS5kZWZhdWx0X3JuZyhzZWVkKVxuICAgIGNlbnRlcnMgPSBwdHNbcm5nLmNob2ljZShsZW4ocHRzKSwgaywgcmVwbGFjZT1GYWxzZSldLmNvcHkoKVxuICAgIGZvciBfIGluIHJhbmdlKGl0ZXJzKTpcbiAgICAgICAgZCA9IG5wLmxpbmFsZy5ub3JtKHB0c1s6LCBOb25lLCA6XSAtIGNlbnRlcnNbTm9uZSwgOiwgOl0sIGF4aXM9MilcbiAgICAgICAgbGFiZWxzID0gZC5hcmdtaW4oYXhpcz0xKVxuICAgICAgICBmb3IgYyBpbiByYW5nZShrKTpcbiAgICAgICAgICAgIGlkeCA9IG5wLndoZXJlKGxhYmVscyA9PSBjKVswXVxuICAgICAgICAgICAgaWYgbGVuKGlkeCkgPiAwOlxuICAgICAgICAgICAgICAgIGNlbnRlcnNbY10gPSBwdHNbaWR4XS5tZWFuKGF4aXM9MClcbiAgICBkID0gbnAubGluYWxnLm5vcm0ocHRzWzosIE5vbmUsIDpdIC0gY2VudGVyc1tOb25lLCA6LCA6XSwgYXhpcz0yKVxuICAgIGxhYmVscyA9IGQuYXJnbWluKGF4aXM9MSlcbiAgICBtZWRvaWRzID0gW11cbiAgICBmb3IgYyBpbiByYW5nZShrKTpcbiAgICAgICAgaWR4ID0gbnAud2hlcmUobGFiZWxzID09IGMpWzBdXG4gICAgICAgIGlmIGxlbihpZHgpID09IDA6XG4gICAgICAgICAgICBjb250aW51ZVxuICAgICAgICBkZCA9IG5wLmxpbmFsZy5ub3JtKHB0c1tpZHhdIC0gY2VudGVyc1tjXSwgYXhpcz0xKVxuICAgICAgICBtZWRvaWRzLmFwcGVuZChpZHhbbnAuYXJnbWluKGRkKV0pXG4gICAgcmV0dXJuIHB0c1ttZWRvaWRzXVxuXG5wcmludChcIlBvaW50cyDDqWNoYW50aWxsb25uw6lzIDpcIilcbnByaW50KGttZWFuc19tZWRvaWRzKHB0cywgaykpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5cbnB0cyA9IG5wLmFycmF5KFtcbiAgICBbMSwxXSxbMSwzXSxbMiwyXSxbNCwxXSxbNCwzXSxbNSwyXSxcbiAgICBbOCw4XSxbOCwxMF0sWzksOV0sWzExLDhdLFsxMSwxMF0sWzEyLDldLFxuICAgIFsyLDhdLFszLDldLFs4LDJdLFs5LDNdLFxuXSwgZHR5cGU9ZmxvYXQpXG5cbmsgPSAzXG5cbmRlZiBrbWVhbnNfbWVkb2lkcyhwdHMsIGssIGl0ZXJzPTIwLCBzZWVkPTEpOlxuICAgIHJuZyA9IG5wLnJhbmRvbS5kZWZhdWx0X3JuZyhzZWVkKVxuICAgIGNlbnRlcnMgPSBwdHNbcm5nLmNob2ljZShsZW4ocHRzKSwgaywgcmVwbGFjZT1GYWxzZSldLmNvcHkoKVxuICAgIGZvciBfIGluIHJhbmdlKGl0ZXJzKTpcbiAgICAgICAgZCA9IG5wLmxpbmFsZy5ub3JtKHB0c1s6LCBOb25lLCA6XSAtIGNlbnRlcnNbTm9uZSwgOiwgOl0sIGF4aXM9MilcbiAgICAgICAgbGFiZWxzID0gZC5hcmdtaW4oYXhpcz0xKVxuICAgICAgICBmb3IgYyBpbiByYW5nZShrKTpcbiAgICAgICAgICAgIGlkeCA9IG5wLndoZXJlKGxhYmVscyA9PSBjKVswXVxuICAgICAgICAgICAgaWYgbGVuKGlkeCkgPiAwOlxuICAgICAgICAgICAgICAgIGNlbnRlcnNbY10gPSBwdHNbaWR4XS5tZWFuKGF4aXM9MClcbiAgICBkID0gbnAubGluYWxnLm5vcm0ocHRzWzosIE5vbmUsIDpdIC0gY2VudGVyc1tOb25lLCA6LCA6XSwgYXhpcz0yKVxuICAgIGxhYmVscyA9IGQuYXJnbWluKGF4aXM9MSlcbiAgICBtZWRvaWRzID0gW11cbiAgICBmb3IgYyBpbiByYW5nZShrKTpcbiAgICAgICAgaWR4ID0gbnAud2hlcmUobGFiZWxzID09IGMpWzBdXG4gICAgICAgIGlmIGxlbihpZHgpID09IDA6XG4gICAgICAgICAgICBjb250aW51ZVxuICAgICAgICBkZCA9IG5wLmxpbmFsZy5ub3JtKHB0c1tpZHhdIC0gY2VudGVyc1tjXSwgYXhpcz0xKVxuICAgICAgICBtZWRvaWRzLmFwcGVuZChpZHhbbnAuYXJnbWluKGRkKV0pXG4gICAgcmV0dXJuIHB0c1ttZWRvaWRzXVxuXG5wcmludChcIlNhbXBsZWQgcG9pbnRzOlwiKVxucHJpbnQoa21lYW5zX21lZG9pZHMocHRzLCBrKSkifQ==
 </script>
 </div>
 </div>
 </section>
-<section id="pour-aller-plus-loin" class="level2">
-<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<section id="go-further" class="level2">
+<h2 class="anchored" data-anchor-id="go-further">Go further</h2>
 <div class="d-flex gap-2 flex-wrap" style="margin:14px 0 28px">
-<p><a href="https://github.com/latsouckfaye/SpatialSampling" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code R sur GitHub</a> <a href="https://github.com/latsouckfaye/SpatialSampling/tree/main/python" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code Python sur GitHub</a> <a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo</a> <a href="../../projets.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »</a> <a href="../../tutoriels.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Retour aux tutoriels</a></p>
+<p><a href="https://github.com/latsouckfaye/SpatialSampling" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> R code on GitHub</a> <a href="https://github.com/latsouckfaye/SpatialSampling/tree/main/python" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Python code on GitHub</a> <a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo</a> <a href="../../projets.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> View the “Large-scale mapping” project</a> <a href="../../tutoriels.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Back to tutorials</a></p>
 </div>
-<p>Ces méthodes d’échantillonnage ont servi à constituer les données d’entraînement du modèle de cartographie géomorphologique automatique décrit dans <span class="citation" data-cites="FaDa2024">Faye et al. (<a href="#ref-FaDa2024" role="doc-biblioref">2024</a>)</span>.</p>
+<p>These sampling methods were used to build the training data for the automatic geomorphological mapping model described in <span class="citation" data-cites="FaDa2024">Faye et al. (<a href="#ref-FaDa2024" role="doc-biblioref">2024</a>)</span>.</p>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-FaDa2024" class="csl-entry" role="listitem">
-Faye, Paul Aimé Latsouck, Elodie Brunel, Thomas Claverie, Solym Mawaki Manou-Abi, et Sophie Dabo-Niang. 2024. <span>«&nbsp;Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms&nbsp;»</span>. <em>Earth Science Informatics</em>, 1‑18.
+Faye, Paul Aimé Latsouck, Elodie Brunel, Thomas Claverie, Solym Mawaki Manou-Abi, and Sophie Dabo-Niang. 2024. <span>“Automatic Geomorphological Mapping Using Ground Truth Data with Coverage Sampling and Random Forest Algorithms.”</span> <em>Earth Science Informatics</em>, 1–18.
 </div>
 </div>
 
@@ -899,12 +900,12 @@ window._ojs.runtime.interpretFromScriptTags();
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copié");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copié");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

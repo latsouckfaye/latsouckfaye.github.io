@@ -1,15 +1,15 @@
 ---
-title: "Comparer des cartes à différentes résolutions spatiales"
-description: "Désagrégation de résolution, score de concordance et score équilibré par classe, pour comparer une carte prédite à une carte de référence — en R et en Python."
-pagetitle: "Comparer des cartes — Tutoriels — Paul Faye"
+title: "Comparing maps at different spatial resolutions"
+description: "Resolution disaggregation, match score, and per-class balanced score, to compare a predicted map to a reference map — in R and in Python."
+pagetitle: "Compare maps — Tutorials — Paul Faye"
 author: "Paul Faye"
 date: 2024-05-26
-categories: [Analyse spatiale, Cartographie multi-échelle, SIG, R, Python]
+categories: [Spatial analysis, Multi-scale mapping, GIS, R, Python]
 image: statusmap.png
 toc: true
-toc-title: "Sommaire"
+toc-title: "Contents"
 code-fold: true
-code-summary: "Afficher le code"
+code-summary: "Show code"
 code-copy: true
 theme:
   dark: [darkly, ../../styles-dark.scss]
@@ -18,6 +18,7 @@ include-after-body: ../../assets/navlang-include.html
 format: live-html
 engine: jupyter
 bibliography: references.bib
+lang: en
 ---
 
 ```{=html}
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 (function(){
   var PAIR = {fr: "comparer-cartes.html", en: "comparer-cartes-en.html"};
-  var THIS_LANG = "fr";
+  var THIS_LANG = "en";
   var firstLangEvent = true;
   window.addEventListener("sitelangchange", function(e){
     if(firstLangEvent){ firstLangEvent = false; return; }
@@ -71,39 +72,39 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 ```
 
-[← Retour aux tutoriels](../../tutoriels.qmd)
+[← Back to tutorials](../../tutoriels.qmd)
 
-## Le problème
+## The problem
 
-Deux cartes géomorphologiques obtenues à des résolutions spatiales différentes ne se comparent pas cellule à cellule telles quelles : la carte prédite doit d'abord être ramenée à la résolution de la carte de référence, puis leur concordance mesurée — sans se limiter à un seul score global, qui favoriserait les classes majoritaires.
+Two geomorphological maps obtained at different spatial resolutions cannot be compared cell by cell as they are: the predicted map must first be brought down to the resolution of the reference map, and only then can their agreement be measured — without settling for a single overall score, which would favor majority classes.
 
-Le code et les fonctions utilisées ici sont ceux employés pour la validation du modèle présenté dans [« Cartographie grande échelle »](../../projets.qmd) sur la page Travaux. Choisissez le langage qui vous intéresse ci-dessous — la méthode et les résultats sont les mêmes, seul le code (et parfois la figure) diffère.
+The code and functions used here are the ones employed to validate the model presented in [“Large-scale mapping”](../../projets.qmd) on the Work page. Pick the language you're interested in below — the method and the results are the same, only the code (and sometimes the figure) differs.
 
 ```{=html}
-<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<div class="langtoggle" role="group" aria-label="Choose language">
 <span class="langtoggle-indicator" id="langIndicator"></span>
 <button type="button" data-lang="r" aria-pressed="true">R</button>
 <button type="button" data-lang="python" aria-pressed="false">Python</button>
 </div>
 ```
 
-::: {.callout-note title="En bref"}
-- La carte prédite est **désagrégée** pour retrouver la résolution de la carte de référence, cellule par cellule.
-- **Score de concordance ("Match")** : proportion de cellules identiques entre les deux cartes.
-- **Score équilibré ("Balanced Match")** : moyenne des rappels par classe — chaque classe compte autant que les autres, indépendamment de sa fréquence.
-- Sur l'exemple ci-dessous, le score équilibré passe de **0,86** à **0,56** selon la façon dont les cellules non prédites sont comptabilisées — l'écart à lui seul illustre pourquoi le choix de la métrique compte.
+::: {.callout-note title="In short"}
+- The predicted map is **disaggregated** to recover the resolution of the reference map, cell by cell.
+- **Match score**: proportion of identical cells between the two maps.
+- **Balanced Match score**: average of per-class recalls — each class counts as much as the others, regardless of its frequency.
+- In the example below, the balanced score goes from **0.86** to **0.56** depending on how unpredicted cells are counted — that gap alone illustrates why the choice of metric matters.
 :::
 
-## La méthode
+## The method
 
-Une zone d'étude est délimitée puis discrétisée en grille. La carte prédite — produite à une résolution plus grossière — est désagrégée pour retrouver la résolution de la carte de référence, et chaque cellule est classée selon son statut : hors zone, prédite, ou non prédite.
+A study area is delineated then discretized into a grid. The predicted map — produced at a coarser resolution — is disaggregated to recover the resolution of the reference map, and each cell is classified by status: out of area, predicted, or unpredicted.
 
 ::: {.lang-block .lang-r}
 
-::: {.callout-tip collapse="true" title="Prérequis techniques"}
-Packages R : `ggplot2`, `dplyr`, `stringr`, `sp`, `sf`, `ggspatial`, `ggpubr`, `ggnewscale`, `raster`. Les 4 fonctions utilisées ici (désagrégation, statut des cellules, score de concordance, score équilibré) sont publiées séparément sur Zenodo pour être réutilisables indépendamment de ce notebook.
+::: {.callout-tip collapse="true" title="Technical prerequisites"}
+R packages: `ggplot2`, `dplyr`, `stringr`, `sp`, `sf`, `ggspatial`, `ggpubr`, `ggnewscale`, `raster`. The 4 functions used here (disaggregation, cell status, match score, balanced score) are published separately on Zenodo so they can be reused independently of this notebook.
 
-[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+[<i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
 :::
 
 ```r
@@ -112,7 +113,7 @@ library(sp)
 library(sf)
 library(raster)
 
-# Zone d'étude : polygone WGS84 discrétisé en grille
+# Study area: WGS84 polygon discretized into a grid
 crdref <- CRS('+proj=longlat +datum=WGS84')
 lon <- c(-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7)
 lat <- c(41.3, 42.9, 42.4, 39.8, 37.9, 38.3, 38.6)
@@ -123,7 +124,7 @@ ref_sp <- raster(xmn = extent(pols)[1], xmx = extent(pols)[2],
                   ymn = extent(pols)[3], ymx = extent(pols)[4], res = c(.5, .5))
 crs(ref_sp) <- crdref
 
-# Carte de référence (résolution fine, 5 classes) et carte prédite (résolution grossière)
+# Reference map (fine resolution, 5 classes) and predicted map (coarse resolution)
 r <- raster(xmn = extent(pols)[1], xmx = extent(pols)[2],
             ymn = extent(pols)[3], ymx = extent(pols)[4], res = c(1, 1))
 set.seed(12)
@@ -135,7 +136,7 @@ pred_sp <- r
 pred_sp[[1]][c(9, 17, 21)] <- c(5, 1, 4)
 pred_sp_mask <- mask(pred_sp, pols, updateNA = TRUE)
 
-# Désagrégation de la carte prédite + statut des cellules (hors zone / prédite / non prédite)
+# Disaggregating the predicted map + cell status (out of area / predicted / unpredicted)
 source('disaggregate.R'); source('status-prop.R')
 pred_sp_dis <- disagRast(pols, pred_sp_mask, ref_sp, crdref)
 
@@ -143,30 +144,30 @@ ref_spbis <- ref_sp
 ref_spbis[is.na(ref_spbis)] <- 999
 outstudy <- mask(ref_spbis, pols, updateNA = TRUE)
 status <- statusProp(pred_sp_dis, ref_sp, outstudy[[1]], pols, 4326)
-PropNL <- status[[4]]  # proportion de cellules non prédites
-PropL  <- status[[5]]  # proportion de cellules prédites
+PropNL <- status[[4]]  # proportion of unpredicted cells
+PropL  <- status[[5]]  # proportion of predicted cells
 ```
 
 ::: {layout-ncol="4"}
-![Référence](refmap.png)
+![Reference](refmap.png)
 
-![Prédite](predmap.png)
+![Predicted](predmap.png)
 
-![Désagrégée](predismap.png)
+![Disaggregated](predismap.png)
 
-![Statut](statusmap.png)
+![Status](statusmap.png)
 :::
 
-De la référence à la carte de statut : la carte prédite (résolution grossière) est désagrégée pour retrouver la résolution de la référence, puis chaque cellule de la zone d'étude est classée hors zone, prédite (vert) ou non prédite (orange). Sur cet exemple, 45 cellules sont hors zone, et parmi les 82 restantes, 72 sont prédites (88 %) contre 10 non prédites (12 %) — cette dernière proportion conditionne l'écart entre score brut et score corrigé ci-dessous.
+From reference to status map: the predicted map (coarse resolution) is disaggregated to recover the resolution of the reference map, then every cell in the study area is classified as out of area, predicted (green), or unpredicted (orange). In this example, 45 cells are out of area, and of the remaining 82, 72 are predicted (88%) versus 10 unpredicted (12%) — this last proportion is what drives the gap between the raw and corrected scores below.
 
-> La désagrégation de la carte prédite génère des effets de bord en périphérie de zone — visibles sur la carte de statut ci-dessus.
+> Disaggregating the predicted map produces edge effects at the periphery of the study area — visible on the status map above.
 
 :::
 
 ::: {.lang-block .lang-python}
 
-::: {.callout-tip collapse="true" title="Prérequis techniques"}
-Seuls `numpy` et `matplotlib` sont nécessaires — pas de `geopandas`/`shapely`/`rasterio` : le test point-dans-polygone utilise `matplotlib.path.Path`, et les grilles sont de simples tableaux numpy. Code complet : [`compare_maps.py`](compare_maps.py).
+::: {.callout-tip collapse="true" title="Technical prerequisites"}
+Only `numpy` and `matplotlib` are needed — no `geopandas`/`shapely`/`rasterio`: the point-in-polygon test uses `matplotlib.path.Path`, and the grids are plain numpy arrays. Full code: [`compare_maps.py`](compare_maps.py).
 :::
 
 ```{python}
@@ -176,14 +177,14 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path
 from matplotlib.colors import ListedColormap, BoundaryNorm
 
-# Zone d'étude
+# Study area
 POLY_LON = [-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7]
 POLY_LAT = [41.3, 42.9, 42.4, 39.8, 37.9, 38.3, 38.6]
 POLYGON = np.column_stack([POLY_LON, POLY_LAT])
 XMIN, XMAX, YMIN, YMAX = -117.7, -111.9, 37.9, 42.9
 NA = np.nan
 
-# Carte de référence (fine, 10x12) et carte prédite (grossière, 5x6)
+# Reference map (fine, 10x12) and predicted map (coarse, 5x6)
 REFERENCE = np.array([
     [NA, NA, NA, NA, NA, NA,  5,  5, NA, NA, NA, NA],
     [NA, NA, NA, NA, NA,  3,  5,  5,  5,  5, NA, NA],
@@ -206,13 +207,13 @@ PRED_COARSE = np.array([
 ], dtype=float)
 
 def cell_polygon_mask(xs, ys, polygon):
-    """True pour les cellules dont le centre est à l'intérieur du polygone."""
+    """True for cells whose center lies inside the polygon."""
     xx, yy = np.meshgrid(xs, ys)
     pts = np.column_stack([xx.ravel(), yy.ravel()])
     return Path(polygon).contains_points(pts).reshape(len(ys), len(xs))
 
 def disaggregate(coarse, factor):
-    """Désagrège une grille grossière en répétant chaque cellule factor x factor fois."""
+    """Disaggregates a coarse grid by repeating each cell factor x factor times."""
     return np.repeat(np.repeat(coarse, factor, axis=0), factor, axis=1)
 
 xs_f = XMIN + 0.5 * (np.arange(12) + 0.5)
@@ -225,7 +226,7 @@ predicted = np.where(mask_ref, disaggregate(PRED_COARSE, 2), np.nan)
 
 ```{python}
 #| label: fig-methode
-#| fig-cap: "De la référence à la carte prédite désagrégée"
+#| fig-cap: "From reference to disaggregated predicted map"
 #| code-fold: true
 CLASS_COLORS = ["#dee273", "#dcbf64", "#a5bfdd", "#1f77b6", "#02426d"]
 
@@ -241,33 +242,33 @@ def plot_class(ax, grid, title):
     ax.set_xticks([]); ax.set_yticks([])
 
 fig, axes = plt.subplots(1, 3, figsize=(11, 4))
-plot_class(axes[0], reference, "Référence (fine)")
-plot_class(axes[1], PRED_COARSE, "Prédite (grossière)")
-plot_class(axes[2], predicted, "Prédite désagrégée")
+plot_class(axes[0], reference, "Reference (fine)")
+plot_class(axes[1], PRED_COARSE, "Predicted (coarse)")
+plot_class(axes[2], predicted, "Predicted, disaggregated")
 fig.tight_layout()
 plt.show()
 ```
 
 :::
 
-## Les résultats
+## The results
 
-Deux familles de scores mesurent la concordance entre les deux cartes : un **score de concordance** simple (proportion de cellules identiques), et un **score équilibré par classe** qui neutralise l'effet des classes dominantes [d'après @grandini2020metrics]. Chacun se décline en une version *non corrigée* (qui ignore les cellules non prédites) et une ou deux versions *corrigées* (qui les comptent comme des erreurs, plus ou moins sévèrement).
+Two families of scores measure agreement between the two maps: a simple **match score** (proportion of identical cells), and a **per-class balanced score** that neutralizes the effect of dominant classes [per @grandini2020metrics]. Each comes in an *uncorrected* version (which ignores unpredicted cells) and one or two *corrected* versions (which count them as errors, more or less severely).
 
 ::: {.lang-block .lang-r}
 
-| Score | Valeur | Ce qu'il mesure |
+| Score | Value | What it measures |
 |---|---|---|
-| Concordance — non corrigée | **0,82** | Cellules identiques, cellules non prédites ignorées |
-| Concordance — corrigée | **0,71** | Idem, cellules non prédites comptées comme erreurs |
-| Balanced Match — brut (NCBM) | **0,86** | Moyenne des rappels par classe, cellules non prédites ignorées |
-| Balanced Match — corrigé, prop. 1 | **0,76** | NCBM pénalisé par la proportion de cellules non prédites |
-| Balanced Match — corrigé, prop. 2 | **0,56** | Cellules non prédites réintégrées, rappel fixé à 0 |
+| Match — uncorrected | **0.82** | Identical cells, unpredicted cells ignored |
+| Match — corrected | **0.71** | Same, unpredicted cells counted as errors |
+| Balanced Match — raw (NCBM) | **0.86** | Average of per-class recalls, unpredicted cells ignored |
+| Balanced Match — corrected, prop. 1 | **0.76** | NCBM penalized by the proportion of unpredicted cells |
+| Balanced Match — corrected, prop. 2 | **0.56** | Unpredicted cells reintegrated, recall set to 0 |
 
 ::: {layout-ncol="2"}
-![Concordance non corrigée](pmapcomp.png)
+![Uncorrected match](pmapcomp.png)
 
-![Concordance corrigée](pmapcompcorr.png)
+![Corrected match](pmapcompcorr.png)
 :::
 
 :::
@@ -305,24 +306,24 @@ match_nc = match_score(predicted, reference, mask_ref, correct=False)
 match_c = match_score(predicted, reference, mask_ref, correct=True)
 ncbm, cbm1, cbm2 = balanced_match(predicted, reference, mask_ref, [1, 2, 3, 4, 5])
 
-print(f"Match non corrigé : {match_nc:.2f}")
-print(f"Match corrigé     : {match_c:.2f}")
-print(f"NCBM (brut)       : {ncbm:.2f}")
-print(f"CBM1 (corrigé, prop. 1) : {cbm1:.2f}")
-print(f"CBM2 (corrigé, prop. 2) : {cbm2:.2f}")
+print(f"Uncorrected match : {match_nc:.2f}")
+print(f"Corrected match    : {match_c:.2f}")
+print(f"NCBM (raw)         : {ncbm:.2f}")
+print(f"CBM1 (corrected, prop. 1) : {cbm1:.2f}")
+print(f"CBM2 (corrected, prop. 2) : {cbm2:.2f}")
 ```
 
-| Score | Valeur | Ce qu'il mesure |
+| Score | Value | What it measures |
 |---|---|---|
-| Concordance — non corrigée | **0,81** | Cellules identiques, cellules non prédites ignorées |
-| Concordance — corrigée | **0,70** | Idem, cellules non prédites comptées comme erreurs |
-| Balanced Match — brut (NCBM) | **0,86** | Moyenne des rappels par classe, cellules non prédites ignorées |
-| Balanced Match — corrigé, prop. 1 | **0,74** | NCBM pénalisé par la proportion de cellules non prédites |
-| Balanced Match — corrigé, prop. 2 | **0,56** | Cellules non prédites réintégrées, rappel fixé à 0 |
+| Match — uncorrected | **0.81** | Identical cells, unpredicted cells ignored |
+| Match — corrected | **0.70** | Same, unpredicted cells counted as errors |
+| Balanced Match — raw (NCBM) | **0.86** | Average of per-class recalls, unpredicted cells ignored |
+| Balanced Match — corrected, prop. 1 | **0.74** | NCBM penalized by the proportion of unpredicted cells |
+| Balanced Match — corrected, prop. 2 | **0.56** | Unpredicted cells reintegrated, recall set to 0 |
 
 ```{python}
 #| label: fig-scores
-#| fig-cap: "Concordance non corrigée (gauche) et corrigée (droite)"
+#| fig-cap: "Uncorrected (left) and corrected (right) match"
 #| code-fold: true
 valid_ref = mask_ref & ~np.isnan(reference)
 predicted_here = ~np.isnan(predicted)
@@ -348,18 +349,18 @@ def plot_match(ax, grid, colors, bounds, title):
 
 fig, axes = plt.subplots(1, 2, figsize=(8, 4))
 plot_match(axes[0], cat_nc, ["#dcbf64", "#3f8f5f", "#d97a3e"], [-0.5, 0.5, 1.5, 2.5],
-           f"Non corrigée — {match_nc:.2f}")
+           f"Uncorrected — {match_nc:.2f}")
 plot_match(axes[1], cat_c, ["#dcbf64", "#3f8f5f"], [-0.5, 0.5, 1.5],
-           f"Corrigée — {match_c:.2f}")
+           f"Corrected — {match_c:.2f}")
 fig.tight_layout()
 plt.show()
 ```
 
 :::
 
-Ces cinq nombres mesurent la même carte prédite, mais répondent à des questions différentes : *quelle est ma précision là où j'ai prédit ?* (versions non corrigées) contre *quelle est ma précision compte tenu de tout ce que je n'ai pas prédit ?* (versions corrigées). Le bon score dépend de l'usage qu'on veut en faire, pas d'une convention universelle.
+These five numbers measure the same predicted map, but answer different questions: *how accurate am I where I predicted?* (uncorrected versions) versus *how accurate am I given everything I didn't predict?* (corrected versions). The right score depends on the intended use, not on a universal convention.
 
-::: {.callout-tip title="Détail mathématique"}
+::: {.callout-tip title="Mathematical detail"}
 $$
 Match\ (Yes) = \frac{N_{+}}{N_{+} + N_{-}}
 \qquad\qquad
@@ -374,21 +375,21 @@ CBM_{1} = NCBM \times (1 - \%NL)
 CBM_{2} = \frac{1}{K}\sum_{k \neq 99}^{K} Recall_{k}
 $$
 
-où $N_{+}$/$N_{-}$ sont les cellules aux classes identiques/différentes entre les deux cartes, et $K$ le nombre de classes (5 pour NCBM et CBM₁, 6 pour CBM₂ qui réintègre la classe des cellules non prédites, avec un rappel conventionnellement fixé à 0).
+where $N_{+}$/$N_{-}$ are cells with identical/different classes between the two maps, and $K$ is the number of classes (5 for NCBM and CBM₁, 6 for CBM₂ which reintegrates the unpredicted-cell class, with recall conventionally set to 0).
 :::
 
-## Testez par vous-même
+## Try it yourself
 
-Le calcul réel ci-dessus s'appuie sur des structures trop lourdes pour tourner directement dans un navigateur (`sf`/`raster` en R, une grille fine en Python). Voici une version simplifiée sur un petit exemple 4×4 à 3 classes : modifiez les valeurs de `pred` ci-dessous et cliquez sur *Exécuter* pour voir les scores changer — exécuté directement dans votre navigateur, sans serveur.
+The actual computation above relies on structures too heavy to run directly in a browser (`sf`/`raster` in R, a fine grid in Python). Here is a simplified version on a small 4×4, 3-class example: edit the values of `pred` below and click *Run* to see the scores change — executed directly in your browser, no server involved.
 
 ::: {.callout-warning}
-Version simplifiée à but pédagogique, sur un petit exemple jouet — le calcul réel sur des cartes complètes est celui de la section précédente.
+Simplified version for teaching purposes, on a small toy example — the real computation on full maps is the one from the previous section.
 :::
 
 ::: {.lang-block .lang-r}
 
-::: {.callout-note title="Ce que fait ce code"}
-`ref` et `pred` sont deux petites grilles 4×4 à 3 classes (référence et prédiction). `match_score` calcule la proportion de cellules identiques entre les deux ; `balanced_match` fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l'essentiel. Changez quelques valeurs de `pred` et relancez pour voir les deux scores bouger différemment.
+::: {.callout-note title="What this code does"}
+`ref` and `pred` are two small 4×4, 3-class grids (reference and prediction). `match_score` computes the proportion of identical cells between the two; `balanced_match` averages the recalls class by class, so the most frequent class can't dominate the score — these are the same two functions as above, reduced to their essentials. Change a few values of `pred` and rerun to see the two scores move differently.
 :::
 
 ```{webr}
@@ -410,16 +411,16 @@ balanced_match <- function(pred, ref) {
   mean(recalls)
 }
 
-cat("Concordance (Match)          :", round(match_score(pred, ref), 2), "\n")
-cat("Score équilibré (Balanced Match) :", round(balanced_match(pred, ref), 2), "\n")
+cat("Match                :", round(match_score(pred, ref), 2), "\n")
+cat("Balanced Match        :", round(balanced_match(pred, ref), 2), "\n")
 ```
 
 :::
 
 ::: {.lang-block .lang-python}
 
-::: {.callout-note title="Ce que fait ce code"}
-`ref` et `pred` sont deux petites grilles 4×4 à 3 classes (référence et prédiction). `match_score` calcule la proportion de cellules identiques entre les deux ; `balanced_match` fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l'essentiel. Changez quelques valeurs de `pred` et relancez pour voir les deux scores bouger différemment.
+::: {.callout-note title="What this code does"}
+`ref` and `pred` are two small 4×4, 3-class grids (reference and prediction). `match_score` computes the proportion of identical cells between the two; `balanced_match` averages the recalls class by class, so the most frequent class can't dominate the score — these are the same two functions as above, reduced to their essentials. Change a few values of `pred` and rerun to see the two scores move differently.
 :::
 
 ```{pyodide}
@@ -443,23 +444,23 @@ def balanced_match(pred, ref):
     recalls = [np.mean(pred[ref == k] == k) for k in classes]
     return float(np.mean(recalls))
 
-print("Concordance (Match)             :", round(match_score(pred, ref), 2))
-print("Score équilibré (Balanced Match) :", round(balanced_match(pred, ref), 2))
+print("Match          :", round(match_score(pred, ref), 2))
+print("Balanced Match :", round(balanced_match(pred, ref), 2))
 ```
 
 :::
 
-## Pour aller plus loin
+## Go further
 
 :::: {.d-flex .gap-2 .flex-wrap style="margin:14px 0 28px"}
-[<i class="bi bi-github"></i> Code R sur GitHub](https://github.com/latsouckfaye/CompareMap){.btn .btn-outline-secondary role="button" target="_blank"}
-[<i class="bi bi-github"></i> Code Python sur GitHub](https://github.com/latsouckfaye/CompareMap/tree/main/python){.btn .btn-outline-secondary role="button" target="_blank"}
-[<i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
-[<i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »](../../projets.qmd){.btn .btn-outline-secondary role="button"}
-[<i class="bi bi-door-open"></i> Retour aux tutoriels](../../tutoriels.qmd){.btn .btn-outline-secondary role="button"}
+[<i class="bi bi-github"></i> R code on GitHub](https://github.com/latsouckfaye/CompareMap){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-github"></i> Python code on GitHub](https://github.com/latsouckfaye/CompareMap/tree/main/python){.btn .btn-outline-secondary role="button" target="_blank"}
+[<i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo](https://doi.org/10.5281/zenodo.8436795){.btn .btn-outline-primary role="button" target="_blank"}
+[<i class="bi bi-door-open"></i> View the “Large-scale mapping” project](../../projets.qmd){.btn .btn-outline-secondary role="button"}
+[<i class="bi bi-door-open"></i> Back to tutorials](../../tutoriels.qmd){.btn .btn-outline-secondary role="button"}
 ::::
 
-Cette méthode a servi à valider le modèle de cartographie géomorphologique automatique décrit dans @faye2024automatic.
+This method was used to validate the automatic geomorphological mapping model described in @faye2024automatic.
 
 ::: {#refs}
 :::

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Paul Faye">
-<meta name="description" content="Désagrégation de résolution, score de concordance et score équilibré par classe, pour comparer une carte prédite à une carte de référence — en R et en Python.">
+<meta name="dcterms.date" content="2024-05-26">
+<meta name="description" content="Resolution disaggregation, match score, and per-class balanced score, to compare a predicted map to a reference map — in R and in Python.">
 
-<title>Comparer des cartes — Tutoriels — Paul Faye – Paul Faye</title>
+<title>Compare maps — Tutorials — Paul Faye – Paul Faye</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -120,17 +121,17 @@ div.csl-indent {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Pas de résultats",
-    "search-matching-documents-text": "documents trouvés",
-    "search-copy-link-title": "Copier le lien vers la recherche",
-    "search-hide-matches-text": "Cacher les correspondances additionnelles",
-    "search-more-match-text": "correspondance de plus dans ce document",
-    "search-more-matches-text": "correspondances de plus dans ce document",
-    "search-clear-button-title": "Effacer",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer",
-    "search-label": "Recherche"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
@@ -340,9 +341,9 @@ window.Quarto = {
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Basculer le mode sombre"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Recherche"></div>
+          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -352,14 +353,14 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sommaire</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#le-problème" id="toc-le-problème" class="nav-link active" data-scroll-target="#le-problème">Le problème</a></li>
-  <li><a href="#la-méthode" id="toc-la-méthode" class="nav-link" data-scroll-target="#la-méthode">La méthode</a></li>
-  <li><a href="#les-résultats" id="toc-les-résultats" class="nav-link" data-scroll-target="#les-résultats">Les résultats</a></li>
-  <li><a href="#testez-par-vous-même" id="toc-testez-par-vous-même" class="nav-link" data-scroll-target="#testez-par-vous-même">Testez par vous-même</a></li>
-  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a></li>
+  <li><a href="#the-method" id="toc-the-method" class="nav-link" data-scroll-target="#the-method">The method</a></li>
+  <li><a href="#the-results" id="toc-the-results" class="nav-link" data-scroll-target="#the-results">The results</a></li>
+  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself">Try it yourself</a></li>
+  <li><a href="#go-further" id="toc-go-further" class="nav-link" data-scroll-target="#go-further">Go further</a></li>
   </ul>
 </nav>
     </div>
@@ -369,11 +370,11 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Comparer des cartes à différentes résolutions spatiales</h1>
+<h1 class="title">Comparing maps at different spatial resolutions</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Analyse spatiale</div>
-    <div class="quarto-category">Cartographie multi-échelle</div>
-    <div class="quarto-category">SIG</div>
+    <div class="quarto-category">Spatial analysis</div>
+    <div class="quarto-category">Multi-scale mapping</div>
+    <div class="quarto-category">GIS</div>
     <div class="quarto-category">R</div>
     <div class="quarto-category">Python</div>
   </div>
@@ -381,7 +382,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Désagrégation de résolution, score de concordance et score équilibré par classe, pour comparer une carte prédite à une carte de référence — en R et en Python.
+    Resolution disaggregation, match score, and per-class balanced score, to compare a predicted map to a reference map — in R and in Python.
   </div>
 </div>
 
@@ -389,16 +390,16 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
              <p>Paul Faye </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26 mai 2024</p>
+      <p class="date">May 26, 2024</p>
     </div>
   </div>
   
@@ -448,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 (function(){
   var PAIR = {fr: "comparer-cartes.html", en: "comparer-cartes-en.html"};
-  var THIS_LANG = "fr";
+  var THIS_LANG = "en";
   var firstLangEvent = true;
   window.addEventListener("sitelangchange", function(e){
     if(firstLangEvent){ firstLangEvent = false; return; }
@@ -458,53 +459,53 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 })();
 </script>
-<p><a href="../../tutoriels.html">← Retour aux tutoriels</a></p>
-<section id="le-problème" class="level2">
-<h2 class="anchored" data-anchor-id="le-problème">Le problème</h2>
-<p>Deux cartes géomorphologiques obtenues à des résolutions spatiales différentes ne se comparent pas cellule à cellule telles quelles : la carte prédite doit d’abord être ramenée à la résolution de la carte de référence, puis leur concordance mesurée — sans se limiter à un seul score global, qui favoriserait les classes majoritaires.</p>
-<p>Le code et les fonctions utilisées ici sont ceux employés pour la validation du modèle présenté dans <a href="../../projets.html">« Cartographie grande échelle »</a> sur la page Travaux. Choisissez le langage qui vous intéresse ci-dessous — la méthode et les résultats sont les mêmes, seul le code (et parfois la figure) diffère.</p>
-<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<p><a href="../../tutoriels.html">← Back to tutorials</a></p>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
+<p>Two geomorphological maps obtained at different spatial resolutions cannot be compared cell by cell as they are: the predicted map must first be brought down to the resolution of the reference map, and only then can their agreement be measured — without settling for a single overall score, which would favor majority classes.</p>
+<p>The code and functions used here are the ones employed to validate the model presented in <a href="../../projets.html">“Large-scale mapping”</a> on the Work page. Pick the language you’re interested in below — the method and the results are the same, only the code (and sometimes the figure) differs.</p>
+<div class="langtoggle" role="group" aria-label="Choose language">
 <span class="langtoggle-indicator" id="langIndicator"></span>
 <button type="button" data-lang="r" aria-pressed="true">R</button>
 <button type="button" data-lang="python" aria-pressed="false">Python</button>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="En bref">
+<div class="callout callout-style-default callout-note callout-titled" title="In short">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>En bref
+<span class="screen-reader-only">Note</span>In short
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>La carte prédite est <strong>désagrégée</strong> pour retrouver la résolution de la carte de référence, cellule par cellule.</li>
-<li><strong>Score de concordance (“Match”)</strong> : proportion de cellules identiques entre les deux cartes.</li>
-<li><strong>Score équilibré (“Balanced Match”)</strong> : moyenne des rappels par classe — chaque classe compte autant que les autres, indépendamment de sa fréquence.</li>
-<li>Sur l’exemple ci-dessous, le score équilibré passe de <strong>0,86</strong> à <strong>0,56</strong> selon la façon dont les cellules non prédites sont comptabilisées — l’écart à lui seul illustre pourquoi le choix de la métrique compte.</li>
+<li>The predicted map is <strong>disaggregated</strong> to recover the resolution of the reference map, cell by cell.</li>
+<li><strong>Match score</strong>: proportion of identical cells between the two maps.</li>
+<li><strong>Balanced Match score</strong>: average of per-class recalls — each class counts as much as the others, regardless of its frequency.</li>
+<li>In the example below, the balanced score goes from <strong>0.86</strong> to <strong>0.56</strong> depending on how unpredicted cells are counted — that gap alone illustrates why the choice of metric matters.</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="la-méthode" class="level2">
-<h2 class="anchored" data-anchor-id="la-méthode">La méthode</h2>
-<p>Une zone d’étude est délimitée puis discrétisée en grille. La carte prédite — produite à une résolution plus grossière — est désagrégée pour retrouver la résolution de la carte de référence, et chaque cellule est classée selon son statut : hors zone, prédite, ou non prédite.</p>
+<section id="the-method" class="level2">
+<h2 class="anchored" data-anchor-id="the-method">The method</h2>
+<p>A study area is delineated then discretized into a grid. The predicted map — produced at a coarser resolution — is disaggregated to recover the resolution of the reference map, and each cell is classified by status: out of area, predicted, or unpredicted.</p>
 <div class="lang-block lang-r">
-<div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
+<div class="callout callout-style-default callout-tip callout-titled" title="Technical prerequisites">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Prérequis techniques
+<span class="screen-reader-only">Tip</span>Technical prerequisites
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Packages R : <code>ggplot2</code>, <code>dplyr</code>, <code>stringr</code>, <code>sp</code>, <code>sf</code>, <code>ggspatial</code>, <code>ggpubr</code>, <code>ggnewscale</code>, <code>raster</code>. Les 4 fonctions utilisées ici (désagrégation, statut des cellules, score de concordance, score équilibré) sont publiées séparément sur Zenodo pour être réutilisables indépendamment de ce notebook.</p>
-<p><a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo</a></p>
+<p>R packages: <code>ggplot2</code>, <code>dplyr</code>, <code>stringr</code>, <code>sp</code>, <code>sf</code>, <code>ggspatial</code>, <code>ggpubr</code>, <code>ggnewscale</code>, <code>raster</code>. The 4 functions used here (disaggregation, cell status, match score, balanced score) are published separately on Zenodo so they can be reused independently of this notebook.</p>
+<p><a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo</a></p>
 </div>
 </div>
 </div>
@@ -513,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Zone d'étude : polygone WGS84 discrétisé en grille</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Study area: WGS84 polygon discretized into a grid</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>crdref <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">'+proj=longlat +datum=WGS84'</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>lon <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">116.8</span>, <span class="sc">-</span><span class="fl">114.2</span>, <span class="sc">-</span><span class="fl">112.9</span>, <span class="sc">-</span><span class="fl">111.9</span>, <span class="sc">-</span><span class="fl">114.2</span>, <span class="sc">-</span><span class="fl">115.4</span>, <span class="sc">-</span><span class="fl">117.7</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">41.3</span>, <span class="fl">42.9</span>, <span class="fl">42.4</span>, <span class="fl">39.8</span>, <span class="fl">37.9</span>, <span class="fl">38.3</span>, <span class="fl">38.6</span>)</span>
@@ -524,7 +525,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymn =</span> <span class="fu">extent</span>(pols)[<span class="dv">3</span>], <span class="at">ymx =</span> <span class="fu">extent</span>(pols)[<span class="dv">4</span>], <span class="at">res =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">5</span>))</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(ref_sp) <span class="ot">&lt;-</span> crdref</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Carte de référence (résolution fine, 5 classes) et carte prédite (résolution grossière)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Reference map (fine resolution, 5 classes) and predicted map (coarse resolution)</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="at">xmn =</span> <span class="fu">extent</span>(pols)[<span class="dv">1</span>], <span class="at">xmx =</span> <span class="fu">extent</span>(pols)[<span class="dv">2</span>],</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">ymn =</span> <span class="fu">extent</span>(pols)[<span class="dv">3</span>], <span class="at">ymx =</span> <span class="fu">extent</span>(pols)[<span class="dv">4</span>], <span class="at">res =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
@@ -536,7 +537,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>pred_sp[[<span class="dv">1</span>]][<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">17</span>, <span class="dv">21</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>)</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>pred_sp_mask <span class="ot">&lt;-</span> <span class="fu">mask</span>(pred_sp, pols, <span class="at">updateNA =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Désagrégation de la carte prédite + statut des cellules (hors zone / prédite / non prédite)</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Disaggregating the predicted map + cell status (out of area / predicted / unpredicted)</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'disaggregate.R'</span>); <span class="fu">source</span>(<span class="st">'status-prop.R'</span>)</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>pred_sp_dis <span class="ot">&lt;-</span> <span class="fu">disagRast</span>(pols, pred_sp_mask, ref_sp, crdref)</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
@@ -544,15 +545,15 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ref_spbis[<span class="fu">is.na</span>(ref_spbis)] <span class="ot">&lt;-</span> <span class="dv">999</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>outstudy <span class="ot">&lt;-</span> <span class="fu">mask</span>(ref_spbis, pols, <span class="at">updateNA =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">statusProp</span>(pred_sp_dis, ref_sp, outstudy[[<span class="dv">1</span>]], pols, <span class="dv">4326</span>)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>PropNL <span class="ot">&lt;-</span> status[[<span class="dv">4</span>]]  <span class="co"># proportion de cellules non prédites</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>PropL  <span class="ot">&lt;-</span> status[[<span class="dv">5</span>]]  <span class="co"># proportion de cellules prédites</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>PropNL <span class="ot">&lt;-</span> status[[<span class="dv">4</span>]]  <span class="co"># proportion of unpredicted cells</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>PropL  <span class="ot">&lt;-</span> status[[<span class="dv">5</span>]]  <span class="co"># proportion of predicted cells</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-layout-panel" data-layout-ncol="4">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="refmap.png" class="img-fluid figure-img"></p>
-<figcaption>Référence</figcaption>
+<figcaption>Reference</figcaption>
 </figure>
 </div>
 </div>
@@ -560,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="predmap.png" class="img-fluid figure-img"></p>
-<figcaption>Prédite</figcaption>
+<figcaption>Predicted</figcaption>
 </figure>
 </div>
 </div>
@@ -568,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="predismap.png" class="img-fluid figure-img"></p>
-<figcaption>Désagrégée</figcaption>
+<figcaption>Disaggregated</figcaption>
 </figure>
 </div>
 </div>
@@ -576,50 +577,50 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="statusmap.png" class="img-fluid figure-img"></p>
-<figcaption>Statut</figcaption>
+<figcaption>Status</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>De la référence à la carte de statut : la carte prédite (résolution grossière) est désagrégée pour retrouver la résolution de la référence, puis chaque cellule de la zone d’étude est classée hors zone, prédite (vert) ou non prédite (orange). Sur cet exemple, 45 cellules sont hors zone, et parmi les 82 restantes, 72 sont prédites (88 %) contre 10 non prédites (12 %) — cette dernière proportion conditionne l’écart entre score brut et score corrigé ci-dessous.</p>
+<p>From reference to status map: the predicted map (coarse resolution) is disaggregated to recover the resolution of the reference map, then every cell in the study area is classified as out of area, predicted (green), or unpredicted (orange). In this example, 45 cells are out of area, and of the remaining 82, 72 are predicted (88%) versus 10 unpredicted (12%) — this last proportion is what drives the gap between the raw and corrected scores below.</p>
 <blockquote class="blockquote">
-<p>La désagrégation de la carte prédite génère des effets de bord en périphérie de zone — visibles sur la carte de statut ci-dessus.</p>
+<p>Disaggregating the predicted map produces edge effects at the periphery of the study area — visible on the status map above.</p>
 </blockquote>
 </div>
 <div class="lang-block lang-python">
-<div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
+<div class="callout callout-style-default callout-tip callout-titled" title="Technical prerequisites">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Prérequis techniques
+<span class="screen-reader-only">Tip</span>Technical prerequisites
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Seuls <code>numpy</code> et <code>matplotlib</code> sont nécessaires — pas de <code>geopandas</code>/<code>shapely</code>/<code>rasterio</code> : le test point-dans-polygone utilise <code>matplotlib.path.Path</code>, et les grilles sont de simples tableaux numpy. Code complet : <a href="compare_maps.py"><code>compare_maps.py</code></a>.</p>
+<p>Only <code>numpy</code> and <code>matplotlib</code> are needed — no <code>geopandas</code>/<code>shapely</code>/<code>rasterio</code>: the point-in-polygon test uses <code>matplotlib.path.Path</code>, and the grids are plain numpy arrays. Full code: <a href="compare_maps.py"><code>compare_maps.py</code></a>.</p>
 </div>
 </div>
 </div>
 <div id="methode" class="cell" data-execution_count="1">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.path <span class="im">import</span> Path</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap, BoundaryNorm</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Zone d'étude</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Study area</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>POLY_LON <span class="op">=</span> [<span class="op">-</span><span class="fl">116.8</span>, <span class="op">-</span><span class="fl">114.2</span>, <span class="op">-</span><span class="fl">112.9</span>, <span class="op">-</span><span class="fl">111.9</span>, <span class="op">-</span><span class="fl">114.2</span>, <span class="op">-</span><span class="fl">115.4</span>, <span class="op">-</span><span class="fl">117.7</span>]</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>POLY_LAT <span class="op">=</span> [<span class="fl">41.3</span>, <span class="fl">42.9</span>, <span class="fl">42.4</span>, <span class="fl">39.8</span>, <span class="fl">37.9</span>, <span class="fl">38.3</span>, <span class="fl">38.6</span>]</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>POLYGON <span class="op">=</span> np.column_stack([POLY_LON, POLY_LAT])</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>XMIN, XMAX, YMIN, YMAX <span class="op">=</span> <span class="op">-</span><span class="fl">117.7</span>, <span class="op">-</span><span class="fl">111.9</span>, <span class="fl">37.9</span>, <span class="fl">42.9</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>NA <span class="op">=</span> np.nan</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Carte de référence (fine, 10x12) et carte prédite (grossière, 5x6)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Reference map (fine, 10x12) and predicted map (coarse, 5x6)</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>REFERENCE <span class="op">=</span> np.array([</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    [NA, NA, NA, NA, NA, NA,  <span class="dv">5</span>,  <span class="dv">5</span>, NA, NA, NA, NA],</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    [NA, NA, NA, NA, NA,  <span class="dv">3</span>,  <span class="dv">5</span>,  <span class="dv">5</span>,  <span class="dv">5</span>,  <span class="dv">5</span>, NA, NA],</span>
@@ -642,13 +643,13 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cell_polygon_mask(xs, ys, polygon):</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""True pour les cellules dont le centre est à l'intérieur du polygone."""</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""True for cells whose center lies inside the polygon."""</span></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    xx, yy <span class="op">=</span> np.meshgrid(xs, ys)</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    pts <span class="op">=</span> np.column_stack([xx.ravel(), yy.ravel()])</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Path(polygon).contains_points(pts).reshape(<span class="bu">len</span>(ys), <span class="bu">len</span>(xs))</span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> disaggregate(coarse, factor):</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Désagrège une grille grossière en répétant chaque cellule factor x factor fois."""</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Disaggregates a coarse grid by repeating each cell factor x factor times."""</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.repeat(np.repeat(coarse, factor, axis<span class="op">=</span><span class="dv">0</span>), factor, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>xs_f <span class="op">=</span> XMIN <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (np.arange(<span class="dv">12</span>) <span class="op">+</span> <span class="fl">0.5</span>)</span>
@@ -656,12 +657,12 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>mask_ref <span class="op">=</span> cell_polygon_mask(xs_f, ys_f, POLYGON)</span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> np.where(mask_ref, REFERENCE, np.nan)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>predicted <span class="op">=</span> np.where(mask_ref, disaggregate(PRED_COARSE, <span class="dv">2</span>), np.nan)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>predicted <span class="op">=</span> np.where(mask_ref, disaggregate(PRED_COARSE, <span class="dv">2</span>), np.nan)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="cell-fig-methode" class="cell" data-execution_count="2">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>CLASS_COLORS <span class="op">=</span> [<span class="st">"#dee273"</span>, <span class="st">"#dcbf64"</span>, <span class="st">"#a5bfdd"</span>, <span class="st">"#1f77b6"</span>, <span class="st">"#02426d"</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_class(ax, grid, title):</span>
@@ -676,20 +677,20 @@ document.addEventListener("DOMContentLoaded", function(){
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])<span class="op">;</span> ax.set_yticks([])</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">4</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">0</span>], reference, <span class="st">"Référence (fine)"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">1</span>], PRED_COARSE, <span class="st">"Prédite (grossière)"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">2</span>], predicted, <span class="st">"Prédite désagrégée"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">0</span>], reference, <span class="st">"Reference (fine)"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">1</span>], PRED_COARSE, <span class="st">"Predicted (coarse)"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plot_class(axes[<span class="dv">2</span>], predicted, <span class="st">"Predicted, disaggregated"</span>)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-methode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-methode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="comparer-cartes_files/figure-html/fig-methode-output-1.png" width="1046" height="375" class="figure-img">
+<img src="comparer-cartes-en_files/figure-html/fig-methode-output-1.png" width="1046" height="374" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-methode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: De la référence à la carte prédite désagrégée
+Figure&nbsp;1: From reference to disaggregated predicted map
 </figcaption>
 </figure>
 </div>
@@ -697,9 +698,9 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 </div>
 </div>
 </section>
-<section id="les-résultats" class="level2">
-<h2 class="anchored" data-anchor-id="les-résultats">Les résultats</h2>
-<p>Deux familles de scores mesurent la concordance entre les deux cartes : un <strong>score de concordance</strong> simple (proportion de cellules identiques), et un <strong>score équilibré par classe</strong> qui neutralise l’effet des classes dominantes <span class="citation" data-cites="grandini2020metrics">(d’après <a href="#ref-grandini2020metrics" role="doc-biblioref">Grandini et al. 2020</a>)</span>. Chacun se décline en une version <em>non corrigée</em> (qui ignore les cellules non prédites) et une ou deux versions <em>corrigées</em> (qui les comptent comme des erreurs, plus ou moins sévèrement).</p>
+<section id="the-results" class="level2">
+<h2 class="anchored" data-anchor-id="the-results">The results</h2>
+<p>Two families of scores measure agreement between the two maps: a simple <strong>match score</strong> (proportion of identical cells), and a <strong>per-class balanced score</strong> that neutralizes the effect of dominant classes <span class="citation" data-cites="grandini2020metrics">(per <a href="#ref-grandini2020metrics" role="doc-biblioref">Grandini et al. 2020</a>)</span>. Each comes in an <em>uncorrected</em> version (which ignores unpredicted cells) and one or two <em>corrected</em> versions (which count them as errors, more or less severely).</p>
 <div class="lang-block lang-r">
 <table class="caption-top table">
 <colgroup>
@@ -710,35 +711,35 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 <thead>
 <tr class="header">
 <th>Score</th>
-<th>Valeur</th>
-<th>Ce qu’il mesure</th>
+<th>Value</th>
+<th>What it measures</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Concordance — non corrigée</td>
-<td><strong>0,82</strong></td>
-<td>Cellules identiques, cellules non prédites ignorées</td>
+<td>Match — uncorrected</td>
+<td><strong>0.82</strong></td>
+<td>Identical cells, unpredicted cells ignored</td>
 </tr>
 <tr class="even">
-<td>Concordance — corrigée</td>
-<td><strong>0,71</strong></td>
-<td>Idem, cellules non prédites comptées comme erreurs</td>
+<td>Match — corrected</td>
+<td><strong>0.71</strong></td>
+<td>Same, unpredicted cells counted as errors</td>
 </tr>
 <tr class="odd">
-<td>Balanced Match — brut (NCBM)</td>
-<td><strong>0,86</strong></td>
-<td>Moyenne des rappels par classe, cellules non prédites ignorées</td>
+<td>Balanced Match — raw (NCBM)</td>
+<td><strong>0.86</strong></td>
+<td>Average of per-class recalls, unpredicted cells ignored</td>
 </tr>
 <tr class="even">
-<td>Balanced Match — corrigé, prop. 1</td>
-<td><strong>0,76</strong></td>
-<td>NCBM pénalisé par la proportion de cellules non prédites</td>
+<td>Balanced Match — corrected, prop. 1</td>
+<td><strong>0.76</strong></td>
+<td>NCBM penalized by the proportion of unpredicted cells</td>
 </tr>
 <tr class="odd">
-<td>Balanced Match — corrigé, prop. 2</td>
-<td><strong>0,56</strong></td>
-<td>Cellules non prédites réintégrées, rappel fixé à 0</td>
+<td>Balanced Match — corrected, prop. 2</td>
+<td><strong>0.56</strong></td>
+<td>Unpredicted cells reintegrated, recall set to 0</td>
 </tr>
 </tbody>
 </table>
@@ -748,7 +749,7 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pmapcomp.png" class="img-fluid figure-img"></p>
-<figcaption>Concordance non corrigée</figcaption>
+<figcaption>Uncorrected match</figcaption>
 </figure>
 </div>
 </div>
@@ -756,7 +757,7 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pmapcompcorr.png" class="img-fluid figure-img"></p>
-<figcaption>Concordance corrigée</figcaption>
+<figcaption>Corrected match</figcaption>
 </figure>
 </div>
 </div>
@@ -766,7 +767,7 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 <div class="lang-block lang-python">
 <div id="scores" class="cell" data-execution_count="3">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_score(pred, ref, mask, correct<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    valid_ref <span class="op">=</span> mask <span class="op">&amp;</span> <span class="op">~</span>np.isnan(ref)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> correct:</span>
@@ -796,18 +797,18 @@ Figure&nbsp;1: De la référence à la carte prédite désagrégée
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>match_c <span class="op">=</span> match_score(predicted, reference, mask_ref, correct<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>ncbm, cbm1, cbm2 <span class="op">=</span> balanced_match(predicted, reference, mask_ref, [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Match non corrigé : </span><span class="sc">{</span>match_nc<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Match corrigé     : </span><span class="sc">{</span>match_c<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"NCBM (brut)       : </span><span class="sc">{</span>ncbm<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CBM1 (corrigé, prop. 1) : </span><span class="sc">{</span>cbm1<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CBM2 (corrigé, prop. 2) : </span><span class="sc">{</span>cbm2<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Uncorrected match : </span><span class="sc">{</span>match_nc<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Corrected match    : </span><span class="sc">{</span>match_c<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"NCBM (raw)         : </span><span class="sc">{</span>ncbm<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CBM1 (corrected, prop. 1) : </span><span class="sc">{</span>cbm1<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CBM2 (corrected, prop. 2) : </span><span class="sc">{</span>cbm2<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Match non corrigé : 0.81
-Match corrigé     : 0.70
-NCBM (brut)       : 0.86
-CBM1 (corrigé, prop. 1) : 0.74
-CBM2 (corrigé, prop. 2) : 0.56</code></pre>
+<pre><code>Uncorrected match : 0.81
+Corrected match    : 0.70
+NCBM (raw)         : 0.86
+CBM1 (corrected, prop. 1) : 0.74
+CBM2 (corrected, prop. 2) : 0.56</code></pre>
 </div>
 </div>
 <table class="caption-top table">
@@ -819,41 +820,41 @@ CBM2 (corrigé, prop. 2) : 0.56</code></pre>
 <thead>
 <tr class="header">
 <th>Score</th>
-<th>Valeur</th>
-<th>Ce qu’il mesure</th>
+<th>Value</th>
+<th>What it measures</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Concordance — non corrigée</td>
-<td><strong>0,81</strong></td>
-<td>Cellules identiques, cellules non prédites ignorées</td>
+<td>Match — uncorrected</td>
+<td><strong>0.81</strong></td>
+<td>Identical cells, unpredicted cells ignored</td>
 </tr>
 <tr class="even">
-<td>Concordance — corrigée</td>
-<td><strong>0,70</strong></td>
-<td>Idem, cellules non prédites comptées comme erreurs</td>
+<td>Match — corrected</td>
+<td><strong>0.70</strong></td>
+<td>Same, unpredicted cells counted as errors</td>
 </tr>
 <tr class="odd">
-<td>Balanced Match — brut (NCBM)</td>
-<td><strong>0,86</strong></td>
-<td>Moyenne des rappels par classe, cellules non prédites ignorées</td>
+<td>Balanced Match — raw (NCBM)</td>
+<td><strong>0.86</strong></td>
+<td>Average of per-class recalls, unpredicted cells ignored</td>
 </tr>
 <tr class="even">
-<td>Balanced Match — corrigé, prop. 1</td>
-<td><strong>0,74</strong></td>
-<td>NCBM pénalisé par la proportion de cellules non prédites</td>
+<td>Balanced Match — corrected, prop. 1</td>
+<td><strong>0.74</strong></td>
+<td>NCBM penalized by the proportion of unpredicted cells</td>
 </tr>
 <tr class="odd">
-<td>Balanced Match — corrigé, prop. 2</td>
-<td><strong>0,56</strong></td>
-<td>Cellules non prédites réintégrées, rappel fixé à 0</td>
+<td>Balanced Match — corrected, prop. 2</td>
+<td><strong>0.56</strong></td>
+<td>Unpredicted cells reintegrated, recall set to 0</td>
 </tr>
 </tbody>
 </table>
 <div id="cell-fig-scores" class="cell" data-execution_count="4">
 <details class="code-fold">
-<summary>Afficher le code</summary>
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>valid_ref <span class="op">=</span> mask_ref <span class="op">&amp;</span> <span class="op">~</span>np.isnan(reference)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>predicted_here <span class="op">=</span> <span class="op">~</span>np.isnan(predicted)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -878,34 +879,34 @@ CBM2 (corrigé, prop. 2) : 0.56</code></pre>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plot_match(axes[<span class="dv">0</span>], cat_nc, [<span class="st">"#dcbf64"</span>, <span class="st">"#3f8f5f"</span>, <span class="st">"#d97a3e"</span>], [<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>],</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"Non corrigée — </span><span class="sc">{</span>match_nc<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"Uncorrected — </span><span class="sc">{</span>match_nc<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plot_match(axes[<span class="dv">1</span>], cat_c, [<span class="st">"#dcbf64"</span>, <span class="st">"#3f8f5f"</span>], [<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>],</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"Corrigée — </span><span class="sc">{</span>match_c<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"Corrected — </span><span class="sc">{</span>match_c<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-scores" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="comparer-cartes_files/figure-html/fig-scores-output-1.png" width="758" height="375" class="figure-img">
+<img src="comparer-cartes-en_files/figure-html/fig-scores-output-1.png" width="758" height="374" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Concordance non corrigée (gauche) et corrigée (droite)
+Figure&nbsp;2: Uncorrected (left) and corrected (right) match
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>Ces cinq nombres mesurent la même carte prédite, mais répondent à des questions différentes : <em>quelle est ma précision là où j’ai prédit ?</em> (versions non corrigées) contre <em>quelle est ma précision compte tenu de tout ce que je n’ai pas prédit ?</em> (versions corrigées). Le bon score dépend de l’usage qu’on veut en faire, pas d’une convention universelle.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Détail mathématique">
+<p>These five numbers measure the same predicted map, but answer different questions: <em>how accurate am I where I predicted?</em> (uncorrected versions) versus <em>how accurate am I given everything I didn’t predict?</em> (corrected versions). The right score depends on the intended use, not on a universal convention.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Mathematical detail">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Astuce</span>Détail mathématique
+<span class="screen-reader-only">Tip</span>Mathematical detail
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -921,38 +922,38 @@ CBM_{1} = NCBM \times (1 - \%NL)
 \qquad
 CBM_{2} = \frac{1}{K}\sum_{k \neq 99}^{K} Recall_{k}
 \]</span></p>
-<p>où <span class="math inline">\(N_{+}\)</span>/<span class="math inline">\(N_{-}\)</span> sont les cellules aux classes identiques/différentes entre les deux cartes, et <span class="math inline">\(K\)</span> le nombre de classes (5 pour NCBM et CBM₁, 6 pour CBM₂ qui réintègre la classe des cellules non prédites, avec un rappel conventionnellement fixé à 0).</p>
+<p>where <span class="math inline">\(N_{+}\)</span>/<span class="math inline">\(N_{-}\)</span> are cells with identical/different classes between the two maps, and <span class="math inline">\(K\)</span> is the number of classes (5 for NCBM and CBM₁, 6 for CBM₂ which reintegrates the unpredicted-cell class, with recall conventionally set to 0).</p>
 </div>
 </div>
 </section>
-<section id="testez-par-vous-même" class="level2">
-<h2 class="anchored" data-anchor-id="testez-par-vous-même">Testez par vous-même</h2>
-<p>Le calcul réel ci-dessus s’appuie sur des structures trop lourdes pour tourner directement dans un navigateur (<code>sf</code>/<code>raster</code> en R, une grille fine en Python). Voici une version simplifiée sur un petit exemple 4×4 à 3 classes : modifiez les valeurs de <code>pred</code> ci-dessous et cliquez sur <em>Exécuter</em> pour voir les scores changer — exécuté directement dans votre navigateur, sans serveur.</p>
+<section id="try-it-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="try-it-yourself">Try it yourself</h2>
+<p>The actual computation above relies on structures too heavy to run directly in a browser (<code>sf</code>/<code>raster</code> in R, a fine grid in Python). Here is a simplified version on a small 4×4, 3-class example: edit the values of <code>pred</code> below and click <em>Run</em> to see the scores change — executed directly in your browser, no server involved.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Avertissement
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Version simplifiée à but pédagogique, sur un petit exemple jouet — le calcul réel sur des cartes complètes est celui de la section précédente.</p>
+<p>Simplified version for teaching purposes, on a small toy example — the real computation on full maps is the one from the previous section.</p>
 </div>
 </div>
 <div class="lang-block lang-r">
-<div class="callout callout-style-default callout-note callout-titled" title="Ce que fait ce code">
+<div class="callout callout-style-default callout-note callout-titled" title="What this code does">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ce que fait ce code
+<span class="screen-reader-only">Note</span>What this code does
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>ref</code> et <code>pred</code> sont deux petites grilles 4×4 à 3 classes (référence et prédiction). <code>match_score</code> calcule la proportion de cellules identiques entre les deux ; <code>balanced_match</code> fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l’essentiel. Changez quelques valeurs de <code>pred</code> et relancez pour voir les deux scores bouger différemment.</p>
+<p><code>ref</code> and <code>pred</code> are two small 4×4, 3-class grids (reference and prediction). <code>match_score</code> computes the proportion of identical cells between the two; <code>balanced_match</code> averages the recalls class by class, so the most frequent class can’t dominate the score — these are the same two functions as above, reduced to their essentials. Change a few values of <code>pred</code> and rerun to see the two scores move differently.</p>
 </div>
 </div>
 <div>
@@ -960,22 +961,22 @@ Avertissement
 
 </div>
 <script type="webr-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVmIDwtIG1hdHJpeChjKDEsMSwyLDIsXG4gICAgICAgICAgICAgICAgMSwyLDIsMyxcbiAgICAgICAgICAgICAgICAyLDIsMywzLFxuICAgICAgICAgICAgICAgIDIsMywzLDMpLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKVxuXG5wcmVkIDwtIG1hdHJpeChjKDEsMSwyLDMsXG4gICAgICAgICAgICAgICAgICAxLDIsMiwzLFxuICAgICAgICAgICAgICAgICAgMiwzLDMsMyxcbiAgICAgICAgICAgICAgICAgIDIsMywyLDMpLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKVxuXG5tYXRjaF9zY29yZSA8LSBmdW5jdGlvbihwcmVkLCByZWYpIG1lYW4ocHJlZCA9PSByZWYpXG5cbmJhbGFuY2VkX21hdGNoIDwtIGZ1bmN0aW9uKHByZWQsIHJlZikge1xuICBjbGFzc2VzIDwtIHNvcnQodW5pcXVlKGFzLnZlY3RvcihyZWYpKSlcbiAgcmVjYWxscyA8LSBzYXBwbHkoY2xhc3NlcywgZnVuY3Rpb24oaykgbWVhbihwcmVkW3JlZiA9PSBrXSA9PSBrKSlcbiAgbWVhbihyZWNhbGxzKVxufVxuXG5jYXQoXCJDb25jb3JkYW5jZSAoTWF0Y2gpICAgICAgICAgIDpcIiwgcm91bmQobWF0Y2hfc2NvcmUocHJlZCwgcmVmKSwgMiksIFwiXFxuXCIpXG5jYXQoXCJTY29yZSDDqXF1aWxpYnLDqSAoQmFsYW5jZWQgTWF0Y2gpIDpcIiwgcm91bmQoYmFsYW5jZWRfbWF0Y2gocHJlZCwgcmVmKSwgMiksIFwiXFxuXCIpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVmIDwtIG1hdHJpeChjKDEsMSwyLDIsXG4gICAgICAgICAgICAgICAgMSwyLDIsMyxcbiAgICAgICAgICAgICAgICAyLDIsMywzLFxuICAgICAgICAgICAgICAgIDIsMywzLDMpLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKVxuXG5wcmVkIDwtIG1hdHJpeChjKDEsMSwyLDMsXG4gICAgICAgICAgICAgICAgICAxLDIsMiwzLFxuICAgICAgICAgICAgICAgICAgMiwzLDMsMyxcbiAgICAgICAgICAgICAgICAgIDIsMywyLDMpLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKVxuXG5tYXRjaF9zY29yZSA8LSBmdW5jdGlvbihwcmVkLCByZWYpIG1lYW4ocHJlZCA9PSByZWYpXG5cbmJhbGFuY2VkX21hdGNoIDwtIGZ1bmN0aW9uKHByZWQsIHJlZikge1xuICBjbGFzc2VzIDwtIHNvcnQodW5pcXVlKGFzLnZlY3RvcihyZWYpKSlcbiAgcmVjYWxscyA8LSBzYXBwbHkoY2xhc3NlcywgZnVuY3Rpb24oaykgbWVhbihwcmVkW3JlZiA9PSBrXSA9PSBrKSlcbiAgbWVhbihyZWNhbGxzKVxufVxuXG5jYXQoXCJNYXRjaCAgICAgICAgICAgICAgICA6XCIsIHJvdW5kKG1hdGNoX3Njb3JlKHByZWQsIHJlZiksIDIpLCBcIlxcblwiKVxuY2F0KFwiQmFsYW5jZWQgTWF0Y2ggICAgICAgIDpcIiwgcm91bmQoYmFsYW5jZWRfbWF0Y2gocHJlZCwgcmVmKSwgMiksIFwiXFxuXCIpIn0=
 </script>
 </div>
 </div>
 <div class="lang-block lang-python">
-<div class="callout callout-style-default callout-note callout-titled" title="Ce que fait ce code">
+<div class="callout callout-style-default callout-note callout-titled" title="What this code does">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ce que fait ce code
+<span class="screen-reader-only">Note</span>What this code does
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>ref</code> et <code>pred</code> sont deux petites grilles 4×4 à 3 classes (référence et prédiction). <code>match_score</code> calcule la proportion de cellules identiques entre les deux ; <code>balanced_match</code> fait la moyenne des rappels classe par classe, pour ne pas laisser la classe la plus fréquente dominer le score — ce sont les deux mêmes fonctions que plus haut, réduites à l’essentiel. Changez quelques valeurs de <code>pred</code> et relancez pour voir les deux scores bouger différemment.</p>
+<p><code>ref</code> and <code>pred</code> are two small 4×4, 3-class grids (reference and prediction). <code>match_score</code> computes the proportion of identical cells between the two; <code>balanced_match</code> averages the recalls class by class, so the most frequent class can’t dominate the score — these are the same two functions as above, reduced to their essentials. Change a few values of <code>pred</code> and rerun to see the two scores move differently.</p>
 </div>
 </div>
 <div>
@@ -983,23 +984,23 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVmIDwtIG1hdHJpeChjKDEs
 
 </div>
 <script type="pyodide-2-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5cbnJlZiA9IG5wLmFycmF5KFtbMSwxLDIsMl0sXG4gICAgICAgICAgICAgICAgIFsxLDIsMiwzXSxcbiAgICAgICAgICAgICAgICAgWzIsMiwzLDNdLFxuICAgICAgICAgICAgICAgICBbMiwzLDMsM11dKVxuXG5wcmVkID0gbnAuYXJyYXkoW1sxLDEsMiwzXSxcbiAgICAgICAgICAgICAgICAgIFsxLDIsMiwzXSxcbiAgICAgICAgICAgICAgICAgIFsyLDMsMywzXSxcbiAgICAgICAgICAgICAgICAgIFsyLDMsMiwzXV0pXG5cbmRlZiBtYXRjaF9zY29yZShwcmVkLCByZWYpOlxuICAgIHJldHVybiBucC5tZWFuKHByZWQgPT0gcmVmKVxuXG5kZWYgYmFsYW5jZWRfbWF0Y2gocHJlZCwgcmVmKTpcbiAgICBjbGFzc2VzID0gc29ydGVkKHNldChyZWYuZmxhdHRlbigpKSlcbiAgICByZWNhbGxzID0gW25wLm1lYW4ocHJlZFtyZWYgPT0ga10gPT0gaykgZm9yIGsgaW4gY2xhc3Nlc11cbiAgICByZXR1cm4gZmxvYXQobnAubWVhbihyZWNhbGxzKSlcblxucHJpbnQoXCJDb25jb3JkYW5jZSAoTWF0Y2gpICAgICAgICAgICAgIDpcIiwgcm91bmQobWF0Y2hfc2NvcmUocHJlZCwgcmVmKSwgMikpXG5wcmludChcIlNjb3JlIMOpcXVpbGlicsOpIChCYWxhbmNlZCBNYXRjaCkgOlwiLCByb3VuZChiYWxhbmNlZF9tYXRjaChwcmVkLCByZWYpLCAyKSkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5cbnJlZiA9IG5wLmFycmF5KFtbMSwxLDIsMl0sXG4gICAgICAgICAgICAgICAgIFsxLDIsMiwzXSxcbiAgICAgICAgICAgICAgICAgWzIsMiwzLDNdLFxuICAgICAgICAgICAgICAgICBbMiwzLDMsM11dKVxuXG5wcmVkID0gbnAuYXJyYXkoW1sxLDEsMiwzXSxcbiAgICAgICAgICAgICAgICAgIFsxLDIsMiwzXSxcbiAgICAgICAgICAgICAgICAgIFsyLDMsMywzXSxcbiAgICAgICAgICAgICAgICAgIFsyLDMsMiwzXV0pXG5cbmRlZiBtYXRjaF9zY29yZShwcmVkLCByZWYpOlxuICAgIHJldHVybiBucC5tZWFuKHByZWQgPT0gcmVmKVxuXG5kZWYgYmFsYW5jZWRfbWF0Y2gocHJlZCwgcmVmKTpcbiAgICBjbGFzc2VzID0gc29ydGVkKHNldChyZWYuZmxhdHRlbigpKSlcbiAgICByZWNhbGxzID0gW25wLm1lYW4ocHJlZFtyZWYgPT0ga10gPT0gaykgZm9yIGsgaW4gY2xhc3Nlc11cbiAgICByZXR1cm4gZmxvYXQobnAubWVhbihyZWNhbGxzKSlcblxucHJpbnQoXCJNYXRjaCAgICAgICAgICA6XCIsIHJvdW5kKG1hdGNoX3Njb3JlKHByZWQsIHJlZiksIDIpKVxucHJpbnQoXCJCYWxhbmNlZCBNYXRjaCA6XCIsIHJvdW5kKGJhbGFuY2VkX21hdGNoKHByZWQsIHJlZiksIDIpKSJ9
 </script>
 </div>
 </div>
 </section>
-<section id="pour-aller-plus-loin" class="level2">
-<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<section id="go-further" class="level2">
+<h2 class="anchored" data-anchor-id="go-further">Go further</h2>
 <div class="d-flex gap-2 flex-wrap" style="margin:14px 0 28px">
-<p><a href="https://github.com/latsouckfaye/CompareMap" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code R sur GitHub</a> <a href="https://github.com/latsouckfaye/CompareMap/tree/main/python" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code Python sur GitHub</a> <a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo</a> <a href="../../projets.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »</a> <a href="../../tutoriels.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Retour aux tutoriels</a></p>
+<p><a href="https://github.com/latsouckfaye/CompareMap" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> R code on GitHub</a> <a href="https://github.com/latsouckfaye/CompareMap/tree/main/python" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Python code on GitHub</a> <a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Functions on Zenodo</a> <a href="../../projets.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> View the “Large-scale mapping” project</a> <a href="../../tutoriels.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Back to tutorials</a></p>
 </div>
-<p>Cette méthode a servi à valider le modèle de cartographie géomorphologique automatique décrit dans <span class="citation" data-cites="faye2024automatic">Faye et al. (<a href="#ref-faye2024automatic" role="doc-biblioref">2024</a>)</span>.</p>
+<p>This method was used to validate the automatic geomorphological mapping model described in <span class="citation" data-cites="faye2024automatic">Faye et al. (<a href="#ref-faye2024automatic" role="doc-biblioref">2024</a>)</span>.</p>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-faye2024automatic" class="csl-entry" role="listitem">
-Faye, Paul Aimé Latsouck, Elodie Brunel, Thomas Claverie, Solym Mawaki Manou-Abi, et Sophie Dabo-Niang. 2024. <span>«&nbsp;Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms&nbsp;»</span>. <em>Earth Science Informatics</em> 17 (4): 3715‑32.
+Faye, Paul Aimé Latsouck, Elodie Brunel, Thomas Claverie, Solym Mawaki Manou-Abi, and Sophie Dabo-Niang. 2024. <span>“Automatic Geomorphological Mapping Using Ground Truth Data with Coverage Sampling and Random Forest Algorithms.”</span> <em>Earth Science Informatics</em> 17 (4): 3715–32.
 </div>
 <div id="ref-grandini2020metrics" class="csl-entry" role="listitem">
-Grandini, Margherita, Enrico Bagli, et Giorgio Visani. 2020. <span>«&nbsp;Metrics for multi-class classification: an overview&nbsp;»</span>. <em>arXiv preprint arXiv:2008.05756</em>.
+Grandini, Margherita, Enrico Bagli, and Giorgio Visani. 2020. <span>“Metrics for Multi-Class Classification: An Overview.”</span> <em>arXiv Preprint arXiv:2008.05756</em>.
 </div>
 </div>
 
@@ -1082,12 +1083,12 @@ window._ojs.runtime.interpretFromScriptTags();
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copié");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copié");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
