@@ -374,7 +374,9 @@ window.Quarto = {
   <div class="quarto-categories">
     <div class="quarto-category">Spatial analysis</div>
     <div class="quarto-category">Sampling</div>
-    <div class="quarto-category">Geomorphology</div>
+    <div class="quarto-category">Clustering</div>
+    <div class="quarto-category">KMeans</div>
+    <div class="quarto-category">CLARA</div>
     <div class="quarto-category">R</div>
     <div class="quarto-category">Python</div>
   </div>
@@ -418,8 +420,8 @@ body.nav-fixed{padding-top:0 !important}
 body[data-lang="python"] .lang-r{display:none}
 body[data-lang="python"] .lang-python{display:block}
 
-:root{--lr-r:#E08767;--lr-py:#5B8FE8}
-body.quarto-light{--lr-r:#C4643F;--lr-py:#2F63C7}
+:root{--lr-r:#5B8FE8;--lr-py:#E3B341}
+body.quarto-light{--lr-r:#2F63C7;--lr-py:#9A6700}
 .langtoggle{position:sticky;top:12px;z-index:40;display:inline-flex;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);box-shadow:0 8px 20px -12px rgba(0,0,0,.35);margin:18px 0 26px}
 .langtoggle-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--bs-body-bg,#fff);box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
 .langtoggle button{position:relative;z-index:1;border:none;background:transparent;padding:8px 24px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;color:inherit;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
@@ -481,7 +483,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <ul>
 <li><strong>SCS-KMeans</strong>: k-means on the coordinates of a regular grid — uniform coverage, sampled points are the cluster centers.</li>
 <li><strong>SCS-CLARA</strong>: same goal, but each sampled point is an actual cell of the terrain (its medoid), not a computed center — this is the CLARA/PAM algorithm in R.</li>
-<li><strong>CD-CLARA</strong> <em>(complexity-dependent)</em>: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.</li>
+<li><strong>CDS-CLARA</strong> <em>(complexity-dependent)</em>: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.</li>
 </ul>
 </div>
 </div>
@@ -552,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </div>
 </div>
 </div>
-<p>These two variables — depth and roughness — describe the complexity of the relief: they are what CD-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.</p>
+<p>These two variables — depth and roughness — describe the complexity of the relief: they are what CDS-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.</p>
 </div>
 <div class="lang-block lang-python">
 <div class="callout callout-style-default callout-tip callout-titled" title="Technical prerequisites">
@@ -663,7 +665,7 @@ Figure&nbsp;1: Depth and roughness of the real terrain (Geyser bank)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Geyser_cds.png" class="img-fluid figure-img"></p>
-<figcaption>CD-CLARA</figcaption>
+<figcaption>CDS-CLARA</figcaption>
 </figure>
 </div>
 </div>
@@ -686,12 +688,12 @@ Figure&nbsp;1: Depth and roughness of the real terrain (Geyser bank)
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-KMeans  :"</span>, scs_kmeans_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-CLARA   :"</span>, scs_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CD-CLARA    :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CDS-CLARA   :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>SCS-KMeans  : 50 points
 SCS-CLARA   : 50 points
-CD-CLARA    : 50 points</code></pre>
+CDS-CLARA   : 50 points</code></pre>
 </div>
 </div>
 <div id="cell-fig-sampling" class="cell" data-execution_count="4">
@@ -703,7 +705,7 @@ CD-CLARA    : 50 points</code></pre>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="fl">4.6</span>))</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, pts, title <span class="kw">in</span> <span class="bu">zip</span>(axes, [scs_kmeans_pts, scs_clara_pts, cd_clara_pts],</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                           [<span class="st">"SCS-KMeans"</span>, <span class="st">"SCS-CLARA"</span>, <span class="st">"CD-CLARA"</span>]):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                           [<span class="st">"SCS-KMeans"</span>, <span class="st">"SCS-CLARA"</span>, <span class="st">"CDS-CLARA"</span>]):</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(lonlat[:, <span class="dv">0</span>], lonlat[:, <span class="dv">1</span>], c<span class="op">=</span>rough[valid], cmap<span class="op">=</span><span class="st">"Blues"</span>, s<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    pts_ll <span class="op">=</span> to_lonlat(pts)</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    ax.scatter(pts_ll[:, <span class="dv">0</span>], pts_ll[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">"#E08767"</span>, s<span class="op">=</span><span class="dv">14</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
@@ -742,7 +744,7 @@ Figure&nbsp;2: Points sampled by the three methods, over a roughness background
 <p><span class="math display">\[
 MSSD = \frac{1}{N}\sum_{i=1}^{N} \min_{k} \lVert x_i - c_k \rVert^2
 \]</span></p>
-<p>where <span class="math inline">\(x_i\)</span> are the terrain cells and <span class="math inline">\(c_k\)</span> the <span class="math inline">\(K\)</span> sampled points: k-means chooses the <span class="math inline">\(c_k\)</span> that minimize the average squared distance to the nearest sampled point — hence the regular coverage. <strong>SCS-CLARA</strong> and <strong>CD-CLARA</strong> use this same criterion, but additionally require each <span class="math inline">\(c_k\)</span> to be an actual cell of the terrain (a medoid), not a recomputed center.</p>
+<p>where <span class="math inline">\(x_i\)</span> are the terrain cells and <span class="math inline">\(c_k\)</span> the <span class="math inline">\(K\)</span> sampled points: k-means chooses the <span class="math inline">\(c_k\)</span> that minimize the average squared distance to the nearest sampled point — hence the regular coverage. <strong>SCS-CLARA</strong> and <strong>CDS-CLARA</strong> use this same criterion, but additionally require each <span class="math inline">\(c_k\)</span> to be an actual cell of the terrain (a medoid), not a recomputed center.</p>
 </div>
 </div>
 </section>

@@ -373,7 +373,9 @@ window.Quarto = {
   <div class="quarto-categories">
     <div class="quarto-category">Analyse spatiale</div>
     <div class="quarto-category">Échantillonnage</div>
-    <div class="quarto-category">Géomorphologie</div>
+    <div class="quarto-category">Clustering</div>
+    <div class="quarto-category">KMeans</div>
+    <div class="quarto-category">CLARA</div>
     <div class="quarto-category">R</div>
     <div class="quarto-category">Python</div>
   </div>
@@ -417,8 +419,8 @@ body.nav-fixed{padding-top:0 !important}
 body[data-lang="python"] .lang-r{display:none}
 body[data-lang="python"] .lang-python{display:block}
 
-:root{--lr-r:#E08767;--lr-py:#5B8FE8}
-body.quarto-light{--lr-r:#C4643F;--lr-py:#2F63C7}
+:root{--lr-r:#5B8FE8;--lr-py:#E3B341}
+body.quarto-light{--lr-r:#2F63C7;--lr-py:#9A6700}
 .langtoggle{position:sticky;top:12px;z-index:40;display:inline-flex;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);box-shadow:0 8px 20px -12px rgba(0,0,0,.35);margin:18px 0 26px}
 .langtoggle-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--bs-body-bg,#fff);box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
 .langtoggle button{position:relative;z-index:1;border:none;background:transparent;padding:8px 24px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;color:inherit;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
@@ -480,7 +482,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <ul>
 <li><strong>SCS-KMeans</strong> : k-means sur les coordonnées d’une grille régulière — couverture uniforme, les points échantillonnés sont les centres des clusters.</li>
 <li><strong>SCS-CLARA</strong> : même objectif, mais chaque point échantillonné est une vraie cellule du terrain (son médoïde), pas un centre calculé — c’est l’algorithme CLARA/PAM en R.</li>
-<li><strong>CD-CLARA</strong> <em>(complexity-dependent)</em> : le clustering se fait sur la profondeur et la rugosité du terrain plutôt que sur les coordonnées — l’échantillonnage se concentre là où le relief est le plus complexe.</li>
+<li><strong>CDS-CLARA</strong> <em>(complexity-dependent)</em> : le clustering se fait sur la profondeur et la rugosité du terrain plutôt que sur les coordonnées — l’échantillonnage se concentre là où le relief est le plus complexe.</li>
 </ul>
 </div>
 </div>
@@ -551,7 +553,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </div>
 </div>
 </div>
-<p>Ces deux variables — profondeur et rugosité — décrivent la complexité du relief : c’est sur elles que se base l’échantillonnage CD-CLARA, alors que SCS-KMeans et SCS-CLARA ignorent le relief et ne considèrent que la position géographique.</p>
+<p>Ces deux variables — profondeur et rugosité — décrivent la complexité du relief : c’est sur elles que se base l’échantillonnage CDS-CLARA, alors que SCS-KMeans et SCS-CLARA ignorent le relief et ne considèrent que la position géographique.</p>
 </div>
 <div class="lang-block lang-python">
 <div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
@@ -662,7 +664,7 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Geyser_cds.png" class="img-fluid figure-img"></p>
-<figcaption>CD-CLARA</figcaption>
+<figcaption>CDS-CLARA</figcaption>
 </figure>
 </div>
 </div>
@@ -685,12 +687,12 @@ Figure&nbsp;1: Profondeur et rugosité du terrain réel (banc du Geyser)
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-KMeans  :"</span>, scs_kmeans_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SCS-CLARA   :"</span>, scs_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CD-CLARA    :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CDS-CLARA   :"</span>, cd_clara_pts.shape[<span class="dv">0</span>], <span class="st">"points"</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>SCS-KMeans  : 50 points
 SCS-CLARA   : 50 points
-CD-CLARA    : 50 points</code></pre>
+CDS-CLARA   : 50 points</code></pre>
 </div>
 </div>
 <div id="cell-fig-sampling" class="cell" data-execution_count="4">
@@ -702,7 +704,7 @@ CD-CLARA    : 50 points</code></pre>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="fl">4.6</span>))</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, pts, title <span class="kw">in</span> <span class="bu">zip</span>(axes, [scs_kmeans_pts, scs_clara_pts, cd_clara_pts],</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                           [<span class="st">"SCS-KMeans"</span>, <span class="st">"SCS-CLARA"</span>, <span class="st">"CD-CLARA"</span>]):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                           [<span class="st">"SCS-KMeans"</span>, <span class="st">"SCS-CLARA"</span>, <span class="st">"CDS-CLARA"</span>]):</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(lonlat[:, <span class="dv">0</span>], lonlat[:, <span class="dv">1</span>], c<span class="op">=</span>rough[valid], cmap<span class="op">=</span><span class="st">"Blues"</span>, s<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    pts_ll <span class="op">=</span> to_lonlat(pts)</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    ax.scatter(pts_ll[:, <span class="dv">0</span>], pts_ll[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">"#E08767"</span>, s<span class="op">=</span><span class="dv">14</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
@@ -741,7 +743,7 @@ Figure&nbsp;2: Points échantillonnés par les trois méthodes, sur fond de rugo
 <p><span class="math display">\[
 MSSD = \frac{1}{N}\sum_{i=1}^{N} \min_{k} \lVert x_i - c_k \rVert^2
 \]</span></p>
-<p>où <span class="math inline">\(x_i\)</span> sont les cellules du terrain et <span class="math inline">\(c_k\)</span> les <span class="math inline">\(K\)</span> points échantillonnés : le k-means choisit les <span class="math inline">\(c_k\)</span> qui minimisent la distance quadratique moyenne au point échantillonné le plus proche — d’où la couverture régulière. <strong>SCS-CLARA</strong> et <strong>CD-CLARA</strong> reprennent ce même critère, mais imposent en plus que chaque <span class="math inline">\(c_k\)</span> soit une cellule réelle du terrain (un médoïde), pas un centre recalculé.</p>
+<p>où <span class="math inline">\(x_i\)</span> sont les cellules du terrain et <span class="math inline">\(c_k\)</span> les <span class="math inline">\(K\)</span> points échantillonnés : le k-means choisit les <span class="math inline">\(c_k\)</span> qui minimisent la distance quadratique moyenne au point échantillonné le plus proche — d’où la couverture régulière. <strong>SCS-CLARA</strong> et <strong>CDS-CLARA</strong> reprennent ce même critère, mais imposent en plus que chaque <span class="math inline">\(c_k\)</span> soit une cellule réelle du terrain (un médoïde), pas un centre recalculé.</p>
 </div>
 </div>
 </section>

@@ -1,6 +1,6 @@
 ---
 pagetitle: "Blog — Paul Faye"
-description: "Data & Tech, Finance & Investissement, Projets & Build — ce que j'apprends, ce que je construis, ce qui m'intéresse."
+description: "Data & Tech, Finance & Investissement, Projets & Créations — ce que j'apprends, ce que je construis, ce qui m'intéresse."
 toc: false
 freeze: false
 page-layout: full
@@ -73,7 +73,7 @@ body.quarto-light #quarto-content{--blue:#2F63C7;--coral:#C4643F;--third:#9A6700
 <div class="blogcats">
 <span class="hubminibadge" style="color:var(--cyan)" data-en="Data & Tech">Data & Tech</span>
 <span class="hubminibadge" style="color:var(--purple)" data-en="Finance & Investing">Finance & Investissement</span>
-<span class="hubminibadge" style="color:var(--pink)" data-en="Projects & Build">Projets & Build</span>
+<span class="hubminibadge" style="color:var(--pink)" data-en="Projects & Creations">Projets & Créations</span>
 </div>
 </div>
 

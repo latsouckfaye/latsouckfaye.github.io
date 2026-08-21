@@ -285,8 +285,8 @@ ul.task-list li input[type="checkbox"] {
 .v8 .statlabel{font-size:12.5px;color:var(--muted)}
 .v8 .hook{max-width:540px;margin:10px auto 0;padding:0 20px;text-align:center;font-size:14.5px;color:var(--txt);line-height:1.55}
 .v8 .sgb[data-key="all"][aria-pressed="true"]{background:var(--txt)}
-.v8 .sgb[data-key="python"][aria-pressed="true"]{background:var(--blue)}
-.v8 .sgb[data-key="r"][aria-pressed="true"]{background:var(--coral)}
+.v8 .sgb[data-key="python"][aria-pressed="true"]{background:var(--third)}
+.v8 .sgb[data-key="r"][aria-pressed="true"]{background:var(--blue)}
 
 .v8 .domainrow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;max-width:700px;margin:14px auto 0;padding:0 20px}
 .v8 .domainchip{font-size:11.5px;font-family:inherit;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .18s;white-space:nowrap}
@@ -389,23 +389,23 @@ var TUTS=[
  {key:"cartes",
   fr:{title:"Comparer des cartes à différentes résolutions spatiales",
    desc:"Désagrégation de résolution puis scores de concordance (Match, Balanced Match) entre carte prédite et référence — méthode issue d'un article publié.",
-   domains:["Analyse spatiale","Cartographie multi-échelle","SIG"]},
+   domains:["Analyse spatiale","Cartographie multi-échelle","Désagrégation","Classification","Validation de modèle","Score de concordance"]},
   en:{title:"Comparing maps at different spatial resolutions",
    desc:"Resolution disaggregation followed by agreement scores (Match, Balanced Match) between predicted and reference maps — method from a published paper.",
-   domains:["Spatial analysis","Multi-scale mapping","GIS"]},
+   domains:["Spatial analysis","Multi-scale mapping","Disaggregation","Classification","Model validation","Match score"]},
   langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/CompareMap", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#r"},
          {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/CompareMap/tree/main/python", readLink:"tutoriels/comparer-cartes/comparer-cartes.html#python"}],
   images:["tutoriels/comparer-cartes/refmap.png","tutoriels/comparer-cartes/predmap.png"]},
  {key:"echantillonnage",
   fr:{title:"Méthodes d'échantillonnage stratégique",
    desc:"Échantillonnage par couverture (k-means) et par complexité du terrain (médoïdes), sur un récif corallien réel.",
-   domains:["Analyse spatiale","Échantillonnage","Géomorphologie"]},
+   domains:["Analyse spatiale","Échantillonnage","Clustering","KMeans","CLARA"]},
   en:{title:"Strategic sampling methods",
    desc:"Coverage-based sampling (k-means) and terrain-complexity sampling (medoids), on a real coral reef.",
-   domains:["Spatial analysis","Sampling","Geomorphology"]},
+   domains:["Spatial analysis","Sampling","Clustering","KMeans","CLARA"]},
   langs:[{lang:"r", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling", readLink:"tutoriels/echantillonnage/echantillonnage.html#r"},
          {lang:"python", status:"ready", link:"https://github.com/latsouckfaye/SpatialSampling/tree/main/python", readLink:"tutoriels/echantillonnage/echantillonnage.html#python"}],
-  images:["tutoriels/echantillonnage/Geyser_rough.png","tutoriels/echantillonnage/Geyser_cds.png"]},
+  images:["tutoriels/echantillonnage/Geyser_scscl.png","tutoriels/echantillonnage/Geyser_cds.png"]},
  {key:"composition",
   fr:{title:"Analyse spatiale de données de composition",
    desc:"Modèle de régression pour données compositionnelles spatiales, avec zéros structurels.",
@@ -424,7 +424,7 @@ var SVGS={
   "<g class='b'><circle cx='26' cy='18' r='3.2'/><circle cx='52' cy='34' r='3.2'/><circle cx='40' cy='54' r='3.2'/><circle cx='86' cy='24' r='3.2'/><circle cx='112' cy='42' r='3.2'/><circle cx='146' cy='30' r='3.2'/><circle cx='176' cy='46' r='3.2'/><circle cx='96' cy='58' r='3.2'/><circle cx='70' cy='58' r='3.2'/></g></svg>"
 };
 
-var LANG_META={r:{label:"R", col:"var(--coral)"}, python:{label:"Python", col:"var(--blue)"}};
+var LANG_META={r:{label:"R", col:"var(--blue)"}, python:{label:"Python", col:"var(--third)"}};
 var STATE_META={
   fr:{publie:{color:"#3fbf7f", label:"Publié"}, redaction:{color:"#e3b341", label:"En cours de rédaction"}, planned:{color:"var(--muted)", label:"À venir"}},
   en:{publie:{color:"#3fbf7f", label:"Published"}, redaction:{color:"#e3b341", label:"Being written"}, planned:{color:"var(--muted)", label:"Coming soon"}}

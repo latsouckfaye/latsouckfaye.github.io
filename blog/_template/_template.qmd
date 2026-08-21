@@ -2,7 +2,7 @@
 title: "Titre de l'article"
 description: "Une phrase de résumé, utilisée dans la liste et les métadonnées SEO."
 date: 2026-01-01
-categories: [Data & Tech]   # une seule, parmi : Data & Tech / Finance & Investissement / Projets & Build
+categories: [Data & Tech]   # une seule, parmi : Data & Tech / Finance & Investissement / Projets & Créations
 tags: [Python]              # libre, pour les croisements (ex. Python, Vélo, ETF...)
 image: cover.png            # optionnel, co-localisé dans ce même dossier
 draft: true                 # true = Draft (invisible dans la liste) ; false = Published

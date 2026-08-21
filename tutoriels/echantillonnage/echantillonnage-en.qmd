@@ -4,7 +4,7 @@ description: "Spatial sampling by coverage (k-means) and by terrain complexity (
 pagetitle: "Strategic sampling — Tutorials — Paul Faye"
 author: "Paul Faye"
 date: 2026-08-19
-categories: [Spatial analysis, Sampling, Geomorphology, R, Python]
+categories: [Spatial analysis, Sampling, Clustering, KMeans, CLARA, R, Python]
 image: Geyser_cds.png
 toc: true
 toc-title: "Contents"
@@ -29,8 +29,8 @@ body.nav-fixed{padding-top:0 !important}
 body[data-lang="python"] .lang-r{display:none}
 body[data-lang="python"] .lang-python{display:block}
 
-:root{--lr-r:#E08767;--lr-py:#5B8FE8}
-body.quarto-light{--lr-r:#C4643F;--lr-py:#2F63C7}
+:root{--lr-r:#5B8FE8;--lr-py:#E3B341}
+body.quarto-light{--lr-r:#2F63C7;--lr-py:#9A6700}
 .langtoggle{position:sticky;top:12px;z-index:40;display:inline-flex;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);box-shadow:0 8px 20px -12px rgba(0,0,0,.35);margin:18px 0 26px}
 .langtoggle-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--bs-body-bg,#fff);box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
 .langtoggle button{position:relative;z-index:1;border:none;background:transparent;padding:8px 24px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;color:inherit;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
@@ -90,7 +90,7 @@ The code and functions used here are the ones employed to build the training dat
 ::: {.callout-note title="In short"}
 - **SCS-KMeans**: k-means on the coordinates of a regular grid — uniform coverage, sampled points are the cluster centers.
 - **SCS-CLARA**: same goal, but each sampled point is an actual cell of the terrain (its medoid), not a computed center — this is the CLARA/PAM algorithm in R.
-- **CD-CLARA** *(complexity-dependent)*: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.
+- **CDS-CLARA** *(complexity-dependent)*: clustering is done on terrain depth and roughness rather than on coordinates — sampling concentrates where the relief is most complex.
 :::
 
 ## The method
@@ -139,7 +139,7 @@ Roughness_plot <- ggplot(shp2) +
 ![Roughness](Geyser_rough.png)
 :::
 
-These two variables — depth and roughness — describe the complexity of the relief: they are what CD-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.
+These two variables — depth and roughness — describe the complexity of the relief: they are what CDS-CLARA sampling is based on, while SCS-KMeans and SCS-CLARA ignore the relief and only consider geographic position.
 
 :::
 
@@ -217,7 +217,7 @@ pvtcdcl <- cdCLARA(data = Terrain_Attr_50_df, var1 = c("Longitude", "Latitude"),
 
 ![SCS-CLARA](Geyser_scscl.png)
 
-![CD-CLARA](Geyser_cds.png)
+![CDS-CLARA](Geyser_cds.png)
 :::
 
 The first two methods produce a grid of points regularly spaced across the whole area. The third departs from that clearly: points cluster along the edges, where roughness is highest.
@@ -239,7 +239,7 @@ cd_clara_pts, _ = kmeans_medoids(complexity, coords, K, seed=12)
 
 print("SCS-KMeans  :", scs_kmeans_pts.shape[0], "points")
 print("SCS-CLARA   :", scs_clara_pts.shape[0], "points")
-print("CD-CLARA    :", cd_clara_pts.shape[0], "points")
+print("CDS-CLARA   :", cd_clara_pts.shape[0], "points")
 ```
 
 ```{python}
@@ -252,7 +252,7 @@ def to_lonlat(pts_utm):
 
 fig, axes = plt.subplots(1, 3, figsize=(13, 4.6))
 for ax, pts, title in zip(axes, [scs_kmeans_pts, scs_clara_pts, cd_clara_pts],
-                           ["SCS-KMeans", "SCS-CLARA", "CD-CLARA"]):
+                           ["SCS-KMeans", "SCS-CLARA", "CDS-CLARA"]):
     ax.scatter(lonlat[:, 0], lonlat[:, 1], c=rough[valid], cmap="Blues", s=2, alpha=0.6)
     pts_ll = to_lonlat(pts)
     ax.scatter(pts_ll[:, 0], pts_ll[:, 1], c="#E08767", s=14, edgecolor="black", linewidth=0.4)
@@ -273,7 +273,7 @@ $$
 MSSD = \frac{1}{N}\sum_{i=1}^{N} \min_{k} \lVert x_i - c_k \rVert^2
 $$
 
-where $x_i$ are the terrain cells and $c_k$ the $K$ sampled points: k-means chooses the $c_k$ that minimize the average squared distance to the nearest sampled point — hence the regular coverage. **SCS-CLARA** and **CD-CLARA** use this same criterion, but additionally require each $c_k$ to be an actual cell of the terrain (a medoid), not a recomputed center.
+where $x_i$ are the terrain cells and $c_k$ the $K$ sampled points: k-means chooses the $c_k$ that minimize the average squared distance to the nearest sampled point — hence the regular coverage. **SCS-CLARA** and **CDS-CLARA** use this same criterion, but additionally require each $c_k$ to be an actual cell of the terrain (a medoid), not a recomputed center.
 :::
 
 ## Try it yourself

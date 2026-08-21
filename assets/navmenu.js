@@ -13,7 +13,7 @@
     {group:"Tutoriels publiés", groupEn:"Published tutorials", cls:"c-tutoriels", label:"Méthodes d'échantillonnage stratégique", labelEn:"Strategic sampling methods", href:"/tutoriels/echantillonnage/echantillonnage.html"},
     {group:"Blog", groupEn:"Blog", cls:"c-blog", label:"Data & Tech", labelEn:"Data & Tech", href:"/blog.html#category=Data%20%26%20Tech"},
     {group:"Blog", groupEn:"Blog", cls:"c-blog", label:"Finance & Investissement", labelEn:"Finance & Investing", href:"/blog.html#category=Finance%20%26%20Investissement"},
-    {group:"Blog", groupEn:"Blog", cls:"c-blog", label:"Projets & Build", labelEn:"Projects & Build", href:"/blog.html#category=Projets%20%26%20Build"}
+    {group:"Blog", groupEn:"Blog", cls:"c-blog", label:"Projets & Créations", labelEn:"Projects & Creations", href:"/blog.html#category=Projets%20%26%20Cr%C3%A9ations"}
   ];
 
   function build(){
