@@ -16,6 +16,7 @@ freeze: false
 .v8 .sgb[data-key="dakar"][aria-pressed="true"]{background:var(--third)}
 .v8 .sgb[data-key="lille"][aria-pressed="true"]{background:var(--blue)}
 .v8 .sgb[data-key="mtp"][aria-pressed="true"]{background:var(--coral)}
+#segExp .sgb{min-width:200px;text-align:center}
 .v8 #ftl circle{cursor:pointer;outline:none;transition:opacity .18s,filter .18s}
 .v8 #ftl circle:hover{filter:brightness(1.15)}
 .v8 #ftl circle:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
@@ -96,32 +97,32 @@ var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 var EXP=[
  {key:"inria", logo:"images/logos/inria.svg", start:2025.0, end:2025.9, col:"var(--blue)",
   fr:{title:"Ingénieur de Recherche", org:"Inria — Lille · 2025",
-   desc:"Étude avec l'Institut ONCOLILLE : d'une base de dossiers cliniques à un modèle de pronostic interprétable, sur une cohorte nettoyée de 1 445 à 884 individus, et 48 variables candidates.",
-   kw:["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"]},
+   desc:"Étude avec l'Institut ONCOLILLE : d'une base de dossiers cliniques à un modèle de pronostic interprétable de la récidive des cancers œsogastriques, sur une cohorte nettoyée de 1 445 à 884 individus — 48 variables candidates réduites à 6 variables retenues.",
+   kw:["Recherche clinique","Analyses de survie","Données censurées","Sélection de modèles","Interprétation"]},
   en:{title:"Research Engineer", org:"Inria — Lille · 2025",
-   desc:"A study with the ONCOLille Institute: from a database of clinical records to an interpretable prognostic model, on a cohort cleaned from 1,445 down to 884 patients, with 48 candidate variables.",
-   kw:["Medical decision support","Interpretable predictive model","Clinical study (1,445 → 884 patients)","Model simplification","Applied research","Scientific publication"]}},
+   desc:"A study with the ONCOLille Institute: from a database of clinical records to an interpretable prognostic model of esophagogastric cancer recurrence, on a cohort cleaned from 1,445 down to 884 patients — 48 candidate variables narrowed down to 6 retained variables.",
+   kw:["Clinical research","Survival analysis","Censored data","Model selection","Interpretation"]}},
  {key:"ens", logo:"images/logos/lille.svg", start:2023.0, end:2026.6, col:"var(--third)",
   fr:{title:"Enseignant-Chercheur", org:"Université de Lille — depuis 2023",
    desc:"Statistique appliquée à des publics techniques et non techniques, sur trois contrats successifs : ATER, vacataire, puis contractuel.",
-   kw:["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"]},
+   kw:["Mise en place de supports de cours","Enseignement","Encadrement","Évaluation","Ateliers"]},
   en:{title:"Lecturer-Researcher", org:"University of Lille — since 2023",
    desc:"Applied statistics for technical and non-technical audiences, across three successive contracts: ATER (temporary teaching/research post), part-time lecturer, then fixed-term staff.",
-   kw:["Professional training","Teaching & science communication","Project supervision","Business analysis","R and Python programming","Juries & assessment"]}},
+   kw:["Course material design","Teaching","Supervision","Assessment","Workshops"]}},
  {key:"doc", logo:"images/logos/montpellier.png", start:2020.0, end:2025.0, col:"var(--coral)",
   fr:{title:"Doctorant", org:"Université de Montpellier · 2020–2025",
    desc:"Automatiser une expertise : deux ans de cartographie manuelle réduits à une chaîne statistique reproductible, en statistique spatiale.",
-   kw:["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"]},
+   kw:["Machine learning","Statistique spatiale","Cartographie","Régression","Classification","Big data","Simulations","Applications sur données réelles","Calcul haute performance (HPC)"]},
   en:{title:"PhD Student", org:"University of Montpellier · 2020–2025",
    desc:"Automating an area of expertise: two years of manual mapping reduced to a reproducible statistical pipeline, in spatial statistics.",
-   kw:["Process automation","Geospatial analysis","Methodological innovation","Time savings (2 years saved)","175 km² mapped","Applied research (5 years)"]}},
+   kw:["Machine learning","Spatial statistics","Mapping","Regression","Classification","Big data","Simulations","Applications on real data","High-performance computing (HPC)"]}},
  {key:"stage", logo:"images/logos/lille.svg", start:2019.85, end:2020.35, col:"var(--txt)",
-  fr:{title:"Data Scientist - Stage", org:"Université de Lille · 2020",
+  fr:{title:"Data scientist (Stagiaire)", org:"Université de Lille · 2020",
    desc:"Analyse statistique d'indicateurs de peuplement de communautés de récifs coralliens.",
-   kw:["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]},
-  en:{title:"Data Scientist - Internship", org:"University of Lille · 2020",
+   kw:["Analyse exploratoire","Réduction de dimension","Classification","Analyses spatiales (krigeage, cartographie)"]},
+  en:{title:"Data Scientist (Intern)", org:"University of Lille · 2020",
    desc:"Statistical analysis of population indicators for coral reef communities.",
-   kw:["Coral reefs","Population indicators","Exploratory statistical analysis"]}}
+   kw:["Exploratory analysis","Dimension reduction","Classification","Spatial analysis (kriging, mapping)"]}}
 ];
 
 var gx0=26, gx1=614, gy0=16, rowH=42, barH=24, yMin=2019.6, yMax=2026.6;
