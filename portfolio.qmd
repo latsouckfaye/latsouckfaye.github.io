@@ -9,10 +9,18 @@ freeze: false
 ```{=html}
 <link rel="stylesheet" href="assets/v8.css">
 <style>
-.v8 .sgb[data-key="all"][aria-pressed="true"]{background:var(--txt)}
 .v8 .sgb[data-key="comp"][aria-pressed="true"]{background:var(--blue)}
 .v8 .sgb[data-key="outil"][aria-pressed="true"]{background:var(--coral)}
-.v8 .sgb[data-key="exp"][aria-pressed="true"]{background:var(--third)}
+#segwrap .sgb{min-width:118px;text-align:center}
+
+/* Interrupteur Radar/Chiffres : piste arrondie avec curseur glissant, comme le
+   sélecteur R/Python des tutoriels — plus explicitement un "interrupteur"
+   qu'une paire de boutons indépendants. */
+.v8 .togglewrap{position:relative;display:flex;width:fit-content;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);margin:14px auto 0}
+.v8 .togglewrap .tg-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--txt);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
+.v8 .togglewrap .tgb{position:relative;z-index:1;width:152px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13.5px;font-family:inherit;color:var(--muted);background:transparent;border:0;border-radius:999px;padding:8px 15px;cursor:pointer;transition:color .2s}
+.v8 .togglewrap .tgb i{font-size:13px}
+.v8 .togglewrap .tgb[aria-pressed="true"]{color:var(--onblue);font-weight:600}
 .v8 .radwrap{max-width:800px;margin:0 auto;padding:0 14px}
 .v8 .radwrap svg{width:100%;height:auto;display:block;overflow:visible}
 .v8 #polys circle{outline:none}
@@ -57,7 +65,7 @@ freeze: false
 
 <div class="hero">
 <p class="h1" data-en="Portfolio" data-title-en="Portfolio — Paul Faye">Portfolio</p>
-<p class="ld" data-en="Skills, tools, and experience, at a glance.">Compétences, outils et expériences, en un coup d'œil.</p>
+<p class="ld" data-en="Skills and tools, at a glance.">Compétences et outils, en un coup d'œil.</p>
 <div class="cta">
 <a class="btn" href="index.qmd"><span data-en="Back to home">Retour à l'accueil</span> <i class="bi bi-door-open"></i></a>
 </div>
@@ -69,7 +77,7 @@ freeze: false
 
 <div class="view on" id="viewRadar">
 <div class="radwrap">
-<svg viewBox="0 0 520 330" role="img" aria-label="Radar interactif des compétences, outils et expériences / Interactive radar of skills, tools, and experience">
+<svg viewBox="0 0 520 330" role="img" aria-label="Radar interactif des compétences et outils / Interactive radar of skills and tools">
 <g class="gl" stroke-width=".9" fill="none" id="web"></g>
 <g id="polys"></g>
 <g id="axLabels"></g>
@@ -81,7 +89,7 @@ freeze: false
 
 <div class="view" id="viewChiffres">
 <div class="donutwrap">
-<svg viewBox="0 0 400 400" role="img" aria-label="Chiffres clés : modélisation, code et outils, articles scientifiques / Key figures: modeling, code and tools, scientific papers">
+<svg viewBox="0 0 400 400" role="img" aria-label="Chiffres clés : compétences et outils, par catégorie / Key figures: skills and tools, by category">
 <g id="donut"></g>
 <text id="donutTotal" x="200" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="38" font-weight="700"></text>
 <text id="donutLabel" x="200" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="var(--muted)"></text>
@@ -115,112 +123,79 @@ var NS="http://www.w3.org/2000/svg";
 var CX=260, CY=160, R=115;
 var curLang=(window.localStorage && localStorage.getItem("site-lang")) || "fr";
 
-// Compétences et Outils partagent une grille de compétences ; Expériences est à part, sur les postes occupés.
-var SKILL_ANG=[-90,-18,54,126,198].map(function(d){return d*Math.PI/180;});
-var SKILL_AXES_FR=["Analyse","Modélisation","Expérimentation","Ingénierie","Communication"];
-var SKILL_AXES_EN=["Analysis","Modeling","Experimentation","Engineering","Communication"];
-var EXP_ANG=[-90,0,90,180].map(function(d){return d*Math.PI/180;});
-var EXP_AXES_FR=["Ingénieur de Recherche","Enseignant-Chercheur","Doctorant","Data Scientist - Stage"];
-var EXP_AXES_EN=["Research Engineer","Lecturer-Researcher","PhD Student","Data Scientist - Intern"];
+// Compétences (6 axes) et Outils (4 axes) ont chacun leur propre géométrie —
+// plus de superposition partagée depuis le retrait de la vue "Tout".
+var COMP_ANG=[-90,-30,30,90,150,210].map(function(d){return d*Math.PI/180;});
+var COMP_AXES_FR=["Analyse","Modélisation","Machine/Deep/AI","Expérimentation","Ingénierie","Communication"];
+var COMP_AXES_EN=["Analysis","Modeling","Machine/Deep/AI","Experimentation","Engineering","Communication"];
+var OUTIL_ANG=[-90,0,90,180].map(function(d){return d*Math.PI/180;});
+var OUTIL_AXES_FR=["Langages de programmation","Logiciels","Infra et versioning","Restitution et reporting"];
+var OUTIL_AXES_EN=["Programming languages","Software","Infra & Versioning","Reporting & Delivery"];
 
 var S_FR={
- comp:{lab:"Compétences",col:"var(--blue)",v:[.75,.95,.78,.82,.80],
-  tip:["Exploration & restitution","Scoring & prédiction","Plans & simulation","Calcul & industrialisation","Restitution & pédagogie"],
-  it:[["Collecte","Préparation","Gestion des valeurs manquantes","Construction de variables","Exploration des données","Détection d'anomalies"],
-      ["Scoring crédit (PD, LGD, EAD)","Segmentation et grilles de score","Régression logistique, GLM","Analyse de survie (Kaplan-Meier, Cox)","Séries temporelles (ARIMA)","Analyses factorielles","Clustering","Tests d'hypothèses","Gradient boosting, forêts aléatoires","Krigeage et dépendances spatiales","Données de composition"],
-      ["Plans d'expérimentation","Simulations","Validation croisée","Monte Carlo","Comparaison de modèles","Bootstrap"],
-      ["Big data","Calcul haute performance (HPC)","Reproductibilité","Versionning (Git)","Architecture de données","Mise en production"],
-      ["Restitution non-technique","Enseignement et formation","Vulgarisation scientifique","Rédaction et publication"]]},
- outil:{lab:"Outils",col:"var(--coral)",v:[.85,.85,.65,.70,.90],
-  tip:["SQL · Python · R","Python · R · SAS","SciPy · Jupyter","Git · Azure · HPC","Power BI · Tableau · Quarto"],
-  it:[["SQL","Python (Pandas, NumPy)","R (tidyverse, data.table)","Excel"],
-      ["Python (scikit-learn, XGBoost, statsmodels)","R (caret, tidymodels, survival)","SAS (SAS/STAT)"],
-      ["Python (SciPy, statsmodels)","R (caret, boot, DoE.base)","Jupyter (notebooks, simulations)"],
+ comp:{lab:"Compétences",col:"var(--blue)",v:[.75,.90,.85,.80,.78,.82],
+  tip:["Collecte, nettoyage et exploration des données","Modèles statistiques classiques et spécialisés","Algorithmes de machine learning et deep learning","Validation, robustesse et fiabilité des modèles","Calcul, reproductibilité et mise en production","Transmettre et vulgariser les résultats"],
+  it:[["Collecte de données","Gestion de valeurs manquantes","Construction de variables","Exploration de données"],
+      ["Régression linéaire simple et multiple","Régression logistique","Modèles linéaires généralisés (GLM)","Modèles de survie","Analyse spatiale (krigeage)","Séries temporelles statistiques (ARIMA, SARIMA, GARCH)","Classification","Clustering","Réduction de dimension"],
+      ["Arbres de décision","Random Forest","Gradient Boosting","SVM","KNN","K-Means","CAH","PCA","AFD","CNN","LLM"],
+      ["Validation croisée","Métriques de performance","Optimisation des hyperparamètres","Régularisation","Gestion du biais et de la variance","Simulations","Monte Carlo/Bootstrap"],
+      ["Big data","Calcul haute performance (HPC)","Reproductibilité/Mise en production","Versioning (Git)"],
+      ["Restitution non technique","Enseignement et formation","Vulgarisation scientifique","Rédaction et publication"]]},
+ outil:{lab:"Outils",col:"var(--coral)",v:[.85,.70,.70,.90],
+  tip:["R, Python, SQL","Logiciels statistiques et économétriques","Git · Azure · HPC","Power BI · Tableau · Quarto"],
+  it:[["R","Python","SQL"],
+      ["Excel","GRETL","EVIEWS","SPAD","SPHYNX"],
       ["Git","Azure","HPC (clusters, calcul parallèle)"],
-      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]},
- exp:{lab:"Expériences",col:"var(--third)",v:[.65,.80,.95,.40],
-  tip:["Inria, Lille (2025)","Université de Lille (depuis 2023)","Université de Montpellier (2020–2025)","Université de Lille (2020)"],
-  it:[["Aide à la décision médicale","Modèle prédictif interprétable","Étude clinique (1 445 → 884 patients)","Simplification de modèle","Recherche appliquée","Publication scientifique"],
-      ["Formation professionnelle","Pédagogie & vulgarisation","Encadrement de projets","Analyse commerciale","Programmation R et Python","Jurys & évaluation"],
-      ["Automatisation de processus","Analyse géospatiale","Innovation méthodologique","Gain de temps (2 ans économisés)","175 km² cartographiés","Recherche appliquée (5 ans)"],
-      ["Récifs coralliens","Indicateurs de peuplement","Analyse statistique exploratoire"]],
-  // Même expérience, relue sur les 5 axes de compétence pour se superposer à Compétences et Outils dans la vue "Tout".
-  vSkill:[.80,.85,.75,.70,.85],
-  tipSkill:["Données réelles, tous domaines","4 postes, modèles bout-en-bout","Terrain, clinique, écologie","Automatisation, calcul HPC","Enseignement, publications"],
-  itSkill:[["Étude clinique (1 445 → 884 patients)","Analyse géospatiale","Analyse commerciale","Analyse statistique exploratoire"],
-      ["Modèle prédictif interprétable","Automatisation de processus","Innovation méthodologique","Recherche appliquée (5 ans)"],
-      ["Récifs coralliens","Indicateurs de peuplement","175 km² cartographiés","Étude clinique (1 445 → 884 patients)"],
-      ["Gain de temps (2 ans économisés)","Mise en production","Programmation R et Python","Automatisation de processus"],
-      ["Formation professionnelle","Pédagogie & vulgarisation","Publication scientifique","Encadrement de projets"]]}
+      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]}
 };
 var S_EN={
- comp:{lab:"Skills",col:"var(--blue)",v:[.75,.95,.78,.82,.80],
-  tip:["Exploration & reporting","Scoring & prediction","Design & simulation","Computing & deployment","Communication & teaching"],
-  it:[["Data collection","Data preparation","Missing value handling","Feature engineering","Data exploration","Anomaly detection"],
-      ["Credit scoring (PD, LGD, EAD)","Segmentation and scorecards","Logistic regression, GLM","Survival analysis (Kaplan-Meier, Cox)","Time series (ARIMA)","Factor analysis","Clustering","Hypothesis testing","Gradient boosting, random forests","Kriging and spatial dependence","Compositional data"],
-      ["Experimental design","Simulations","Cross-validation","Monte Carlo","Model comparison","Bootstrap"],
-      ["Big data","High-performance computing (HPC)","Reproducibility","Version control (Git)","Data architecture","Production deployment"],
+ comp:{lab:"Skills",col:"var(--blue)",v:[.75,.90,.85,.80,.78,.82],
+  tip:["Data collection, cleaning, and exploration","Classical and specialized statistical models","Machine learning and deep learning algorithms","Validating, stress-testing, and trusting models","Computing, reproducibility, and deployment","Sharing and explaining results"],
+  it:[["Data collection","Missing value handling","Feature engineering","Data exploration"],
+      ["Simple and multiple linear regression","Logistic regression","Generalized linear models (GLM)","Survival models","Spatial analysis (kriging)","Statistical time series (ARIMA, SARIMA, GARCH)","Classification","Clustering","Dimension reduction"],
+      ["Decision trees","Random Forest","Gradient Boosting","SVM","KNN","K-Means","Hierarchical clustering (HAC)","PCA","LDA","CNN","LLM"],
+      ["Cross-validation","Performance metrics","Hyperparameter optimization","Regularization","Bias-variance tradeoff","Simulations","Monte Carlo/Bootstrap"],
+      ["Big data","High-performance computing (HPC)","Reproducibility/Production deployment","Version control (Git)"],
       ["Non-technical reporting","Teaching and training","Science communication","Writing and publishing"]]},
- outil:{lab:"Tools",col:"var(--coral)",v:[.85,.85,.65,.70,.90],
-  tip:["SQL · Python · R","Python · R · SAS","SciPy · Jupyter","Git · Azure · HPC","Power BI · Tableau · Quarto"],
-  it:[["SQL","Python (Pandas, NumPy)","R (tidyverse, data.table)","Excel"],
-      ["Python (scikit-learn, XGBoost, statsmodels)","R (caret, tidymodels, survival)","SAS (SAS/STAT)"],
-      ["Python (SciPy, statsmodels)","R (caret, boot, DoE.base)","Jupyter (notebooks, simulations)"],
+ outil:{lab:"Tools",col:"var(--coral)",v:[.85,.70,.70,.90],
+  tip:["R, Python, SQL","Statistical and econometric software","Git · Azure · HPC","Power BI · Tableau · Quarto"],
+  it:[["R","Python","SQL"],
+      ["Excel","GRETL","EVIEWS","SPAD","SPHYNX"],
       ["Git","Azure","HPC (clusters, parallel computing)"],
-      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]},
- exp:{lab:"Experience",col:"var(--third)",v:[.65,.80,.95,.40],
-  tip:["Inria, Lille (2025)","University of Lille (since 2023)","University of Montpellier (2020–2025)","University of Lille (2020)"],
-  it:[["Medical decision support","Interpretable predictive model","Clinical study (1,445 → 884 patients)","Model simplification","Applied research","Scientific publication"],
-      ["Professional training","Teaching & outreach","Project supervision","Business analysis","R and Python programming","Juries & assessment"],
-      ["Process automation","Geospatial analysis","Methodological innovation","Time saved (2 years)","175 km² mapped","Applied research (5 years)"],
-      ["Coral reefs","Population indicators","Exploratory statistical analysis"]],
-  vSkill:[.80,.85,.75,.70,.85],
-  tipSkill:["Real data, all domains","4 roles, end-to-end models","Field, clinical, ecological","Automation, HPC computing","Teaching, publications"],
-  itSkill:[["Clinical study (1,445 → 884 patients)","Geospatial analysis","Business analysis","Exploratory statistical analysis"],
-      ["Interpretable predictive model","Process automation","Methodological innovation","Applied research (5 years)"],
-      ["Coral reefs","Population indicators","175 km² mapped","Clinical study (1,445 → 884 patients)"],
-      ["Time saved (2 years)","Production deployment","R and Python programming","Process automation"],
-      ["Professional training","Teaching & outreach","Scientific publication","Project supervision"]]}
+      ["Power BI","Tableau","LaTeX","Quarto","PowerPoint","Shiny"]]}
 };
-var SKILL_AXES=SKILL_AXES_FR, EXP_AXES=EXP_AXES_FR, S=S_FR;
-var curAngArr=SKILL_ANG, curAxesArr=SKILL_AXES;
-function dataFor(k){
-  if(k==="exp" && curAxesArr===SKILL_AXES) return {lab:S.exp.lab, col:S.exp.col, v:S.exp.vSkill, tip:S.exp.tipSkill, it:S.exp.itSkill};
-  return S[k];
-}
+var COMP_AXES=COMP_AXES_FR, OUTIL_AXES=OUTIL_AXES_FR, S=S_FR;
+var filt="comp";
+var curAngArr=COMP_ANG, curAxesArr=COMP_AXES;
+function dataFor(k){ return S[k]; }
 function pt(i,v){var a=curAngArr[i]; return [CX+R*v*Math.cos(a), CY+R*v*Math.sin(a)];}
 
-// En chiffres : mêmes clés que le radar (comp/outil/exp) pour partager le même filtre.
-var C_FR=[
- {key:"comp", lab:"Modélisation", labLines:["Modélisation"], col:"var(--blue)", total:9,
-  items:[["Modèles industrialisés",3],["Domaines d'application",4],["Jeux massifs traités",2]]},
- {key:"outil", lab:"Code et outils", labLines:["Code et outils"], col:"var(--coral)", total:15,
-  items:[["Langages",5],["Certifications",4],["Dépôts publics",6]]},
- {key:"exp", lab:"Articles scientifiques", labLines:["Articles","scientifiques"], col:"var(--third)", total:4,
-  items:[["Publiés",1],["Soumis",2],["En rédaction",1]]}
-];
-var C_EN=[
- {key:"comp", lab:"Modeling", labLines:["Modeling"], col:"var(--blue)", total:9,
-  items:[["Deployed models",3],["Application domains",4],["Large datasets handled",2]]},
- {key:"outil", lab:"Code & tools", labLines:["Code & tools"], col:"var(--coral)", total:15,
-  items:[["Languages",5],["Certifications",4],["Public repos",6]]},
- {key:"exp", lab:"Scientific papers", labLines:["Scientific","papers"], col:"var(--third)", total:4,
-  items:[["Published",1],["Submitted",2],["In progress",1]]}
-];
-var C=C_FR;
-var grandTotal=C.reduce(function(a,c){return a+c.total;},0);
+// En chiffres : dérivé directement des listes d'éléments de "En graphique" —
+// une catégorie du camembert par axe du filtre actif (Compétences ou Outils),
+// avec pour total le nombre réel d'éléments de cet axe.
+var AXIS_COLORS=["var(--blue)","var(--coral)","var(--third)","#3fbf7f","#a569bd","#e0629a"];
+function categoriesFor(key){
+  var s=S[key], axes = key==="outil" ? OUTIL_AXES : COMP_AXES;
+  return axes.map(function(name,i){
+    return {idx:i, lab:name, labLines:axisLabelLines(name), col:AXIS_COLORS[i%AXIS_COLORS.length],
+      total:s.it[i].length, items:s.it[i]};
+  });
+}
 var CX2=200, CY2=200, R2=98, SW=30, CIRC=2*Math.PI*R2;
 var donut=document.getElementById("donut"), bubC=document.getElementById("bubC"),
     dTotal=document.getElementById("donutTotal"), dLabel=document.getElementById("donutLabel");
+var donutSel=null;
 
 function buildDonut(){
   donut.innerHTML="";
+  var cats=categoriesFor(filt);
+  var grandTotal=cats.reduce(function(a,c){return a+c.total;},0);
   var track=document.createElementNS(NS,"circle");
   track.setAttribute("cx",CX2); track.setAttribute("cy",CY2); track.setAttribute("r",R2);
   track.setAttribute("fill","none"); track.setAttribute("stroke","var(--faint)"); track.setAttribute("stroke-width",SW);
   donut.appendChild(track);
   var offset=0;
-  C.forEach(function(c){
+  cats.forEach(function(c){
     var len=(c.total/grandTotal)*CIRC;
     var seg=document.createElementNS(NS,"circle");
     seg.setAttribute("cx",CX2); seg.setAttribute("cy",CY2); seg.setAttribute("r",R2);
@@ -228,57 +203,59 @@ function buildDonut(){
     seg.setAttribute("stroke-dasharray", len.toFixed(1)+" "+(CIRC-len).toFixed(1));
     seg.setAttribute("stroke-dashoffset", (-offset).toFixed(1));
     seg.setAttribute("transform","rotate(-90 "+CX2+" "+CY2+")");
-    seg.setAttribute("data-key",c.key);
+    seg.setAttribute("data-idx",c.idx);
     seg.setAttribute("tabindex","0"); seg.setAttribute("role","button");
     seg.setAttribute("aria-label",c.lab+" : "+c.total);
-    seg.addEventListener("click",function(){applyFilter(c.key);});
-    seg.addEventListener("focus",function(){applyFilter(c.key);});
+    seg.addEventListener("click",function(){donutSel=c.idx; renderChiffres();});
+    seg.addEventListener("focus",function(){donutSel=c.idx; renderChiffres();});
     donut.appendChild(seg);
 
     var midAng=((offset+len/2)/CIRC)*360-90, rad=midAng*Math.PI/180;
     var r=R2+SW/2+42, lx=CX2+r*Math.cos(rad), ly=CY2+r*Math.sin(rad);
     var t=document.createElementNS(NS,"text");
     t.setAttribute("text-anchor","middle"); t.setAttribute("font-family","Inter,sans-serif");
-    t.setAttribute("fill",c.col); t.setAttribute("data-key",c.key); t.style.cursor="pointer";
-    var n=document.createElementNS(NS,"tspan"); n.setAttribute("x",lx.toFixed(1)); n.setAttribute("y",ly.toFixed(1));
-    n.setAttribute("font-size","17"); n.setAttribute("font-weight","700"); n.textContent=c.total;
-    t.appendChild(n);
-    c.labLines.forEach(function(line){
-      var l=document.createElementNS(NS,"tspan"); l.setAttribute("x",lx.toFixed(1)); l.setAttribute("dy","12");
+    t.setAttribute("fill",c.col); t.setAttribute("data-idx",c.idx); t.style.cursor="pointer";
+    var startY = ly - c.labLines.length*6;
+    c.labLines.forEach(function(line,li){
+      var l=document.createElementNS(NS,"tspan"); l.setAttribute("x",lx.toFixed(1));
+      if(li===0) l.setAttribute("y", startY.toFixed(1)); else l.setAttribute("dy","12");
       l.setAttribute("font-size","9.5"); l.setAttribute("font-weight","500"); l.textContent=line;
       t.appendChild(l);
     });
-    t.addEventListener("click",function(){applyFilter(c.key);});
+    var n=document.createElementNS(NS,"tspan"); n.setAttribute("x",lx.toFixed(1)); n.setAttribute("dy","18");
+    n.setAttribute("font-size","17"); n.setAttribute("font-weight","700"); n.textContent=c.total;
+    t.appendChild(n);
+    t.addEventListener("click",function(){donutSel=c.idx; renderChiffres();});
     donut.appendChild(t);
     offset+=len;
   });
 }
 
 function renderChiffres(){
-  donut.querySelectorAll("circle[data-key]").forEach(function(el){
-    var on=(filt==="all"||filt===el.getAttribute("data-key"));
+  var cats=categoriesFor(filt);
+  var grandTotal=cats.reduce(function(a,c){return a+c.total;},0);
+  donut.querySelectorAll("circle[data-idx]").forEach(function(el){
+    var on=(donutSel===null || String(donutSel)===el.getAttribute("data-idx"));
     el.setAttribute("stroke-opacity", on?1:.2);
   });
-  donut.querySelectorAll("text[data-key]").forEach(function(el){
-    var k=el.getAttribute("data-key");
+  donut.querySelectorAll("text[data-idx]").forEach(function(el){
+    var idx=el.getAttribute("data-idx");
     // Le libellé du secteur actif est déjà affiché au centre : on l'y masque pour éviter le doublon.
-    el.style.opacity = filt==="all" ? 1 : (k===filt ? 0 : .35);
+    el.style.opacity = donutSel===null ? 1 : (String(donutSel)===idx ? 0 : .35);
   });
-  var active=filt==="all"?null:C.filter(function(c){return c.key===filt;})[0];
+  var active=donutSel===null?null:cats[donutSel];
   dTotal.textContent=active?active.total:grandTotal;
   dTotal.setAttribute("fill", active?active.col:"var(--txt)");
-  dLabel.textContent=active?active.lab:(curLang==="en"?"key figures, total":"chiffres clés, au total");
+  var totalLabel = filt==="outil" ? (curLang==="en"?"tools, total":"outils, au total") : (curLang==="en"?"skills, total":"compétences, au total");
+  dLabel.textContent=active?active.lab:totalLabel;
 
   bubC.innerHTML="";
   if(active){
-    active.items.forEach(function(it,n){
-      var d=document.createElement("div"); d.className="bb";
+    active.items.forEach(function(txt,n){
+      var d=document.createElement("div"); d.className="bb"; d.textContent=txt;
       d.style.borderColor=active.col; d.style.color="var(--txt)";
       d.style.background="color-mix(in srgb, "+active.col+" 14%, transparent)";
       d.style.animationDelay=(n*60)+"ms";
-      d.style.flexDirection="column";
-      d.innerHTML="<span style='margin-bottom:4px'>"+it[0]+
-        "</span><strong style='font-size:18px;font-weight:700;line-height:1.1'>"+it[1]+"</strong>";
       bubC.appendChild(d);
     });
   }
@@ -337,7 +314,7 @@ function buildAxLabels(){
 }
 
 var polys=document.getElementById("polys"), det=document.getElementById("det"),
-    bub=document.getElementById("bub"), filt="all";
+    bub=document.getElementById("bub");
 
 function bubbles(key,i){
   var s=dataFor(key), list=s.it[i];
@@ -353,67 +330,60 @@ function bubbles(key,i){
 }
 function applyFilter(k){
   filt=k;
-  segwrap.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filt);});
+  donutSel=null;
+  segGroup.querySelectorAll(".sgb").forEach(function(x){x.setAttribute("aria-pressed", x.getAttribute("data-key")===filt);});
   draw();
+  buildDonut();
   renderChiffres();
 }
 function selectVertex(k,i){
-  applyFilter(k);
   bubbles(k,i);
 }
 function draw(){
-  var expMode = filt==="exp";
-  curAngArr = expMode ? EXP_ANG : SKILL_ANG;
-  curAxesArr = expMode ? EXP_AXES : SKILL_AXES;
+  curAngArr = filt==="outil" ? OUTIL_ANG : COMP_ANG;
+  curAxesArr = filt==="outil" ? OUTIL_AXES : COMP_AXES;
   buildGrid();
   buildAxLabels();
   polys.innerHTML=""; bub.innerHTML="";
-  det.innerHTML="<strong>"+(filt==="all"?(curLang==="en"?"Skills, tools, and experience":"Compétences, outils et expériences"):S[filt].lab)+"</strong>";
-  var series = expMode ? ["exp"] : (filt==="all" ? ["comp","outil","exp"] : [filt]);
-  series.forEach(function(k,gi){
-    var s=dataFor(k);
-    var p=document.createElementNS(NS,"polygon");
-    p.setAttribute("points", s.v.map(function(v,i){return pt(i,v).map(function(n){return n.toFixed(1);}).join(",");}).join(" "));
-    p.setAttribute("fill",s.col); p.setAttribute("fill-opacity", filt==="all"?.10:.18);
-    p.setAttribute("stroke",s.col); p.setAttribute("stroke-width",2); p.setAttribute("stroke-opacity",.95);
-    polys.appendChild(p);
-    s.v.forEach(function(v,i){
-      var q=pt(i,v);
-      var h=document.createElementNS(NS,"circle");
-      h.setAttribute("cx",q[0]); h.setAttribute("cy",q[1]); h.setAttribute("r",9);
-      h.setAttribute("fill",s.col); h.setAttribute("class","halo");
-      h.style.animationDelay=(i*160+gi*90)+"ms"; h.style.pointerEvents="none";
-      polys.appendChild(h);
-      var c=document.createElementNS(NS,"circle");
-      c.setAttribute("cx",q[0]); c.setAttribute("cy",q[1]); c.setAttribute("r",5);
-      c.setAttribute("fill",s.col); c.setAttribute("stroke","var(--bg)"); c.setAttribute("stroke-width",1.6);
-      c.setAttribute("tabindex","0"); c.setAttribute("role","button");
-      c.setAttribute("aria-label",curAxesArr[i]+", "+s.lab+" : "+s.tip[i]); c.style.cursor="pointer";
-      var onPick = (k==="exp" && filt==="all") ? function(){bubbles(k,i);} : function(){selectVertex(k,i);};
-      c.addEventListener("click",onPick);
-      c.addEventListener("focus",onPick);
-      polys.appendChild(c);
-    });
+  det.innerHTML="<strong>"+S[filt].lab+"</strong>";
+  var s=dataFor(filt);
+  var p=document.createElementNS(NS,"polygon");
+  p.setAttribute("points", s.v.map(function(v,i){return pt(i,v).map(function(n){return n.toFixed(1);}).join(",");}).join(" "));
+  p.setAttribute("fill",s.col); p.setAttribute("fill-opacity",.18);
+  p.setAttribute("stroke",s.col); p.setAttribute("stroke-width",2); p.setAttribute("stroke-opacity",.95);
+  polys.appendChild(p);
+  s.v.forEach(function(v,i){
+    var q=pt(i,v);
+    var h=document.createElementNS(NS,"circle");
+    h.setAttribute("cx",q[0]); h.setAttribute("cy",q[1]); h.setAttribute("r",9);
+    h.setAttribute("fill",s.col); h.setAttribute("class","halo");
+    h.style.animationDelay=(i*160)+"ms"; h.style.pointerEvents="none";
+    polys.appendChild(h);
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",q[0]); c.setAttribute("cy",q[1]); c.setAttribute("r",5);
+    c.setAttribute("fill",s.col); c.setAttribute("stroke","var(--bg)"); c.setAttribute("stroke-width",1.6);
+    c.setAttribute("tabindex","0"); c.setAttribute("role","button");
+    c.setAttribute("aria-label",curAxesArr[i]+", "+s.lab+" : "+s.tip[i]); c.style.cursor="pointer";
+    var onPick = function(){ selectVertex(filt,i); };
+    c.addEventListener("click",onPick);
+    c.addEventListener("focus",onPick);
+    polys.appendChild(c);
   });
 }
-var FILTER_LABELS={fr:["Tout","Compétences","Outils","Expériences"], en:["All","Skills","Tools","Experience"]};
+var FILTER_LABELS={fr:["Compétences","Outils"], en:["Skills","Tools"]};
 var segwrap=document.getElementById("segwrap");
-var segAll=document.createElement("div"); segAll.className="seg"; segAll.setAttribute("role","group");
-var segSkills=document.createElement("div"); segSkills.className="seg"; segSkills.setAttribute("role","group");
-var segExp=document.createElement("div"); segExp.className="seg"; segExp.setAttribute("role","group");
-segwrap.appendChild(segAll); segwrap.appendChild(segSkills); segwrap.appendChild(segExp);
+var segGroup=document.createElement("div"); segGroup.className="seg"; segGroup.setAttribute("role","group");
+segwrap.appendChild(segGroup);
 function buildFilterButtons(){
-  segAll.innerHTML=""; segSkills.innerHTML=""; segExp.innerHTML="";
+  segGroup.innerHTML="";
   var lab=FILTER_LABELS[curLang];
-  segAll.setAttribute("aria-label",lab[0]);
-  segSkills.setAttribute("aria-label",lab[1]+(curLang==="en"?" and ":" et ")+lab[2].toLowerCase());
-  segExp.setAttribute("aria-label",lab[3]);
-  [["all",lab[0],segAll],["comp",lab[1],segSkills],["outil",lab[2],segSkills],["exp",lab[3],segExp]].forEach(function(f){
+  segGroup.setAttribute("aria-label",lab[0]+(curLang==="en"?" and ":" et ")+lab[1].toLowerCase());
+  [["comp",lab[0]],["outil",lab[1]]].forEach(function(f){
     var b=document.createElement("button"); b.className="sgb"; b.textContent=f[1];
     b.setAttribute("data-key",f[0]);
     b.setAttribute("aria-pressed", f[0]===filt);
     b.onclick=function(){applyFilter(f[0]);};
-    f[2].appendChild(b);
+    segGroup.appendChild(b);
   });
 }
 buildFilterButtons();
@@ -427,7 +397,7 @@ var HINTS={
   fr:{radar:"Cliquez sur un sommet pour voir ce qu'il contient", chiffres:"Cliquez sur une part du camembert pour voir le détail"},
   en:{radar:"Click a vertex to see what it contains", chiffres:"Click a pie slice to see the detail"}
 };
-var TOGGLE_LABELS={fr:["Radar","En chiffres"], en:["Radar","By the numbers"]};
+var TOGGLE_LABELS={fr:["En graphique","En chiffres"], en:["As a chart","By the numbers"]};
 var view="radar";
 function setView(v){
   view=v;
@@ -435,11 +405,15 @@ function setView(v){
   viewChiffres.classList.toggle("on", v==="chiffres");
   hintTextEl.textContent=HINTS[curLang][v];
   toggleEl.querySelectorAll(".tgb").forEach(function(b){b.setAttribute("aria-pressed", b.dataset.view===v);});
+  var indicator=toggleEl.querySelector(".tg-indicator");
+  if(indicator) indicator.style.transform = v==="chiffres" ? "translateX(100%)" : "translateX(0)";
 }
 function buildToggleButtons(){
   toggleEl.innerHTML="";
+  var indicator=document.createElement("span"); indicator.className="tg-indicator";
+  toggleEl.appendChild(indicator);
   var lab=TOGGLE_LABELS[curLang];
-  [["radar",lab[0],"bi-diagram-3"],["chiffres",lab[1],"bi-bar-chart-line"]].forEach(function(f){
+  [["radar",lab[0],"bi-bar-chart-line"],["chiffres",lab[1],"bi-123"]].forEach(function(f){
     var b=document.createElement("button"); b.className="tgb"; b.dataset.view=f[0];
     b.innerHTML="<i class='bi "+f[2]+"'></i>"+f[1];
     b.setAttribute("aria-pressed", f[0]===view);
@@ -452,11 +426,11 @@ setView("radar");
 
 window.addEventListener("sitelangchange", function(e){
   curLang=e.detail.lang;
-  SKILL_AXES = curLang==="en" ? SKILL_AXES_EN : SKILL_AXES_FR;
-  EXP_AXES = curLang==="en" ? EXP_AXES_EN : EXP_AXES_FR;
+  COMP_AXES = curLang==="en" ? COMP_AXES_EN : COMP_AXES_FR;
+  OUTIL_AXES = curLang==="en" ? OUTIL_AXES_EN : OUTIL_AXES_FR;
   S = curLang==="en" ? S_EN : S_FR;
-  C = curLang==="en" ? C_EN : C_FR;
-  curAxesArr = (curAxesArr===EXP_AXES || curAxesArr===EXP_AXES_FR || curAxesArr===EXP_AXES_EN) ? EXP_AXES : SKILL_AXES;
+  curAxesArr = filt==="outil" ? OUTIL_AXES : COMP_AXES;
+  donutSel=null;
   buildFilterButtons();
   buildToggleButtons();
   draw();

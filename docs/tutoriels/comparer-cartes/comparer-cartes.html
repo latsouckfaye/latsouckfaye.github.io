@@ -360,6 +360,7 @@ window.Quarto = {
   <li><a href="#les-résultats" id="toc-les-résultats" class="nav-link" data-scroll-target="#les-résultats">Les résultats</a></li>
   <li><a href="#testez-par-vous-même" id="toc-testez-par-vous-même" class="nav-link" data-scroll-target="#testez-par-vous-même">Testez par vous-même</a></li>
   <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
   </ul>
 </nav>
     </div>
@@ -420,9 +421,20 @@ body.nav-fixed{padding-top:0 !important}
 body[data-lang="python"] .lang-r{display:none}
 body[data-lang="python"] .lang-python{display:block}
 
-:root{--lr-r:#5B8FE8;--lr-py:#E3B341}
-body.quarto-light{--lr-r:#2F63C7;--lr-py:#9A6700}
-.langtoggle{position:sticky;top:12px;z-index:40;display:inline-flex;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);box-shadow:0 8px 20px -12px rgba(0,0,0,.35);margin:18px 0 26px}
+:root{--lr-r:#5B8FE8;--lr-py:#E3B341;--lr-accent:#E08767;--lr-neutral:#8a94a3}
+body.quarto-light{--lr-r:#2F63C7;--lr-py:#9A6700;--lr-accent:#C4643F;--lr-neutral:#6c757d}
+
+.gofurther-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;max-width:780px;margin:20px auto 8px}
+.gofurther-tile{position:relative;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid rgba(127,127,127,.22);background:rgba(127,127,127,.05);text-decoration:none;color:inherit;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.gofurther-tile:hover{transform:translateY(-3px);box-shadow:0 14px 28px -16px rgba(0,0,0,.35);border-color:var(--gf-accent);color:inherit}
+.gofurther-tile .gf-icon{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:color-mix(in srgb, var(--gf-accent) 16%, transparent);color:var(--gf-accent);font-size:18px;flex:none}
+.gofurther-tile .gf-label{font-size:13.5px;font-weight:600;line-height:1.3}
+
+#refs{counter-reset:refnum;margin-top:6px}
+#refs > div.csl-entry{counter-increment:refnum}
+#refs > div.csl-entry::before{content:counter(refnum) ". ";font-weight:700;color:var(--lr-r)}
+.langtoggle{position:relative;display:flex;width:fit-content;padding:4px;border-radius:999px;background:rgba(127,127,127,.1);border:1px solid rgba(127,127,127,.22);margin:20px auto 22px}
+.langtoggle-lead{text-align:center;font-size:12.5px;color:var(--bs-secondary-color,#6c757d);margin:28px 0 4px}
 .langtoggle-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--bs-body-bg,#fff);box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .28s cubic-bezier(.22,.8,.32,1);z-index:0}
 .langtoggle button{position:relative;z-index:1;border:none;background:transparent;padding:8px 24px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;color:inherit;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
 .langtoggle button::before{content:"";width:7px;height:7px;border-radius:50%;flex:none}
@@ -465,12 +477,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <section id="le-problème" class="level2">
 <h2 class="anchored" data-anchor-id="le-problème">Le problème</h2>
 <p>Deux cartes géomorphologiques obtenues à des résolutions spatiales différentes ne se comparent pas cellule à cellule telles quelles : la carte prédite doit d’abord être ramenée à la résolution de la carte de référence, puis leur concordance mesurée — sans se limiter à un seul score global, qui favoriserait les classes majoritaires.</p>
-<p>Le code et les fonctions utilisées ici sont ceux employés pour la validation du modèle présenté dans <a href="../../projets.html">« Cartographie grande échelle »</a> sur la page Travaux. Choisissez le langage qui vous intéresse ci-dessous — la méthode et les résultats sont les mêmes, seul le code (et parfois la figure) diffère.</p>
-<div class="langtoggle" role="group" aria-label="Choisir le langage">
-<span class="langtoggle-indicator" id="langIndicator"></span>
-<button type="button" data-lang="r" aria-pressed="true">R</button>
-<button type="button" data-lang="python" aria-pressed="false">Python</button>
-</div>
+<p>Le code et les fonctions utilisées ici sont ceux employés pour la validation du modèle présenté dans <a href="../../projets.html">« Cartographie grande échelle »</a> sur la page Travaux. La méthode et les résultats sont les mêmes en R et en Python — seul le code (et parfois la figure) diffère ; choisissez votre langage au niveau du code, un peu plus bas.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="En bref">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -493,6 +500,14 @@ document.addEventListener("DOMContentLoaded", function(){
 <section id="la-méthode" class="level2">
 <h2 class="anchored" data-anchor-id="la-méthode">La méthode</h2>
 <p>Une zone d’étude est délimitée puis discrétisée en grille. La carte prédite — produite à une résolution plus grossière — est désagrégée pour retrouver la résolution de la carte de référence, et chaque cellule est classée selon son statut : hors zone, prédite, ou non prédite.</p>
+<p class="langtoggle-lead">
+Voir le code et les résultats en
+</p>
+<div class="langtoggle" role="group" aria-label="Choisir le langage">
+<span class="langtoggle-indicator" id="langIndicator"></span>
+<button type="button" data-lang="r" aria-pressed="true">R</button>
+<button type="button" data-lang="python" aria-pressed="false">Python</button>
+</div>
 <div class="lang-block lang-r">
 <div class="callout callout-style-default callout-tip callout-titled" title="Prérequis techniques">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -914,14 +929,17 @@ Figure&nbsp;2: Concordance non corrigée (gauche) et corrigée (droite)
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[
 Match\ (Yes) = \frac{N_{+}}{N_{+} + N_{-}}
-\qquad\qquad
+\]</span></p>
+<p><span class="math display">\[
 Recall_{k} = \frac{TP_{k}}{TP_{k} + FN_{k}}
 \]</span></p>
 <p><span class="math display">\[
 NCBM = \frac{1}{K}\sum_{k=1}^{K} Recall_{k}
-\qquad
+\]</span></p>
+<p><span class="math display">\[
 CBM_{1} = NCBM \times (1 - \%NL)
-\qquad
+\]</span></p>
+<p><span class="math display">\[
 CBM_{2} = \frac{1}{K}\sum_{k \neq 99}^{K} Recall_{k}
 \]</span></p>
 <p>où <span class="math inline">\(N_{+}\)</span>/<span class="math inline">\(N_{-}\)</span> sont les cellules aux classes identiques/différentes entre les deux cartes, et <span class="math inline">\(K\)</span> le nombre de classes (5 pour NCBM et CBM₁, 6 pour CBM₂ qui réintègre la classe des cellules non prédites, avec un rappel conventionnellement fixé à 0).</p>
@@ -993,10 +1011,17 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5w
 </section>
 <section id="pour-aller-plus-loin" class="level2">
 <h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
-<div class="d-flex gap-2 flex-wrap" style="margin:14px 0 28px">
-<p><a href="https://github.com/latsouckfaye/CompareMap" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code R sur GitHub</a> <a href="https://github.com/latsouckfaye/CompareMap/tree/main/python" class="btn btn-outline-secondary" role="button" target="_blank"><i class="bi bi-github"></i> Code Python sur GitHub</a> <a href="https://doi.org/10.5281/zenodo.8436795" class="btn btn-outline-primary" role="button" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Fonctions sur Zenodo</a> <a href="../../projets.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Voir le projet « Cartographie grande échelle »</a> <a href="../../tutoriels.html" class="btn btn-outline-secondary" role="button"><i class="bi bi-door-open"></i> Retour aux tutoriels</a></p>
+<div class="gofurther-grid">
+<a class="gofurther-tile" href="https://github.com/latsouckfaye/CompareMap" target="_blank" rel="noopener" style="--gf-accent:var(--lr-r)"><span class="gf-icon"><i class="bi bi-github"></i></span><span class="gf-label">Code R sur GitHub</span></a>
+<a class="gofurther-tile" href="https://github.com/latsouckfaye/CompareMap/tree/main/python" target="_blank" rel="noopener" style="--gf-accent:var(--lr-py)"><span class="gf-icon"><i class="bi bi-github"></i></span><span class="gf-label">Code Python sur GitHub</span></a>
+<a class="gofurther-tile" href="https://doi.org/10.5281/zenodo.8436795" target="_blank" rel="noopener" style="--gf-accent:var(--lr-accent)"><span class="gf-icon"><i class="bi bi-box-arrow-up-right"></i></span><span class="gf-label">Fonctions sur Zenodo</span></a>
+<a class="gofurther-tile" href="../../projets.html" style="--gf-accent:var(--lr-neutral)"><span class="gf-icon"><i class="bi bi-door-open"></i></span><span class="gf-label">Voir le projet « Cartographie grande échelle »</span></a>
+<a class="gofurther-tile" href="../../tutoriels.html" style="--gf-accent:var(--lr-neutral)"><span class="gf-icon"><i class="bi bi-arrow-left"></i></span><span class="gf-label">Retour aux tutoriels</span></a>
 </div>
 <p>Cette méthode a servi à valider le modèle de cartographie géomorphologique automatique décrit dans <span class="citation" data-cites="faye2024automatic">Faye et al. (<a href="#ref-faye2024automatic" role="doc-biblioref">2024</a>)</span>.</p>
+</section>
+<section id="bibliographie" class="level2">
+<h2 class="anchored" data-anchor-id="bibliographie">Bibliographie</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-faye2024automatic" class="csl-entry" role="listitem">
 Faye, Paul Aimé Latsouck, Elodie Brunel, Thomas Claverie, Solym Mawaki Manou-Abi, et Sophie Dabo-Niang. 2024. <span>«&nbsp;Automatic geomorphological mapping using ground truth data with coverage sampling and random forest algorithms&nbsp;»</span>. <em>Earth Science Informatics</em> 17 (4): 3715‑32.
